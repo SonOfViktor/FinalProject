@@ -1,0 +1,71 @@
+a:link {
+    color: #CD6326;
+    text-decoration: none;
+}
+a:visited {
+    text-decoration: none;
+    color: #CD6326;
+}
+a:active {
+    text-decoration: none;
+    color: #CD6326;
+}
+body {
+    background: #181617;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: auto;
+    margin-right: auto;
+}
+.container {
+    margin-left: auto;
+    margin-right: auto;
+    width: 1000px;
+    height: 500px;
+}
+.error-title-error {
+    position: absolute;
+    left: 5%;
+    right: 5%;
+    top: 10%;
+
+    font-family: Bebas Neue;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 200px;
+    line-height: 200px;
+    text-align: center;
+    color: #CD6326;
+}
+.error-title {
+    position: absolute;
+    left: 5%;
+    right: 5%;
+    top: 40%;
+
+    font-family: Bebas Neue;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 150px;
+    line-height: 150px;
+    text-align: center;
+    color: #CD6326;
+}
+.error-text {
+    position: absolute;
+    left: 30%;
+    right: 30%;
+    top: 65%;
+
+    font-family: Bebas Neue;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 40px;
+    line-height: 40px;
+    text-align: center;
+    color: #CD6326;
+}
+.error-text:hover {
+    text-decoration: underline;
+    transform: scale(1.2);
+}

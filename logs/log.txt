@@ -1,0 +1,359 @@
+21-08-08 19:01.842 [main] ERROR edy.epam.task6.util.EmailSender - Error during email sending: 
+com.sun.mail.util.MailConnectException: Couldn't connect to host, port: localhost, 587; timeout -1
+	at com.sun.mail.smtp.SMTPTransport.openServer(SMTPTransport.java:2210) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at com.sun.mail.smtp.SMTPTransport.protocolConnect(SMTPTransport.java:722) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at jakarta.mail.Service.connect(Service.java:364) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at jakarta.mail.Service.connect(Service.java:222) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at jakarta.mail.Service.connect(Service.java:171) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at jakarta.mail.Transport.send0(Transport.java:230) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at jakarta.mail.Transport.send(Transport.java:100) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at edy.epam.task6.util.EmailSender.sendEmail(EmailSender.java:51) [classes/:?]
+	at edy.epam.task6._main.Main.main(Main.java:68) [classes/:?]
+Caused by: java.net.ConnectException: Connection refused: connect
+	at sun.nio.ch.Net.connect0(Native Method) ~[?:?]
+	at sun.nio.ch.Net.connect(Net.java:574) ~[?:?]
+	at sun.nio.ch.Net.connect(Net.java:563) ~[?:?]
+	at sun.nio.ch.NioSocketImpl.connect(NioSocketImpl.java:588) ~[?:?]
+	at java.net.SocksSocketImpl.connect(SocksSocketImpl.java:333) ~[?:?]
+	at java.net.Socket.connect(Socket.java:648) ~[?:?]
+	at java.net.Socket.connect(Socket.java:597) ~[?:?]
+	at com.sun.mail.util.SocketFetcher.createSocket(SocketFetcher.java:335) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at com.sun.mail.util.SocketFetcher.getSocket(SocketFetcher.java:214) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at com.sun.mail.smtp.SMTPTransport.openServer(SMTPTransport.java:2160) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	... 8 more
+21-08-08 19:02.190 [main] ERROR edy.epam.task6.util.EmailSender - Error during email sending: 
+jakarta.mail.AuthenticationFailedException: 535-5.7.8 Username and Password not accepted. Learn more at
+535 5.7.8  https://support.google.com/mail/?p=BadCredentials a11sm2583104wrq.6 - gsmtp
+
+	at com.sun.mail.smtp.SMTPTransport$Authenticator.authenticate(SMTPTransport.java:947) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at com.sun.mail.smtp.SMTPTransport.authenticate(SMTPTransport.java:858) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at com.sun.mail.smtp.SMTPTransport.protocolConnect(SMTPTransport.java:762) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at jakarta.mail.Service.connect(Service.java:364) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at jakarta.mail.Service.connect(Service.java:222) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at jakarta.mail.Service.connect(Service.java:171) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at jakarta.mail.Transport.send0(Transport.java:230) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at jakarta.mail.Transport.send(Transport.java:100) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at edy.epam.task6.util.EmailSender.sendEmail(EmailSender.java:51) [classes/:?]
+	at edy.epam.task6._main.Main.main(Main.java:68) [classes/:?]
+21-08-08 19:03.071 [main] ERROR edy.epam.task6.util.EmailSender - Error during email sending: 
+jakarta.mail.AuthenticationFailedException: 535-5.7.8 Username and Password not accepted. Learn more at
+535 5.7.8  https://support.google.com/mail/?p=BadCredentials w4sm17021147wrm.24 - gsmtp
+
+	at com.sun.mail.smtp.SMTPTransport$Authenticator.authenticate(SMTPTransport.java:947) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at com.sun.mail.smtp.SMTPTransport.authenticate(SMTPTransport.java:858) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at com.sun.mail.smtp.SMTPTransport.protocolConnect(SMTPTransport.java:762) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at jakarta.mail.Service.connect(Service.java:364) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at jakarta.mail.Service.connect(Service.java:222) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at jakarta.mail.Service.connect(Service.java:171) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at jakarta.mail.Transport.send0(Transport.java:230) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at jakarta.mail.Transport.send(Transport.java:100) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at edy.epam.task6.util.EmailSender.sendEmail(EmailSender.java:51) [classes/:?]
+	at edy.epam.task6._main.Main.main(Main.java:68) [classes/:?]
+21-08-08 19:07.984 [main] ERROR edy.epam.task6.util.EmailSender - Error during email sending: 
+jakarta.mail.MessagingException: Got bad greeting from SMTP host: smtp.gmail.com, port: 465, response: [EOF]
+	at com.sun.mail.smtp.SMTPTransport.openServer(SMTPTransport.java:2198) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at com.sun.mail.smtp.SMTPTransport.protocolConnect(SMTPTransport.java:722) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at jakarta.mail.Service.connect(Service.java:364) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at jakarta.mail.Service.connect(Service.java:222) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at jakarta.mail.Service.connect(Service.java:171) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at jakarta.mail.Transport.send0(Transport.java:230) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at jakarta.mail.Transport.send(Transport.java:100) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at edy.epam.task6.util.EmailSender.sendEmail(EmailSender.java:51) [classes/:?]
+	at edy.epam.task6._main.Main.main(Main.java:68) [classes/:?]
+21-08-08 19:07.166 [main] ERROR edy.epam.task6.util.EmailSender - Error during email sending: 
+jakarta.mail.AuthenticationFailedException: 535-5.7.8 Username and Password not accepted. Learn more at
+535 5.7.8  https://support.google.com/mail/?p=BadCredentials g5sm17873233wmh.31 - gsmtp
+
+	at com.sun.mail.smtp.SMTPTransport$Authenticator.authenticate(SMTPTransport.java:947) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at com.sun.mail.smtp.SMTPTransport.authenticate(SMTPTransport.java:858) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at com.sun.mail.smtp.SMTPTransport.protocolConnect(SMTPTransport.java:762) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at jakarta.mail.Service.connect(Service.java:364) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at jakarta.mail.Service.connect(Service.java:222) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at jakarta.mail.Service.connect(Service.java:171) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at jakarta.mail.Transport.send0(Transport.java:230) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at jakarta.mail.Transport.send(Transport.java:100) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at edy.epam.task6.util.EmailSender.sendEmail(EmailSender.java:51) [classes/:?]
+	at edy.epam.task6._main.Main.main(Main.java:68) [classes/:?]
+21-08-08 19:10.152 [main] ERROR edy.epam.task6.util.EmailSender - Error during email sending: 
+jakarta.mail.AuthenticationFailedException: 535-5.7.8 Username and Password not accepted. Learn more at
+535 5.7.8  https://support.google.com/mail/?p=BadCredentials h4sm1864583wrt.5 - gsmtp
+
+	at com.sun.mail.smtp.SMTPTransport$Authenticator.authenticate(SMTPTransport.java:947) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at com.sun.mail.smtp.SMTPTransport.authenticate(SMTPTransport.java:858) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at com.sun.mail.smtp.SMTPTransport.protocolConnect(SMTPTransport.java:762) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at jakarta.mail.Service.connect(Service.java:364) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at jakarta.mail.Service.connect(Service.java:222) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at jakarta.mail.Service.connect(Service.java:171) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at jakarta.mail.Transport.send0(Transport.java:230) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at jakarta.mail.Transport.send(Transport.java:100) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at edy.epam.task6.util.EmailSender.sendEmail(EmailSender.java:51) [classes/:?]
+	at edy.epam.task6._main.Main.main(Main.java:68) [classes/:?]
+21-08-08 19:11.163 [main] ERROR edy.epam.task6.util.EmailSender - Error during email sending: 
+jakarta.mail.AuthenticationFailedException: 535-5.7.8 Username and Password not accepted. Learn more at
+535 5.7.8  https://support.google.com/mail/?p=BadCredentials j4sm14840264wmi.4 - gsmtp
+
+	at com.sun.mail.smtp.SMTPTransport$Authenticator.authenticate(SMTPTransport.java:947) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at com.sun.mail.smtp.SMTPTransport.authenticate(SMTPTransport.java:858) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at com.sun.mail.smtp.SMTPTransport.protocolConnect(SMTPTransport.java:762) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at jakarta.mail.Service.connect(Service.java:364) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at jakarta.mail.Service.connect(Service.java:222) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at jakarta.mail.Service.connect(Service.java:171) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at jakarta.mail.Transport.send0(Transport.java:230) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at jakarta.mail.Transport.send(Transport.java:100) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at edy.epam.task6.util.EmailSender.sendEmail(EmailSender.java:51) [classes/:?]
+	at edy.epam.task6._main.Main.main(Main.java:68) [classes/:?]
+21-08-08 19:12.971 [main] ERROR edy.epam.task6.util.EmailSender - Error during email sending: 
+jakarta.mail.MessagingException: Got bad greeting from SMTP host: smtp.gmail.com, port: 465, response: [EOF]
+	at com.sun.mail.smtp.SMTPTransport.openServer(SMTPTransport.java:2198) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at com.sun.mail.smtp.SMTPTransport.protocolConnect(SMTPTransport.java:722) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at jakarta.mail.Service.connect(Service.java:342) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at jakarta.mail.Service.connect(Service.java:222) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at jakarta.mail.Service.connect(Service.java:171) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at jakarta.mail.Transport.send0(Transport.java:230) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at jakarta.mail.Transport.send(Transport.java:100) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at edy.epam.task6.util.EmailSender.sendEmail(EmailSender.java:51) [classes/:?]
+	at edy.epam.task6._main.Main.main(Main.java:68) [classes/:?]
+21-08-08 19:13.122 [main] ERROR edy.epam.task6.util.EmailSender - Error during email sending: 
+com.sun.mail.smtp.SMTPSendFailedException: 530 5.7.0 Must issue a STARTTLS command first. y66sm15110626wmy.39 - gsmtp
+
+	at com.sun.mail.smtp.SMTPTransport.issueSendCommand(SMTPTransport.java:2374) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at com.sun.mail.smtp.SMTPTransport.mailFrom(SMTPTransport.java:1808) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at com.sun.mail.smtp.SMTPTransport.sendMessage(SMTPTransport.java:1285) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at jakarta.mail.Transport.send0(Transport.java:231) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at jakarta.mail.Transport.send(Transport.java:100) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at edy.epam.task6.util.EmailSender.sendEmail(EmailSender.java:51) [classes/:?]
+	at edy.epam.task6._main.Main.main(Main.java:68) [classes/:?]
+21-08-08 19:13.208 [main] ERROR edy.epam.task6.util.EmailSender - Error during email sending: 
+jakarta.mail.AuthenticationFailedException: 535-5.7.8 Username and Password not accepted. Learn more at
+535 5.7.8  https://support.google.com/mail/?p=BadCredentials a9sm16534329wrv.37 - gsmtp
+
+	at com.sun.mail.smtp.SMTPTransport$Authenticator.authenticate(SMTPTransport.java:947) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at com.sun.mail.smtp.SMTPTransport.authenticate(SMTPTransport.java:858) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at com.sun.mail.smtp.SMTPTransport.protocolConnect(SMTPTransport.java:762) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at jakarta.mail.Service.connect(Service.java:364) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at jakarta.mail.Service.connect(Service.java:222) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at jakarta.mail.Service.connect(Service.java:171) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at jakarta.mail.Transport.send0(Transport.java:230) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at jakarta.mail.Transport.send(Transport.java:100) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at edy.epam.task6.util.EmailSender.sendEmail(EmailSender.java:51) [classes/:?]
+	at edy.epam.task6._main.Main.main(Main.java:68) [classes/:?]
+21-08-08 19:14.180 [main] ERROR edy.epam.task6.util.EmailSender - Error during email sending: 
+jakarta.mail.AuthenticationFailedException: 535-5.7.8 Username and Password not accepted. Learn more at
+535 5.7.8  https://support.google.com/mail/?p=BadCredentials q14sm16887929wrm.66 - gsmtp
+
+	at com.sun.mail.smtp.SMTPTransport$Authenticator.authenticate(SMTPTransport.java:947) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at com.sun.mail.smtp.SMTPTransport.authenticate(SMTPTransport.java:858) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at com.sun.mail.smtp.SMTPTransport.protocolConnect(SMTPTransport.java:762) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at jakarta.mail.Service.connect(Service.java:364) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at jakarta.mail.Service.connect(Service.java:222) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at jakarta.mail.Service.connect(Service.java:171) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at jakarta.mail.Transport.send0(Transport.java:230) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at jakarta.mail.Transport.send(Transport.java:100) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at edy.epam.task6.util.EmailSender.sendEmail(EmailSender.java:51) [classes/:?]
+	at edy.epam.task6._main.Main.main(Main.java:68) [classes/:?]
+21-08-08 19:24.221 [main] ERROR edy.epam.task6.util.EmailSender - Error during email sending: 
+jakarta.mail.AuthenticationFailedException: 535-5.7.8 Username and Password not accepted. Learn more at
+535 5.7.8  https://support.google.com/mail/?p=BadCredentials z5sm2168815wmi.36 - gsmtp
+
+	at com.sun.mail.smtp.SMTPTransport$Authenticator.authenticate(SMTPTransport.java:947) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at com.sun.mail.smtp.SMTPTransport.authenticate(SMTPTransport.java:858) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at com.sun.mail.smtp.SMTPTransport.protocolConnect(SMTPTransport.java:762) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at jakarta.mail.Service.connect(Service.java:364) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at jakarta.mail.Service.connect(Service.java:222) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at jakarta.mail.Service.connect(Service.java:171) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at jakarta.mail.Transport.send0(Transport.java:230) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at jakarta.mail.Transport.send(Transport.java:100) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at edy.epam.task6.util.EmailSender.sendEmail(EmailSender.java:53) [classes/:?]
+	at edy.epam.task6._main.Main.main(Main.java:68) [classes/:?]
+21-08-08 19:25.131 [main] ERROR edy.epam.task6.util.EmailSender - Error during email sending: 
+jakarta.mail.AuthenticationFailedException: 535-5.7.8 Username and Password not accepted. Learn more at
+535 5.7.8  https://support.google.com/mail/?p=BadCredentials j97sm13671414wrj.80 - gsmtp
+
+	at com.sun.mail.smtp.SMTPTransport$Authenticator.authenticate(SMTPTransport.java:947) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at com.sun.mail.smtp.SMTPTransport.authenticate(SMTPTransport.java:858) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at com.sun.mail.smtp.SMTPTransport.protocolConnect(SMTPTransport.java:762) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at jakarta.mail.Service.connect(Service.java:364) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at jakarta.mail.Service.connect(Service.java:222) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at jakarta.mail.Service.connect(Service.java:171) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at jakarta.mail.Transport.send0(Transport.java:230) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at jakarta.mail.Transport.send(Transport.java:100) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at edy.epam.task6.util.EmailSender.sendEmail(EmailSender.java:54) [classes/:?]
+	at edy.epam.task6._main.Main.main(Main.java:68) [classes/:?]
+21-08-08 19:25.147 [main] ERROR edy.epam.task6.util.EmailSender - Error during email sending: 
+jakarta.mail.AuthenticationFailedException: 535-5.7.8 Username and Password not accepted. Learn more at
+535 5.7.8  https://support.google.com/mail/?p=BadCredentials q14sm15786535wrs.8 - gsmtp
+
+	at com.sun.mail.smtp.SMTPTransport$Authenticator.authenticate(SMTPTransport.java:947) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at com.sun.mail.smtp.SMTPTransport.authenticate(SMTPTransport.java:858) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at com.sun.mail.smtp.SMTPTransport.protocolConnect(SMTPTransport.java:762) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at jakarta.mail.Service.connect(Service.java:364) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at jakarta.mail.Service.connect(Service.java:222) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at jakarta.mail.Service.connect(Service.java:171) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at jakarta.mail.Transport.send0(Transport.java:230) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at jakarta.mail.Transport.send(Transport.java:100) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at edy.epam.task6.util.EmailSender.sendEmail(EmailSender.java:55) [classes/:?]
+	at edy.epam.task6._main.Main.main(Main.java:68) [classes/:?]
+21-08-08 19:26.233 [main] ERROR edy.epam.task6.util.EmailSender - Error during email sending: 
+jakarta.mail.AuthenticationFailedException: 535-5.7.8 Username and Password not accepted. Learn more at
+535 5.7.8  https://support.google.com/mail/?p=BadCredentials l12sm1386237wms.24 - gsmtp
+
+	at com.sun.mail.smtp.SMTPTransport$Authenticator.authenticate(SMTPTransport.java:947) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at com.sun.mail.smtp.SMTPTransport.authenticate(SMTPTransport.java:858) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at com.sun.mail.smtp.SMTPTransport.protocolConnect(SMTPTransport.java:762) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at jakarta.mail.Service.connect(Service.java:364) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at jakarta.mail.Service.connect(Service.java:222) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at jakarta.mail.Service.connect(Service.java:171) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at jakarta.mail.Transport.send0(Transport.java:230) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at jakarta.mail.Transport.send(Transport.java:100) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at edy.epam.task6.util.EmailSender.sendEmail(EmailSender.java:53) [classes/:?]
+	at edy.epam.task6._main.Main.main(Main.java:68) [classes/:?]
+21-08-08 19:30.257 [main] ERROR edy.epam.task6.util.EmailSender - Error during email sending: 
+jakarta.mail.AuthenticationFailedException: 535-5.7.8 Username and Password not accepted. Learn more at
+535 5.7.8  https://support.google.com/mail/?p=BadCredentials h11sm17766551wmq.34 - gsmtp
+
+	at com.sun.mail.smtp.SMTPTransport$Authenticator.authenticate(SMTPTransport.java:947) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at com.sun.mail.smtp.SMTPTransport.authenticate(SMTPTransport.java:858) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at com.sun.mail.smtp.SMTPTransport.protocolConnect(SMTPTransport.java:762) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at jakarta.mail.Service.connect(Service.java:364) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at jakarta.mail.Service.connect(Service.java:222) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at jakarta.mail.Service.connect(Service.java:171) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at jakarta.mail.Transport.send0(Transport.java:230) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at jakarta.mail.Transport.send(Transport.java:100) ~[jakarta.mail-2.0.1.jar:2.0.1]
+	at edy.epam.task6.util.EmailSender.sendEmail(EmailSender.java:53) [classes/:?]
+	at edy.epam.task6._main.Main.main(Main.java:68) [classes/:?]
+21-08-10 15:56.861 [main] ERROR epam.task6.model.dao.TattooDao - Error during searching for tattoos catalog.
+java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'FROM tattoos
+INNER JOIN tattoos_has_body_parts ON tattoos.tattoo_id = tattoos_ha' at line 6
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120) ~[mysql-connector-java-8.0.21.jar:8.0.21]
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97) ~[mysql-connector-java-8.0.21.jar:8.0.21]
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122) ~[mysql-connector-java-8.0.21.jar:8.0.21]
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:953) ~[mysql-connector-java-8.0.21.jar:8.0.21]
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeQuery(ClientPreparedStatement.java:1003) ~[mysql-connector-java-8.0.21.jar:8.0.21]
+	at edy.epam.task6.model.dao.TattooDao.findAll(TattooDao.java:91) [classes/:?]
+	at edy.epam.task6.model.service.impl.TattooServiceImpl.findAll(TattooServiceImpl.java:29) [classes/:?]
+	at edy.epam.task6._main.Main.main(Main.java:30) [classes/:?]
+21-08-10 15:59.865 [main] ERROR epam.task6.model.dao.TattooDao - Error during searching for tattoos catalog.
+java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'FROM tattoos
+INNER JOIN tattoos_has_body_parts ON tattoos.tattoo_id = tattoos_ha' at line 6
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120) ~[mysql-connector-java-8.0.21.jar:8.0.21]
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97) ~[mysql-connector-java-8.0.21.jar:8.0.21]
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122) ~[mysql-connector-java-8.0.21.jar:8.0.21]
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:953) ~[mysql-connector-java-8.0.21.jar:8.0.21]
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeQuery(ClientPreparedStatement.java:1003) ~[mysql-connector-java-8.0.21.jar:8.0.21]
+	at edy.epam.task6.model.dao.TattooDao.findAll(TattooDao.java:91) [classes/:?]
+	at edy.epam.task6.model.service.impl.TattooServiceImpl.findAll(TattooServiceImpl.java:29) [classes/:?]
+	at edy.epam.task6._main.Main.main(Main.java:30) [classes/:?]
+21-08-10 17:42.731 [main] ERROR epam.task6.model.dao.TattooDao - Error during searching ACTIVE tattoos in tattoos catalog.
+java.sql.SQLException: Column 'place' not found.
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:129) ~[mysql-connector-java-8.0.21.jar:8.0.21]
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97) ~[mysql-connector-java-8.0.21.jar:8.0.21]
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:89) ~[mysql-connector-java-8.0.21.jar:8.0.21]
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:63) ~[mysql-connector-java-8.0.21.jar:8.0.21]
+	at com.mysql.cj.jdbc.result.ResultSetImpl.findColumn(ResultSetImpl.java:556) ~[mysql-connector-java-8.0.21.jar:8.0.21]
+	at com.mysql.cj.jdbc.result.ResultSetImpl.getObject(ResultSetImpl.java:1408) ~[mysql-connector-java-8.0.21.jar:8.0.21]
+	at edy.epam.task6.model.dao.TattooDao.createTattoos(TattooDao.java:123) ~[classes/:?]
+	at edy.epam.task6.model.dao.TattooDao.findAllActive(TattooDao.java:105) [classes/:?]
+	at edy.epam.task6.model.service.impl.TattooServiceImpl.findAllActive(TattooServiceImpl.java:40) [classes/:?]
+	at edy.epam.task6._main.Main.main(Main.java:30) [classes/:?]
+21-08-10 18:34.196 [main] ERROR epam.task6.model.dao.TattooDao - Error during searching for tattoos catalog.
+java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'FROM tattoos
+JOIN tattoo_statuses
+ON tattoos.tattoo_status_id = tattoo_statuses.' at line 3
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120) ~[mysql-connector-java-8.0.21.jar:8.0.21]
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97) ~[mysql-connector-java-8.0.21.jar:8.0.21]
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122) ~[mysql-connector-java-8.0.21.jar:8.0.21]
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:953) ~[mysql-connector-java-8.0.21.jar:8.0.21]
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeQuery(ClientPreparedStatement.java:1003) ~[mysql-connector-java-8.0.21.jar:8.0.21]
+	at edy.epam.task6.model.dao.TattooDao.findAll(TattooDao.java:90) [classes/:?]
+	at edy.epam.task6.model.service.impl.TattooServiceImpl.findAll(TattooServiceImpl.java:29) [classes/:?]
+	at edy.epam.task6._main.Main.main(Main.java:30) [classes/:?]
+21-08-10 18:36.301 [main] ERROR epam.task6.model.dao.TattooDao - Error during searching for tattoos catalog.
+java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'FROM tattoos
+JOIN tattoo_statuses
+ON tattoos.tattoo_status_id = tattoo_statuses.' at line 3
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120) ~[mysql-connector-java-8.0.21.jar:8.0.21]
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97) ~[mysql-connector-java-8.0.21.jar:8.0.21]
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122) ~[mysql-connector-java-8.0.21.jar:8.0.21]
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:953) ~[mysql-connector-java-8.0.21.jar:8.0.21]
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeQuery(ClientPreparedStatement.java:1003) ~[mysql-connector-java-8.0.21.jar:8.0.21]
+	at edy.epam.task6.model.dao.TattooDao.findAll(TattooDao.java:89) [classes/:?]
+	at edy.epam.task6.model.service.impl.TattooServiceImpl.findAll(TattooServiceImpl.java:29) [classes/:?]
+	at edy.epam.task6._main.Main.main(Main.java:30) [classes/:?]
+21-08-10 18:39.823 [main] ERROR epam.task6.model.dao.TattooDao - Error during searching for tattoos catalog.
+java.sql.SQLSyntaxErrorException: Unknown column 'tattoos.places' in 'group statement'
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120) ~[mysql-connector-java-8.0.21.jar:8.0.21]
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97) ~[mysql-connector-java-8.0.21.jar:8.0.21]
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122) ~[mysql-connector-java-8.0.21.jar:8.0.21]
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:953) ~[mysql-connector-java-8.0.21.jar:8.0.21]
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeQuery(ClientPreparedStatement.java:1003) ~[mysql-connector-java-8.0.21.jar:8.0.21]
+	at edy.epam.task6.model.dao.TattooDao.findAll(TattooDao.java:90) [classes/:?]
+	at edy.epam.task6.model.service.impl.TattooServiceImpl.findAll(TattooServiceImpl.java:29) [classes/:?]
+	at edy.epam.task6._main.Main.main(Main.java:30) [classes/:?]
+21-08-10 18:42.563 [main] ERROR epam.task6.model.dao.TattooDao - Error during searching for tattoos catalog.
+java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'FROM tattoos
+JOIN tattoo_statuses
+ON tattoos.tattoo_status_id = tattoo_statuses.' at line 3
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120) ~[mysql-connector-java-8.0.21.jar:8.0.21]
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97) ~[mysql-connector-java-8.0.21.jar:8.0.21]
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122) ~[mysql-connector-java-8.0.21.jar:8.0.21]
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:953) ~[mysql-connector-java-8.0.21.jar:8.0.21]
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeQuery(ClientPreparedStatement.java:1003) ~[mysql-connector-java-8.0.21.jar:8.0.21]
+	at edy.epam.task6.model.dao.TattooDao.findAll(TattooDao.java:89) [classes/:?]
+	at edy.epam.task6.model.service.impl.TattooServiceImpl.findAll(TattooServiceImpl.java:29) [classes/:?]
+	at edy.epam.task6._main.Main.main(Main.java:30) [classes/:?]
+21-08-10 18:49.182 [main] ERROR epam.task6.model.dao.TattooDao - Error during searching for tattoos catalog.
+java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'FROM tattoos
+JOIN tattoo_statuses
+ON tattoos.tattoo_status_id = tattoo_statuses.' at line 3
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120) ~[mysql-connector-java-8.0.21.jar:8.0.21]
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97) ~[mysql-connector-java-8.0.21.jar:8.0.21]
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122) ~[mysql-connector-java-8.0.21.jar:8.0.21]
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:953) ~[mysql-connector-java-8.0.21.jar:8.0.21]
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeQuery(ClientPreparedStatement.java:1003) ~[mysql-connector-java-8.0.21.jar:8.0.21]
+	at edy.epam.task6.model.dao.TattooDao.findAll(TattooDao.java:91) [classes/:?]
+	at edy.epam.task6.model.service.impl.TattooServiceImpl.findAll(TattooServiceImpl.java:29) [classes/:?]
+	at edy.epam.task6._main.Main.main(Main.java:30) [classes/:?]
+21-08-10 18:52.015 [main] ERROR epam.task6.model.dao.TattooDao - Error during searching for tattoos catalog.
+java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'FROM tattoos
+JOIN tattoo_statuses
+ON tattoos.tattoo_status_id = tattoo_statuses.' at line 3
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120) ~[mysql-connector-java-8.0.21.jar:8.0.21]
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97) ~[mysql-connector-java-8.0.21.jar:8.0.21]
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122) ~[mysql-connector-java-8.0.21.jar:8.0.21]
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:953) ~[mysql-connector-java-8.0.21.jar:8.0.21]
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeQuery(ClientPreparedStatement.java:1003) ~[mysql-connector-java-8.0.21.jar:8.0.21]
+	at edy.epam.task6.model.dao.TattooDao.findAll(TattooDao.java:91) [classes/:?]
+	at edy.epam.task6.model.service.impl.TattooServiceImpl.findAll(TattooServiceImpl.java:29) [classes/:?]
+	at edy.epam.task6._main.Main.main(Main.java:30) [classes/:?]
+21-08-10 18:59.619 [main] ERROR epam.task6.model.dao.TattooDao - Error during searching ACTIVE tattoos in tattoos catalog.
+java.sql.SQLException: Column 'place' not found.
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:129) ~[mysql-connector-java-8.0.21.jar:8.0.21]
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97) ~[mysql-connector-java-8.0.21.jar:8.0.21]
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:89) ~[mysql-connector-java-8.0.21.jar:8.0.21]
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:63) ~[mysql-connector-java-8.0.21.jar:8.0.21]
+	at com.mysql.cj.jdbc.result.ResultSetImpl.findColumn(ResultSetImpl.java:556) ~[mysql-connector-java-8.0.21.jar:8.0.21]
+	at com.mysql.cj.jdbc.result.ResultSetImpl.getString(ResultSetImpl.java:863) ~[mysql-connector-java-8.0.21.jar:8.0.21]
+	at edy.epam.task6.model.dao.TattooDao.createTattoos(TattooDao.java:129) ~[classes/:?]
+	at edy.epam.task6.model.dao.TattooDao.findAllActive(TattooDao.java:109) [classes/:?]
+	at edy.epam.task6.model.service.impl.TattooServiceImpl.findAllActive(TattooServiceImpl.java:40) [classes/:?]
+	at edy.epam.task6._main.Main.main(Main.java:30) [classes/:?]
+21-08-10 23:20.131 [main] ERROR epam.task6.model.dao.OrderDao - Error during searching for all orders.
+java.sql.SQLIntegrityConstraintViolationException: Column 'users_user_id' in field list is ambiguous
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:117) ~[mysql-connector-java-8.0.21.jar:8.0.21]
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97) ~[mysql-connector-java-8.0.21.jar:8.0.21]
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122) ~[mysql-connector-java-8.0.21.jar:8.0.21]
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:953) ~[mysql-connector-java-8.0.21.jar:8.0.21]
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeQuery(ClientPreparedStatement.java:1003) ~[mysql-connector-java-8.0.21.jar:8.0.21]
+	at edy.epam.task6.model.dao.OrderDao.findAll(OrderDao.java:43) [classes/:?]
+	at edy.epam.task6.model.service.impl.OrderServiceImpl.findAll(OrderServiceImpl.java:16) [classes/:?]
+	at edy.epam.task6._main.Main.main(Main.java:86) [classes/:?]
+21-08-10 23:34.359 [main] ERROR epam.task6.model.dao.OrderDao - Error during searching for all orders.
+java.sql.SQLIntegrityConstraintViolationException: Column 'registration_date' in field list is ambiguous
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:117) ~[mysql-connector-java-8.0.21.jar:8.0.21]
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97) ~[mysql-connector-java-8.0.21.jar:8.0.21]
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122) ~[mysql-connector-java-8.0.21.jar:8.0.21]
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:953) ~[mysql-connector-java-8.0.21.jar:8.0.21]
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeQuery(ClientPreparedStatement.java:1003) ~[mysql-connector-java-8.0.21.jar:8.0.21]
+	at edy.epam.task6.model.dao.OrderDao.findAll(OrderDao.java:67) [classes/:?]
+	at edy.epam.task6.model.service.impl.OrderServiceImpl.findAll(OrderServiceImpl.java:26) [classes/:?]
+	at edy.epam.task6._main.Main.main(Main.java:86) [classes/:?]
