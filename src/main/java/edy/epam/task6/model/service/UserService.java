@@ -11,9 +11,13 @@ public interface UserService {
 
     boolean registerUser(Map<String, String> parameters) throws ServiceException;
 
-    boolean updateLogin(Map<String, String> parameters, Long userId) throws ServiceException;
+    boolean updateEmail(Map<String, String> parameters, Long userId) throws ServiceException;
 
     boolean updatePassword(Map<String, String> parameters, Long userId) throws ServiceException;
+
+    boolean updateName(Map<String, String> parameters, Long userId) throws ServiceException;
+
+    boolean updateSurname(Map<String, String> parameters, Long userId) throws ServiceException;
 
     boolean updateDiscount(Map<String, String> parameters, Long userId) throws ServiceException;
 

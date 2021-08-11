@@ -66,8 +66,10 @@ public class UserDao {
             JOIN user_roles ON users.role_id = user_roles.role_id
             WHERE user_statuses.status=?""";
     //UPDATE REGEX
-    private static final String UPDATE_LOGIN = "UPDATE users SET users.login=? WHERE user_id=?";
+    private static final String UPDATE_EMAIL = "UPDATE users SET email=? WHERE user_id=?";
     private static final String UPDATE_PASSWORD = "UPDATE users SET password=? WHERE user_id=?";
+    private static final String UPDATE_NAME = "UPDATE users SET name=? WHERE user_id=?";
+    private static final String UPDATE_SURNAME = "UPDATE users SET surname=? WHERE user_id=?";
     private static final String UPDATE_DISCOUNT = "UPDATE users SET discount=? WHERE user_id=?";
     private static final String UPDATE_BALANCE = "UPDATE users SET balance=? WHERE user_id=?";
     private static final String UPDATE_STATUS = "UPDATE users SET status_id=? WHERE user_id=?";
@@ -103,16 +105,16 @@ public class UserDao {
         return result;
     }
 
-    public boolean updateLogin(Map<String, String> parameters, Long userId) throws DaoException {
+    public boolean updateEmail(Map<String, String> parameters, Long userId) throws DaoException {
         boolean result = false;
         try(Connection connection = ConnectionPool.getInstance().getConnection();
-            PreparedStatement statement = connection.prepareStatement(UPDATE_LOGIN)){
-            statement.setString(1, parameters.get(FieldName.USER_LOGIN));
+            PreparedStatement statement = connection.prepareStatement(UPDATE_EMAIL)){
+            statement.setString(1, parameters.get(FieldName.USER_EMAIL));
             statement.setLong(2, userId);
             result = statement.executeUpdate()>0;
         } catch (SQLException e){
-            logger.error("Error during updating password of user with id = " + userId, e);
-            throw new DaoException("Error during updating password of user with id = " + userId, e);
+            logger.error("Error during updating email of user with id = " + userId, e);
+            throw new DaoException("Error during updating email of user with id = " + userId, e);
         }
         return result;
     }
@@ -127,6 +129,34 @@ public class UserDao {
         } catch (SQLException e){
             logger.error("Error during updating password of user with id = " + userId, e);
             throw new DaoException("Error during updating password of user with id = " + userId, e);
+        }
+        return result;
+    }
+
+    public boolean updateName(Map<String, String> parameters, Long userId) throws DaoException {
+        boolean result = false;
+        try(Connection connection = ConnectionPool.getInstance().getConnection();
+            PreparedStatement statement = connection.prepareStatement(UPDATE_NAME)){
+            statement.setString(1, parameters.get(FieldName.USER_NAME));
+            statement.setLong(2, userId);
+            result = statement.executeUpdate()>0;
+        } catch (SQLException e){
+            logger.error("Error during updating name of user with id = " + userId, e);
+            throw new DaoException("Error during updating name of user with id = " + userId, e);
+        }
+        return result;
+    }
+
+    public boolean updateSurname(Map<String, String> parameters, Long userId) throws DaoException {
+        boolean result = false;
+        try(Connection connection = ConnectionPool.getInstance().getConnection();
+            PreparedStatement statement = connection.prepareStatement(UPDATE_SURNAME)){
+            statement.setString(1, parameters.get(FieldName.USER_SURNAME));
+            statement.setLong(2, userId);
+            result = statement.executeUpdate()>0;
+        } catch (SQLException e){
+            logger.error("Error during updating surname of user with id = " + userId, e);
+            throw new DaoException("Error during updating surname of user with id = " + userId, e);
         }
         return result;
     }

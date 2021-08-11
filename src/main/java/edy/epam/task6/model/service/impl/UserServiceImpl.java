@@ -1,7 +1,6 @@
 package edy.epam.task6.model.service.impl;
 
 import edy.epam.task6.exception.DaoException;
-import edy.epam.task6.exception.HashGenerationException;
 import edy.epam.task6.exception.ServiceException;
 import edy.epam.task6.model.dao.UserDao;
 import edy.epam.task6.model.entity.User;
@@ -23,19 +22,19 @@ public class UserServiceImpl implements UserService {
                 String password = HashGenerator.generatePassword(parameters.get(MapKeys.USER_PASSWORD));
                 parameters.computeIfPresent(MapKeys.USER_PASSWORD, (key, value) -> value = password);
                 result = userDao.add(parameters);
-            } catch (DaoException | HashGenerationException e) {
+            } catch (DaoException e) {
                 throw new ServiceException(e);
             }
         }
         return result;
     }
 
-    public boolean updateLogin(Map<String, String> parameters, Long userId) throws ServiceException {
+    public boolean updateEmail(Map<String, String> parameters, Long userId) throws ServiceException {
         boolean result = true;
         if(result) {
             UserDao userDao = UserDao.getInstance();
             try {
-                result = userDao.updateLogin(parameters, userId);
+                result = userDao.updateEmail(parameters, userId);
             } catch (DaoException e) {
                 throw new ServiceException(e);
             }
@@ -49,6 +48,32 @@ public class UserServiceImpl implements UserService {
             UserDao userDao = UserDao.getInstance();
             try {
                 result = userDao.updatePassword(parameters, userId);
+            } catch (DaoException e) {
+                throw new ServiceException(e);
+            }
+        }
+        return result;
+    }
+
+    public boolean updateName(Map<String, String> parameters, Long userId) throws ServiceException {
+        boolean result = true;
+        if(result) {
+            UserDao userDao = UserDao.getInstance();
+            try {
+                result = userDao.updateName(parameters, userId);
+            } catch (DaoException e) {
+                throw new ServiceException(e);
+            }
+        }
+        return result;
+    }
+
+    public boolean updateSurname(Map<String, String> parameters, Long userId) throws ServiceException {
+        boolean result = true;
+        if(result) {
+            UserDao userDao = UserDao.getInstance();
+            try {
+                result = userDao.updateSurname(parameters, userId);
             } catch (DaoException e) {
                 throw new ServiceException(e);
             }
