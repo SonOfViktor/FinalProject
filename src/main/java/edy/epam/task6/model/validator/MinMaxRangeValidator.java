@@ -8,7 +8,7 @@ public class MinMaxRangeValidator {
 
     public static boolean validate(BigDecimal min, BigDecimal max) {
         boolean result = false;
-        if (min.intValue() > 0 || max.intValue() > 0 && min.intValue() < max.intValue()) {
+        if (min.doubleValue() < max.doubleValue() && min.doubleValue() > 0) {
             result = true;
         }
         return result;
