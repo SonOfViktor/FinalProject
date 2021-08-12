@@ -42,6 +42,9 @@ input {
 form {
     padding-top: 1%;
 }
+.info-div {
+    padding-top: 1%;
+}
 .info-field {
     position: relative;
     left: 5%;
@@ -75,8 +78,6 @@ form {
     position: relative;
     width: 290px;
     height: 60px;
-    left: 20%;
-    top: 5%;
     background: #CD6326;
     border-radius: 5px;
     outline: none;
@@ -88,11 +89,18 @@ form {
     text-align: center;
     color: #F7F7F7;
 }
+.register-form {
+    position: relative;
+    width: 290px;
+    height: 60px;
+    left: 51%;
+    top: -9%;
+}
 .login {
     position: relative;
     width: 290px;
     height: 60px;
-    left: 22%;
+    left: 20%;
     top: 5%;
     background: #CD6326;
     border-radius: 5px;

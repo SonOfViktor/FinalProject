@@ -23,9 +23,7 @@
         <div class="header-wildlife" display="inline">TATTOO-Салон</div>
         <ul>
             <li class="header-blog">
-                <form method="post" action="ProjectServlet">
-                    <a href="ProjectServlet?command=to_catalog_page_command">Каталог</a>
-                </form>
+                <a href="ProjectServlet?command=to_catalog_page_command">Каталог</a>
             </li>
             <li class="header-contacts">
                 <a href="">Заказы</a>
