@@ -17,10 +17,6 @@ import java.util.concurrent.locks.ReentrantLock;
 public class ConnectionPool {
     private static final Logger logger = LogManager.getLogger();
 
-    public static final String DATABASE_PROPERTY_PATH = "database.properties";
-    public static final String DATABASE_URL = "url";
-    public static final String DATABASE_DRIVER = "driverClassName";
-
     private static ConnectionPool instance;
     private static final ReentrantLock locker = new ReentrantLock();
     private static final AtomicBoolean create = new AtomicBoolean(false);
@@ -28,6 +24,10 @@ public class ConnectionPool {
     private static final int CONNECTION_POOL_SIZE = 8;
     private BlockingQueue<ProxyConnection> freeConnections;
     private BlockingQueue<ProxyConnection> busyConnections;
+
+    public static final String DATABASE_PROPERTY_PATH = "database.properties";
+    public static final String DATABASE_URL = "url";
+    public static final String DATABASE_DRIVER = "driverClassName";
 
     private ConnectionPool() {
         try{
@@ -42,8 +42,8 @@ public class ConnectionPool {
                 freeConnections.add(new ProxyConnection(DriverManager.getConnection(url, properties)));
             }
         } catch (SQLException | ClassNotFoundException | LocalPropertyException e) {
-            logger.error("Error during connection pool creation.", e);
-            throw new RuntimeException("Error during connection pool creation.",e);
+            logger.fatal("Fatal error during connection pool creation.", e);
+            throw new RuntimeException("Fatal error during connection pool creation.", e);
         }
     }
 
@@ -74,18 +74,20 @@ public class ConnectionPool {
         return connection;
     }
 
-    public void releaseConnection(Connection connection) {
-        if(connection instanceof ProxyConnection){
-            busyConnections.remove(connection);
+    public boolean releaseConnection(Connection connection) {
+        boolean result = true;
+        if(connection instanceof ProxyConnection && busyConnections.remove(connection)) {
             try {
                 freeConnections.put((ProxyConnection) connection);
             } catch (InterruptedException e) {
+                logger.error("Error: wrong connection to put in free connections.", e);
                 Thread.currentThread().interrupt();
-                logger.error("Error: wrong connection to put in free connections.");
             }
         } else {
             logger.error("Error: wrong connection to release.");
+            result = false;
         }
+        return result;
     }
 
     public void destroyPool() {

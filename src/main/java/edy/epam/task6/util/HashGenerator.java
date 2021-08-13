@@ -15,9 +15,9 @@ public class HashGenerator {
 
     private static final char[] hex = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f' };
 
-    public static String generatePassword(String stringToEncrypt) {
+    public static String hashPassword(String stringToEncrypt) {
         try {
-            MessageDigest messageDigest = MessageDigest.getInstance(PASSWORD_ALGORITHM_SHA256);
+            MessageDigest messageDigest = MessageDigest.getInstance(PASSWORD_ALGORITHM_MD5);
             messageDigest.update(stringToEncrypt.getBytes());
             return byteArray2Hex(messageDigest.digest());
         } catch (NoSuchAlgorithmException e) {

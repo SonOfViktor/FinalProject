@@ -4,6 +4,7 @@ import edy.epam.task6.exception.DaoException;
 import edy.epam.task6.exception.ServiceException;
 import edy.epam.task6.model.dao.UserDao;
 import edy.epam.task6.model.entity.User;
+import edy.epam.task6.model.entity.UserStatus;
 import edy.epam.task6.model.service.UserService;
 import edy.epam.task6.util.HashGenerator;
 import edy.epam.task6.model.dao.MapKeys;
@@ -14,12 +15,13 @@ import java.util.Optional;
 
 public class UserServiceImpl implements UserService {
 
+
     public boolean registerUser(Map<String, String> parameters) throws ServiceException {
         boolean result = true;
         if(result) {
             UserDao userDao = UserDao.getInstance();
             try {
-                String password = HashGenerator.generatePassword(parameters.get(MapKeys.USER_PASSWORD));
+                String password = HashGenerator.hashPassword(parameters.get(MapKeys.USER_PASSWORD));
                 parameters.computeIfPresent(MapKeys.USER_PASSWORD, (key, value) -> value = password);
                 result = userDao.add(parameters);
             } catch (DaoException e) {
@@ -111,13 +113,13 @@ public class UserServiceImpl implements UserService {
         boolean result = true;
         if(result) {
             UserDao userDao = UserDao.getInstance();
-            int status_id = switch (parameters.get(MapKeys.USER_STATUS)) {
+            int statusId = switch (parameters.get(MapKeys.USER_STATUS)) {
                 case "ACTIVE" -> 1;
                 case "BLOCKED" -> 2;
                 default -> 1;
             };
             try {
-                result = userDao.updateStatus(status_id, userId);
+                result = userDao.updateStatus(statusId, userId);
             } catch (DaoException e) {
                 throw new ServiceException(e);
             }

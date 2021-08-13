@@ -2,8 +2,6 @@ package edy.epam.task6.model.entity;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
-import java.util.Date;
 
 public class User {
 
