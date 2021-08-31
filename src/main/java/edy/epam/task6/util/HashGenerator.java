@@ -1,6 +1,5 @@
 package edy.epam.task6.util;
 
-import edy.epam.task6.exception.HashGenerationException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -17,7 +16,7 @@ public class HashGenerator {
 
     public static String hashPassword(String stringToEncrypt) {
         try {
-            MessageDigest messageDigest = MessageDigest.getInstance(PASSWORD_ALGORITHM_MD5);
+            MessageDigest messageDigest = MessageDigest.getInstance(PASSWORD_ALGORITHM_SHA256);
             messageDigest.update(stringToEncrypt.getBytes());
             return byteArray2Hex(messageDigest.digest());
         } catch (NoSuchAlgorithmException e) {

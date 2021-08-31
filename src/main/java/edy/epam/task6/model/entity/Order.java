@@ -2,6 +2,7 @@ package edy.epam.task6.model.entity;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.util.Objects;
 
 public class Order {
     private Long orderId;
@@ -109,6 +110,40 @@ public class Order {
 
     public void setTattooName(String tattooName) {
         this.tattooName = tattooName;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        Order order = (Order) obj;
+        return paid.equals(order.paid)
+                && registrationDate.equals(order.registrationDate)
+                && Objects.equals(userLogin, order.userLogin)
+                && orderStatus == order.orderStatus
+                && tattooId.equals(order.tattooId)
+                && tattooPrice.equals(order.tattooPrice)
+                && tattooName.equals(order.tattooName);
+    }
+
+    @Override
+    public int hashCode() {
+        int prime = 31;
+        int result = 1;
+
+        result = result * prime + paid.hashCode();
+        result = result * prime + registrationDate.hashCode();
+        result = result * prime + userLogin.hashCode();
+        result = result * prime + orderStatus.hashCode();
+        result = result * prime + tattooId.hashCode();
+        result = result * prime + tattooPrice.hashCode();
+        result = result * prime + tattooName.hashCode();
+
+        return result;
     }
 
     @Override

@@ -1,0 +1,85 @@
+.user-list-title {
+    position: absolute;
+    width: 780px;
+    height: 50px;
+    left: 25%;
+    top: 50px;
+    text-align: center;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 30px;
+    line-height: 35px;
+    color: #333333;
+}
+.user-list-container {
+    max-height: 360px;
+    max-width: 1560px;
+    padding-left: 55px;
+    display: inline-grid;
+    grid-template-columns: repeat(2, 590px);
+    grid-gap: 130px;
+    grid-auto-rows: 250px;
+    grid-auto-flow: dence;
+}
+.user-list-item {
+    width: 680px;
+    height: 335px;
+    border: 2px solid #CD6326;
+    box-sizing: border-box;
+    border-radius: 5px;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 17px;
+    line-height: 19px;
+    color: #333333;
+}
+.user-list-text-item {
+    position: relative;
+    width: 590px;
+    padding-bottom: 25px;
+}
+.user-list-text1 {
+    position: absolute;
+    left: 5px;
+    top: 15px;
+    width: 150px;
+    height: 20px;
+    padding-bottom: 5px;
+    text-align: right;
+}
+.user-list-text2 {
+    position: absolute;
+    left: 160px;
+    top: 15px;
+    width: 500px;
+    height: 20px;
+    padding-bottom: 5px;
+}
+.user-list-item-button {
+    position: relative;
+    width: 325px;
+    height: 55px;
+    left: 10px;
+    top: 15px;
+    background: #CD6326;
+    border: 1px solid #CD6326;
+    border-radius: 5px 5px 5px 5px;
+    outline: none;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 23px;
+    line-height: 27px;
+    align-items: center;
+    text-align: center;
+    color: #F7F7F7;
+}
+.form-button-user2 {
+    position: relative;
+    width: 325px;
+    height: 55px;
+    left: 330px;
+    top: -72px;
+}

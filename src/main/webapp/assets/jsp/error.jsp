@@ -1,4 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page isErrorPage="true" contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -7,7 +7,7 @@
             href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;display=swap"
             rel="stylesheet">
     <link
-            href="assets/css/errorpage.css"
+            href="../css/error1.css"
             rel="stylesheet"
     />
     <title>Error</title>

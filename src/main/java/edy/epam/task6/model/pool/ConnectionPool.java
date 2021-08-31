@@ -97,7 +97,7 @@ public class ConnectionPool {
             }
             deregisterDrivers();
         } catch (SQLException e) {
-            logger.error("Error while destroying connection pool.");
+            logger.error("Error while destroying connection pool.", e);
         }
     }
 

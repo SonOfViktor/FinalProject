@@ -2,6 +2,7 @@ package edy.epam.task6.model.entity;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Objects;
 
 public class Tattoo {
 
@@ -119,19 +120,57 @@ public class Tattoo {
     }
 
     @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        Tattoo tattoo = (Tattoo) obj;
+        return name.equals(tattoo.name)
+                && description.equals(tattoo.description)
+                && price.equals(tattoo.price)
+                && width.equals(tattoo.width)
+                && height.equals(tattoo.height)
+                && imageUrl.equals(tattoo.imageUrl)
+                && status == tattoo.status
+                && places == tattoo.places
+                && userId.equals(tattoo.userId);
+    }
+
+    @Override
+    public int hashCode() {
+        int prime = 31;
+        int result = 1;
+
+        result = result * prime + name.hashCode();
+        result = result * prime + description.hashCode();
+        result = result * prime + price.hashCode();
+        result = result * prime + width.hashCode();
+        result = result * prime + height.hashCode();
+        result = result * prime + imageUrl.hashCode();
+        result = result * prime + status.hashCode();
+        result = result * prime + places.hashCode();
+        result = result * prime + userId.hashCode();
+
+        return result;
+    }
+
+    @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("Catalog{ ")
-                .append("catalog_id = '").append(tattooId).append('\'')
+                .append("tattooId = '").append(tattooId).append('\'')
                 .append(", name = '").append(name).append('\'')
                 .append(", description = '").append(description).append('\'')
                 .append(", price = '").append(price).append('\'')
                 .append(", width = '").append(width).append('\'')
                 .append(", height = '").append(height).append('\'')
+                .append(", imageUrl = '").append(imageUrl).append('\'')
+                .append(", status = '").append(status).append('\'')
                 .append(", places = '").append(places).append('\'')
-                .append(", image_url = '").append(imageUrl).append('\'')
-                .append(", tattoo_status = '").append(status).append('\'')
-                .append(", user_id = '").append(userId).append('\'')
+                .append(", userId = '").append(userId).append('\'')
                 .append(" }\n");
         return stringBuilder.toString();
     }

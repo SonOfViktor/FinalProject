@@ -14,7 +14,6 @@ public class UserBuilder {
     private Long userId;
     private String email;
     private String login;
-    private String password;
     private String name;
     private String surname;
     private Integer discount;
@@ -24,12 +23,11 @@ public class UserBuilder {
     private UserRole role;
 
     public User build() {
-        User user = new User(userId, email, login, password, name, surname,
+        User user = new User(userId, email, login, name, surname,
                 discount, balance, registrationDate, status, role);
         this.userId = null;
         this.email = null;
         this.login = null;
-        this.password = null;
         this.name = null;
         this.surname = null;
         this.discount = null;
@@ -62,14 +60,6 @@ public class UserBuilder {
 
     public void setLogin(String login) {
         this.login = login;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getName() {

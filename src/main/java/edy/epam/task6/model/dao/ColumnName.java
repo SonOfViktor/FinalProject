@@ -1,6 +1,6 @@
 package edy.epam.task6.model.dao;
 
-public final class FieldName {
+public final class ColumnName {
 
     public static final String USER_ID ="user_id";
     public static final String USER_EMAIL ="email";
@@ -39,10 +39,11 @@ public final class FieldName {
     public static final String ORDERS_PAID ="paid";
     public static final String ORDERS_REGISTRATION_DATE ="registration_date";
     public static final String ORDERS_USER_LOGIN ="login";
+    public static final String ORDERS_USER_ID ="users_user_id";
     public static final String ORDERS_STATUS ="status";
     public static final String ORDERS_TATTOO_ID ="tattoos_tattoo_id";
     public static final String ORDERS_TATTOO_NAME ="name";
     public static final String ORDERS_TATTOO_PRICE ="price";
 
-    private FieldName() {}
+    private ColumnName() {}
 }

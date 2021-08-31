@@ -2,13 +2,13 @@ package edy.epam.task6.model.entity;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.util.Objects;
 
 public class User {
 
     private Long userId;
     private String email;
     private String login;
-    private String password;
     private String name;
     private String surname;
     private Integer discount;
@@ -20,7 +20,6 @@ public class User {
     public User(Long userId,
                 String email,
                 String login,
-                String password,
                 String name,
                 String surname,
                 Integer discount,
@@ -31,7 +30,6 @@ public class User {
         this.userId = userId;
         this.email = email;
         this.login = login;
-        this.password = password;
         this.name = name;
         this.surname = surname;
         this.discount = discount;
@@ -63,14 +61,6 @@ public class User {
 
     public void setLogin(String login) {
         this.login = login;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getName() {
@@ -130,13 +120,51 @@ public class User {
     }
 
     @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        User user = (User) obj;
+        return email.equals(user.email)
+                && login.equals(user.login)
+                && name.equals(user.name)
+                && surname.equals(user.surname)
+                && discount.equals(user.discount)
+                && balance.equals(user.balance)
+                && registrationDate.equals(user.registrationDate)
+                && status == user.status
+                && role == user.role;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int prime = 31;
+        int result = 1;
+
+        result = result * prime + email.hashCode();
+        result = result * prime + login.hashCode();
+        result = result * prime + name.hashCode();
+        result = result * prime + surname.hashCode();
+        result = result * prime + discount.hashCode();
+        result = result * prime + balance.hashCode();
+        result = result * prime + registrationDate.hashCode();
+        result = result * prime + status.hashCode();
+        result = result * prime + role.hashCode();
+
+        return result;
+    }
+
+    @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("User{ ")
                 .append(" user_id = '").append(userId).append('\'')
                 .append(", email = '").append(email).append('\'')
                 .append(", login = '").append(login).append('\'')
-                .append(", password = '").append(password).append('\'')
                 .append(", name = '").append(name).append('\'')
                 .append(", soname = '").append(surname).append('\'')
                 .append(", discount = '").append(discount).append('\'')

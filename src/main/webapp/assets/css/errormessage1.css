@@ -1,0 +1,14 @@
+.user-error-message {
+    position: relative;
+    width: 700px;
+    height: 29px;
+    top: 10px;
+    left: 0px;
+    text-align: center;
+    font-family: Open Sans;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 27px;
+    color: #a32525;
+}

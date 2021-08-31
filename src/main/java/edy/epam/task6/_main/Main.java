@@ -1,25 +1,13 @@
 package edy.epam.task6._main;
 
-import edy.epam.task6.exception.HashGenerationException;
-import edy.epam.task6.exception.LocalPropertyException;
 import edy.epam.task6.exception.ServiceException;
-import edy.epam.task6.model.entity.Order;
-import edy.epam.task6.model.entity.Tattoo;
 import edy.epam.task6.model.entity.User;
-import edy.epam.task6.model.service.OrderService;
-import edy.epam.task6.model.service.TattooService;
 import edy.epam.task6.model.service.UserService;
-import edy.epam.task6.model.service.impl.OrderServiceImpl;
-import edy.epam.task6.model.service.impl.TattooServiceImpl;
 import edy.epam.task6.model.service.impl.UserServiceImpl;
-import edy.epam.task6.util.EmailSender;
-import edy.epam.task6.util.PropertyReader;
-import jdk.swing.interop.SwingInterOpUtils;
+import edy.epam.task6.model.validator.Validator;
+import edy.epam.task6.util.RegisterCodeGenerator;
 
-import java.math.BigDecimal;
 import java.util.*;
-
-import static edy.epam.task6.util.HashGenerator.generatePassword;
 
 public class Main {
 
@@ -29,7 +17,11 @@ public class Main {
     public static final String DATABASE_DRIVER = "driverClassName";
 
     public static void main(String[] args) {
-        try {
+//        try {
+        Map<String, String> parameters = new HashMap<>();
+            parameters.put("paid", "0");
+            parameters.put("tattoo_id", "7800");
+            System.out.println(Validator.validateOrder(parameters));
 //            TattooService catalogService = new TattooServiceImpl();
 //            List<Tattoo> catalogElements =
 //                    catalogService.findByPriceRangeAllActive(BigDecimal.valueOf(3000), BigDecimal.valueOf(8000));
@@ -47,11 +39,11 @@ public class Main {
 //            parametersTattoo.put("users_user_id", "2");
 //            System.out.println(parametersTattoo);
 //            System.out.println(catalogService.AddNewTattoo(parametersTattoo));
-            UserService userService = new UserServiceImpl();
+//            UserService userService = new UserServiceImpl();
 //            List<User> userList = userService.findAll();
 //            System.out.println(userList);
-            Optional<User> user = userService.findByLogin("Daetwen");
-            System.out.println(user);
+//            Optional<User> user = userService.findByLogin("Daetwen");
+//            System.out.println(user);
 //            List<User> userList = userService.findByLogin("Daetwen");
 //            System.out.println(userList);
 //            Map<String, String> parameters = new HashMap<>();
@@ -73,19 +65,15 @@ public class Main {
 //            user = userService.findById(4L);
 //            System.out.println(user);
 
-//            try {
-//                String resultPassword = generatePassword("12345");
-//                System.out.println(resultPassword);
+//                String resultPassword = hashPassword("12345KOEVlad");
+//                System.out.println("Password: " + resultPassword);
 //                System.out.println(resultPassword.length());
-//            } catch (HashGenerationException e) {
-//                e.getStackTrace();
-//            }
 //            EmailSender emailSender = new EmailSender();
 //            emailSender.sendEmail("Vlad.Korenchyk@gmail.com", "https://vk.com/im?peers=239289588_502084994");
-            OrderService orderService = new OrderServiceImpl();
-            List<Order> orderList = orderService.findAll();
-            System.out.println(orderList);
-            Map<String, String> parameters3 = new HashMap<>();
+//            OrderService orderService = new OrderServiceImpl();
+//            List<Order> orderList = orderService.findAll();
+//            System.out.println(orderList);
+//            Map<String, String> parameters3 = new HashMap<>();
 //            parameters3.put("paid", "12000");
 //            parameters3.put("registration_date", "2021-08-10 23:51:00.0");
 //            parameters3.put("login", "1");
@@ -96,9 +84,9 @@ public class Main {
 //            orderService.updateStatus(parameters3, 2L);
 //            orderList = orderService.findAll();
 //            System.out.println(orderList);
-        } catch (ServiceException e) {
-            System.out.println(e.getStackTrace());
-        }
+//        } catch (ServiceException e) {
+//            System.out.println(e.getStackTrace());
+//        }
 //        try {
 //            PropertyReader reader = new PropertyReader();
 //            Properties properties = reader.read(MAIL_PROPERTY_PATH);
