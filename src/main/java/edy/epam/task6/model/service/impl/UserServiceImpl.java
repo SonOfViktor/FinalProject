@@ -93,15 +93,25 @@ public class UserServiceImpl implements UserService {
         return result;
     }
 
+    //TODO спросить нормально ли выглядит проверка скидки
     public boolean updateDiscount(Map<String, String> parameters, Long userId) throws ServiceException {
         String discount = parameters.get(RequestParameter.USER_DISCOUNT);
-        boolean result = Validator.validateDiscount(discount);
+        boolean result = Validator.validateDiscount(discount) && Validator.validateId(userId.toString());
         if(result) {
-            UserDao userDao = UserDaoImpl.getInstance();
-            try {
-                result = userDao.updateDiscount(parameters, userId);
-            } catch (DaoException e) {
-                throw new ServiceException(e);
+            Optional<User> user = findById(userId);
+            if (user.isPresent()) {
+                int localDiscount = user.get().getDiscount() + Integer.valueOf(discount);
+                if (localDiscount > 100) {
+                    localDiscount = 100;
+                }
+                UserDao userDao = UserDaoImpl.getInstance();
+                try {
+                    String resultDiscount = String.valueOf(localDiscount);
+                    parameters.computeIfPresent(ColumnName.USER_DISCOUNT, (key, value) -> value = resultDiscount);
+                    result = userDao.updateDiscount(parameters, userId);
+                } catch (DaoException e) {
+                    throw new ServiceException(e);
+                }
             }
         }
         return result;

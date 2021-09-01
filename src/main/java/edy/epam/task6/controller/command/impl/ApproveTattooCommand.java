@@ -7,7 +7,9 @@ import edy.epam.task6.model.entity.Tattoo;
 import edy.epam.task6.model.entity.TattooStatus;
 import edy.epam.task6.model.entity.User;
 import edy.epam.task6.model.service.TattooService;
+import edy.epam.task6.model.service.UserService;
 import edy.epam.task6.model.service.impl.TattooServiceImpl;
+import edy.epam.task6.model.service.impl.UserServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.apache.logging.log4j.LogManager;
@@ -31,11 +33,13 @@ public class ApproveTattooCommand implements Command {
         request.setAttribute(RequestParameter.PROFILE, userSession);
 
         TattooService tattooService = new TattooServiceImpl();
+        UserService userService = new UserServiceImpl();
         Map<String, String> parameters = new HashMap<>();
         try {
             Long tattooId = Long.valueOf(request.getParameter(RequestParameter.TATTOO_ID));
             BigDecimal tattooPrice = BigDecimal.valueOf(
                     Long.valueOf(request.getParameter(RequestParameter.TATTOO_PRICE)));
+            String discount = request.getParameter(RequestParameter.USER_DISCOUNT);
             boolean button = Boolean.parseBoolean(
                     request.getParameter(RequestParameter.TATTOO_BUTTON));
             Optional<Tattoo> tattoo = tattooService.findById(tattooId);
@@ -46,10 +50,15 @@ public class ApproveTattooCommand implements Command {
                 } else if (tattooStatus == TattooStatus.OFFERED_BY_USER && !button) {
                     tattooStatus = TattooStatus.LOCKED;
                 }
+
+                Long userId = tattoo.get().getUserId();
+                parameters.put(ColumnName.USER_DISCOUNT, discount);
+
                 parameters.put(ColumnName.TATTOOS_STATUS, tattooStatus.toString());
                 parameters.put(ColumnName.TATTOOS_PRICE, tattooPrice.toString());
-                if (tattooService.updateStatus(parameters, tattooId) &&
-                        tattooService.updatePrice(parameters, tattooId)) {
+                if (tattooService.updateStatus(parameters, tattooId)
+                        && tattooService.updatePrice(parameters, tattooId)
+                        && userService.updateDiscount(parameters, userId)) {
                     logger.info("Tattoo approving was successful.");
                     router = new Router(Router.RouterType.REDIRECT,
                             session.getAttribute(SessionAttribute.PREVIOUS_PAGE).toString());

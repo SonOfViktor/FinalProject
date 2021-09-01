@@ -93,6 +93,13 @@
                    pattern="[0-9]([0-9.]){0,9}"
             >
         </div>
+        <div class="info-div">
+            <input type="number" name="discount" placeholder="<fmt:message key="add.tattoo.discount"/>"
+                   required
+                   min="0"
+                   max="10"
+            >
+        </div>
         <input type="hidden" name="active" value="true"/>
         <c:choose>
             <c:when test="${id == 0}">
