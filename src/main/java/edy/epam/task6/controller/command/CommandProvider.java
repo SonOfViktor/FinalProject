@@ -71,6 +71,7 @@ public class CommandProvider {
         commands.put(CommandType.TO_CHANGE_NAME_PAGE_COMMAND, new GoToChangeNamePageCommand());
         commands.put(CommandType.TO_CHANGE_SURNAME_PAGE_COMMAND, new GoToChangeSurnamePageCommand());
         commands.put(CommandType.TO_CHANGE_PASSWORD_PAGE_COMMAND, new GoToChangePasswordPageCommand());
+        commands.put(CommandType.TO_CHANGE_BALANCE_PAGE_COMMAND, new GoToChangeBalancePageCommand());
         commands.put(CommandType.TO_CHANGE_USER_STATUS_PAGE_COMMAND, new GoToChangeUserStatusPageCommand());
 
         commands.put(CommandType.CHANGE_EMAIL_COMMAND, new ChangeEmailCommand());

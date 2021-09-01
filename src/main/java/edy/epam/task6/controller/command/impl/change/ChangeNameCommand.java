@@ -45,6 +45,7 @@ public class ChangeNameCommand implements Command {
                 }
             }
         } catch (ServiceException e) {
+            logger.error("Error during changing name of user: ", e);
             router = new Router(PagePath.ERROR_PAGE_500);
         }
         return router;

@@ -46,6 +46,7 @@ public class ChangeSurnameCommand implements Command {
                 }
             }
         } catch (ServiceException e) {
+            logger.error("Error during changing surname of user: ", e);
             router = new Router(PagePath.ERROR_PAGE_500);
         }
         return router;

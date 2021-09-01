@@ -3,6 +3,7 @@ package edy.epam.task6.controller.command.impl.page;
 import edy.epam.task6.controller.command.*;
 import edy.epam.task6.exception.ServiceException;
 import edy.epam.task6.model.entity.Tattoo;
+import edy.epam.task6.model.entity.UserRole;
 import edy.epam.task6.model.service.TattooService;
 import edy.epam.task6.model.service.impl.TattooServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;

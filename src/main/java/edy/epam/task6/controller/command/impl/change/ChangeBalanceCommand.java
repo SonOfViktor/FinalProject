@@ -30,22 +30,14 @@ public class ChangeBalanceCommand implements Command {
             Map<String, String> parameters = new HashMap<>();
             parameters.put(ColumnName.USER_BALANCE,
                     request.getParameter(RequestParameter.USER_BALANCE));
-            userService.updateName(parameters, userId);
+            userService.updateBalance(parameters, userId);
+
             Optional<User> resultUser = userService.findById(userId);
             request.setAttribute(RequestParameter.PROFILE, resultUser.get());
-            switch (user.getRole()) {
-                case ADMIN -> {
-                    router = new Router(PagePath.PROFILE_PAGE_ADMIN);
-                }
-                case USER -> {
-                    router = new Router(PagePath.PROFILE_PAGE_USER);
-                }
-                default -> {
-                    logger.error("Error after change balance with a return to the profile page.");
-                    router = new Router(PagePath.ERROR_PAGE_500);
-                }
-            }
+
+            router = new Router(PagePath.PROFILE_PAGE_USER);
         } catch (ServiceException e) {
+            logger.error("Error during changing balance of user: ", e);
             router = new Router(PagePath.ERROR_PAGE_500);
         }
         return router;

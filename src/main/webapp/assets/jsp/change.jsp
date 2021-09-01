@@ -60,6 +60,7 @@
     <c:set var="localName">name</c:set>
     <c:set var="localSurname">surname</c:set>
     <c:set var="localPassword">password</c:set>
+    <c:set var="localBalance">balance</c:set>
     <c:set var="localRole">role</c:set>
     <c:set var="localUserStatus">status</c:set>
     <c:set var="localTattooStatus">tattoo_status</c:set>
@@ -146,9 +147,27 @@
             </button>
             <c:if test = "${change_password_error}">
                 <div class="change-error-message">
-                    Введённые вами текущий пароль не верен, повторите ввод или вернитесь на страницу профиля.
+                    <fmt:message key="change.password.message.error"/>
                 </div>
             </c:if>
+        </form>
+    </c:if>
+    <c:if test="${what_change == localBalance}">
+        <form method="post" action="ProjectServlet">
+            <input type="hidden" name="command" value="change_balance_command"/>
+            <div class="info-div">
+                <input type="number"
+                       name="balance"
+                       placeholder="<fmt:message key="profile.change.balance"/>"
+                       required
+                       min="0"
+                       max="9223372036854775807"
+                />
+            </div>
+            <button type="submit"
+                    class="submit">
+                <fmt:message key="change.button"/>
+            </button>
         </form>
     </c:if>
     <c:if test="${what_change == localUserStatus && active == false}">

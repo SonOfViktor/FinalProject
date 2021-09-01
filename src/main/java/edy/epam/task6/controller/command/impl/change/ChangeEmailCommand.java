@@ -45,6 +45,7 @@ public class ChangeEmailCommand implements Command {
                 }
             }
         } catch (ServiceException e) {
+            logger.error("Error during changing email of user: ", e);
             router = new Router(PagePath.ERROR_PAGE_500);
         }
         return router;

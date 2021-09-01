@@ -7,6 +7,7 @@
 
 <c:set var="status_active">ACTIVE</c:set>
 <c:set var="status_blocked">BLOCKED</c:set>
+<c:set var="role_admin">ADMIN</c:set>
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -279,10 +280,10 @@
                                                             <input type="hidden" name="id" value="${user.userId}"/>
                                                             <input type="hidden" name="active" value="false"/>
                                                             <input type="hidden" name="title_users" value="${title_users}"/>
-                                                            <c:if test="${user.status eq status_active}">
+                                                            <c:if test="${user.status == status_active && user.role != role_admin}">
                                                                 <button class="user-list-item-button" type="submit"><fmt:message key="change.button-block"/></button>
                                                             </c:if>
-                                                            <c:if test="${user.status eq status_blocked}">
+                                                            <c:if test="${user.status == status_blocked || user.role == role_admin}">
                                                                 <button disabled="disabled" class="user-list-item-button" type="submit"><fmt:message key="change.button-block"/></button>
                                                             </c:if>
                                                         </form>
@@ -291,10 +292,10 @@
                                                             <input type="hidden" name="id" value="${user.userId}"/>
                                                             <input type="hidden" name="active" value="true"/>
                                                             <input type="hidden" name="title_users" value="${title_users}"/>
-                                                            <c:if test="${user.status eq status_active}">
+                                                            <c:if test="${user.status == status_active || user.role == role_admin}">
                                                                 <button disabled="disabled" class="user-list-item-button" type="submit"><fmt:message key="change.button-unblock"/></button>
                                                             </c:if>
-                                                            <c:if test="${user.status eq status_blocked}">
+                                                            <c:if test="${user.status == status_blocked && user.role != role_admin}">
                                                                 <button class="user-list-item-button" type="submit"><fmt:message key="change.button-unblock"/></button>
                                                             </c:if>
                                                         </form>
@@ -393,10 +394,10 @@
                                                         <input type="hidden" name="id" value="${user.userId}"/>
                                                         <input type="hidden" name="active" value="false"/>
                                                         <input type="hidden" name="title_users" value="${title_users}"/>
-                                                        <c:if test="${user.status eq status_active}">
+                                                        <c:if test="${user.status == status_active && user.role != role_admin}">
                                                             <button class="user-list-item-button" type="submit"><fmt:message key="change.button-block"/></button>
                                                         </c:if>
-                                                        <c:if test="${user.status eq status_blocked}">
+                                                        <c:if test="${user.status == status_blocked || user.role == role_admin}">
                                                             <button disabled="disabled" class="user-list-item-button" type="submit"><fmt:message key="change.button-block"/></button>
                                                         </c:if>
                                                     </form>
@@ -405,10 +406,10 @@
                                                         <input type="hidden" name="id" value="${user.userId}"/>
                                                         <input type="hidden" name="active" value="true"/>
                                                         <input type="hidden" name="title_users" value="${title_users}"/>
-                                                        <c:if test="${user.status eq status_active}">
+                                                        <c:if test="${user.status == status_active || user.role == role_admin}">
                                                             <button disabled="disabled" class="user-list-item-button" type="submit"><fmt:message key="change.button-unblock"/></button>
                                                         </c:if>
-                                                        <c:if test="${user.status eq status_blocked}">
+                                                        <c:if test="${user.status == status_blocked && user.role != role_admin}">
                                                             <button class="user-list-item-button" type="submit"><fmt:message key="change.button-unblock"/></button>
                                                         </c:if>
                                                     </form>

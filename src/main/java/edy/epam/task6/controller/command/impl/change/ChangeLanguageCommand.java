@@ -21,6 +21,6 @@ public class ChangeLanguageCommand implements Command {
         } else {
             session.setAttribute(SessionAttribute.LOCALE, ENGLISH);
         }
-        return new Router((String)session.getAttribute(SessionAttribute.PREVIOUS_PAGE));
+        return new Router(Router.RouterType.REDIRECT, session.getAttribute(SessionAttribute.PREVIOUS_PAGE).toString());
     }
 }

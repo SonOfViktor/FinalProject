@@ -24,11 +24,9 @@ public class ChangePasswordCommand implements Command {
         Router router;
         HttpSession session = request.getSession();
         User user = (User)session.getAttribute(SessionAttribute.USER);
-        System.out.println(user);
         Long userId = user.getUserId();
         UserService userService = new UserServiceImpl();
         try {
-            System.out.println("hello");
             Optional<User> localUser = userService.findByLoginAndPassword(
                     user.getLogin(),
                     request.getParameter(RequestParameter.PASSWORD_OLD));
@@ -60,6 +58,7 @@ public class ChangePasswordCommand implements Command {
                 router = new Router(PagePath.CHANGE_PAGE);
             }
         } catch (ServiceException e) {
+            logger.error("Error during changing password of user: ", e);
             router = new Router(PagePath.ERROR_PAGE_500);
         }
         return router;
