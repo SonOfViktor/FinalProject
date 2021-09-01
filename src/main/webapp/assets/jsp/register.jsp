@@ -86,7 +86,7 @@
                    required
                    minlength="1"
                    maxlength="40"
-                   pattern="[A-ZА-Я]([\w\sА-Яа-я]){0,39}"
+                   pattern="[A-ZА-ЯЁ][A-Za-zА-Яа-яЁё]{0,39}"
             >
         </div>
         <div class="info-div">
@@ -94,7 +94,7 @@
                    required
                    minlength="1"
                    maxlength="40"
-                   pattern="[A-ZА-Я]([\w\sА-Яа-я]){0,39}"
+                   pattern="[A-ZА-ЯЁ][A-Za-zА-Яа-яЁё]{0,39}"
             >
         </div>
         <div class="info-div">

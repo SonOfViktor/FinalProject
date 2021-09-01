@@ -90,7 +90,7 @@
                        required
                        minlength="1"
                        maxlength="40"
-                       pattern="[A-ZА-Я]([\w\sА-Яа-я]){0,39}"
+                       pattern="[A-ZА-ЯЁ][A-Za-zА-Яа-яЁё]{0,39}"
                 />
             </div>
             <button type="submit"
@@ -107,7 +107,7 @@
                        required
                        minlength="1"
                        maxlength="40"
-                       pattern="[A-ZА-Я]([\w\sА-Яа-я]){0,39}"
+                       pattern="[A-ZА-ЯЁ][A-Za-zА-Яа-яЁё]{0,39}"
                 />
             </div>
             <button type="submit"
@@ -174,11 +174,10 @@
         <form method="post" action="ProjectServlet">
             <input type="hidden" name="command" value="change_user_status_command"/>
             <div class="info-div">
-                <input type="text" name="id" placeholder="<fmt:message key="change.user-status.id"/>"
+                <input type="number" name="id" placeholder="<fmt:message key="change.user-status.id"/>"
                        required
-                       minlength="1"
-                       maxlength="19"
-                       pattern="[0-9]{1,19}"
+                       min="1"
+                       max="9223372036854775807"
                 />
             </div>
                 <input type="hidden" name="active" value="false"/>
@@ -189,11 +188,10 @@
         <form method="post" action="ProjectServlet">
             <input type="hidden" name="command" value="change_user_status_command"/>
             <div class="info-div">
-                <input type="text" name="id" placeholder="<fmt:message key="change.user-status.id"/>"
+                <input type="number" name="id" placeholder="<fmt:message key="change.user-status.id"/>"
                        required
-                       minlength="1"
-                       maxlength="19"
-                       pattern="[0-9]{1,19}"
+                       min="1"
+                       max="9223372036854775807"
                 >
             </div>
             <input type="hidden" name="active" value="true"/>
@@ -204,11 +202,10 @@
         <form method="post" action="ProjectServlet">
             <input type="hidden" name="command" value="change_tattoo_status_command"/>
             <div class="info-div">
-                <input type="text" name="tattoo_status" placeholder="<fmt:message key="change.tattoo-status.id"/>"
+                <input type="number" name="tattoo_status" placeholder="<fmt:message key="change.tattoo-status.id"/>"
                        required
-                       minlength="1"
-                       maxlength="19"
-                       pattern="[0-9]{1,19}"
+                       min="1"
+                       max="9223372036854775807"
                 >
             </div>
             <input type="hidden" name="active" value="false"/>
@@ -219,11 +216,10 @@
         <form method="post" action="ProjectServlet">
             <input type="hidden" name="command" value="change_tattoo_status_command"/>
             <div class="info-div">
-                <input type="text" name="id" placeholder="<fmt:message key="change.tattoo-status.id"/>"
+                <input type="number" name="id" placeholder="<fmt:message key="change.tattoo-status.id"/>"
                        required
                        minlength="1"
-                       maxlength="19"
-                       pattern="[0-9]{1,19}"
+                       maxlength="9223372036854775807"
                 >
             </div>
             <input type="hidden" name="active" value="true"/>

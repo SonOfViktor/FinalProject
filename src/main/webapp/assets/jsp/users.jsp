@@ -96,12 +96,11 @@
                     <input type="hidden" name="command" value="to_find_user_by_id_page_command"/>
                     <div class="block2-text"><fmt:message key="users.search.title.id"/></div>
                     <input class="block2-input"
-                           type="text"
+                           type="number"
                            name="id"
                            placeholder="<fmt:message key="users.search.placeholder.id"/>"
-                           minlength="1"
-                           maxlength="19"
-                           pattern="[0-9]{1,19}"
+                           min="1"
+                           max="9223372036854775807"
                     />
                     <button class="block2-button1" type="submit"><fmt:message key="users.search.button"/></button>
                 </form>
@@ -131,7 +130,7 @@
                            placeholder="<fmt:message key="users.search.placeholder.name"/>"
                            minlength="1"
                            maxlength="40"
-                           pattern="[A-ZА-Я]([\w\sА-Яа-я]){0,39}"
+                           pattern="[A-ZА-ЯЁ][A-Za-zА-Яа-яЁё]{0,39}"
                     />
                     <button class="block2-button1" type="submit"><fmt:message key="users.search.button"/></button>
                 </form>
@@ -146,7 +145,7 @@
                            placeholder="<fmt:message key="users.search.placeholder.surname"/>"
                            minlength="1"
                            maxlength="40"
-                           pattern="[A-ZА-Я]([\w\sА-Яа-я]){0,39}"
+                           pattern="[A-ZА-ЯЁ][A-Za-zА-Яа-яЁё]{0,39}"
                     />
                     <button class="block2-button1" type="submit"><fmt:message key="users.search.button"/></button>
                 </form>

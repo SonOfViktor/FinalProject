@@ -73,11 +73,10 @@
         <c:choose>
             <c:when test="${id == null}">
                 <div class="info-div">
-                    <input type="text" name="id" placeholder="<fmt:message key="change.tattoo-status.id"/>"
+                    <input type="number" name="id" placeholder="<fmt:message key="change.tattoo-status.id"/>"
                            required
-                           minlength="1"
-                           maxlength="19"
-                           pattern="[0-9]{1,19}"
+                           min="1"
+                           max="9223372036854775807"
                     >
                 </div>
             </c:when>
@@ -86,11 +85,10 @@
             </c:otherwise>
         </c:choose>
         <div class="info-div">
-            <input type="text" name="price" placeholder="<fmt:message key="add.tattoo.price"/>"
+            <input type="number" name="price" placeholder="<fmt:message key="add.tattoo.price"/>"
                    required
-                   minlength="1"
-                   maxlength="10"
-                   pattern="[0-9]([0-9.]){0,9}"
+                   min="0"
+                   max="9223372036854775807"
             >
         </div>
         <div class="info-div">

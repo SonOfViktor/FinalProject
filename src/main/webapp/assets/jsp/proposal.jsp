@@ -99,30 +99,28 @@
                    required
                    minlength="1"
                    maxlength="40"
-                   pattern="[A-ZА-Я]([\w\sА-Яа-я]){0,39}"
+                   pattern="[A-ZА-ЯЁ][A-Za-zА-Яа-яЁё]{0,39}"
             >
         </div>
         <div class="info-div">
             <input type="info-field" name="description" placeholder="<fmt:message key="add.tattoo.description"/>"
                    minlength="1"
                    maxlength="2000"
-                   pattern="[A-ZА-Я]([\w\s\.!?,А-Яа-я]){0,1999}"
+                   pattern="[A-ZА-ЯЁ][A-Za-zА-Яа-яЁё ,\.!?\d]{0,1999}"
             >
         </div>
         <div class="info-div">
-            <input type="text" name="width" placeholder="<fmt:message key="add.tattoo.width"/>"
+            <input type="number" name="width" placeholder="<fmt:message key="add.tattoo.width"/>"
                    required
-                   minlength="1"
-                   maxlength="9"
-                   pattern="[0-9]{1,9}"
+                   min="1"
+                   max="2147483647"
             >
         </div>
         <div class="info-div">
-            <input type="text" name="height" placeholder="<fmt:message key="add.tattoo.height"/>"
+            <input type="number" name="height" placeholder="<fmt:message key="add.tattoo.height"/>"
                    required
-                   minlength="1"
-                   maxlength="9"
-                   pattern="[0-9]{1,9}"
+                   min="1"
+                   max="2147483647"
             >
         </div>
         <div class="info-div">

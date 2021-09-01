@@ -10,10 +10,10 @@ public class Validator {
     private static final String ID_REGEX = "[0-9]{1,19}";
     private static final String EMAIL_REGEX = "^[A-z0-9._-]+@[a-z0-9._-]+\\.[a-z]{2,4}$";
     private final static String LOGIN_REGEX= "[\\w][\\w._-]{0,39}";
-    private static final String NAME_REGEX = "[A-ZА-Я]([\\w\\sА-Яа-я]){0,39}";
+    private static final String NAME_REGEX = "[A-ZА-ЯЁ][A-Za-zА-Яа-яЁё]{0,39}";
     private final static String PASSWORD_REGEX = "[-\\w_!@#$%^&*()]{8,45}";
     private final static String PRICE_REGEX = "[0-9]([0-9.]){0,9}";
-    private final static String DESCRIPTION_REGEX = "[A-ZА-Я]([\\w\\s\\.!?,А-Яа-я]){0,1999}";
+    private final static String DESCRIPTION_REGEX = "[A-ZА-ЯЁ][A-Za-zА-Яа-яЁё ,\\.!?\\d]{0,1999}";
     private final static String SIZE_REGEX = "[0-9]{1,9}";
     private final static String DISCOUNT_REGEX = "[0-9]{1,3}";
 

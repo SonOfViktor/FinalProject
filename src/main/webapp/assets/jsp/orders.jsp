@@ -97,12 +97,11 @@
                     <input type="hidden" name="command" value="to_find_order_by_id_page_command"/>
                     <div class="block2-text"><fmt:message key="orders.search.title.id"/></div>
                     <input class="block2-input"
-                           type="text"
+                           type="number"
                            name="id"
                            placeholder="<fmt:message key="orders.search.placeholder.id"/>"
-                           minlength="1"
-                           maxlength="19"
-                           pattern="[0-9]{1,19}"
+                           min="1"
+                           max="9223372036854775807"
                     />
                     <button class="block2-button1" type="submit"><fmt:message key="orders.search.button"/></button>
                 </form>
@@ -142,12 +141,11 @@
                             <input type="hidden" name="command" value="cancel_order_command"/>
                             <div class="block2-text"><fmt:message key="orders.cancel.title"/></div>
                             <input class="block2-input"
-                                   type="text"
+                                   type="number"
                                    name="id"
                                    placeholder="<fmt:message key="orders.search.placeholder.id"/>"
-                                   minlength="1"
-                                   maxlength="19"
-                                   pattern="[0-9]{1,19}"
+                                   min="1"
+                                   max="9223372036854775807"
                             />
                             <button class="block2-button1" type="submit"><fmt:message key="orders.cancel.button"/></button>
                         </form>

@@ -93,7 +93,13 @@
                 <form class="block2-form" method="post" action="ProjectServlet">
                     <input type="hidden" name="command" value="to_find_tattoo_by_id_page_command"/>
                     <div class="block2-text"><fmt:message key="tattoo.search-by-id"/></div>
-                    <input class="block2-input" type="text" name="id" placeholder="<fmt:message key="tattoo.search-by-id-input"/>">
+                    <input class="block2-input"
+                           type="number"
+                           name="id"
+                           placeholder="<fmt:message key="tattoo.search-by-id-input"/>"
+                           min="1"
+                           max="9223372036854775807"
+                    />
                     <button class="block2-button1" type="submit"><fmt:message key="tattoo.search-button"/></button>
                 </form>
             </div>
@@ -101,7 +107,14 @@
                 <form class="block2-form" method="post" action="ProjectServlet">
                     <input type="hidden" name="command" value="to_find_tattoo_by_name_page_command"/>
                     <div class="block2-text"><fmt:message key="tattoo.search-by-name"/></div>
-                    <input class="block2-input" type="text" name="name" placeholder="<fmt:message key="tattoo.search-by-name-input"/>">
+                    <input class="block2-input"
+                           type="text"
+                           name="name"
+                           placeholder="<fmt:message key="tattoo.search-by-name-input"/>"
+                           minlength="1"
+                           maxlength="40"
+                           pattern="[A-ZА-ЯЁ][A-Za-zА-Яа-яЁё]{0,39}"
+                    />
                     <button class="block2-button1" type="submit"><fmt:message key="tattoo.search-button"/></button>
                 </form>
             </div>
@@ -125,8 +138,20 @@
                 <form class="block2-form" method="post" action="ProjectServlet">
                     <input type="hidden" name="command" value="to_find_tattoo_by_price_range_page_command"/>
                     <div class="block2-text"><fmt:message key="tattoo.search-by-price"/></div>
-                    <input class="block2-input" type="text" name="min_price" placeholder="<fmt:message key="tattoo.search-by-price-min"/>">
-                    <input class="block2-input" type="text" name="max_price" placeholder="<fmt:message key="tattoo.search-by-price-max"/>">
+                    <input class="block2-input"
+                           type="number"
+                           name="min_price"
+                           placeholder="<fmt:message key="tattoo.search-by-price-min"/>"
+                           min="0"
+                           max="2147483647"
+                    />
+                    <input class="block2-input"
+                           type="number"
+                           name="max_price"
+                           placeholder="<fmt:message key="tattoo.search-by-price-max"/>"
+                           min="0"
+                           max="2147483647"
+                    />
                     <button class="block2-button2" type="submit"><fmt:message key="tattoo.search-button"/></button>
                 </form>
             </div>

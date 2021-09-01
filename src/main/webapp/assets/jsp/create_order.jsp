@@ -62,23 +62,21 @@
     <form method="post" action="ProjectServlet">
         <input type="hidden" name="command" value="create_order_command"/>
         <div class="info-div">
-            <input type="info-field"
+            <input type="number"
                    name="paid"
                    placeholder="<fmt:message key="create.order.tattoo.price"/>"
                    required
-                   minlength="1"
-                   maxlength="10"
-                   pattern="[0-9]([0-9.]){0,9}"
+                   min="0"
+                   max="9223372036854775807"
             />
         </div>
         <div class="info-div">
-            <input type="info-field"
+            <input type="number"
                    name="tattoo_id"
                    placeholder="<fmt:message key="create.order.tattoo.id"/>"
                    required
-                   minlength="1"
-                   maxlength="19"
-                   pattern="[0-9]{1,19}"
+                   min="1"
+                   max="9223372036854775807"
             />
         </div>
         <div class="info-div">
