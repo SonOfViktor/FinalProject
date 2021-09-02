@@ -100,72 +100,102 @@
                 <button class="block3-button4"><fmt:message key="profile.change.surname"/></button>
             </form>
 
-            <div class="block4-title-admin">Возможности администратора</div>
+            <div class="block4-title-admin"><fmt:message key="profile.admin.title"/></div>
             <div class="block4-container-admin">
                 <form method="post" action="ProjectServlet">
                     <input type="hidden" name="command" value="to_all_users_page_command"/>
-                    <button class="block4-button-admin1" type="submit">Список всех пользователей</button>
+                    <button class="block4-button-admin1" type="submit">
+                        <fmt:message key="profile.button.admin1.list.user.all"/>
+                    </button>
                 </form>
                 <form method="post" action="ProjectServlet">
                     <input type="hidden" name="command" value="to_blocked_users_page_command"/>
-                    <button class="block4-button-admin2" type="submit">Список заблокированных пользователей</button>
+                    <button class="block4-button-admin2" type="submit">
+                        <fmt:message key="profile.button.admin2.list.user.blocked"/>
+                    </button>
                 </form>
                 <form method="post" action="ProjectServlet">
                     <input type="hidden" name="command" value="to_active_users_page_command"/>
-                    <button class="block4-button-admin3" type="submit">Список активных пользователей</button>
+                    <button class="block4-button-admin3" type="submit">
+                        <fmt:message key="profile.button.admin3.list.user.active"/>
+                    </button>
                 </form>
 
                 <form method="post" action="ProjectServlet">
                     <input type="hidden" name="command" value="to_all_catalog_page_command"/>
-                    <button class="block4-button-admin4" type="submit">Список всех тату</button>
+                    <button class="block4-button-admin4" type="submit">
+                        <fmt:message key="profile.button.admin4.list.tattoo.all"/>
+                    </button>
                 </form>
                 <form method="post" action="ProjectServlet">
                     <input type="hidden" name="command" value="to_locked_catalog_page_command"/>
-                    <button class="block4-button-admin5" type="submit">Список заблокированных тату</button>
+                    <button class="block4-button-admin5" type="submit">
+                        <fmt:message key="profile.button.admin5.list.tattoo.blocked"/>
+                    </button>
                 </form>
                 <form method="post" action="ProjectServlet">
                     <input type="hidden" name="command" value="to_proposal_catalog_page_command"/>
-                    <button class="block4-button-admin6" type="submit">Список предложенных тату</button>
+                    <button class="block4-button-admin6" type="submit">
+                        <fmt:message key="profile.button.admin6.list.tattoo.suggested"/>
+                    </button>
                 </form>
 
                 <form method="post" action="ProjectServlet">
                     <input type="hidden" name="command" value="to_orders_page_command"/>
-                    <button class="block4-button-admin7">Список всех заказов</button>
+                    <button class="block4-button-admin7">
+                        <fmt:message key="profile.button.admin7.list.order.all"/>
+                    </button>
                 </form>
                 <form method="post" action="ProjectServlet">
                     <input type="hidden" name="command" value="to_active_orders_page_command"/>
-                    <button class="block4-button-admin8">Список активных заказов</button>
+                    <button class="block4-button-admin8">
+                        <fmt:message key="profile.button.admin8.list.order.active"/>
+                    </button>
                 </form>
                 <form method="post" action="ProjectServlet">
                     <input type="hidden" name="command" value="to_completed_orders_page_command"/>
-                    <button class="block4-button-admin9">Список выполненных заказов</button>
+                    <button class="block4-button-admin9">
+                        <fmt:message key="profile.button.admin9.list.order.completed"/>
+                    </button>
                 </form>
 
                 <form method="post" action="ProjectServlet">
                     <input type="hidden" name="command" value="to_block_user_page_command"/>
-                    <button class="block4-button-admin10">Заблокировать пользователя</button>
+                    <button class="block4-button-admin10">
+                        <fmt:message key="profile.button.admin10.user.block"/>
+                    </button>
                 </form>
                 <form method="post" action="ProjectServlet">
                     <input type="hidden" name="command" value="to_unblock_user_page_command"/>
-                    <button class="block4-button-admin11">Разблокировать пользователя</button>
+                    <button class="block4-button-admin11">
+                        <fmt:message key="profile.button.admin11.user.unblock"/>
+                    </button>
                 </form>
                 <form method="post" action="ProjectServlet">
                     <input type="hidden" name="command" value="to_add_tattoo_page_command"/>
-                    <button class="block4-button-admin12">Добавить тату</button>
+                    <button class="block4-button-admin12">
+                        <fmt:message key="profile.button.admin12.tattoo.add"/>
+                    </button>
                 </form>
 
                 <form method="post" action="ProjectServlet">
                     <input type="hidden" name="command" value="to_block_tattoo_page_command"/>
-                    <button class="block4-button-admin13">Заблокировать тату</button>
+                    <button class="block4-button-admin13">
+                        <fmt:message key="profile.button.admin13.tattoo.block"/>
+                    </button>
                 </form>
                 <form method="post" action="ProjectServlet">
                     <input type="hidden" name="command" value="to_unblock_tattoo_page_command"/>
-                    <button class="block4-button-admin14">Разблокировать тату</button>
+                    <button class="block4-button-admin14">
+                        <fmt:message key="profile.button.admin14.tattoo.unblock"/>
+                    </button>
                 </form>
                 <form method="post" action="ProjectServlet">
                     <input type="hidden" name="command" value="to_approve_tattoo_page_command"/>
                     <input type="hidden" name="id" value="0"/>
-                    <button class="block4-button-admin15">К одобрению пользовательского тату</button>
+                    <button class="block4-button-admin15">
+                        <fmt:message key="profile.button.admin15.tattoo.proposal"/>
+                    </button>
                 </form>
             </div>
         </div>
