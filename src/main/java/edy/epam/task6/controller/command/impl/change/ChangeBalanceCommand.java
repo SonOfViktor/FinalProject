@@ -11,6 +11,7 @@ import jakarta.servlet.http.HttpSession;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -28,12 +29,15 @@ public class ChangeBalanceCommand implements Command {
         UserService userService = new UserServiceImpl();
         try {
             Map<String, String> parameters = new HashMap<>();
-            parameters.put(ColumnName.USER_BALANCE,
-                    request.getParameter(RequestParameter.USER_BALANCE));
+
+            BigDecimal balance = BigDecimal.valueOf(
+                    Long.valueOf(request.getParameter(RequestParameter.USER_BALANCE)));
+            balance = balance.add(user.getBalance());
+            parameters.put(ColumnName.USER_BALANCE, balance.toString());
             userService.updateBalance(parameters, userId);
 
-            Optional<User> resultUser = userService.findById(userId);
-            request.setAttribute(RequestParameter.PROFILE, resultUser.get());
+            user.setBalance(balance);
+            request.setAttribute(RequestParameter.PROFILE, user);
 
             router = new Router(PagePath.PROFILE_PAGE_USER);
         } catch (ServiceException e) {

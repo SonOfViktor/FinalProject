@@ -7,12 +7,15 @@ import edy.epam.task6.model.entity.Order;
 import edy.epam.task6.model.entity.OrderStatus;
 import edy.epam.task6.model.entity.User;
 import edy.epam.task6.model.service.OrderService;
+import edy.epam.task6.model.service.UserService;
 import edy.epam.task6.model.service.impl.OrderServiceImpl;
+import edy.epam.task6.model.service.impl.UserServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -26,10 +29,12 @@ public class CancelOrderCommand implements Command {
         Router router;
 
         HttpSession session = request.getSession();
-        User userSession = (User)session.getAttribute(SessionAttribute.USER);
+        User userSession = (User) session.getAttribute(SessionAttribute.USER);
+        Long userId = (Long) session.getAttribute(SessionAttribute.USER_ID);
         String userLogin = userSession.getLogin();
 
         OrderService orderService = new OrderServiceImpl();
+        UserService userService = new UserServiceImpl();
         Map<String, String> parameters = new HashMap<>();
         try {
             Long orderId = Long.valueOf(request.getParameter(RequestParameter.ORDER_ID));
@@ -39,8 +44,11 @@ public class CancelOrderCommand implements Command {
                 if (orderStatus == OrderStatus.ACTIVE) {
                     orderStatus = OrderStatus.CANCELED;
 
-                    userSession.setBalance(userSession.getBalance().add(order.get().getPaid()));
-
+                    BigDecimal paid = order.get().getPaid();
+                    BigDecimal balance = paid.add(userSession.getBalance());
+                    parameters.put(ColumnName.USER_BALANCE, balance.toString());
+                    userService.updateBalance(parameters, userId);
+                    userSession.setBalance(balance);
                 }
                 parameters.put(ColumnName.ORDERS_STATUS, orderStatus.toString());
                 if (orderService.updateStatus(parameters, orderId)) {

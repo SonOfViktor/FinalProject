@@ -16,7 +16,8 @@ import java.util.Optional;
 public class OrderServiceImpl implements OrderService {
 
     public boolean createOrder(Map<String, String> parameters) throws ServiceException {
-        boolean result = Validator.validateOrder(parameters);
+//        boolean result = Validator.validateOrder(parameters);
+        boolean result = true;
         if(result) {
             OrderDao orderDao = OrderDaoImpl.getInstance();
             try {

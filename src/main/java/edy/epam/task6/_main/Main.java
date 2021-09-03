@@ -19,9 +19,10 @@ public class Main {
     public static void main(String[] args) {
 //        try {
         Map<String, String> parameters = new HashMap<>();
-            parameters.put("paid", "0");
-            parameters.put("tattoo_id", "7800");
-            System.out.println(Validator.validateOrder(parameters));
+//            parameters.put("paid", "0");
+//            parameters.put("tattoo_id", "7800");
+        String balance = "4000";
+            System.out.println(Validator.validatePrice(balance));
 //            TattooService catalogService = new TattooServiceImpl();
 //            List<Tattoo> catalogElements =
 //                    catalogService.findByPriceRangeAllActive(BigDecimal.valueOf(3000), BigDecimal.valueOf(8000));

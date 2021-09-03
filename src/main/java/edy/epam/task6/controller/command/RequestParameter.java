@@ -76,6 +76,8 @@ public final class RequestParameter {
     public static final String FIND_ORDER_ERROR = "find_order_error";
     public static final String FIND_TATTOO_ERROR = "find_tattoo_error";
     public static final String CHANGE_PASSWORD_ERROR = "change_password_error";
+    public static final String BALANCE_NOT_ENOUGH_ERROR_MESSAGE = "balance_not_enough_error_message";
+    public static final String TATTOO_ID_NOT_FOUND_MESSAGE = "tattoo_id_not_found_message";
     public static final String EMPTY_ORDERS_MESSAGE = "empty_orders_message";
 
     private RequestParameter() {}

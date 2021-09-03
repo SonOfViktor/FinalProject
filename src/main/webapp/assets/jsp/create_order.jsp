@@ -63,15 +63,6 @@
         <input type="hidden" name="command" value="create_order_command"/>
         <div class="info-div">
             <input type="number"
-                   name="paid"
-                   placeholder="<fmt:message key="create.order.tattoo.price"/>"
-                   required
-                   min="0"
-                   max="9223372036854775807"
-            />
-        </div>
-        <div class="info-div">
-            <input type="number"
                    name="tattoo_id"
                    placeholder="<fmt:message key="create.order.tattoo.id"/>"
                    required
@@ -85,9 +76,19 @@
         <button type="submit"
                 class="submit"
                 onclick="timeNow(date)">
-            <fmt:message key="login.button.register"/>
+            <fmt:message key="create.order.button"/>
         </button>
     </form>
+    <c:if test = "${balance_not_enough_error_message}">
+        <div class="change-error-message">
+            На вашем балансе не достаточно средст для оплаты выбранной тату. пожалуйста, пополните баланс и повторите операцию.
+        </div>
+    </c:if>
+    <c:if test = "${tattoo_id_not_found_message}">
+        <div class="change-error-message">
+            Тату с введённым вами id не найдено, пожалйста, повторите ввод id.
+        </div>
+    </c:if>
 </div>
 <footer class="footer">
     <div class="footer-background">

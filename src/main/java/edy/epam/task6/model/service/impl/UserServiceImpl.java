@@ -67,7 +67,7 @@ public class UserServiceImpl implements UserService {
 
     public boolean updateName(Map<String, String> parameters, Long userId) throws ServiceException {
         String name = parameters.get(RequestParameter.USER_NAME);
-        boolean result = Validator.validateEmail(name);
+        boolean result = Validator.validateName(name);
         if(result) {
             UserDao userDao = UserDaoImpl.getInstance();
             try {
@@ -81,7 +81,7 @@ public class UserServiceImpl implements UserService {
 
     public boolean updateSurname(Map<String, String> parameters, Long userId) throws ServiceException {
         String surname = parameters.get(RequestParameter.USER_SURNAME);
-        boolean result = Validator.validateEmail(surname);
+        boolean result = Validator.validateName(surname);
         if(result) {
             UserDao userDao = UserDaoImpl.getInstance();
             try {
