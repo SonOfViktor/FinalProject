@@ -25,14 +25,13 @@ public class RoleFilter implements Filter {
         HttpServletResponse response = (HttpServletResponse) servletResponse;
 
         HttpSession session = request.getSession();
-        User user = (User) session.getAttribute(SessionAttribute.USER);
-        UserRole sessionRole = (UserRole) session.getAttribute(SessionAttribute.ROLE);
         UserRole role;
 
-        if (user == null) {
+        if (session.getAttribute(SessionAttribute.USER) == null) {
             role = UserRole.VISITOR;
             session.setAttribute(SessionAttribute.ROLE, role);
-        } else if (sessionRole == null) {
+        } else if (session.getAttribute(SessionAttribute.ROLE) == null) {
+            User user = (User) session.getAttribute(SessionAttribute.USER);
             role = user.getRole();
             session.setAttribute(SessionAttribute.ROLE, role);
         }
