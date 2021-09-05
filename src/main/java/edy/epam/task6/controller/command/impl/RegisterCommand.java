@@ -22,6 +22,8 @@ import java.util.Optional;
 public class RegisterCommand implements Command {
 
     private static final Logger logger = LogManager.getLogger();
+    private static final String EMAIL_MESSAGE_TITLE = "Email confirmation";
+    private static final String EMAIL_MESSAGE_TEXT = "Your registration confirmation code: ";
 
     @Override
     public Router execute(HttpServletRequest request) {
@@ -45,8 +47,10 @@ public class RegisterCommand implements Command {
                 if (!user.isPresent()) {
                     if (userService.registerUser(parameters)) {
                         String code = RegisterCodeGenerator.generateCode();
-                        EmailSender emailSender =
-                                new EmailSender(request.getParameter(RequestParameter.USER_EMAIL), code);
+                        EmailSender emailSender = new EmailSender(
+                                request.getParameter(RequestParameter.USER_EMAIL),
+                                EMAIL_MESSAGE_TITLE,
+                                EMAIL_MESSAGE_TEXT + code);
                         emailSender.start();
                         request.setAttribute(RequestParameter.GENERATE_CODE, code);
                         request.setAttribute(RequestParameter.USER_LOGIN, parameters.get(ColumnName.USER_LOGIN));

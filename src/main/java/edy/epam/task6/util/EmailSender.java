@@ -16,14 +16,15 @@ public class EmailSender extends Thread {
     public static final String MAIL_PROPERTY_PATH = "mail.properties";
     public static final String USER_KEY = "mail.user.user";
     public static final String PASSWORD_KEY = "mail.user.password";
-    public static final String MAIL_TITLE = "Email confirmation";
     public static final String MAIL_CONTENT_TYPE = "text/html";
 
     private String emailTo;
-    private String code;
-    public EmailSender(String emailTo, String code) {
+    private String title;
+    private String text;
+    public EmailSender(String emailTo, String title, String text) {
         this.emailTo = emailTo;
-        this.code = code;
+        this.title = title;
+        this.text = text;
     }
 
     public boolean sendEmail() throws ServiceException {
@@ -45,8 +46,8 @@ public class EmailSender extends Thread {
             Message message = new MimeMessage(session);
             message.setFrom(new InternetAddress(user));
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(emailTo));
-            message.setSubject(MAIL_TITLE);
-            String content = "Your registration confirmation code: " + code;
+            message.setSubject(title);
+            String content = text;
             message.setContent(content, MAIL_CONTENT_TYPE);
             Transport.send(message);
             result = true;

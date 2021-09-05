@@ -68,7 +68,8 @@ public class CreateOrderCommand implements Command {
                         request.setAttribute(RequestParameter.PROFILE, userSession);
 
                         logger.info("Order has been created.");
-                        router = new Router(PagePath.MAIN_PAGE);
+                        router = new Router(Router.RouterType.REDIRECT,
+                                session.getAttribute(SessionAttribute.PREVIOUS_PAGE).toString());
                     } else {
                         logger.error("Error during creating order.");
                         router = new Router(PagePath.ERROR_PAGE_500);

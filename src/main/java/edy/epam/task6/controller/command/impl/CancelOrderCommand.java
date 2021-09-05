@@ -10,6 +10,7 @@ import edy.epam.task6.model.service.OrderService;
 import edy.epam.task6.model.service.UserService;
 import edy.epam.task6.model.service.impl.OrderServiceImpl;
 import edy.epam.task6.model.service.impl.UserServiceImpl;
+import edy.epam.task6.util.EmailSender;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.apache.logging.log4j.LogManager;
@@ -23,6 +24,8 @@ import java.util.Optional;
 public class CancelOrderCommand implements Command {
 
     private static final Logger logger = LogManager.getLogger();
+    private static final String EMAIL_MESSAGE_TITLE = "Order cancellation";
+    private static final String EMAIL_MESSAGE_TEXT = "Your order number  has been canceled.";
 
     @Override
     public Router execute(HttpServletRequest request) {
@@ -52,9 +55,17 @@ public class CancelOrderCommand implements Command {
                 }
                 parameters.put(ColumnName.ORDERS_STATUS, orderStatus.toString());
                 if (orderService.updateStatus(parameters, orderId)) {
-                    logger.info("Order status change was successful.");
+
+                    StringBuffer sb = new StringBuffer(EMAIL_MESSAGE_TEXT);
+                    sb.insert(18, orderId);
+                    EmailSender emailSender = new EmailSender(
+                            userSession.getEmail(),
+                            EMAIL_MESSAGE_TITLE,
+                            sb.toString());
+                    emailSender.start();
                     router = new Router(Router.RouterType.REDIRECT,
                             session.getAttribute(SessionAttribute.PREVIOUS_PAGE).toString());
+                    logger.info("Order status change was successful.");
                 } else {
                     logger.error("An error in changing the order's status.");
                     router = new Router(PagePath.ERROR_PAGE_500);

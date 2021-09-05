@@ -24,7 +24,7 @@
             rel="stylesheet"
     />
     <link
-            href="assets/css/register5.css"
+            href="assets/css/register6.css"
             rel="stylesheet"
     />
     <title><fmt:message key="register.main-title.code"/></title>
@@ -98,7 +98,7 @@
         </button>
     </form>
     <c:if test = "${entered_code_error}">
-        <div class="login-error-message">
+        <div class="error-message">
             <fmt:message key="register.error.code.message"/>
         </div>
     </c:if>
