@@ -10,6 +10,8 @@
 <c:set var="completed">completed</c:set>
 <c:set var="founded">founded</c:set>
 <c:set var="person">person</c:set>
+<c:set var="statusAdmin">ADMIN</c:set>
+<c:set var="statusUser">USER</c:set>
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -101,12 +103,14 @@
 <main class="main-catalog">
     <section class="block2">
         <div class="block2-background">
-            <div class="block2-item">
-                <form class="block2-form" method="post" action="ProjectServlet">
-                    <input type="hidden" name="command" value="to_create_order_page_command"/>
-                    <button class="block2-button-create" type="submit"><fmt:message key="orders.create.order"/></button>
-                </form>
-            </div>
+            <c:if test="${sessionScope.role == statusUser}">
+                <div class="block2-item">
+                    <form class="block2-form" method="post" action="ProjectServlet">
+                        <input type="hidden" name="command" value="to_create_order_page_command"/>
+                        <button class="block2-button-create" type="submit"><fmt:message key="orders.create.order"/></button>
+                    </form>
+                </div>
+            </c:if>
             <div class="block2-item">
                 <form class="block2-form" method="post" action="ProjectServlet">
                     <input type="hidden" name="command" value="to_find_order_by_id_page_command"/>
@@ -132,41 +136,37 @@
                     <button class="block2-button1" type="submit"><fmt:message key="orders.search.button"/></button>
                 </form>
             </div>
-            <c:choose>
-                <c:when test="${title_orders != person}">
-                    <div class="block2-item">
-                        <form class="block2-form" method="post" action="ProjectServlet">
-                            <input type="hidden" name="command" value="to_find_order_by_login_page_command"/>
-                            <div class="block2-text"><fmt:message key="orders.search.title.login"/></div>
-                            <input class="block2-input"
-                                   type="text"
-                                   name="login"
-                                   placeholder="<fmt:message key="orders.search.placeholder.login"/>"
-                                   minlength="1"
-                                   maxlength="40"
-                                   pattern="[\w][\w._-]{0,39}"
-                            />
-                            <button class="block2-button1" type="submit"><fmt:message key="orders.search.button"/></button>
-                        </form>
-                    </div>
-                </c:when>
-                <c:otherwise>
-                    <div class="block2-item">
-                        <form class="block2-form" method="post" action="ProjectServlet">
-                            <input type="hidden" name="command" value="cancel_order_command"/>
-                            <div class="block2-text"><fmt:message key="orders.cancel.title"/></div>
-                            <input class="block2-input"
-                                   type="number"
-                                   name="id"
-                                   placeholder="<fmt:message key="orders.search.placeholder.id"/>"
-                                   min="1"
-                                   max="9223372036854775807"
-                            />
-                            <button class="block2-button1" type="submit"><fmt:message key="orders.cancel.button"/></button>
-                        </form>
-                    </div>
-                </c:otherwise>
-            </c:choose>
+            <c:if test="${sessionScope.role == statusAdmin}">
+                <div class="block2-item">
+                    <form class="block2-form" method="post" action="ProjectServlet">
+                        <input type="hidden" name="command" value="to_find_order_by_login_page_command"/>
+                        <div class="block2-text"><fmt:message key="orders.search.title.login"/></div>
+                        <input class="block2-input"
+                               type="text"
+                               name="login"
+                               placeholder="<fmt:message key="orders.search.placeholder.login"/>"
+                               minlength="1"
+                               maxlength="40"
+                               pattern="[\w][\w._-]{0,39}"
+                        />
+                        <button class="block2-button1" type="submit"><fmt:message key="orders.search.button"/></button>
+                    </form>
+                </div>
+            </c:if>
+            <div class="block2-item">
+                <form class="block2-form" method="post" action="ProjectServlet">
+                    <input type="hidden" name="command" value="cancel_order_command"/>
+                    <div class="block2-text"><fmt:message key="orders.cancel.title"/></div>
+                    <input class="block2-input"
+                           type="number"
+                           name="id"
+                           placeholder="<fmt:message key="orders.search.placeholder.id"/>"
+                           min="1"
+                           max="9223372036854775807"
+                    />
+                    <button class="block2-button1" type="submit"><fmt:message key="orders.cancel.button"/></button>
+                </form>
+            </div>
         </div>
     </section>
 
