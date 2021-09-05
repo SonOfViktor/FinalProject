@@ -8,10 +8,14 @@ import edy.epam.task6.model.service.TattooService;
 import edy.epam.task6.model.service.impl.TattooServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.List;
 
 public class GoToHomePageCommand implements Command {
+
+    private static final Logger logger = LogManager.getLogger();
 
     private final static String ENGLISH = "en";
     private final static String RUSSIAN = "ru";
@@ -20,7 +24,9 @@ public class GoToHomePageCommand implements Command {
     public Router execute(HttpServletRequest request) {
         Router router;
         HttpSession session = request.getSession();
-        session.setAttribute(SessionAttribute.LOCALE, RUSSIAN);
+        if (session.getAttribute(SessionAttribute.LOCALE) == null) {
+            session.setAttribute(SessionAttribute.LOCALE, RUSSIAN);
+        }
         session.setAttribute(SessionAttribute.PREVIOUS_PAGE, PagePath.MAIN_PAGE_REDIRECT);
         TattooService catalogService = new TattooServiceImpl();
         try {
@@ -28,6 +34,7 @@ public class GoToHomePageCommand implements Command {
             request.setAttribute(RequestParameter.CATALOG, catalogElements);
             router = new Router(PagePath.MAIN_PAGE);
         } catch (ServiceException e) {
+            logger.error("Error loading pre-catalog on homepage.");
             router = new Router(PagePath.ERROR_PAGE_500);
         }
         return router;

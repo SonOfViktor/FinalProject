@@ -33,22 +33,17 @@ public class ChangePasswordCommand implements Command {
 
             if (localUser.isPresent()) {
                 Map<String, String> parameters = new HashMap<>();
-                parameters.put(ColumnName.USER_PASSWORD,
+                parameters.put(RequestParameter.USER_PASSWORD,
                         request.getParameter(RequestParameter.PASSWORD_NEW));
-                userService.updatePassword(parameters, userId);
-                Optional<User> resultUser = userService.findById(userId);
-                request.setAttribute(RequestParameter.PROFILE, resultUser.get());
-                switch (user.getRole()) {
-                    case ADMIN -> {
-                        router = new Router(PagePath.PROFILE_PAGE_ADMIN);
-                    }
-                    case USER -> {
-                        router = new Router(PagePath.PROFILE_PAGE_USER);
-                    }
-                    default -> {
-                        logger.error("Error after change password with a return to the profile page.");
-                        router = new Router(PagePath.ERROR_PAGE_500);
-                    }
+                if (userService.updatePassword(parameters, userId)) {
+                    router = new Router(Router.RouterType.REDIRECT,
+                            session.getAttribute(SessionAttribute.PREVIOUS_PAGE).toString());
+                    logger.info("Password updated successfully.");
+                } else {
+                    logger.error("Incorrect data was sent to update password, data validation failed.");
+                    request.setAttribute(RequestParameter.WHAT_CHANGE, RequestParameter.USER_PASSWORD);
+                    request.setAttribute(RequestParameter.CHANGE_PASSWORD_ERROR, true);
+                    router = new Router(PagePath.CHANGE_PAGE);
                 }
             }
             else {

@@ -48,6 +48,9 @@ public final class RequestParameter {
     public static final String TATTOO = "tattoo";
     public static final String PROFILE = "profile";
 
+    public static final String REGISTER_CODE = "register_code";
+    public static final String GENERATE_CODE = "generate_code";
+
     public static final String PAGES_NUMBER = "pages_number";
     public static final String ELEMENTS_PER_PAGE = "elements_per_page";
     public static final String NUMBER_OF_TATTOOS = "number_of_tattoos";
@@ -76,6 +79,8 @@ public final class RequestParameter {
     public static final String FIND_ORDER_ERROR = "find_order_error";
     public static final String FIND_TATTOO_ERROR = "find_tattoo_error";
     public static final String CHANGE_PASSWORD_ERROR = "change_password_error";
+    public static final String REPEAT_PASSWORD_ERROR = "repeat_password_error";
+    public static final String ENTERED_CODE_ERROR = "entered_code_error";
     public static final String BALANCE_NOT_ENOUGH_ERROR_MESSAGE = "balance_not_enough_error_message";
     public static final String TATTOO_ID_NOT_FOUND_MESSAGE = "tattoo_id_not_found_message";
     public static final String EMPTY_ORDERS_MESSAGE = "empty_orders_message";

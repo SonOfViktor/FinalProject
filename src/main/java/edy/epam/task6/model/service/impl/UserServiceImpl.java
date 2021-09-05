@@ -46,12 +46,9 @@ public class UserServiceImpl implements UserService {
         return result;
     }
 
-    //TODO доделать поиск старого пароля и сверку с введённым старым
     public boolean updatePassword(Map<String, String> parameters, Long userId) throws ServiceException {
-        String passwordOld = parameters.get(RequestParameter.PASSWORD_OLD);
-        String passwordNew = parameters.get(RequestParameter.PASSWORD_NEW);
-        boolean result = Validator.validatePassword(passwordOld)
-                && Validator.validatePassword(passwordNew) ;
+        String passwordNew = parameters.get(RequestParameter.USER_PASSWORD);
+        boolean result = Validator.validatePassword(passwordNew) ;
         if(result) {
             UserDao userDao = UserDaoImpl.getInstance();
             try {
@@ -101,8 +98,8 @@ public class UserServiceImpl implements UserService {
             Optional<User> user = findById(userId);
             if (user.isPresent()) {
                 int localDiscount = user.get().getDiscount() + Integer.valueOf(discount);
-                if (localDiscount > 100) {
-                    localDiscount = 100;
+                if (localDiscount > 50) {
+                    localDiscount = 50;
                 }
                 UserDao userDao = UserDaoImpl.getInstance();
                 try {
@@ -139,29 +136,10 @@ public class UserServiceImpl implements UserService {
             int statusId = switch (parameters.get(ColumnName.USER_STATUS)) {
                 case "ACTIVE" -> 1;
                 case "BLOCKED" -> 2;
-                default -> 1;
-            };
-            try {
-                result = userDao.updateStatus(statusId, userId);
-            } catch (DaoException e) {
-                throw new ServiceException(e);
-            }
-        }
-        return result;
-    }
-
-    //TODO Сделать валидацию
-    public boolean updateRole(Map<String, String> parameters, Long userId) throws ServiceException {
-        boolean result = true;
-        if(result) {
-            UserDao userDao = UserDaoImpl.getInstance();
-            int roleId = switch (parameters.get(ColumnName.USER_ROLE)) {
-                case "ADMIN" -> 1;
-                case "USER" -> 2;
                 default -> 3;
             };
             try {
-                result = userDao.updateRole(roleId, userId);
+                result = userDao.updateStatus(statusId, userId);
             } catch (DaoException e) {
                 throw new ServiceException(e);
             }

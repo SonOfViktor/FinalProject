@@ -41,6 +41,7 @@ public class CommandProvider {
         commands.put(CommandType.TO_BLOCK_TATTOO_PAGE_COMMAND, new GoToBlockTattooPageCommand());
         commands.put(CommandType.TO_UNBLOCK_TATTOO_PAGE_COMMAND, new GoToUnblockTattooPageCommand());
         commands.put(CommandType.TO_APPROVE_TATTOO_PAGE_COMMAND, new GoToApproveTattooPageCommand());
+        commands.put(CommandType.TO_CODE_PAGE_COMMAND, new GoToCodePageCommand());
 
         commands.put(CommandType.TO_FIND_ORDER_BY_ID_PAGE_COMMAND,
                 new GoToFindOrderByIdPageCommand());
@@ -81,8 +82,10 @@ public class CommandProvider {
         commands.put(CommandType.CHANGE_BALANCE_COMMAND, new ChangeBalanceCommand());
         commands.put(CommandType.CHANGE_USER_STATUS_COMMAND, new ChangeUserStatusCommand());
         commands.put(CommandType.CHANGE_TATTOO_STATUS_COMMAND, new ChangeTattooStatusCommand());
+        commands.put(CommandType.CHANGE_LANGUAGE_COMMAND, new ChangeLanguageCommand());
 
         commands.put(CommandType.REGISTER_PERSON_COMMAND, new RegisterCommand());
+        commands.put(CommandType.CODE_ENTRY_COMMAND, new CodeEntryCommand());
         commands.put(CommandType.LOGIN_PERSON_COMMAND, new LoginCommand());
         commands.put(CommandType.LOGOUT_PERSON_COMMAND, new LogoutCommand());
         commands.put(CommandType.ADD_TATTOO_COMMAND, new AddTattooCommand());

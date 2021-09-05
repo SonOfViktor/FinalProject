@@ -1,6 +1,7 @@
 package edy.epam.task6.controller.command.impl.find;
 
 import edy.epam.task6.controller.command.*;
+import edy.epam.task6.controller.command.impl.pagination.SendSplitParameters;
 import edy.epam.task6.exception.ServiceException;
 import edy.epam.task6.model.entity.Tattoo;
 import edy.epam.task6.model.entity.UserRole;
@@ -35,14 +36,7 @@ public class GoToFindTattooByPlacePageCommand implements Command {
             }
             request.setAttribute(RequestParameter.CATALOG, tattoos);
 
-            request.setAttribute(RequestParameter.ELEMENTS_PER_PAGE,
-                    PageSplitParameter.NUMBER_OF_TATTOOS_PER_PAGE);
-
-            request.setAttribute(RequestParameter.PAGES_NUMBER,
-                    (int)Math.ceil((double)tattoos.size()
-                            / PageSplitParameter.NUMBER_OF_TATTOOS_PER_PAGE));
-
-            request.setAttribute(RequestParameter.NUMBER_OF_TATTOOS, tattoos.size());
+            request = SendSplitParameters.sendSplitParametersTattoos(request, tattoos.size());
 
             request.setAttribute(RequestParameter.TITLE_TATTOOS, RequestParameter.TITLE_TATTOOS_FOUNDED);
             router = new Router(PagePath.CATALOG_PAGE);

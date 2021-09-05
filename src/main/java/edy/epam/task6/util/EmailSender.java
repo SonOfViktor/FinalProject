@@ -10,7 +10,7 @@ import jakarta.mail.internet.InternetAddress;
 import jakarta.mail.internet.MimeMessage;
 import java.util.Properties;
 
-public class EmailSender {
+public class EmailSender extends Thread {
     private static final Logger logger = LogManager.getLogger();
 
     public static final String MAIL_PROPERTY_PATH = "mail.properties";
@@ -19,7 +19,14 @@ public class EmailSender {
     public static final String MAIL_TITLE = "Email confirmation";
     public static final String MAIL_CONTENT_TYPE = "text/html";
 
-    public boolean sendEmail(String emailTo, String address) throws ServiceException {
+    private String emailTo;
+    private String code;
+    public EmailSender(String emailTo, String code) {
+        this.emailTo = emailTo;
+        this.code = code;
+    }
+
+    public boolean sendEmail() throws ServiceException {
         boolean result;
         PropertyReader reader = new PropertyReader();
         Properties properties;
@@ -39,7 +46,7 @@ public class EmailSender {
             message.setFrom(new InternetAddress(user));
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(emailTo));
             message.setSubject(MAIL_TITLE);
-            String content = "Click her to confirm email: <a href='" + address + "'> link </a>";
+            String content = "Your registration confirmation code: " + code;
             message.setContent(content, MAIL_CONTENT_TYPE);
             Transport.send(message);
             result = true;
@@ -58,5 +65,13 @@ public class EmailSender {
             }
         });
         return session;
+    }
+
+    public void run() {
+        try {
+            sendEmail();
+        } catch (ServiceException e) {
+            logger.error("Error during email sending: ", e);
+        }
     }
 }

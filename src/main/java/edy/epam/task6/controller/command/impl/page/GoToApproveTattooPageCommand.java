@@ -1,10 +1,8 @@
 package edy.epam.task6.controller.command.impl.page;
 
-import edy.epam.task6.controller.command.Command;
-import edy.epam.task6.controller.command.PagePath;
-import edy.epam.task6.controller.command.RequestParameter;
-import edy.epam.task6.controller.command.Router;
+import edy.epam.task6.controller.command.*;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 
 public class GoToApproveTattooPageCommand implements Command {
 

@@ -2,17 +2,21 @@ package edy.epam.task6.controller.command.impl.page;
 
 import edy.epam.task6.controller.command.Command;
 import edy.epam.task6.controller.command.PagePath;
-import edy.epam.task6.controller.command.RequestParameter;
 import edy.epam.task6.controller.command.Router;
+import edy.epam.task6.controller.command.SessionAttribute;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 
-public class GoToChangeRolePageCommand implements Command {
+public class GoToCodePageCommand implements Command {
 
     @Override
     public Router execute(HttpServletRequest request) {
         Router router;
-        request.setAttribute(RequestParameter.WHAT_CHANGE, RequestParameter.USER_ROLE);
-        router = new Router(PagePath.CHANGE_PAGE);
+
+        HttpSession session = request.getSession();
+        session.setAttribute(SessionAttribute.PREVIOUS_PAGE, PagePath.CODE_PAGE_REDIRECT);
+
+        router = new Router(PagePath.CODE_PAGE);
         return router;
     }
 }

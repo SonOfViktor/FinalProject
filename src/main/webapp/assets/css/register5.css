@@ -167,3 +167,17 @@ form {
     line-height: 27px;
     color: #a32525;
 }
+.error-password-message {
+    position: relative;
+    width: 420px;
+    height: 54px;
+    top: -175px;
+    left: 830px;
+    text-align: left;
+    font-family: Open Sans;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 18px;
+    line-height: 27px;
+    color: #a32525;
+}

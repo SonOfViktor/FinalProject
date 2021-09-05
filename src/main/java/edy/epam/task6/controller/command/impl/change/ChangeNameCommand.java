@@ -29,20 +29,17 @@ public class ChangeNameCommand implements Command {
         try {
             Map<String, String> parameters = new HashMap<>();
             parameters.put(ColumnName.USER_NAME, request.getParameter(RequestParameter.USER_NAME));
-            userService.updateName(parameters, userId);
-            Optional<User> resultUser = userService.findById(userId);
-            request.setAttribute(RequestParameter.PROFILE, resultUser.get());
-            switch (user.getRole()) {
-                case ADMIN -> {
-                    router = new Router(PagePath.PROFILE_PAGE_ADMIN);
-                }
-                case USER -> {
-                    router = new Router(PagePath.PROFILE_PAGE_USER);
-                }
-                default -> {
-                    logger.error("Error after change name with a return to the profile page.");
-                    router = new Router(PagePath.ERROR_PAGE_500);
-                }
+            if (userService.updateName(parameters, userId)) {
+                user.setName(request.getParameter(RequestParameter.USER_NAME));
+                session.setAttribute(SessionAttribute.USER, user);
+
+                router = new Router(Router.RouterType.REDIRECT,
+                        session.getAttribute(SessionAttribute.PREVIOUS_PAGE).toString());
+                logger.info("Name updated successfully.");
+            } else {
+                logger.error("Incorrect data was sent to update name, data validation failed.");
+                request.setAttribute(RequestParameter.WHAT_CHANGE, RequestParameter.USER_NAME);
+                router = new Router(PagePath.CHANGE_PAGE);
             }
         } catch (ServiceException e) {
             logger.error("Error during changing name of user: ", e);

@@ -21,11 +21,11 @@
             rel="stylesheet"
     />
     <link
-            href="assets/css/main8.css"
+            href="assets/css/main10.css"
             rel="stylesheet"
     />
     <link
-            href="assets/css/register4.css"
+            href="assets/css/register5.css"
             rel="stylesheet"
     />
     <title><fmt:message key="create.order.main-title"/></title>
@@ -53,6 +53,21 @@
                 </a>
             </li>
         </ul>
+
+        <c:set var="localeRu">ru</c:set>
+        <c:set var="localeEn">en</c:set>
+        <form method="post" action="ProjectServlet">
+            <input type="hidden" name="command" value="change_language_command"/>
+            <button class="language-button" type="submit">
+                <c:if test="${language == localeRu}">
+                    <fmt:message key="header.language.ru"/>
+                </c:if>
+                <c:if test="${language == localeEn}">
+                    <fmt:message key="header.language.en"/>
+                </c:if>
+            </button>
+        </form>
+
     </header>
 </div>
 <div class="container-login">
@@ -81,12 +96,12 @@
     </form>
     <c:if test = "${balance_not_enough_error_message}">
         <div class="change-error-message">
-            На вашем балансе не достаточно средст для оплаты выбранной тату. пожалуйста, пополните баланс и повторите операцию.
+            <fmt:message key="order.message.not-enough-balance"/>
         </div>
     </c:if>
     <c:if test = "${tattoo_id_not_found_message}">
         <div class="change-error-message">
-            Тату с введённым вами id не найдено, пожалйста, повторите ввод id.
+            <fmt:message key="order.message.tattoo.id"/>
         </div>
     </c:if>
 </div>

@@ -79,7 +79,6 @@ public class UserDaoImpl implements UserDao {
     private static final String UPDATE_DISCOUNT = "UPDATE users SET discount=? WHERE user_id=?";
     private static final String UPDATE_BALANCE = "UPDATE users SET balance=? WHERE user_id=?";
     private static final String UPDATE_STATUS = "UPDATE users SET status_id=? WHERE user_id=?";
-    private static final String UPDATE_ROLE = "UPDATE users SET role_id=? WHERE user_id=?";
 
     private UserDaoImpl(){}
 
@@ -102,7 +101,7 @@ public class UserDaoImpl implements UserDao {
             statement.setInt(6, 0);
             statement.setInt(7, 0);
             statement.setTimestamp(8, Timestamp.valueOf(parameters.get(ColumnName.USER_REGISTRATION_DATE)));
-            statement.setInt(9, 1);
+            statement.setInt(9, 3);
             statement.setInt(10, 2);
             result = statement.executeUpdate() > 0;
         } catch (SQLException e) {
@@ -206,20 +205,6 @@ public class UserDaoImpl implements UserDao {
         } catch (SQLException e){
             logger.error("Error during updating status of user with id = " + userId, e);
             throw new DaoException("Error during updating status of user with id = " + userId, e);
-        }
-        return result;
-    }
-
-    public boolean updateRole(int roleId, Long userId) throws DaoException {
-        boolean result;
-        try(Connection connection = ConnectionPool.getInstance().getConnection();
-            PreparedStatement statement = connection.prepareStatement(UPDATE_ROLE)){
-            statement.setInt(1, roleId);
-            statement.setLong(2, userId);
-            result = statement.executeUpdate()>0;
-        } catch (SQLException e){
-            logger.error("Error during updating role of user with id = " + userId, e);
-            throw new DaoException("Error during updating role of user with id = " + userId, e);
         }
         return result;
     }

@@ -39,7 +39,7 @@ public class GoToOrdersPageCommand implements Command {
 
             request = SendSplitParameters.sendSplitParametersOrders(request, orders.size());
             router = new Router(PagePath.ORDERS_PAGE);
-        } catch (ServiceException e){
+        } catch (ServiceException e) {
             router = new Router(PagePath.ERROR_PAGE_500);
         }
         return router;

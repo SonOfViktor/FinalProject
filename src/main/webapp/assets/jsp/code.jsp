@@ -27,7 +27,7 @@
             href="assets/css/register5.css"
             rel="stylesheet"
     />
-    <title><fmt:message key="register.main-title"/></title>
+    <title><fmt:message key="register.main-title.code"/></title>
 </head>
 <body class="body-size1">
 <div class="header-background">
@@ -73,95 +73,33 @@
                 </form>
             </li>
         </ul>
-
-        <c:set var="localeRu">ru</c:set>
-        <c:set var="localeEn">en</c:set>
-        <form method="post" action="ProjectServlet">
-            <input type="hidden" name="command" value="change_language_command"/>
-            <button class="language-button" type="submit">
-                <c:if test="${language == localeRu}">
-                    <fmt:message key="header.language.ru"/>
-                </c:if>
-                <c:if test="${language == localeEn}">
-                    <fmt:message key="header.language.en"/>
-                </c:if>
-            </button>
-        </form>
-
     </header>
 </div>
-<div class="container-register">
+<div class="container-login">
     <div class="register-login-info">
         <fmt:message key="login.message.info"/>
     </div>
     <form method="post" action="ProjectServlet">
-        <input type="hidden" name="command" value="register_person_command"/>
+        <input type="hidden" name="command" value="code_entry_command"/>
+        <input type="hidden" name="login" value="${login}"/>
+        <input type="hidden" name="generate_code" value="${generate_code}"/>
         <div class="info-div">
-            <input type="info-field" name="name" placeholder="<fmt:message key="register.placeholder.name"/>"
+            <input type="number"
+                   name="register_code"
+                   placeholder="<fmt:message key="register.placeholder.code"/>"
                    required
-                   minlength="1"
-                   maxlength="40"
-                   pattern="[A-ZА-ЯЁ][A-Za-zА-Яа-яЁё]{0,39}"
-            >
-        </div>
-        <div class="info-div">
-            <input type="info-field" name="surname" placeholder="<fmt:message key="register.placeholder.surname"/>"
-                   required
-                   minlength="1"
-                   maxlength="40"
-                   pattern="[A-ZА-ЯЁ][A-Za-zА-Яа-яЁё]{0,39}"
-            >
-        </div>
-        <div class="info-div">
-            <input type="text" name="login" placeholder="<fmt:message key="register.placeholder.login"/>"
-                   required
-                   minlength="1"
-                   maxlength="40"
-                   pattern="[\w][\w._-]{0,39}"
-            >
-        </div>
-        <div class="info-div">
-            <input type="email" name="email" placeholder="<fmt:message key="register.placeholder.email"/>"
-                   required
-                   minlength="2"
-                   maxlength="50"
-                   pattern="^[A-z0-9._-]+@[a-z0-9._-]+\.[a-z]{2,4}$"
-            >
-        </div>
-        <div class="info-div">
-            <input type="password"
-                   autocomplete="current-password"
-                   name="password"
-                   placeholder="<fmt:message key="register.placeholder.password"/>"
-                   required
-                   minlength="8"
-                   maxlength="45"
-                   pattern="[-\w_!@#$%^&*()]{8,45}"
-            >
-        </div>
-        <div class="info-div">
-            <input type="password"
-                   autocomplete="current-password"
-                   name="repeat_password"
-                   placeholder="<fmt:message key="register.placeholder.repeat.password"/>"
-                   required
-                   minlength="8"
-                   maxlength="45"
-                   pattern="[-\w_!@#$%^&*()]{8,45}"
-            >
-        </div>
-        <div class="info-div">
-            <input id="date" type="hidden" name="registration_date">
+                   min="100000"
+                   max="999999"
+            />
         </div>
         <button type="submit"
-                class="submit"
-                onclick="timeNow(date)">
-            <fmt:message key="register.button"/>
+                class="submit">
+            <fmt:message key="register.code.button"/>
         </button>
     </form>
-    <c:if test = "${repeat_password_error}">
-        <div class="error-password-message">
-            <fmt:message key="register.error.password.message"/>
+    <c:if test = "${entered_code_error}">
+        <div class="login-error-message">
+            <fmt:message key="register.error.code.message"/>
         </div>
     </c:if>
 </div>
@@ -233,6 +171,5 @@
         </ul>
     </div>
 </footer>
-<script src="assets/js/time2.js"></script>
 </body>
 </html>

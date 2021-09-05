@@ -21,11 +21,11 @@
             rel="stylesheet"
     />
     <link
-            href="assets/css/main8.css"
+            href="assets/css/main10.css"
             rel="stylesheet"
     />
     <link
-            href="assets/css/register4.css"
+            href="assets/css/register5.css"
             rel="stylesheet"
     />
     <title><fmt:message key="change.title"/></title>
@@ -37,22 +37,54 @@
             <fmt:message key="header.main-title"/>
         </div>
         <ul>
+            <li class="header-ref0">
+                <form method="post" action="ProjectServlet">
+                    <input type="hidden" name="command" value="to_home_page_command"/>
+                    <button class="header-button" type="submit">
+                        <fmt:message key="header.home"/>
+                    </button>
+                </form>
+            </li>
             <li class="header-ref1">
-                <a href="ProjectServlet?command=to_catalog_page_command">
-                    <fmt:message key="header.catalog"/>
-                </a>
+                <form method="post" action="ProjectServlet">
+                    <input type="hidden" name="command" value="to_catalog_page_command"/>
+                    <button class="header-button" type="submit">
+                        <fmt:message key="header.catalog"/>
+                    </button>
+                </form>
             </li>
             <li class="header-ref2">
-                <a href="ProjectServlet?command=to_orders_page_command">
-                    <fmt:message key="header.orders"/>
-                </a>
+                <form method="post" action="ProjectServlet">
+                    <input type="hidden" name="command" value="to_orders_page_command"/>
+                    <button class="header-button" type="submit">
+                        <fmt:message key="header.orders"/>
+                    </button>
+                </form>
             </li>
             <li class="header-sign-in">
-                <a href="ProjectServlet?command=to_home_page_command">
-                    <fmt:message key="header.home"/>
-                </a>
+                <form method="post" action="ProjectServlet">
+                    <input type="hidden" name="command" value="to_profile_page_command"/>
+                    <button class="header-button" type="submit">
+                        <fmt:message key="header.profile"/>
+                    </button>
+                </form>
             </li>
         </ul>
+
+        <c:set var="localeRu">ru</c:set>
+        <c:set var="localeEn">en</c:set>
+        <form method="post" action="ProjectServlet">
+            <input type="hidden" name="command" value="change_language_command"/>
+            <button class="language-button" type="submit">
+                <c:if test="${language == localeRu}">
+                    <fmt:message key="header.language.ru"/>
+                </c:if>
+                <c:if test="${language == localeEn}">
+                    <fmt:message key="header.language.en"/>
+                </c:if>
+            </button>
+        </form>
+
     </header>
 </div>
 <div class="container-login">
@@ -66,6 +98,9 @@
     <c:set var="localTattooStatus">tattoo_status</c:set>
     <c:set var="localOrdersStatus">order_status</c:set>
     <c:if test="${what_change == localEmail}">
+        <div class="register-login-info">
+            <fmt:message key="login.message.info"/>
+        </div>
         <form method="post" action="ProjectServlet">
             <input type="hidden" name="command" value="change_email_command"/>
             <div class="info-div">
@@ -83,6 +118,9 @@
         </form>
     </c:if>
     <c:if test="${what_change == localName}">
+        <div class="register-login-info">
+            <fmt:message key="login.message.info"/>
+        </div>
         <form method="post" action="ProjectServlet">
             <input type="hidden" name="command" value="change_name_command"/>
             <div class="info-div">
@@ -100,6 +138,9 @@
         </form>
     </c:if>
     <c:if test="${what_change == localSurname}">
+        <div class="register-login-info">
+            <fmt:message key="login.message.info"/>
+        </div>
         <form method="post" action="ProjectServlet">
             <input type="hidden" name="command" value="change_surname_command"/>
             <div class="info-div">
@@ -117,6 +158,9 @@
         </form>
     </c:if>
     <c:if test="${what_change == localPassword}">
+        <div class="register-login-info">
+            <fmt:message key="login.message.info"/>
+        </div>
         <form method="post" action="ProjectServlet">
             <input type="hidden" name="command" value="change_password_command"/>
             <div class="info-div">

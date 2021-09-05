@@ -21,8 +21,12 @@ public class Main {
         Map<String, String> parameters = new HashMap<>();
 //            parameters.put("paid", "0");
 //            parameters.put("tattoo_id", "7800");
-        String balance = "4000";
-            System.out.println(Validator.validatePrice(balance));
+//        String balance = "4000";
+//            System.out.println(Validator.validatePrice(balance));
+        String passwordOld = "12345KOEVlad";
+        String passwordNew = "123456789";
+        System.out.println(Validator.validatePassword(passwordOld));
+        System.out.println(Validator.validatePassword(passwordNew));
 //            TattooService catalogService = new TattooServiceImpl();
 //            List<Tattoo> catalogElements =
 //                    catalogService.findByPriceRangeAllActive(BigDecimal.valueOf(3000), BigDecimal.valueOf(8000));

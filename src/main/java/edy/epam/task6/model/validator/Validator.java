@@ -57,7 +57,7 @@ public class Validator {
         return result;
     }
 
-    public static boolean validatePassword(String password){
+    public static boolean validatePassword(String password) {
         boolean result = false;
         if(password != null && !password.isBlank()){
             result = password.matches(PASSWORD_REGEX);

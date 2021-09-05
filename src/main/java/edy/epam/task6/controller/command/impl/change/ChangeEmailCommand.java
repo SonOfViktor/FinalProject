@@ -29,20 +29,17 @@ public class ChangeEmailCommand implements Command {
         try {
             Map<String, String> parameters = new HashMap<>();
             parameters.put(ColumnName.USER_EMAIL, request.getParameter(RequestParameter.USER_EMAIL));
-            userService.updateEmail(parameters, userId);
-            Optional<User> resultUser = userService.findById(userId);
-            request.setAttribute(RequestParameter.PROFILE, resultUser.get());
-            switch (user.getRole()) {
-                case ADMIN -> {
-                    router = new Router(PagePath.PROFILE_PAGE_ADMIN);
-                }
-                case USER -> {
-                    router = new Router(PagePath.PROFILE_PAGE_USER);
-                }
-                default -> {
-                    logger.error("Error after change email with a return to the profile page.");
-                    router = new Router(PagePath.ERROR_PAGE_500);
-                }
+            if (userService.updateEmail(parameters, userId)) {
+                user.setEmail(request.getParameter(RequestParameter.USER_EMAIL));
+                session.setAttribute(SessionAttribute.USER, user);
+
+                router = new Router(Router.RouterType.REDIRECT,
+                        session.getAttribute(SessionAttribute.PREVIOUS_PAGE).toString());
+                logger.info("Email updated successfully.");
+            } else {
+                logger.error("Incorrect data was sent to update email, data validation failed.");
+                request.setAttribute(RequestParameter.WHAT_CHANGE, RequestParameter.USER_EMAIL);
+                router = new Router(PagePath.CHANGE_PAGE);
             }
         } catch (ServiceException e) {
             logger.error("Error during changing email of user: ", e);

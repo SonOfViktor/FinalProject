@@ -21,7 +21,6 @@ public class GoToFindOrderByIdPageCommand implements Command {
     @Override
     public Router execute(HttpServletRequest request) {
         Router router;
-
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute(SessionAttribute.USER);
         String userLogin = user.getLogin();

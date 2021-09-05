@@ -25,8 +25,6 @@ public interface UserService {
 
     boolean updateStatus(Map<String, String> parameters, Long userId) throws ServiceException;
 
-    boolean updateRole(Map<String, String> parameters, Long userId) throws ServiceException;
-
     Optional<User> findById(Long soughtId) throws ServiceException;
 
     Optional<User> findByLogin(String login) throws ServiceException;

@@ -28,22 +28,18 @@ public class ChangeSurnameCommand implements Command {
         UserService userService = new UserServiceImpl();
         try {
             Map<String, String> parameters = new HashMap<>();
-            parameters.put(ColumnName.USER_SURNAME,
-                    request.getParameter(RequestParameter.USER_SURNAME));
-            userService.updateSurname(parameters, userId);
-            Optional<User> resultUser = userService.findById(userId);
-            request.setAttribute(RequestParameter.PROFILE, resultUser.get());
-            switch (user.getRole()) {
-                case ADMIN -> {
-                    router = new Router(PagePath.PROFILE_PAGE_ADMIN);
-                }
-                case USER -> {
-                    router = new Router(PagePath.PROFILE_PAGE_USER);
-                }
-                default -> {
-                    logger.error("Error after change surname with a return to the profile page.");
-                    router = new Router(PagePath.ERROR_PAGE_500);
-                }
+            parameters.put(ColumnName.USER_SURNAME, request.getParameter(RequestParameter.USER_SURNAME));
+            if (userService.updateSurname(parameters, userId)) {
+                user.setSurname(request.getParameter(RequestParameter.USER_SURNAME));
+                session.setAttribute(SessionAttribute.USER, user);
+
+                router = new Router(Router.RouterType.REDIRECT,
+                        session.getAttribute(SessionAttribute.PREVIOUS_PAGE).toString());
+                logger.info("Surname updated successfully.");
+            } else {
+                logger.error("Incorrect data was sent to update surname, data validation failed.");
+                request.setAttribute(RequestParameter.WHAT_CHANGE, RequestParameter.USER_SURNAME);
+                router = new Router(PagePath.CHANGE_PAGE);
             }
         } catch (ServiceException e) {
             logger.error("Error during changing surname of user: ", e);

@@ -21,11 +21,11 @@
             rel="stylesheet"
     />
     <link
-            href="assets/css/main8.css"
+            href="assets/css/main10.css"
             rel="stylesheet"
     />
     <link
-            href="assets/css/register4.css"
+            href="assets/css/register5.css"
             rel="stylesheet"
     />
     <title><fmt:message key="add.tattoo.main-title"/></title>
@@ -71,7 +71,7 @@
     <form method="post" action="ProjectServlet">
         <input type="hidden" name="command" value="approve_tattoo_command"/>
         <c:choose>
-            <c:when test="${id == null}">
+            <c:when test="${id == 0}">
                 <div class="info-div">
                     <input type="number" name="id" placeholder="<fmt:message key="change.tattoo-status.id"/>"
                            required

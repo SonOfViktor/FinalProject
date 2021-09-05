@@ -21,7 +21,7 @@
             rel="stylesheet"
     />
     <link
-            href="assets/css/main8.css"
+            href="assets/css/main10.css"
             rel="stylesheet"
     />
     <link
@@ -62,6 +62,21 @@
                 </form>
             </li>
         </ul>
+
+        <c:set var="localeRu">ru</c:set>
+        <c:set var="localeEn">en</c:set>
+        <form method="post" action="ProjectServlet">
+            <input type="hidden" name="command" value="change_language_command"/>
+            <button class="language-button" type="submit">
+                <c:if test="${language == localeRu}">
+                    <fmt:message key="header.language.ru"/>
+                </c:if>
+                <c:if test="${language == localeEn}">
+                    <fmt:message key="header.language.en"/>
+                </c:if>
+            </button>
+        </form>
+
     </header>
 </div>
 <div class="container-proposal2">

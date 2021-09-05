@@ -53,7 +53,8 @@ public class CancelOrderCommand implements Command {
                 parameters.put(ColumnName.ORDERS_STATUS, orderStatus.toString());
                 if (orderService.updateStatus(parameters, orderId)) {
                     logger.info("Order status change was successful.");
-                    router = new Router(PagePath.ORDERS_PAGE);
+                    router = new Router(Router.RouterType.REDIRECT,
+                            session.getAttribute(SessionAttribute.PREVIOUS_PAGE).toString());
                 } else {
                     logger.error("An error in changing the order's status.");
                     router = new Router(PagePath.ERROR_PAGE_500);

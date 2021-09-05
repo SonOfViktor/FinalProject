@@ -15,6 +15,7 @@ public class GoToProfilePageCommand implements Command {
     public Router execute(HttpServletRequest request) {
         Router router;
         HttpSession session = request.getSession();
+        session.setAttribute(SessionAttribute.PREVIOUS_PAGE, PagePath.PROFILE_PAGE_REDIRECT);
         User user = (User)session.getAttribute(SessionAttribute.USER);
         request.setAttribute(RequestParameter.PROFILE, user);
         switch (user.getRole()) {

@@ -7,6 +7,7 @@ import edy.epam.task6.model.entity.Tattoo;
 import edy.epam.task6.model.service.TattooService;
 import edy.epam.task6.model.service.impl.TattooServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 
 import java.util.List;
 
@@ -15,6 +16,10 @@ public class GoToCatalogAllPageCommand implements Command {
     @Override
     public Router execute(HttpServletRequest request) {
         Router router;
+
+        HttpSession session = request.getSession();
+        session.setAttribute(SessionAttribute.PREVIOUS_PAGE, PagePath.CATALOG_PAGE_ALL_REDIRECT);
+
         TattooService catalogService = new TattooServiceImpl();
         try {
             List<Tattoo> catalogElements = catalogService.findAll();

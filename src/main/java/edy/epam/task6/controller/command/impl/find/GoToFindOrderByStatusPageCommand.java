@@ -1,6 +1,7 @@
 package edy.epam.task6.controller.command.impl.find;
 
 import edy.epam.task6.controller.command.*;
+import edy.epam.task6.controller.command.impl.pagination.SendSplitParameters;
 import edy.epam.task6.exception.ServiceException;
 import edy.epam.task6.model.entity.Order;
 import edy.epam.task6.model.entity.User;
@@ -38,14 +39,7 @@ public class GoToFindOrderByStatusPageCommand implements Command {
             }
             request.setAttribute(RequestParameter.ORDERS, orders);
 
-            request.setAttribute(RequestParameter.ELEMENTS_PER_PAGE,
-                    PageSplitParameter.NUMBER_OF_ORDERS_PER_PAGE);
-
-            request.setAttribute(RequestParameter.PAGES_NUMBER,
-                    (int)Math.ceil((double)orders.size()
-                            / PageSplitParameter.NUMBER_OF_ORDERS_PER_PAGE));
-
-            request.setAttribute(RequestParameter.NUMBER_OF_ORDERS, orders.size());
+            request = SendSplitParameters.sendSplitParametersOrders(request, orders.size());
 
             request.setAttribute(RequestParameter.TITLE_ORDERS, RequestParameter.TITLE_ORDERS_FOUNDED);
             router = new Router(PagePath.ORDERS_PAGE);

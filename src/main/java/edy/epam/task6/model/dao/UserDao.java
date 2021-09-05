@@ -25,8 +25,6 @@ public interface UserDao {
 
     boolean updateStatus(int statusId, Long userId) throws DaoException;
 
-    boolean updateRole(int statusId, Long userId) throws DaoException;
-
     Optional<User> findById(Long soughtId) throws DaoException;
 
     Optional<User> findByLogin(String login) throws DaoException;
