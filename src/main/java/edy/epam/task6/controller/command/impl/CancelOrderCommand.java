@@ -3,9 +3,7 @@ package edy.epam.task6.controller.command.impl;
 import edy.epam.task6.controller.command.*;
 import edy.epam.task6.exception.ServiceException;
 import edy.epam.task6.model.dao.ColumnName;
-import edy.epam.task6.model.entity.Order;
-import edy.epam.task6.model.entity.OrderStatus;
-import edy.epam.task6.model.entity.User;
+import edy.epam.task6.model.entity.*;
 import edy.epam.task6.model.service.OrderService;
 import edy.epam.task6.model.service.UserService;
 import edy.epam.task6.model.service.impl.OrderServiceImpl;
@@ -33,7 +31,7 @@ public class CancelOrderCommand implements Command {
 
         HttpSession session = request.getSession();
         User userSession = (User) session.getAttribute(SessionAttribute.USER);
-        Long userId = (Long) session.getAttribute(SessionAttribute.USER_ID);
+        UserRole userRole = (UserRole) session.getAttribute(SessionAttribute.ROLE);
         String userLogin = userSession.getLogin();
 
         OrderService orderService = new OrderServiceImpl();
@@ -41,16 +39,23 @@ public class CancelOrderCommand implements Command {
         Map<String, String> parameters = new HashMap<>();
         try {
             Long orderId = Long.valueOf(request.getParameter(RequestParameter.ORDER_ID));
-            Optional<Order> order = orderService.findByIdPersonal(orderId, userLogin);
+            Optional<Order> order = Optional.empty();
+            if (userRole == UserRole.ADMIN) {
+                order = orderService.findById(orderId);
+            } else if (userRole == UserRole.USER) {
+                order = orderService.findByIdPersonal(orderId, userLogin);
+            }
             if (order.isPresent()) {
                 OrderStatus orderStatus = order.get().getOrderStatus();
                 if (orderStatus == OrderStatus.ACTIVE) {
                     orderStatus = OrderStatus.CANCELED;
 
+                    Optional<User> user = userService.findByLogin(order.get().getUserLogin());
                     BigDecimal paid = order.get().getPaid();
-                    BigDecimal balance = paid.add(userSession.getBalance());
+                    BigDecimal balance = paid.add(user.get().getBalance());
                     parameters.put(ColumnName.USER_BALANCE, balance.toString());
-                    userService.updateBalance(parameters, userId);
+
+                    userService.updateBalance(parameters, user.get().getUserId());
                     userSession.setBalance(balance);
                 }
                 parameters.put(ColumnName.ORDERS_STATUS, orderStatus.toString());
@@ -72,7 +77,8 @@ public class CancelOrderCommand implements Command {
                 }
             } else {
                 logger.error("Order with this id and user login was not found.");
-                router = new Router(PagePath.ERROR_PAGE_500);
+                router = new Router(Router.RouterType.REDIRECT,
+                        session.getAttribute(SessionAttribute.PREVIOUS_PAGE).toString());
             }
         } catch (ServiceException e) {
             logger.error("Error during changing status of order: ", e);

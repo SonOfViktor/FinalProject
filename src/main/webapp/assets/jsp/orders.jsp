@@ -170,7 +170,7 @@
         </div>
     </section>
 
-
+    <div>${sessionScope.role}</div>
     <div class="catalog-background">
         <section class="catalog">
             <c:if test="${title_orders == all}">
