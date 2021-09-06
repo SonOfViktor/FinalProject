@@ -33,8 +33,7 @@ public class ChangeSurnameCommand implements Command {
                 user.setSurname(request.getParameter(RequestParameter.USER_SURNAME));
                 session.setAttribute(SessionAttribute.USER, user);
 
-                router = new Router(Router.RouterType.REDIRECT,
-                        session.getAttribute(SessionAttribute.PREVIOUS_PAGE).toString());
+                router = new Router(Router.RouterType.REDIRECT, PagePath.PROFILE_PAGE_REDIRECT);
                 logger.info("Surname updated successfully.");
             } else {
                 logger.error("Incorrect data was sent to update surname, data validation failed.");

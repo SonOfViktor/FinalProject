@@ -23,7 +23,7 @@
             rel="stylesheet"
     />
     <link
-            href="assets/css/main10.css"
+            href="assets/css/main11.css"
             rel="stylesheet"
     />
     <link
@@ -49,9 +49,12 @@
 </script>
 <div class="header-background">
     <header>
-        <div class="header-title" display="inline">
-            <fmt:message key="header.main-title"/>
-        </div>
+        <form method="post" action="ProjectServlet">
+            <input type="hidden" name="command" value="to_home_page_command"/>
+            <button class="header-title" type="submit">
+                <fmt:message key="header.main-title"/>
+            </button>
+        </form>
         <ul>
             <li class="header-ref1">
                 <form method="post" action="ProjectServlet">
@@ -282,7 +285,12 @@
 </main>
 <footer class="footer">
     <div class="footer-background">
-        <div class="footer-title"><fmt:message key="footer.main-title"/></div>
+        <form method="post" action="ProjectServlet">
+            <input type="hidden" name="command" value="to_home_page_command"/>
+            <button class="footer-title" type="submit">
+                <fmt:message key="footer.main-title"/>
+            </button>
+        </form>
         <ul class="footer-info">
             <li class="footer-info-item">
                 <c:choose>

@@ -104,6 +104,9 @@ header {
 }
 
 .header-title {
+    background: transparent;
+    border: none !important;
+    display: inline;
     position: absolute;
     width: 350px;
     height: 60px;
@@ -115,7 +118,16 @@ header {
     font-size: 32px;
     line-height: 60px;
     text-transform: uppercase;
+    text-align: left;
     color: #F7F7F7;
+}
+.header-title:hover {
+    background: transparent;
+    border: none !important;
+}
+.header-title:active {
+    background: transparent;
+    border: none !important;
 }
 .header-ref0 {
     position: absolute;
@@ -1338,6 +1350,9 @@ input {
     border-radius: 0px;
 }
 .footer-title {
+    background: transparent;
+    border: none !important;
+    display: inline;
     position: absolute;
     width: 350px;
     height: 60px;
@@ -1349,7 +1364,16 @@ input {
     font-size: 32px;
     line-height: 60px;
     text-transform: uppercase;
+    text-align: left;
     color: #F7F7F7;
+}
+.footer-title:hover {
+    background: transparent;
+    border: none !important;
+}
+.footer-title:active {
+    background: transparent;
+    border: none !important;
 }
 .footer-info1 {
     position: absolute;

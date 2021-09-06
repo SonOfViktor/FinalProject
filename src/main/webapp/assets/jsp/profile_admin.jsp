@@ -17,7 +17,7 @@
             rel="stylesheet"
     />
     <link
-            href="assets/css/main10.css"
+            href="assets/css/main11.css"
             rel="stylesheet"
     />
     <title><fmt:message key="profile.main-title"/></title>
@@ -25,9 +25,12 @@
 <body class="body-size3">
 <div class="header-background">
     <header>
-        <div class="header-title" display="inline">
-            <fmt:message key="header.main-title"/>
-        </div>
+        <form method="post" action="ProjectServlet">
+            <input type="hidden" name="command" value="to_home_page_command"/>
+            <button class="header-title" type="submit">
+                <fmt:message key="header.main-title"/>
+            </button>
+        </form>
         <ul>
             <li class="header-ref0">
                 <form method="post" action="ProjectServlet">
@@ -84,19 +87,19 @@
         <div class="block4-background">
             <div class="block3-item">
                 <div class="block3-text1"><fmt:message key="profile.email"/></div>
-                <div class="block3-text2">${profile.email}</div>
+                <div class="block3-text2">${sessionScope.user.email}</div>
             </div>
             <div class="block3-item">
                 <div class="block3-text1"><fmt:message key="profile.login"/></div>
-                <div class="block3-text2">${profile.login}</div>
+                <div class="block3-text2">${sessionScope.user.login}</div>
             </div>
             <div class="block3-item">
                 <div class="block3-text1"><fmt:message key="profile.name"/></div>
-                <div class="block3-text2">${profile.name}</div>
+                <div class="block3-text2">${sessionScope.user.name}</div>
             </div>
             <div class="block3-item">
                 <div class="block3-text1"><fmt:message key="profile.surname"/></div>
-                <div class="block3-text2">${profile.surname}</div>
+                <div class="block3-text2">${sessionScope.user.surname}</div>
             </div>
             <form method="post" action="ProjectServlet">
                 <input type="hidden" name="command" value="to_change_email_page_command"/>
@@ -218,7 +221,12 @@
 </main>
 <footer class="footer">
     <div class="footer-background">
-        <div class="footer-title"><fmt:message key="footer.main-title"/></div>
+        <form method="post" action="ProjectServlet">
+            <input type="hidden" name="command" value="to_home_page_command"/>
+            <button class="footer-title" type="submit">
+                <fmt:message key="footer.main-title"/>
+            </button>
+        </form>
         <ul class="footer-info">
             <li class="footer-info-item">
                 <form method="post" action="ProjectServlet">

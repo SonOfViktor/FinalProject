@@ -17,7 +17,7 @@
             rel="stylesheet"
     />
     <link
-            href="assets/css/main10.css"
+            href="assets/css/main11.css"
             rel="stylesheet"
     />
     <link
@@ -41,9 +41,12 @@
 <body class="result-find-body">
 <div class="header-background">
     <header>
-        <div class="header-title" display="inline">
-            <fmt:message key="header.main-title"/>
-        </div>
+        <form method="post" action="ProjectServlet">
+            <input type="hidden" name="command" value="to_home_page_command"/>
+            <button class="header-title" type="submit">
+                <fmt:message key="header.main-title"/>
+            </button>
+        </form>
         <ul>
             <li class="header-ref1">
                 <a href="ProjectServlet?command=to_catalog_page_command">
@@ -270,7 +273,12 @@
 </div>
 <footer class="footer">
     <div class="footer-background">
-        <div class="footer-title"><fmt:message key="footer.main-title"/></div>
+        <form method="post" action="ProjectServlet">
+            <input type="hidden" name="command" value="to_home_page_command"/>
+            <button class="footer-title" type="submit">
+                <fmt:message key="footer.main-title"/>
+            </button>
+        </form>
         <ul class="footer-info">
             <li class="footer-info-item">
                 <c:choose>

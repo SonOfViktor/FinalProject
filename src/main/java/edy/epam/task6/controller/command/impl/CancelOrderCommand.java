@@ -57,23 +57,28 @@ public class CancelOrderCommand implements Command {
 
                     userService.updateBalance(parameters, user.get().getUserId());
                     userSession.setBalance(balance);
-                }
-                parameters.put(ColumnName.ORDERS_STATUS, orderStatus.toString());
-                if (orderService.updateStatus(parameters, orderId)) {
 
-                    StringBuffer sb = new StringBuffer(EMAIL_MESSAGE_TEXT);
-                    sb.insert(18, orderId);
-                    EmailSender emailSender = new EmailSender(
-                            userSession.getEmail(),
-                            EMAIL_MESSAGE_TITLE,
-                            sb.toString());
-                    emailSender.start();
+                    parameters.put(ColumnName.ORDERS_STATUS, orderStatus.toString());
+                    if (orderService.updateStatus(parameters, orderId)) {
+
+                        StringBuffer sb = new StringBuffer(EMAIL_MESSAGE_TEXT);
+                        sb.insert(18, orderId);
+                        EmailSender emailSender = new EmailSender(
+                                userSession.getEmail(),
+                                EMAIL_MESSAGE_TITLE,
+                                sb.toString());
+                        emailSender.start();
+                        router = new Router(Router.RouterType.REDIRECT,
+                                session.getAttribute(SessionAttribute.PREVIOUS_PAGE).toString());
+                        logger.info("Order status change was successful.");
+                    } else {
+                        logger.error("An error in changing the order's status.");
+                        router = new Router(PagePath.ERROR_PAGE_500);
+                    }
+                } else {
+                    logger.error("Order status is CANCELED already.");
                     router = new Router(Router.RouterType.REDIRECT,
                             session.getAttribute(SessionAttribute.PREVIOUS_PAGE).toString());
-                    logger.info("Order status change was successful.");
-                } else {
-                    logger.error("An error in changing the order's status.");
-                    router = new Router(PagePath.ERROR_PAGE_500);
                 }
             } else {
                 logger.error("Order with this id and user login was not found.");

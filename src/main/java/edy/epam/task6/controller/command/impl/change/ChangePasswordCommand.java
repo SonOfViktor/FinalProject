@@ -36,8 +36,7 @@ public class ChangePasswordCommand implements Command {
                 parameters.put(RequestParameter.USER_PASSWORD,
                         request.getParameter(RequestParameter.PASSWORD_NEW));
                 if (userService.updatePassword(parameters, userId)) {
-                    router = new Router(Router.RouterType.REDIRECT,
-                            session.getAttribute(SessionAttribute.PREVIOUS_PAGE).toString());
+                    router = new Router(Router.RouterType.REDIRECT, PagePath.PROFILE_PAGE_REDIRECT);
                     logger.info("Password updated successfully.");
                 } else {
                     logger.error("Incorrect data was sent to update password, data validation failed.");

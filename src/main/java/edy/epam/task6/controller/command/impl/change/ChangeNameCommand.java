@@ -33,8 +33,7 @@ public class ChangeNameCommand implements Command {
                 user.setName(request.getParameter(RequestParameter.USER_NAME));
                 session.setAttribute(SessionAttribute.USER, user);
 
-                router = new Router(Router.RouterType.REDIRECT,
-                        session.getAttribute(SessionAttribute.PREVIOUS_PAGE).toString());
+                router = new Router(Router.RouterType.REDIRECT, PagePath.PROFILE_PAGE_REDIRECT);
                 logger.info("Name updated successfully.");
             } else {
                 logger.error("Incorrect data was sent to update name, data validation failed.");

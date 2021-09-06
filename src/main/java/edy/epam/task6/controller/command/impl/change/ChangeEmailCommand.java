@@ -33,8 +33,7 @@ public class ChangeEmailCommand implements Command {
                 user.setEmail(request.getParameter(RequestParameter.USER_EMAIL));
                 session.setAttribute(SessionAttribute.USER, user);
 
-                router = new Router(Router.RouterType.REDIRECT,
-                        session.getAttribute(SessionAttribute.PREVIOUS_PAGE).toString());
+                router = new Router(Router.RouterType.REDIRECT, PagePath.PROFILE_PAGE_REDIRECT);
                 logger.info("Email updated successfully.");
             } else {
                 logger.error("Incorrect data was sent to update email, data validation failed.");
