@@ -29,7 +29,7 @@ body {
     right: 5%;
     top: 10%;
 
-    font-family: Bebas Neue;
+    font-family: "Bebas Neue";
     font-style: normal;
     font-weight: bold;
     font-size: 200px;
@@ -43,7 +43,7 @@ body {
     right: 5%;
     top: 40%;
 
-    font-family: Bebas Neue;
+    font-family: "Bebas Neue";
     font-style: normal;
     font-weight: bold;
     font-size: 150px;
@@ -57,7 +57,11 @@ body {
     right: 30%;
     top: 65%;
 
-    font-family: Bebas Neue;
+    background: transparent;
+    border: none !important;
+    display: inline;
+
+    font-family: "Bebas Neue";
     font-style: normal;
     font-weight: bold;
     font-size: 40px;
@@ -68,4 +72,12 @@ body {
 .error-text:hover {
     text-decoration: underline;
     transform: scale(1.2);
+    background: transparent;
+    border: none !important;
+}
+.error-text:active {
+    text-decoration: underline;
+    transform: scale(1.2);
+    background: transparent;
+    border: none !important;
 }

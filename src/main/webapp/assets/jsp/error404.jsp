@@ -7,10 +7,10 @@
             href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;display=swap"
             rel="stylesheet">
     <link
-            href="../css/error1.css"
+            href="${pageContext.request.contextPath}/assets/css/error2.css"
             rel="stylesheet"
     />
-    <title>Error</title>
+    <title>Error 404</title>
 </head>
 <body>
 <div class="container">
@@ -21,9 +21,10 @@
         PAGE NOT FOUND
     </div>
     <form method="post" action="ProjectServlet">
-        <a class="error-text" href="ProjectServlet?command=to_home_page_command">
+        <input type="hidden" name="command" value="to_home_page_command"/>
+        <button class="error-text" type="submit">
             GO BACK TO HOME PAGE AND TRY ANOTHER FUNCTIONALITY
-        </a>
+        </button>
     </form>
 </div>
 </body>

@@ -17,7 +17,7 @@
             rel="stylesheet"
     />
     <link
-            href="assets/css/main11.css"
+            href="${pageContext.request.contextPath}/assets/css/main11.css"
             rel="stylesheet"
     />
     <title><fmt:message key="profile.main-title"/></title>

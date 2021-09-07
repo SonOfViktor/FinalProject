@@ -48,7 +48,7 @@ public class AddTattooCommand implements Command {
                     request.getParameter(RequestParameter.TATTOO_STATUS));
             parameters.put(ColumnName.TATTOOS_PLACE, String.valueOf(placeNumber));
             parameters.put(ColumnName.TATTOOS_USER_ID, userId.toString());
-            System.out.println(parameters);
+
             boolean added = tattooService.AddNewTattoo(parameters);
             if (added) {
                 logger.info("Tattoo has been added in catalog.");

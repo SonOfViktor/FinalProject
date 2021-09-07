@@ -20,15 +20,15 @@
             rel="stylesheet"
     />
     <link
-            href="assets/css/main11.css"
+            href="${pageContext.request.contextPath}/assets/css/main11.css"
             rel="stylesheet"
     />
     <link
-            href="assets/css/users3.css"
+            href="${pageContext.request.contextPath}/assets/css/users3.css"
             rel="stylesheet"
     />
     <link
-            href="assets/css/slider2.css"
+            href="${pageContext.request.contextPath}/assets/css/slider2.css"
             rel="stylesheet"
     />
     <title><fmt:message key="users.main-title"/></title>

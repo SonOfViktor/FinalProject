@@ -1,7 +1,9 @@
 package edy.epam.task6._main;
 
+import edy.epam.task6.controller.command.CommandType;
 import edy.epam.task6.exception.ServiceException;
 import edy.epam.task6.model.entity.User;
+import edy.epam.task6.model.entity.UserRole;
 import edy.epam.task6.model.service.UserService;
 import edy.epam.task6.model.service.impl.UserServiceImpl;
 import edy.epam.task6.model.validator.Validator;
@@ -18,10 +20,16 @@ public class Main {
 
     public static void main(String[] args) {
 //        try {
-        Map<String, String> parameters = new HashMap<>();
-        StringBuffer sb = new StringBuffer("Your order number  has been canceled.");
-        sb.insert(18,"123");
-        System.out.println(sb);
+//        if (CommandType.valueOf("code_entry_command".toUpperCase()).isContainRole(UserRole.ADMIN)) {
+//            System.out.println("hello");
+//        } else {
+//            System.out.println("hello 2");
+//        }
+//        System.out.println(CommandType.valueOf("to_login_page_command".toUpperCase()));
+//        Map<String, String> parameters = new HashMap<>();
+//        StringBuffer sb = new StringBuffer("Your order number  has been canceled.");
+//        sb.insert(18,"123");
+//        System.out.println(sb);
 //            parameters.put("paid", "0");
 //            parameters.put("tattoo_id", "7800");
 //        String balance = "4000";

@@ -21,11 +21,11 @@
             rel="stylesheet"
     />
     <link
-            href="assets/css/main11.css"
+            href="${pageContext.request.contextPath}/assets/css/main11.css"
             rel="stylesheet"
     />
     <link
-            href="assets/css/register5.css"
+            href="${pageContext.request.contextPath}/assets/css/register5.css"
             rel="stylesheet"
     />
     <title><fmt:message key="create.order.main-title"/></title>

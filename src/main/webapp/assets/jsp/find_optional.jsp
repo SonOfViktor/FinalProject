@@ -17,23 +17,23 @@
             rel="stylesheet"
     />
     <link
-            href="assets/css/main11.css"
+            href="${pageContext.request.contextPath}/assets/css/main11.css"
             rel="stylesheet"
     />
     <link
-            href="assets/css/users3.css"
+            href="${pageContext.request.contextPath}/assets/css/users3.css"
             rel="stylesheet"
     />
     <link
-            href="assets/css/orders1.css"
+            href="${pageContext.request.contextPath}/assets/css/orders1.css"
             rel="stylesheet"
     />
     <link
-            href="assets/css/find1.css"
+            href="${pageContext.request.contextPath}/assets/css/find1.css"
             rel="stylesheet"
     />
     <link
-            href="assets/css/errormessage1.css"
+            href="${pageContext.request.contextPath}/assets/css/errormessage1.css"
             rel="stylesheet"
     />
     <title><fmt:message key="find.main-title"/></title>

@@ -18,7 +18,7 @@
             rel="stylesheet"
     />
     <link
-            href="assets/css/main11.css"
+            href="${pageContext.request.contextPath}/assets/css/main11.css"
             rel="stylesheet"
     />
     <title><fmt:message key="header.main-title"/></title>
@@ -42,24 +42,24 @@
                 </form>
             </li>
             <li class="header-ref2">
-                <c:choose>
-                    <c:when test="${authentication == true}">
+<%--                <c:choose>--%>
+<%--                    <c:when test="${authentication == true}">--%>
                         <form method="post" action="ProjectServlet">
                             <input type="hidden" name="command" value="to_orders_page_command"/>
                             <button class="header-button" type="submit">
                                 <fmt:message key="header.orders"/>
                             </button>
                         </form>
-                    </c:when>
-                    <c:otherwise>
-                        <form method="post" action="ProjectServlet">
-                            <input type="hidden" name="command" value="to_login_page_command"/>
-                            <button class="header-button" type="submit">
-                                <fmt:message key="header.orders"/>
-                            </button>
-                        </form>
-                    </c:otherwise>
-                </c:choose>
+<%--                    </c:when>--%>
+<%--                    <c:otherwise>--%>
+<%--                        <form method="post" action="ProjectServlet">--%>
+<%--                            <input type="hidden" name="command" value="to_login_page_command"/>--%>
+<%--                            <button class="header-button" type="submit">--%>
+<%--                                <fmt:message key="header.orders"/>--%>
+<%--                            </button>--%>
+<%--                        </form>--%>
+<%--                    </c:otherwise>--%>
+<%--                </c:choose>--%>
             </li>
             <li class="header-sign-in">
                 <c:choose>

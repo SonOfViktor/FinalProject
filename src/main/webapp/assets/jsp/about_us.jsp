@@ -21,11 +21,11 @@
             rel="stylesheet"
     />
     <link
-            href="assets/css/main11.css"
+            href="${pageContext.request.contextPath}/assets/css/main11.css"
             rel="stylesheet"
     />
     <link
-            href="assets/css/aboutus1.css"
+            href="${pageContext.request.contextPath}/assets/css/aboutus1.css"
             rel="stylesheet"
     />
     <title><fmt:message key="about.us.main-title"/></title>

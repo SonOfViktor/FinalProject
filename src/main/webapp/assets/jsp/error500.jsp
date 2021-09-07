@@ -7,10 +7,10 @@
             href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;display=swap"
             rel="stylesheet">
     <link
-            href="../css/error1.css"
+            href="${pageContext.request.contextPath}/assets/css/error2.css"
             rel="stylesheet"
     />
-    <title>Error</title>
+    <title>Error 500</title>
 </head>
 <body>
 <div class="container">
