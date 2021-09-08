@@ -2,6 +2,7 @@ package edy.epam.task6._main;
 
 import edy.epam.task6.controller.command.CommandType;
 import edy.epam.task6.exception.ServiceException;
+import edy.epam.task6.model.dao.ColumnName;
 import edy.epam.task6.model.entity.User;
 import edy.epam.task6.model.entity.UserRole;
 import edy.epam.task6.model.service.UserService;
@@ -9,6 +10,8 @@ import edy.epam.task6.model.service.impl.UserServiceImpl;
 import edy.epam.task6.model.validator.Validator;
 import edy.epam.task6.util.RegisterCodeGenerator;
 
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.*;
 
 public class Main {
@@ -20,6 +23,9 @@ public class Main {
 
     public static void main(String[] args) {
 //        try {
+        Timestamp time = Timestamp.valueOf("2021-08-20 15:27:12");
+        LocalDateTime ldt = LocalDateTime.of(time.toLocalDateTime().toLocalDate(), time.toLocalDateTime().toLocalTime());
+        System.out.println(ldt);
 //        if (CommandType.valueOf("code_entry_command".toUpperCase()).isContainRole(UserRole.ADMIN)) {
 //            System.out.println("hello");
 //        } else {

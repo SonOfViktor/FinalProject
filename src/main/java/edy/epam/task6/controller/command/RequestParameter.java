@@ -75,6 +75,7 @@ public final class RequestParameter {
     public static final String TITLE_TATTOOS_PROPOSAL = "proposal";
 
     public static final String LOGIN_ERROR = "login_error";
+    public static final String USER_BLOCKED_ERROR = "user_blocked_error";
     public static final String FIND_USER_ERROR = "find_user_error";
     public static final String FIND_ORDER_ERROR = "find_order_error";
     public static final String FIND_TATTOO_ERROR = "find_tattoo_error";

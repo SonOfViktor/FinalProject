@@ -15,7 +15,7 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 
 @WebFilter( urlPatterns = { "/ProjectServlet" },
-        initParams = { @WebInitParam(name = "INDEX_PATH", value = "/login.jsp") })
+        initParams = { @WebInitParam(name = "INDEX_PATH", value = "/assets/jsp/login.jsp") })
 public class RoleFilter implements Filter {
     private String indexPath;
 
@@ -47,8 +47,14 @@ public class RoleFilter implements Filter {
 
         if (role.equals(UserRole.VISITOR)) {
             if (!CommandType.valueOf(command.toUpperCase()).isContainRole(UserRole.VISITOR)) {
+                //TODO тут надо сделать переход на логин и спросить почему не работает строка снизу
                 response.sendRedirect(request.getContextPath() + indexPath);
             }
+        }
+
+        if (!CommandType.valueOf(command.toUpperCase()).isContainRole(role) && !role.equals(UserRole.VISITOR)) {
+            response.sendError(403);
+            return;
         }
 
 //        if (!CommandType.valueOf(command.toUpperCase()).isContainRole(role)) {

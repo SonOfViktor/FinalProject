@@ -12,6 +12,7 @@ import org.intellij.lang.annotations.Language;
 
 import java.math.BigDecimal;
 import java.sql.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -130,7 +131,11 @@ public class OrderDaoImpl implements OrderDao {
                     OrderBuilder orderBuilder = new OrderBuilder();
                     orderBuilder.setOrderId(resultSet.getLong(ColumnName.ORDERS_ID));
                     orderBuilder.setPaid(resultSet.getBigDecimal(ColumnName.ORDERS_PAID));
-                    orderBuilder.setRegistrationDate(resultSet.getTimestamp(ColumnName.ORDERS_REGISTRATION_DATE));
+                    Timestamp time = Timestamp.valueOf(resultSet.getString(ColumnName.ORDERS_REGISTRATION_DATE));
+                    LocalDateTime localDateTime = LocalDateTime.of(
+                            time.toLocalDateTime().toLocalDate(),
+                            time.toLocalDateTime().toLocalTime());
+                    orderBuilder.setRegistrationDate(localDateTime);
                     orderBuilder.setUserLogin(resultSet.getString(ColumnName.ORDERS_USER_LOGIN));
                     orderBuilder.setOrderStatus(OrderStatus.valueOf(resultSet.getString(ColumnName.ORDERS_STATUS)));
                     orderBuilder.setTattooId(resultSet.getLong(ColumnName.ORDERS_TATTOO_ID));
@@ -183,7 +188,11 @@ public class OrderDaoImpl implements OrderDao {
                     OrderBuilder orderBuilder = new OrderBuilder();
                     orderBuilder.setOrderId(resultSet.getLong(ColumnName.ORDERS_ID));
                     orderBuilder.setPaid(resultSet.getBigDecimal(ColumnName.ORDERS_PAID));
-                    orderBuilder.setRegistrationDate(resultSet.getTimestamp(ColumnName.ORDERS_REGISTRATION_DATE));
+                    Timestamp time = Timestamp.valueOf(resultSet.getString(ColumnName.ORDERS_REGISTRATION_DATE));
+                    LocalDateTime localDateTime = LocalDateTime.of(
+                            time.toLocalDateTime().toLocalDate(),
+                            time.toLocalDateTime().toLocalTime());
+                    orderBuilder.setRegistrationDate(localDateTime);
                     orderBuilder.setUserLogin(resultSet.getString(ColumnName.ORDERS_USER_LOGIN));
                     orderBuilder.setOrderStatus(OrderStatus.valueOf(resultSet.getString(ColumnName.ORDERS_STATUS)));
                     orderBuilder.setTattooId(resultSet.getLong(ColumnName.ORDERS_TATTOO_ID));
@@ -235,7 +244,11 @@ public class OrderDaoImpl implements OrderDao {
             OrderBuilder orderBuilder = new OrderBuilder();
             orderBuilder.setOrderId(resultSet.getLong(ColumnName.ORDERS_ID));
             orderBuilder.setPaid(resultSet.getBigDecimal(ColumnName.ORDERS_PAID));
-            orderBuilder.setRegistrationDate(resultSet.getTimestamp(ColumnName.ORDERS_REGISTRATION_DATE));
+            Timestamp time = Timestamp.valueOf(resultSet.getString(ColumnName.ORDERS_REGISTRATION_DATE));
+            LocalDateTime localDateTime = LocalDateTime.of(
+                    time.toLocalDateTime().toLocalDate(),
+                    time.toLocalDateTime().toLocalTime());
+            orderBuilder.setRegistrationDate(localDateTime);
             orderBuilder.setUserLogin(resultSet.getString(ColumnName.ORDERS_USER_LOGIN));
             orderBuilder.setOrderStatus(OrderStatus.valueOf(resultSet.getString(ColumnName.ORDERS_STATUS)));
             orderBuilder.setTattooId(resultSet.getLong(ColumnName.ORDERS_TATTOO_ID));

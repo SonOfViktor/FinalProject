@@ -11,6 +11,7 @@ import org.apache.logging.log4j.Logger;
 import org.intellij.lang.annotations.Language;
 
 import java.sql.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -224,7 +225,11 @@ public class UserDaoImpl implements UserDao {
                     userBuilder.setSurname(resultSet.getString(ColumnName.USER_SURNAME));
                     userBuilder.setDiscount(resultSet.getInt(ColumnName.USER_DISCOUNT));
                     userBuilder.setBalance(resultSet.getBigDecimal(ColumnName.USER_BALANCE));
-                    userBuilder.setRegistrationDate(resultSet.getTimestamp(ColumnName.USER_REGISTRATION_DATE));
+                    Timestamp time = Timestamp.valueOf(resultSet.getString(ColumnName.USER_REGISTRATION_DATE));
+                    LocalDateTime localDateTime = LocalDateTime.of(
+                            time.toLocalDateTime().toLocalDate(),
+                            time.toLocalDateTime().toLocalTime());
+                    userBuilder.setRegistrationDate(localDateTime);
                     userBuilder.setStatus(UserStatus.valueOf(resultSet.getString(ColumnName.USER_STATUS)));
                     userBuilder.setRole(UserRole.valueOf(resultSet.getString(ColumnName.USER_ROLE)));
                     resultUser = Optional.of(userBuilder.build());
@@ -252,7 +257,11 @@ public class UserDaoImpl implements UserDao {
                     userBuilder.setSurname(resultSet.getString(ColumnName.USER_SURNAME));
                     userBuilder.setDiscount(resultSet.getInt(ColumnName.USER_DISCOUNT));
                     userBuilder.setBalance(resultSet.getBigDecimal(ColumnName.USER_BALANCE));
-                    userBuilder.setRegistrationDate(resultSet.getTimestamp(ColumnName.USER_REGISTRATION_DATE));
+                    Timestamp time = Timestamp.valueOf(resultSet.getString(ColumnName.USER_REGISTRATION_DATE));
+                    LocalDateTime localDateTime = LocalDateTime.of(
+                            time.toLocalDateTime().toLocalDate(),
+                            time.toLocalDateTime().toLocalTime());
+                    userBuilder.setRegistrationDate(localDateTime);
                     userBuilder.setStatus(UserStatus.valueOf(resultSet.getString(ColumnName.USER_STATUS)));
                     userBuilder.setRole(UserRole.valueOf(resultSet.getString(ColumnName.USER_ROLE)));
                     resultUser = Optional.of(userBuilder.build());
@@ -344,7 +353,11 @@ public class UserDaoImpl implements UserDao {
             userBuilder.setSurname(resultSet.getString(ColumnName.USER_SURNAME));
             userBuilder.setDiscount(resultSet.getInt(ColumnName.USER_DISCOUNT));
             userBuilder.setBalance(resultSet.getBigDecimal(ColumnName.USER_BALANCE));
-            userBuilder.setRegistrationDate(resultSet.getTimestamp(ColumnName.USER_REGISTRATION_DATE));
+            Timestamp time = Timestamp.valueOf(resultSet.getString(ColumnName.USER_REGISTRATION_DATE));
+            LocalDateTime localDateTime = LocalDateTime.of(
+                    time.toLocalDateTime().toLocalDate(),
+                    time.toLocalDateTime().toLocalTime());
+            userBuilder.setRegistrationDate(localDateTime);
             userBuilder.setStatus(UserStatus.valueOf(resultSet.getString(ColumnName.USER_STATUS)));
             userBuilder.setRole(UserRole.valueOf(resultSet.getString(ColumnName.USER_ROLE)));
             userList.add(userBuilder.build());

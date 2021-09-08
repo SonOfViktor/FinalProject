@@ -25,12 +25,8 @@ public class ChangeUserStatusCommand implements Command {
     @Override
     public Router execute(HttpServletRequest request) {
         Router router;
-
         HttpSession session = request.getSession();
-        User userSession = (User)session.getAttribute(SessionAttribute.USER);
-        request.setAttribute(RequestParameter.PROFILE, userSession);
-
-        UserService userService = new UserServiceImpl();
+         UserService userService = new UserServiceImpl();
         Map<String, String> parameters = new HashMap<>();
         try {
             Long userId = Long.valueOf(request.getParameter(RequestParameter.USER_ID));

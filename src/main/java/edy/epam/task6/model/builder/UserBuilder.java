@@ -5,9 +5,7 @@ import edy.epam.task6.model.entity.UserRole;
 import edy.epam.task6.model.entity.UserStatus;
 
 import java.math.BigDecimal;
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
-import java.util.Date;
 
 public class UserBuilder {
 
@@ -18,7 +16,7 @@ public class UserBuilder {
     private String surname;
     private Integer discount;
     private BigDecimal balance;
-    private Timestamp registrationDate;
+    private LocalDateTime registrationDate;
     private UserStatus status;
     private UserRole role;
 
@@ -94,11 +92,11 @@ public class UserBuilder {
         this.balance = balance;
     }
 
-    public Timestamp getRegistrationDate() {
+    public LocalDateTime getRegistrationDate() {
         return registrationDate;
     }
 
-    public void setRegistrationDate(Timestamp registrationDate) {
+    public void setRegistrationDate(LocalDateTime registrationDate) {
         this.registrationDate = registrationDate;
     }
 

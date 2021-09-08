@@ -103,15 +103,21 @@
             </div>
             <div class="block3-item">
                 <div class="block3-text1"><fmt:message key="profile.balance"/></div>
-                <div class="block3-text2">${sessionScope.user.balance}</div>
+                <div class="block3-text2">
+                    ${sessionScope.user.balance} <fmt:message key="profile.coins"/>
+                </div>
             </div>
             <div class="block3-item">
                 <div class="block3-text1"><fmt:message key="profile.discount"/></div>
-                <div class="block3-text2">${sessionScope.user.discount}</div>
+                <div class="block3-text2">${sessionScope.user.discount} %</div>
             </div>
             <div class="block3-item">
                 <div class="block3-text1"><fmt:message key="profile.registration-date"/></div>
-                <div class="block3-text2">${sessionScope.user.registrationDate}</div>
+                <div class="block3-text2">${sessionScope.user.registrationDate}
+                    <script src="assets/js/time3.js">
+                        timeOutput("${sessionScope.user.registrationDate}");
+                    </script>
+                </div>
             </div>
             <form method="post" action="ProjectServlet">
                 <input type="hidden" name="command" value="to_change_email_page_command"/>

@@ -241,6 +241,6 @@
         </ul>
     </div>
 </footer>
-<script src="assets/js/time2.js"></script>
+<script src="assets/js/time3.js"></script>
 </body>
 </html>

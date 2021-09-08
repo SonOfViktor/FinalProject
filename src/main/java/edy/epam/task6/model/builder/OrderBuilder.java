@@ -5,12 +5,13 @@ import edy.epam.task6.model.entity.OrderStatus;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 
 public class OrderBuilder {
 
     private Long orderId;
     private BigDecimal paid;
-    private Timestamp registrationDate;
+    private LocalDateTime registrationDate;
     private String userLogin;
     private OrderStatus orderStatus;
 
@@ -47,11 +48,11 @@ public class OrderBuilder {
         this.paid = paid;
     }
 
-    public Timestamp getRegistrationDate() {
+    public LocalDateTime getRegistrationDate() {
         return registrationDate;
     }
 
-    public void setRegistrationDate(Timestamp registrationDate) {
+    public void setRegistrationDate(LocalDateTime registrationDate) {
         this.registrationDate = registrationDate;
     }
 

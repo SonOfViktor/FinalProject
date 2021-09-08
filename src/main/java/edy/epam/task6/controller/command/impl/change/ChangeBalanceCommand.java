@@ -37,9 +37,10 @@ public class ChangeBalanceCommand implements Command {
             userService.updateBalance(parameters, userId);
 
             user.setBalance(balance);
-            request.setAttribute(RequestParameter.PROFILE, user);
+            session.setAttribute(SessionAttribute.USER, user);
 
-            router = new Router(PagePath.PROFILE_PAGE_USER);
+            router = new Router(Router.RouterType.REDIRECT, PagePath.PROFILE_PAGE_REDIRECT);
+            logger.info("Balance updated successfully.");
         } catch (ServiceException e) {
             logger.error("Error during changing balance of user: ", e);
             router = new Router(PagePath.ERROR_PAGE_500);

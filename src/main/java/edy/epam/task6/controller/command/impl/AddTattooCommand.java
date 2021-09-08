@@ -4,7 +4,6 @@ import edy.epam.task6.controller.command.*;
 import edy.epam.task6.exception.ServiceException;
 import edy.epam.task6.model.dao.ColumnName;
 import edy.epam.task6.model.entity.User;
-import edy.epam.task6.model.entity.UserRole;
 import edy.epam.task6.model.service.TattooService;
 import edy.epam.task6.model.service.impl.TattooServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
@@ -49,14 +48,9 @@ public class AddTattooCommand implements Command {
             parameters.put(ColumnName.TATTOOS_PLACE, String.valueOf(placeNumber));
             parameters.put(ColumnName.TATTOOS_USER_ID, userId.toString());
 
-            boolean added = tattooService.AddNewTattoo(parameters);
-            if (added) {
+            if (tattooService.AddNewTattoo(parameters)) {
                 logger.info("Tattoo has been added in catalog.");
-                if (userSession.getRole() == UserRole.ADMIN) {
-                    router = new Router(PagePath.PROFILE_PAGE_ADMIN);
-                } else {
-                    router = new Router(PagePath.PROFILE_PAGE_USER);
-                }
+                router = new Router(Router.RouterType.REDIRECT, PagePath.PROFILE_PAGE_REDIRECT);
             } else {
                 logger.error("Error during adding tattoo.");
                 router = new Router(PagePath.ERROR_PAGE_500);

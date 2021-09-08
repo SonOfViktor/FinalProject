@@ -1,8 +1,7 @@
 package edy.epam.task6.model.entity;
 
 import java.math.BigDecimal;
-import java.sql.Timestamp;
-import java.util.Objects;
+import java.time.LocalDateTime;
 
 public class User {
 
@@ -13,7 +12,7 @@ public class User {
     private String surname;
     private Integer discount;
     private BigDecimal balance;
-    private Timestamp registrationDate;
+    private LocalDateTime registrationDate;
     private UserStatus status;
     private UserRole role;
 
@@ -24,7 +23,7 @@ public class User {
                 String surname,
                 Integer discount,
                 BigDecimal balance,
-                Timestamp registrationDate,
+                LocalDateTime registrationDate,
                 UserStatus status,
                 UserRole role) {
         this.userId = userId;
@@ -95,11 +94,11 @@ public class User {
         this.balance = balance;
     }
 
-    public Timestamp getRegistrationDate() {
+    public LocalDateTime getRegistrationDate() {
         return registrationDate;
     }
 
-    public void setRegistrationDate(Timestamp registrationDate) {
+    public void setRegistrationDate(LocalDateTime registrationDate) {
         this.registrationDate = registrationDate;
     }
 

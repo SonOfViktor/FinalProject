@@ -132,6 +132,11 @@
             <fmt:message key="login.message.error"/>
         </div>
     </c:if>
+    <c:if test = "${user_blocked_error}">
+        <div class="login-error-message">
+            <fmt:message key="login.user-blocked.message.error"/>
+        </div>
+    </c:if>
 </div>
 <footer class="footer">
     <div class="footer-background">
