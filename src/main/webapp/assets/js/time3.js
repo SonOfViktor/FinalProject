@@ -7,7 +7,7 @@ function pad(number) {
 
 function timeNow(date) {
     time = new Date();
-    time.setTime(time.getTime() + time.getTimezoneOffset()*60*1000*(-1));
+    time.setTime(time.getTime() + time.getTimezoneOffset()*60*1000*(-2));
     date.value = time.getUTCFullYear() +
         '-' + pad(time.getUTCMonth() + 1) +
         '-' + pad(time.getUTCDate()) +
@@ -15,4 +15,10 @@ function timeNow(date) {
         ':' + pad(time.getUTCMinutes()) +
         ':' + pad(time.getUTCSeconds()) +
         '.' + (time.getUTCMilliseconds() / 1000).toFixed(9).slice(2, 11);
+}
+
+function timeOutput(date) {
+    var local = date;
+    var time = new Date(local);
+    time = time.toLocaleDateString() + " " + time.toLocaleTimeString();
 }
