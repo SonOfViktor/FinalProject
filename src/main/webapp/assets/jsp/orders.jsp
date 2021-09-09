@@ -10,8 +10,8 @@
 <c:set var="completed">completed</c:set>
 <c:set var="founded">founded</c:set>
 <c:set var="person">person</c:set>
-<c:set var="statusAdmin">ADMIN</c:set>
-<c:set var="statusUser">USER</c:set>
+<c:set var="roleAdmin">ADMIN</c:set>
+<c:set var="roleUser">USER</c:set>
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -106,7 +106,7 @@
 <main class="main-catalog">
     <section class="block2">
         <div class="block2-background">
-            <c:if test="${sessionScope.role == statusUser}">
+            <c:if test="${sessionScope.role == roleUser}">
                 <div class="block2-item">
                     <form class="block2-form" method="post" action="ProjectServlet">
                         <input type="hidden" name="command" value="to_create_order_page_command"/>
@@ -139,7 +139,7 @@
                     <button class="block2-button1" type="submit"><fmt:message key="orders.search.button"/></button>
                 </form>
             </div>
-            <c:if test="${sessionScope.role == statusAdmin}">
+            <c:if test="${sessionScope.role == roleAdmin}">
                 <div class="block2-item">
                     <form class="block2-form" method="post" action="ProjectServlet">
                         <input type="hidden" name="command" value="to_find_order_by_login_page_command"/>

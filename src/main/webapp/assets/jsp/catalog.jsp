@@ -293,36 +293,16 @@
         </form>
         <ul class="footer-info">
             <li class="footer-info-item">
-                <c:choose>
-                    <c:when test="${authentication == true}">
-                        <form method="post" action="ProjectServlet">
-                            <input type="hidden" name="command" value="to_proposal_page_command"/>
-                            <button class="footer-button" type="submit"><fmt:message key="footer.proposals"/></button>
-                        </form>
-                    </c:when>
-                    <c:otherwise>
-                        <form method="post" action="ProjectServlet">
-                            <input type="hidden" name="command" value="to_login_page_command"/>
-                            <button class="footer-button" type="submit"><fmt:message key="footer.proposals"/></button>
-                        </form>
-                    </c:otherwise>
-                </c:choose>
+                <form method="post" action="ProjectServlet">
+                    <input type="hidden" name="command" value="to_proposal_page_command"/>
+                    <button class="footer-button" type="submit"><fmt:message key="footer.proposals"/></button>
+                </form>
             </li>
             <li class="footer-info-item">
-                <c:choose>
-                    <c:when test="${authentication == true}">
-                        <form method="post" action="ProjectServlet">
-                            <input type="hidden" name="command" value="to_orders_page_command"/>
-                            <button class="footer-button" type="submit"><fmt:message key="footer.orders"/></button>
-                        </form>
-                    </c:when>
-                    <c:otherwise>
-                        <form method="post" action="ProjectServlet">
-                            <input type="hidden" name="command" value="to_login_page_command"/>
-                            <button class="footer-button" type="submit"><fmt:message key="footer.orders"/></button>
-                        </form>
-                    </c:otherwise>
-                </c:choose>
+                <form method="post" action="ProjectServlet">
+                    <input type="hidden" name="command" value="to_orders_page_command"/>
+                    <button class="footer-button" type="submit"><fmt:message key="footer.orders"/></button>
+                </form>
             </li>
             <li class="footer-info-item">
                 <form method="post" action="ProjectServlet">
