@@ -23,6 +23,7 @@ public class PageRedirectSecurityFilter implements Filter {
             throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         HttpServletResponse response = (HttpServletResponse) servletResponse;
+        System.out.println("PageRedirectSecurityFilter work");
         response.sendRedirect(request.getContextPath() + indexPath);
         filterChain.doFilter(request,response);
     }

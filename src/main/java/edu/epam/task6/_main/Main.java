@@ -1,7 +1,15 @@
 package edu.epam.task6._main;
 
+import edu.epam.task6.exception.ServiceException;
+import edu.epam.task6.model.service.CommentService;
+import edu.epam.task6.model.service.UserService;
+import edu.epam.task6.model.service.impl.CommentServiceImpl;
+import edu.epam.task6.model.service.impl.UserServiceImpl;
+
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Main {
 
@@ -11,10 +19,17 @@ public class Main {
     public static final String DATABASE_DRIVER = "driverClassName";
 
     public static void main(String[] args) {
-//        try {
-        Timestamp time = Timestamp.valueOf("2021-08-20 15:27:12");
-        LocalDateTime ldt = LocalDateTime.of(time.toLocalDateTime().toLocalDate(), time.toLocalDateTime().toLocalTime());
-        System.out.println(ldt);
+        try {
+            Map<String, String> parameters = new HashMap<>();
+            parameters.put("text", "Это тестовый комментарий");
+            parameters.put("registration_date", "2021-09-11 23:42:45");
+            parameters.put("users_user_id", "1");
+            CommentService commentService = new CommentServiceImpl();
+            commentService.leaveComment(parameters);
+            System.out.println(commentService.findAll());
+//        Timestamp time = Timestamp.valueOf("2021-08-20 15:27:12");
+//        LocalDateTime ldt = LocalDateTime.of(time.toLocalDateTime().toLocalDate(), time.toLocalDateTime().toLocalTime());
+//        System.out.println(ldt);
 //        if (CommandType.valueOf("code_entry_command".toUpperCase()).isContainRole(UserRole.ADMIN)) {
 //            System.out.println("hello");
 //        } else {
@@ -95,9 +110,9 @@ public class Main {
 //            orderService.updateStatus(parameters3, 2L);
 //            orderList = orderService.findAll();
 //            System.out.println(orderList);
-//        } catch (ServiceException e) {
-//            System.out.println(e.getStackTrace());
-//        }
+        } catch (ServiceException e) {
+            System.out.println(e.getStackTrace());
+        }
 //        try {
 //            PropertyReader reader = new PropertyReader();
 //            Properties properties = reader.read(MAIL_PROPERTY_PATH);

@@ -7,6 +7,7 @@ import edu.epam.task6.model.dao.OrderDao;
 import edu.epam.task6.model.dao.impl.OrderDaoImpl;
 import edu.epam.task6.model.entity.Order;
 import edu.epam.task6.model.service.OrderService;
+import edu.epam.task6.model.validator.Validator;
 
 import java.util.List;
 import java.util.Map;
@@ -15,8 +16,7 @@ import java.util.Optional;
 public class OrderServiceImpl implements OrderService {
 
     public boolean createOrder(Map<String, String> parameters) throws ServiceException {
-//        boolean result = Validator.validateOrder(parameters);
-        boolean result = true;
+        boolean result = Validator.validateOrder(parameters);
         if(result) {
             OrderDao orderDao = OrderDaoImpl.getInstance();
             try {
@@ -37,7 +37,6 @@ public class OrderServiceImpl implements OrderService {
                 case "CANCELED" ->3;
                 default -> 1;
             };
-            System.out.println("orderStatus id = " + statusId);
             try {
                 result = orderDao.updateStatus(statusId, orderId);
             } catch (DaoException e) {

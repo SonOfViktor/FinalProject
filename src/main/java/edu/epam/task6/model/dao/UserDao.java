@@ -25,6 +25,8 @@ public interface UserDao {
 
     boolean updateStatus(int statusId, Long userId) throws DaoException;
 
+    boolean updateAverageRating(double grade, Long userId) throws DaoException;
+
     Optional<User> findById(Long soughtId) throws DaoException;
 
     Optional<User> findByLogin(String login) throws DaoException;

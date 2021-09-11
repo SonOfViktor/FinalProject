@@ -16,6 +16,8 @@ public interface TattooService {
 
     boolean updatePrice(Map<String, String> parameters, Long tattooId) throws ServiceException;
 
+    boolean updateAverageRating(Map<String, String> parameters, Long tattooId) throws ServiceException;
+
     Optional<Tattoo> findById(Long soughtId) throws ServiceException;
 
     List<Tattoo> findByName(String name) throws ServiceException;

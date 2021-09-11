@@ -83,6 +83,7 @@ public class UserDaoImpl implements UserDao {
     private static final String UPDATE_DISCOUNT = "UPDATE users SET discount=? WHERE user_id=?";
     private static final String UPDATE_BALANCE = "UPDATE users SET balance=? WHERE user_id=?";
     private static final String UPDATE_STATUS = "UPDATE users SET status_id=? WHERE user_id=?";
+    private static final String UPDATE_AVERAGE_RATING = "UPDATE users SET average_rating=? WHERE user_id=?";
 
     private UserDaoImpl(){}
 
@@ -209,6 +210,20 @@ public class UserDaoImpl implements UserDao {
         } catch (SQLException e){
             logger.error("Error during updating status of user with id = " + userId, e);
             throw new DaoException("Error during updating status of user with id = " + userId, e);
+        }
+        return result;
+    }
+
+    public boolean updateAverageRating(double grade, Long userId) throws DaoException {
+        boolean result;
+        try(Connection connection = ConnectionPool.getInstance().getConnection();
+            PreparedStatement statement = connection.prepareStatement(UPDATE_AVERAGE_RATING)){
+            statement.setDouble(1, grade);
+            statement.setLong(2, userId);
+            result = statement.executeUpdate() > 0;
+        } catch (SQLException e){
+            logger.error("Error during updating average rating of user with id = " + userId, e);
+            throw new DaoException("Error during updating average rating of user with id = " + userId, e);
         }
         return result;
     }

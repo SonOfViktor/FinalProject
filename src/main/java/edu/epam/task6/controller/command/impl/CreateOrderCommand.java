@@ -52,17 +52,16 @@ public class CreateOrderCommand implements Command {
                 userBalance = userBalance.add(discount).add(tattooPrice.negate());
                 if (userBalance.compareTo(BigDecimal.ZERO) > 0) {
                     parameters.put(ColumnName.USER_BALANCE, userBalance.toString());
-                    userService.updateBalance(parameters, userId);
 
                     BigDecimal paid = tattooPrice.add(discount.negate());
                     parameters.put(ColumnName.ORDERS_PAID, paid.toString());
                     parameters.put(ColumnName.ORDERS_REGISTRATION_DATE,
                             request.getParameter(RequestParameter.ORDER_REGISTRATION_DATE));
                     parameters.put(ColumnName.ORDERS_USER_ID, userId.toString());
-                    parameters.put(ColumnName.ORDERS_TATTOO_ID,
-                            request.getParameter(RequestParameter.ORDER_TATTOO_ID));
+                    parameters.put(ColumnName.ORDERS_TATTOO_ID, tattooId.toString());
 
                     if (orderService.createOrder(parameters)) {
+                        userService.updateBalance(parameters, userId);
                         userSession.setBalance(userBalance);
                         request.setAttribute(RequestParameter.PROFILE, userSession);
 

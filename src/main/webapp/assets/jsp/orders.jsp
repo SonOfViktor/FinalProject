@@ -12,6 +12,9 @@
 <c:set var="person">person</c:set>
 <c:set var="roleAdmin">ADMIN</c:set>
 <c:set var="roleUser">USER</c:set>
+<c:set var="orderStatusActive">ACTIVE</c:set>
+<c:set var="orderStatusCompleted">COMPLETED</c:set>
+<c:set var="orderStatusCanceled">CANCELED</c:set>
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -28,7 +31,7 @@
             rel="stylesheet"
     />
     <link
-            href="${pageContext.request.contextPath}/assets/css/orders1.css"
+            href="${pageContext.request.contextPath}/assets/css/orders2.css"
             rel="stylesheet"
     />
     <link
@@ -71,9 +74,9 @@
             </li>
             <li class="header-ref2">
                 <form method="post" action="ProjectServlet">
-                    <input type="hidden" name="command" value="to_orders_page_command"/>
+                    <input type="hidden" name="command" value="to_catalog_page_command"/>
                     <button class="header-button" type="submit">
-                        <fmt:message key="header.orders"/>
+                        <fmt:message key="header.catalog"/>
                     </button>
                 </form>
             </li>
@@ -284,6 +287,15 @@
                                                             ${order.tattooName}
                                                         </div>
                                                     </div>
+                                                    <c:if test="${order.orderStatus == orderStatusActive}">
+                                                        <form method="post" action="ProjectServlet">
+                                                            <input type="hidden" name="command" value="cancel_order_command"/>
+                                                            <input type="hidden" name="id" value="${order.orderId}"/>
+                                                            <button class="order-list-item-button">
+                                                                <fmt:message key="orders.cancel.button"/>
+                                                            </button>
+                                                        </form>
+                                                    </c:if>
                                                 </div>
                                             </c:forEach>
                                         </div>
@@ -358,6 +370,15 @@
                                                                 ${order.tattooName}
                                                         </div>
                                                     </div>
+                                                    <c:if test="${order.orderStatus == orderStatusActive}">
+                                                        <form method="post" action="ProjectServlet">
+                                                            <input type="hidden" name="command" value="cancel_order_command"/>
+                                                            <input type="hidden" name="id" value="${order.orderId}"/>
+                                                            <button class="order-list-item-button">
+                                                                <fmt:message key="orders.cancel.button"/>
+                                                            </button>
+                                                        </form>
+                                                    </c:if>
                                                 </div>
                                             </c:forEach>
                                         </div>

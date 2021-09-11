@@ -29,7 +29,7 @@ public class GoToCatalogPageCommand implements Command {
 
             request.setAttribute(RequestParameter.TITLE_TATTOOS, RequestParameter.TITLE_TATTOOS_ACTIVE);
             router = new Router(PagePath.CATALOG_PAGE);
-        } catch (ServiceException e){
+        } catch (ServiceException e) {
             router = new Router(PagePath.ERROR_PAGE_500);
         }
         return router;

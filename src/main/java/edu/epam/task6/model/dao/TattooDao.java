@@ -16,6 +16,8 @@ public interface TattooDao {
 
     boolean updatePrice(BigDecimal price, Long tattooId) throws DaoException;
 
+    boolean updateAverageRating(double grade, Long userId) throws DaoException;
+
     Optional<Tattoo> findById(Long soughtId) throws DaoException;
 
     List<Tattoo> findByName(String name) throws DaoException;

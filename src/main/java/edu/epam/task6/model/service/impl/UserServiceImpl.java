@@ -148,6 +148,20 @@ public class UserServiceImpl implements UserService {
         return result;
     }
 
+    public boolean updateAverageRating(Map<String, String> parameters, Long userId) throws ServiceException {
+        String grade = parameters.get(ColumnName.USER_AVERAGE_RATING);
+        boolean result = Validator.validateAverageRating(grade);
+        if(result) {
+            UserDao userDao = UserDaoImpl.getInstance();
+            try {
+                result = userDao.updateAverageRating(Double.valueOf(grade), userId);
+            } catch (DaoException e) {
+                throw new ServiceException(e);
+            }
+        }
+        return result;
+    }
+
     public Optional<User> findById(Long soughtId) throws ServiceException {
         UserDao userDao = UserDaoImpl.getInstance();
         try {

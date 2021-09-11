@@ -7,6 +7,7 @@ import edu.epam.task6.model.entity.Tattoo;
 import edu.epam.task6.exception.DaoException;
 import edu.epam.task6.exception.ServiceException;
 import edu.epam.task6.model.service.TattooService;
+import edu.epam.task6.model.validator.Validator;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -55,6 +56,20 @@ public class TattooServiceImpl implements TattooService {
             BigDecimal price = BigDecimal.valueOf(Long.valueOf(parameters.get(ColumnName.TATTOOS_PRICE)));
             try {
                 result = tattooDao.updatePrice(price, tattooId);
+            } catch (DaoException e) {
+                throw new ServiceException(e);
+            }
+        }
+        return result;
+    }
+
+    public boolean updateAverageRating(Map<String, String> parameters, Long userId) throws ServiceException {
+        String grade = parameters.get(ColumnName.TATTOOS_AVERAGE_RATING);
+        boolean result = Validator.validateAverageRating(grade);
+        if(result) {
+            TattooDao tattooDao = TattooDaoImpl.getInstance();
+            try {
+                result = tattooDao.updateAverageRating(Double.valueOf(grade), userId);
             } catch (DaoException e) {
                 throw new ServiceException(e);
             }

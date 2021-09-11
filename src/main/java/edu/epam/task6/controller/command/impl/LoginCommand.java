@@ -35,11 +35,7 @@ public class LoginCommand implements Command {
             if (user.isPresent()) {
                 User localUser = user.get();
 
-                if (localUser.getStatus() != UserStatus.ACTIVE) {
-                    request.setAttribute(RequestParameter.USER_BLOCKED_ERROR, true);
-                    logger.info("This user is blocked.");
-                    router = new Router(PagePath.LOGIN_PAGE);
-                } else {
+                if (localUser.getStatus() == UserStatus.ACTIVE) {
                     request.setAttribute(RequestParameter.PROFILE, localUser);
                     session.setAttribute(SessionAttribute.USER, localUser);
                     session.setAttribute(SessionAttribute.USER_ID, localUser.getUserId());
@@ -47,7 +43,12 @@ public class LoginCommand implements Command {
                     session.setAttribute(SessionAttribute.STATUS, localUser.getStatus());
                     session.setAttribute(SessionAttribute.AUTHENTICATION, true);
                     session.setAttribute(SessionAttribute.PREVIOUS_PAGE, PagePath.PROFILE_PAGE_REDIRECT);
+
                     router = new Router(Router.RouterType.REDIRECT, PagePath.PROFILE_PAGE_REDIRECT);
+                } else {
+                    request.setAttribute(RequestParameter.USER_BLOCKED_ERROR, true);
+                    logger.info("This user is blocked.");
+                    router = new Router(PagePath.LOGIN_PAGE);
                 }
             } else {
                 request.setAttribute(RequestParameter.LOGIN_ERROR, true);

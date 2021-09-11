@@ -131,6 +131,7 @@ public class TattooDaoImpl implements TattooDao {
     //UPDATE REGEX
     private static final String UPDATE_STATUS = "UPDATE tattoos SET tattoos.tattoo_status_id=? WHERE tattoo_id=?";
     private static final String UPDATE_PRICE = "UPDATE tattoos SET tattoos.price=? WHERE tattoo_id=?";
+    private static final String UPDATE_AVERAGE_RATING = "UPDATE tattoos SET tattoos.average_rating=? WHERE tattoo_id=?";
 
     private TattooDaoImpl(){}
 
@@ -186,6 +187,20 @@ public class TattooDaoImpl implements TattooDao {
         } catch (SQLException e){
             logger.error("Error during updating price of tattoo with id = " + tattooId, e);
             throw new DaoException("Error during updating price of tattoo with id = " + tattooId, e);
+        }
+        return result;
+    }
+
+    public boolean updateAverageRating(double grade, Long tattooId) throws DaoException {
+        boolean result;
+        try(Connection connection = ConnectionPool.getInstance().getConnection();
+            PreparedStatement statement = connection.prepareStatement(UPDATE_AVERAGE_RATING)){
+            statement.setDouble(1, grade);
+            statement.setLong(2, tattooId);
+            result = statement.executeUpdate() > 0;
+        } catch (SQLException e) {
+            logger.error("Error during updating average rating of tattoo with id = " + tattooId, e);
+            throw new DaoException("Error during updating average rating of tattoo with id = " + tattooId, e);
         }
         return result;
     }

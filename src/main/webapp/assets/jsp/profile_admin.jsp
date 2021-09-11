@@ -87,19 +87,19 @@
         <div class="block4-background">
             <div class="block3-item">
                 <div class="block3-text1"><fmt:message key="profile.email"/></div>
-                <div class="block3-text2">${sessionScope.user.email}</div>
+                <div class="block3-text2">${users.email}</div>
             </div>
             <div class="block3-item">
                 <div class="block3-text1"><fmt:message key="profile.login"/></div>
-                <div class="block3-text2">${sessionScope.user.login}</div>
+                <div class="block3-text2">${users.login}</div>
             </div>
             <div class="block3-item">
                 <div class="block3-text1"><fmt:message key="profile.name"/></div>
-                <div class="block3-text2">${sessionScope.user.name}</div>
+                <div class="block3-text2">${users.name}</div>
             </div>
             <div class="block3-item">
                 <div class="block3-text1"><fmt:message key="profile.surname"/></div>
-                <div class="block3-text2">${sessionScope.user.surname}</div>
+                <div class="block3-text2">${users.surname}</div>
             </div>
             <form method="post" action="ProjectServlet">
                 <input type="hidden" name="command" value="to_change_email_page_command"/>
