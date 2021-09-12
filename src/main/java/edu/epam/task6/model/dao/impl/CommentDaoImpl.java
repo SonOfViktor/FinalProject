@@ -28,8 +28,9 @@ public class CommentDaoImpl implements CommentDao {
             VALUES (?, ?, ?)""";
     //FIND REGEX
     private static final String FIND_ALL = """
-            SELECT comment_id, text, registration_date, users_user_id
+            SELECT comment_id, text, comments.registration_date, users_user_id, users.login
             FROM comments
+            JOIN users ON comments.users_user_id = users.user_id
             ORDER BY comment_id DESC""";
     //DELETE REGEX
     private static final String DELETE_COMMENT = "DELETE FROM comments WHERE comment_id=?";
@@ -95,6 +96,7 @@ public class CommentDaoImpl implements CommentDao {
                     time.toLocalDateTime().toLocalTime());
             commentBuilder.setRegistrationDate(localDateTime);
             commentBuilder.setUserId(resultSet.getLong(ColumnName.COMMENT_USER_ID));
+            commentBuilder.setUserLogin(resultSet.getString(ColumnName.COMMENT_USER_LOGIN));
             commentList.add(commentBuilder.build());
         }
         return commentList;

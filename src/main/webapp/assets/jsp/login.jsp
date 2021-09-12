@@ -96,7 +96,7 @@
                minlength="1"
                maxlength="40"
                pattern="[\w][\w._-]{0,39}"
-        >
+        />
     </div>
     <div class="info-div2">
         <input type="password"
@@ -107,7 +107,7 @@
                minlength="8"
                maxlength="45"
                pattern="[-\w_!@#$%^&*()]{8,45}"
-        >
+        />
     </div>
         <button class="login"><fmt:message key="login.button.log-in"/></button>
     </form>

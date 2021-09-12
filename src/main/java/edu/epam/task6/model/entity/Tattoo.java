@@ -10,6 +10,7 @@ public class Tattoo {
     private BigDecimal price;
     private Integer width;
     private Integer height;
+    private Double averageRating;
     private String imageUrl;
     private TattooStatus status;
     private BodyPart places;
@@ -21,6 +22,7 @@ public class Tattoo {
                   BigDecimal price,
                   Integer width,
                   Integer height,
+                  Double averageRating,
                   String imageUrl,
                   TattooStatus status,
                   BodyPart places,
@@ -31,6 +33,7 @@ public class Tattoo {
         this.price = price;
         this.width = width;
         this.height = height;
+        this.averageRating = averageRating;
         this.imageUrl = imageUrl;
         this.status = status;
         this.places = places;
@@ -93,6 +96,14 @@ public class Tattoo {
         this.places = places;
     }
 
+    public Double getAverageRating() {
+        return averageRating;
+    }
+
+    public void setAverageRating(Double averageRating) {
+        this.averageRating = averageRating;
+    }
+
     public String getImageUrl() {
         return imageUrl;
     }
@@ -131,6 +142,7 @@ public class Tattoo {
                 && price.equals(tattoo.price)
                 && width.equals(tattoo.width)
                 && height.equals(tattoo.height)
+                && averageRating.equals(tattoo.averageRating)
                 && imageUrl.equals(tattoo.imageUrl)
                 && status == tattoo.status
                 && places == tattoo.places
@@ -147,6 +159,7 @@ public class Tattoo {
         result = result * prime + price.hashCode();
         result = result * prime + width.hashCode();
         result = result * prime + height.hashCode();
+        result = result * prime + averageRating.hashCode();
         result = result * prime + imageUrl.hashCode();
         result = result * prime + status.hashCode();
         result = result * prime + places.hashCode();
@@ -165,6 +178,7 @@ public class Tattoo {
                 .append(", price = '").append(price).append('\'')
                 .append(", width = '").append(width).append('\'')
                 .append(", height = '").append(height).append('\'')
+                .append(", averageRating = '").append(averageRating).append('\'')
                 .append(", imageUrl = '").append(imageUrl).append('\'')
                 .append(", status = '").append(status).append('\'')
                 .append(", places = '").append(places).append('\'')

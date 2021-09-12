@@ -16,7 +16,7 @@ public class CommentServiceImpl implements CommentService {
 
     public boolean leaveComment(Map<String, String> parameters) throws ServiceException {
         String text = parameters.get(ColumnName.COMMENT_TEXT);
-        boolean result = Validator.validateDescription(text);
+        boolean result = Validator.validateComment(text);
         if(result) {
             CommentDao commentDao = CommentDaoImpl.getInstance();
             try {

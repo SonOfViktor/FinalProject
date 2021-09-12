@@ -13,19 +13,21 @@ public class TattooBuilder {
     private BigDecimal price;
     private Integer width;
     private Integer height;
+    private Double averageRating;
     private String imageUrl;
     private TattooStatus status;
     private BodyPart places;
     private Long userId;
 
     public Tattoo build() {
-        Tattoo tattoo = new Tattoo(catalogId, name, description, price, width, height, imageUrl, status, places, userId);
+        Tattoo tattoo = new Tattoo(catalogId, name, description, price, width, height, averageRating, imageUrl, status, places, userId);
         this.catalogId = null;
         this.name = null;
         this.description = null;
         this.price = null;
         this.width = null;
         this.height = null;
+        this.averageRating = null;
         this.imageUrl = null;
         this.status = null;
         this.places = null;
@@ -87,6 +89,14 @@ public class TattooBuilder {
 
     public void setPlaces(BodyPart places) {
         this.places = places;
+    }
+
+    public Double getAverageRating() {
+        return averageRating;
+    }
+
+    public void setAverageRating(Double averageRating) {
+        this.averageRating = averageRating;
     }
 
     public String getImageUrl() {

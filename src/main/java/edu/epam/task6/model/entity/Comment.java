@@ -7,12 +7,14 @@ public class Comment {
     private String text;
     private LocalDateTime registrationDate;
     private Long userId;
+    private String userLogin;
 
-    public Comment(Long commentId, String text, LocalDateTime registrationDate, Long userId) {
+    public Comment(Long commentId, String text, LocalDateTime registrationDate, Long userId, String userLogin) {
         this.commentId = commentId;
         this.text = text;
         this.registrationDate = registrationDate;
         this.userId = userId;
+        this.userLogin = userLogin;
     }
 
     public Long getCommentId() {
@@ -47,6 +49,14 @@ public class Comment {
         this.userId = userId;
     }
 
+    public String getUserLogin() {
+        return userLogin;
+    }
+
+    public void setUserLogin(String userLogin) {
+        this.userLogin = userLogin;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -58,7 +68,8 @@ public class Comment {
         Comment comment = (Comment) obj;
         return text.equals(comment.text)
                 && registrationDate.equals(comment.registrationDate)
-                && userId.equals(comment.userId);
+                && userId.equals(comment.userId)
+                && userLogin.equals(comment.userLogin);
     }
 
     @Override
@@ -69,6 +80,7 @@ public class Comment {
         result = result * prime + text.hashCode();
         result = result * prime + registrationDate.hashCode();
         result = result * prime + userId.hashCode();
+        result = result * prime + userLogin.hashCode();
 
         return result;
     }
@@ -81,6 +93,7 @@ public class Comment {
                 .append(", text = '").append(text).append('\'')
                 .append(", registrationDate = '").append(registrationDate).append('\'')
                 .append(", userId = '").append(userId).append('\'')
+                .append(", userLogin = '").append(userLogin).append('\'')
                 .append(" }\n");
         return stringBuilder.toString();
     }

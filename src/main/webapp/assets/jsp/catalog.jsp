@@ -27,7 +27,7 @@
             rel="stylesheet"
     />
     <link
-            href="${pageContext.request.contextPath}/assets/css/main11.css"
+            href="${pageContext.request.contextPath}/assets/css/main12.css"
             rel="stylesheet"
     />
     <link
@@ -234,6 +234,7 @@
                                                                 </a>
                                                             </li>
                                                             <li class="main-text"><fmt:message key="tattoo.body-part-tattoo"/> ${tattoo.places}</li>
+                                                            <li class="main-text"><fmt:message key="tattoo.rating-tattoo"/> ${tattoo.averageRating}</li>
                                                         </ul>
                                                         <c:if test="${title_tattoos == active || title_tattoos == founded}">
                                                             <form method="post" action="ProjectServlet">
@@ -298,6 +299,7 @@
                                                             </a>
                                                         </li>
                                                         <li class="main-text"><fmt:message key="tattoo.body-part-tattoo"/> ${tattoo.places}</li>
+                                                        <li class="main-text"><fmt:message key="tattoo.rating-tattoo"/> ${tattoo.averageRating}</li>
                                                     </ul>
                                                     <c:if test="${title_tattoos == active || title_tattoos == founded}">
                                                         <form method="post" action="ProjectServlet">

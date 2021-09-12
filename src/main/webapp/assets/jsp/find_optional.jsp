@@ -24,7 +24,7 @@
             rel="stylesheet"
     />
     <link
-            href="${pageContext.request.contextPath}/assets/css/main11.css"
+            href="${pageContext.request.contextPath}/assets/css/main12.css"
             rel="stylesheet"
     />
     <link
@@ -56,19 +56,28 @@
         </form>
         <ul>
             <li class="header-ref1">
-                <a href="ProjectServlet?command=to_catalog_page_command">
-                    <fmt:message key="header.catalog"/>
-                </a>
+                <form method="post" action="ProjectServlet">
+                    <input type="hidden" name="command" value="to_catalog_page_command"/>
+                    <button class="header-button" type="submit">
+                        <fmt:message key="header.catalog"/>
+                    </button>
+                </form>
             </li>
             <li class="header-ref2">
-                <a href="ProjectServlet?command=to_orders_page_command">
-                    <fmt:message key="header.orders"/>
-                </a>
+                <form method="post" action="ProjectServlet">
+                    <input type="hidden" name="command" value="to_orders_page_command"/>
+                    <button class="header-button" type="submit">
+                        <fmt:message key="header.orders"/>
+                    </button>
+                </form>
             </li>
             <li class="header-sign-in">
-                <a href="ProjectServlet?command=to_login_page_command">
-                    <fmt:message key="header.profile"/>
-                </a>
+                <form method="post" action="ProjectServlet">
+                    <input type="hidden" name="command" value="to_profile_page_command"/>
+                    <button class="header-button" type="submit">
+                        <fmt:message key="header.profile"/>
+                    </button>
+                </form>
             </li>
         </ul>
     </header>
@@ -282,6 +291,7 @@
                         </a>
                     </li>
                     <li class="main-text"><fmt:message key="tattoo.body-part-tattoo"/> ${tattoo.places}</li>
+                    <li class="main-text"><fmt:message key="tattoo.rating-tattoo"/> ${tattoo.averageRating}</li>
                 </ul>
                 <c:if test="${sessionScope.role == roleVisitor || sessionScope.role == roleUser}">
                     <form method="post" action="ProjectServlet">

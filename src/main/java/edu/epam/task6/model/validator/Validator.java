@@ -15,6 +15,7 @@ public class Validator {
     private final static String PASSWORD_REGEX = "[-\\w_!@#$%^&*()]{8,45}";
     private final static String PRICE_REGEX = "[0-9]([0-9.]){0,9}";
     private final static String DESCRIPTION_REGEX = "[A-ZА-ЯЁ][A-Za-zА-Яа-яЁё ,\\.!?\\d]{0,1999}";
+    private final static String COMMENT_REGEX = "[A-Za-zА-Яа-яЁё1-9 ,\\.!?\\d]{1,1000}";
     private final static String SIZE_REGEX = "[0-9]{1,9}";
     private final static String DISCOUNT_REGEX = "[0-9]{1,3}";
     private final static String RATING_REGEX = "[0-9]{1,2}";
@@ -85,6 +86,14 @@ public class Validator {
         boolean result = false;
         if(description != null && !description.isBlank()) {
             result = description.matches(DESCRIPTION_REGEX);
+        }
+        return result;
+    }
+
+    public static boolean validateComment(String comment) {
+        boolean result = false;
+        if(comment != null && !comment.isBlank()) {
+            result = comment.matches(COMMENT_REGEX);
         }
         return result;
     }

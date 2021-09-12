@@ -89,3 +89,33 @@ java.sql.SQLIntegrityConstraintViolationException: Cannot add or update a child 
 	at edu.epam.task6.model.dao.impl.CommentDaoImpl.add(CommentDaoImpl.java:53) [classes/:?]
 	at edu.epam.task6.model.service.impl.CommentServiceImpl.leaveComment(CommentServiceImpl.java:23) [classes/:?]
 	at edu.epam.task6._main.Main.main(Main.java:28) [classes/:?]
+21-09-12 19:48.765 [main] ERROR task6.model.dao.impl.CommentDaoImpl - Error during searching for all comments.
+java.sql.SQLIntegrityConstraintViolationException: Column 'registration_date' in field list is ambiguous
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:117) ~[mysql-connector-java-8.0.21.jar:8.0.21]
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97) ~[mysql-connector-java-8.0.21.jar:8.0.21]
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122) ~[mysql-connector-java-8.0.21.jar:8.0.21]
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:953) ~[mysql-connector-java-8.0.21.jar:8.0.21]
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeQuery(ClientPreparedStatement.java:1003) ~[mysql-connector-java-8.0.21.jar:8.0.21]
+	at edu.epam.task6.model.dao.impl.CommentDaoImpl.findAll(CommentDaoImpl.java:78) [classes/:?]
+	at edu.epam.task6.model.service.impl.CommentServiceImpl.findAll(CommentServiceImpl.java:47) [classes/:?]
+	at edu.epam.task6._main.Main.main(Main.java:29) [classes/:?]
+21-09-12 19:49.596 [main] ERROR task6.model.dao.impl.CommentDaoImpl - Error during searching for all comments.
+java.sql.SQLIntegrityConstraintViolationException: Column 'registration_date' in field list is ambiguous
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:117) ~[mysql-connector-java-8.0.21.jar:8.0.21]
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97) ~[mysql-connector-java-8.0.21.jar:8.0.21]
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122) ~[mysql-connector-java-8.0.21.jar:8.0.21]
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:953) ~[mysql-connector-java-8.0.21.jar:8.0.21]
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeQuery(ClientPreparedStatement.java:1003) ~[mysql-connector-java-8.0.21.jar:8.0.21]
+	at edu.epam.task6.model.dao.impl.CommentDaoImpl.findAll(CommentDaoImpl.java:78) [classes/:?]
+	at edu.epam.task6.model.service.impl.CommentServiceImpl.findAll(CommentServiceImpl.java:47) [classes/:?]
+	at edu.epam.task6._main.Main.main(Main.java:29) [classes/:?]
+21-09-12 19:49.191 [main] ERROR task6.model.dao.impl.CommentDaoImpl - Error during searching for all comments.
+java.sql.SQLIntegrityConstraintViolationException: Column 'registration_date' in field list is ambiguous
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:117) ~[mysql-connector-java-8.0.21.jar:8.0.21]
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97) ~[mysql-connector-java-8.0.21.jar:8.0.21]
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122) ~[mysql-connector-java-8.0.21.jar:8.0.21]
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:953) ~[mysql-connector-java-8.0.21.jar:8.0.21]
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeQuery(ClientPreparedStatement.java:1003) ~[mysql-connector-java-8.0.21.jar:8.0.21]
+	at edu.epam.task6.model.dao.impl.CommentDaoImpl.findAll(CommentDaoImpl.java:78) [classes/:?]
+	at edu.epam.task6.model.service.impl.CommentServiceImpl.findAll(CommentServiceImpl.java:47) [classes/:?]
+	at edu.epam.task6._main.Main.main(Main.java:29) [classes/:?]

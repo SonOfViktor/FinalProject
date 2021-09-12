@@ -96,6 +96,8 @@ public class CommandProvider {
         commands.put(CommandType.APPROVE_TATTOO_COMMAND, new ApproveTattooCommand());
         commands.put(CommandType.CANCEL_ORDER_COMMAND, new CancelOrderCommand());
         commands.put(CommandType.CREATE_ORDER_COMMAND, new CreateOrderCommand());
+        commands.put(CommandType.CREATE_COMMENT_COMMAND, new CreateCommentCommand());
+        commands.put(CommandType.DELETE_COMMENT_COMMAND, new DeleteCommentCommand());
     }
 
     public static CommandProvider getInstance() {

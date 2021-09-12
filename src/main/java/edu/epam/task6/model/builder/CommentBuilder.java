@@ -9,13 +9,15 @@ public class CommentBuilder {
     private String text;
     private LocalDateTime registrationDate;
     private Long userId;
+    private String userLogin;
 
     public Comment build() {
-        Comment comment = new Comment(commentId, text, registrationDate, userId);
+        Comment comment = new Comment(commentId, text, registrationDate, userId, userLogin);
         this.commentId = null;
         this.text = null;
         this.registrationDate = null;
         this.userId = null;
+        this.userLogin = null;
         return comment;
     }
 
@@ -49,5 +51,13 @@ public class CommentBuilder {
 
     public void setUserId(Long userId) {
         this.userId = userId;
+    }
+
+    public String getUserLogin() {
+        return userLogin;
+    }
+
+    public void setUserLogin(String userLogin) {
+        this.userLogin = userLogin;
     }
 }

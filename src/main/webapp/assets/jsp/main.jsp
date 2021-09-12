@@ -18,7 +18,7 @@
             rel="stylesheet"
     />
     <link
-            href="${pageContext.request.contextPath}/assets/css/main11.css"
+            href="${pageContext.request.contextPath}/assets/css/main12.css"
             rel="stylesheet"
     />
     <title><fmt:message key="header.main-title"/></title>
@@ -109,6 +109,7 @@
                                 </a>
                             </li>
                             <li class="main-text"><fmt:message key="tattoo.body-part-tattoo"/> ${tattoo.places}</li>
+                            <li class="main-text"><fmt:message key="tattoo.rating-tattoo"/> ${tattoo.averageRating}</li>
                         </ul>
                     </div>
                 </c:forEach>

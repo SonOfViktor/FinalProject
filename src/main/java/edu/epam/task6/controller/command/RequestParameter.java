@@ -48,8 +48,16 @@ public final class RequestParameter {
     public static final String TATTOO = "tattoo";
     public static final String PROFILE = "profile";
 
+    public static final String COMMENTS = "comments";
+    public static final String AVERAGE_RATING = "average_rating";
+
     public static final String REGISTER_CODE = "register_code";
     public static final String GENERATE_CODE = "generate_code";
+
+    public static final String COMMENT_ID ="comment_id";
+    public static final String COMMENT_TEXT ="text";
+    public static final String COMMENT_REGISTRATION_DATE ="registration_date";
+    public static final String COMMENT_USER_ID ="users_user_id";
 
     public static final String PAGES_NUMBER = "pages_number";
     public static final String ELEMENTS_PER_PAGE = "elements_per_page";

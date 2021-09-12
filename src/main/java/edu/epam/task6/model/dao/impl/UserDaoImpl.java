@@ -29,19 +29,19 @@ public class UserDaoImpl implements UserDao {
     //CREATE REGEX
     private static final String CREATE_USER = """
             INSERT INTO users (email, login, password, name, surname, 
-            discount, balance, registration_date, status_id, role_id)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""";
+            discount, balance, registration_date, average_rating, status_id, role_id)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""";
     //FIND REGEX
     private static final String FIND_BY_ID = """
             SELECT user_id, email, login, password, name, surname, 
-            discount, balance, registration_date, user_statuses.status, user_roles.role
+            discount, balance, registration_date, users.average_rating, user_statuses.status, user_roles.role
             FROM users
             JOIN user_statuses ON users.status_id = user_statuses.status_id
             JOIN user_roles ON users.role_id = user_roles.role_id
             WHERE user_id=?""";
     private static final String FIND_BY_LOGIN = """
             SELECT user_id, email, login, password, name, surname, 
-            discount, balance, registration_date, user_statuses.status, user_roles.role
+            discount, balance, registration_date, users.average_rating, user_statuses.status, user_roles.role
             FROM users
             JOIN user_statuses ON users.status_id = user_statuses.status_id
             JOIN user_roles ON users.role_id = user_roles.role_id
@@ -49,28 +49,28 @@ public class UserDaoImpl implements UserDao {
     private static final String FIND_PASSWORD_BY_LOGIN = "SELECT password FROM users WHERE login=?";
     private static final String FIND_BY_NAME = """
             SELECT user_id, email, login, password, name, surname, 
-            discount, balance, registration_date, user_statuses.status, user_roles.role
+            discount, balance, registration_date, users.average_rating, user_statuses.status, user_roles.role
             FROM users
             JOIN user_statuses ON users.status_id = user_statuses.status_id
             JOIN user_roles ON users.role_id = user_roles.role_id
             WHERE name=?""";
     private static final String FIND_BY_SURNAME = """
             SELECT user_id, email, login, password, name, surname, 
-            discount, balance, registration_date, user_statuses.status, user_roles.role
+            discount, balance, registration_date, users.average_rating, user_statuses.status, user_roles.role
             FROM users
             JOIN user_statuses ON users.status_id = user_statuses.status_id
             JOIN user_roles ON users.role_id = user_roles.role_id
             WHERE surname=?""";
     private static final String FIND_BY_STATUS = """
             SELECT user_id, email, login, password, name, surname, 
-            discount, balance, registration_date, user_statuses.status, user_roles.role
+            discount, balance, registration_date, users.average_rating, user_statuses.status, user_roles.role
             FROM users
             JOIN user_statuses ON users.status_id = user_statuses.status_id
             JOIN user_roles ON users.role_id = user_roles.role_id
             WHERE user_statuses.status=?""";
     private static final String FIND_ALL_USERS = """
             SELECT user_id, email, login, password, name, surname, 
-            discount, balance, registration_date, user_statuses.status, user_roles.role
+            discount, balance, registration_date, users.average_rating, user_statuses.status, user_roles.role
             FROM users
             JOIN user_statuses ON users.status_id = user_statuses.status_id
             JOIN user_roles ON users.role_id = user_roles.role_id
@@ -106,8 +106,9 @@ public class UserDaoImpl implements UserDao {
             statement.setInt(6, 0);
             statement.setInt(7, 0);
             statement.setTimestamp(8, Timestamp.valueOf(parameters.get(ColumnName.USER_REGISTRATION_DATE)));
-            statement.setInt(9, 3);
-            statement.setInt(10, 2);
+            statement.setDouble(9, 0);
+            statement.setInt(10, 3);
+            statement.setInt(11, 2);
             result = statement.executeUpdate() > 0;
         } catch (SQLException e) {
             logger.error("Error during adding user.", e);
@@ -248,6 +249,7 @@ public class UserDaoImpl implements UserDao {
                             time.toLocalDateTime().toLocalDate(),
                             time.toLocalDateTime().toLocalTime());
                     userBuilder.setRegistrationDate(localDateTime);
+                    userBuilder.setAverageRating(resultSet.getDouble(ColumnName.USER_AVERAGE_RATING));
                     userBuilder.setStatus(UserStatus.valueOf(resultSet.getString(ColumnName.USER_STATUS)));
                     userBuilder.setRole(UserRole.valueOf(resultSet.getString(ColumnName.USER_ROLE)));
                     resultUser = Optional.of(userBuilder.build());
@@ -280,6 +282,7 @@ public class UserDaoImpl implements UserDao {
                             time.toLocalDateTime().toLocalDate(),
                             time.toLocalDateTime().toLocalTime());
                     userBuilder.setRegistrationDate(localDateTime);
+                    userBuilder.setAverageRating(resultSet.getDouble(ColumnName.USER_AVERAGE_RATING));
                     userBuilder.setStatus(UserStatus.valueOf(resultSet.getString(ColumnName.USER_STATUS)));
                     userBuilder.setRole(UserRole.valueOf(resultSet.getString(ColumnName.USER_ROLE)));
                     resultUser = Optional.of(userBuilder.build());
@@ -376,6 +379,7 @@ public class UserDaoImpl implements UserDao {
                     time.toLocalDateTime().toLocalDate(),
                     time.toLocalDateTime().toLocalTime());
             userBuilder.setRegistrationDate(localDateTime);
+            userBuilder.setAverageRating(resultSet.getDouble(ColumnName.USER_AVERAGE_RATING));
             userBuilder.setStatus(UserStatus.valueOf(resultSet.getString(ColumnName.USER_STATUS)));
             userBuilder.setRole(UserRole.valueOf(resultSet.getString(ColumnName.USER_ROLE)));
             userList.add(userBuilder.build());

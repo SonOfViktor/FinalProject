@@ -13,6 +13,7 @@ public class User {
     private Integer discount;
     private BigDecimal balance;
     private LocalDateTime registrationDate;
+    private Double averageRating;
     private UserStatus status;
     private UserRole role;
 
@@ -24,6 +25,7 @@ public class User {
                 Integer discount,
                 BigDecimal balance,
                 LocalDateTime registrationDate,
+                Double averageRating,
                 UserStatus status,
                 UserRole role) {
         this.userId = userId;
@@ -34,6 +36,7 @@ public class User {
         this.discount = discount;
         this.balance = balance;
         this.registrationDate = registrationDate;
+        this.averageRating = averageRating;
         this.status = status;
         this.role = role;
     }
@@ -102,6 +105,14 @@ public class User {
         this.registrationDate = registrationDate;
     }
 
+    public Double getAverageRating() {
+        return averageRating;
+    }
+
+    public void setAverageRating(Double averageRating) {
+        this.averageRating = averageRating;
+    }
+
     public UserStatus getStatus() {
         return status;
     }
@@ -134,6 +145,7 @@ public class User {
                 && discount.equals(user.discount)
                 && balance.equals(user.balance)
                 && registrationDate.equals(user.registrationDate)
+                && averageRating.equals(user.averageRating)
                 && status == user.status
                 && role == user.role;
 
@@ -151,6 +163,7 @@ public class User {
         result = result * prime + discount.hashCode();
         result = result * prime + balance.hashCode();
         result = result * prime + registrationDate.hashCode();
+        result = result * prime + averageRating.hashCode();
         result = result * prime + status.hashCode();
         result = result * prime + role.hashCode();
 
@@ -169,6 +182,7 @@ public class User {
                 .append(", discount = '").append(discount).append('\'')
                 .append(", balance = '").append(balance).append('\'')
                 .append(", registration_date = '").append(registrationDate).append('\'')
+                .append(", average_rating = '").append(averageRating).append('\'')
                 .append(", status = '").append(status).append('\'')
                 .append(", role = '").append(role).append('\'')
                 .append(" }\n");
