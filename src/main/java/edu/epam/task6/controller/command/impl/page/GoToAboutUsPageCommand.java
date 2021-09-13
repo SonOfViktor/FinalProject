@@ -39,7 +39,7 @@ public class GoToAboutUsPageCommand implements Command {
             Optional<User> user = userService.findById(ADMIN_ID);
             if (user.isPresent() && user.get().getRole().equals(UserRole.ADMIN)) {
                 Double averageRating = user.get().getAverageRating();
-                request.setAttribute(RequestParameter.AVERAGE_RATING, averageRating);
+                request.setAttribute(RequestParameter.RATING, averageRating);
             }
 
             request = SendSplitParameters.sendSplitParametersOrders(request, comments.size());

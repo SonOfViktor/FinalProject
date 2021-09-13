@@ -296,6 +296,15 @@
                                                             </button>
                                                         </form>
                                                     </c:if>
+                                                    <c:if test="${order.orderStatus == orderStatusCompleted}">
+                                                        <form method="post" action="ProjectServlet">
+                                                            <input type="hidden" name="command" value="to_change_rating_page_command"/>
+                                                            <input type="hidden" name="id" value="${order.orderId}"/>
+                                                            <button class="order-list-item-button">
+                                                                <fmt:message key="change.rating.button"/>
+                                                            </button>
+                                                        </form>
+                                                    </c:if>
                                                 </div>
                                             </c:forEach>
                                         </div>
@@ -376,6 +385,15 @@
                                                             <input type="hidden" name="id" value="${order.orderId}"/>
                                                             <button class="order-list-item-button">
                                                                 <fmt:message key="orders.cancel.button"/>
+                                                            </button>
+                                                        </form>
+                                                    </c:if>
+                                                    <c:if test="${order.orderStatus == orderStatusCompleted}">
+                                                        <form method="post" action="ProjectServlet">
+                                                            <input type="hidden" name="command" value="to_change_rating_page_command"/>
+                                                            <input type="hidden" name="id" value="${order.orderId}"/>
+                                                            <button class="order-list-item-button">
+                                                                <fmt:message key="change.rating.button"/>
                                                             </button>
                                                         </form>
                                                     </c:if>

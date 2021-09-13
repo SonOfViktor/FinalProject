@@ -119,8 +119,8 @@ public class Validator {
 
     public static boolean validateAverageRating(String grade) {
         boolean result = false;
-        if(grade != null && grade.matches(DISCOUNT_REGEX)) {
-            int localGrade = Integer.valueOf(grade);
+        if(grade != null && grade.matches(RATING_REGEX)) {
+            Double localGrade = Double.valueOf(grade);
             if (localGrade >= 1 && localGrade <= 10) {
                 result = true;
             }

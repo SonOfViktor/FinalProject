@@ -11,6 +11,7 @@ public class Tattoo {
     private Integer width;
     private Integer height;
     private Double averageRating;
+    private Integer numberOfRatings;
     private String imageUrl;
     private TattooStatus status;
     private BodyPart places;
@@ -23,6 +24,7 @@ public class Tattoo {
                   Integer width,
                   Integer height,
                   Double averageRating,
+                  Integer numberOfRatings,
                   String imageUrl,
                   TattooStatus status,
                   BodyPart places,
@@ -34,6 +36,7 @@ public class Tattoo {
         this.width = width;
         this.height = height;
         this.averageRating = averageRating;
+        this.numberOfRatings = numberOfRatings;
         this.imageUrl = imageUrl;
         this.status = status;
         this.places = places;
@@ -104,6 +107,14 @@ public class Tattoo {
         this.averageRating = averageRating;
     }
 
+    public Integer getNumberOfRatings() {
+        return numberOfRatings;
+    }
+
+    public void setNumberOfRatings(Integer numberOfRatings) {
+        this.numberOfRatings = numberOfRatings;
+    }
+
     public String getImageUrl() {
         return imageUrl;
     }
@@ -143,6 +154,7 @@ public class Tattoo {
                 && width.equals(tattoo.width)
                 && height.equals(tattoo.height)
                 && averageRating.equals(tattoo.averageRating)
+                && numberOfRatings.equals(tattoo.numberOfRatings)
                 && imageUrl.equals(tattoo.imageUrl)
                 && status == tattoo.status
                 && places == tattoo.places
@@ -160,6 +172,7 @@ public class Tattoo {
         result = result * prime + width.hashCode();
         result = result * prime + height.hashCode();
         result = result * prime + averageRating.hashCode();
+        result = result * prime + numberOfRatings.hashCode();
         result = result * prime + imageUrl.hashCode();
         result = result * prime + status.hashCode();
         result = result * prime + places.hashCode();
@@ -179,6 +192,7 @@ public class Tattoo {
                 .append(", width = '").append(width).append('\'')
                 .append(", height = '").append(height).append('\'')
                 .append(", averageRating = '").append(averageRating).append('\'')
+                .append(", numberOfRatings = '").append(numberOfRatings).append('\'')
                 .append(", imageUrl = '").append(imageUrl).append('\'')
                 .append(", status = '").append(status).append('\'')
                 .append(", places = '").append(places).append('\'')

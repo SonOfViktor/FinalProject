@@ -149,12 +149,29 @@ public class UserServiceImpl implements UserService {
     }
 
     public boolean updateAverageRating(Map<String, String> parameters, Long userId) throws ServiceException {
-        String grade = parameters.get(ColumnName.USER_AVERAGE_RATING);
-        boolean result = Validator.validateAverageRating(grade);
+        Integer grade = Integer.valueOf(parameters.get(ColumnName.USER_AVERAGE_RATING));
+        boolean result = Validator.validateAverageRating(grade.toString());
         if(result) {
             UserDao userDao = UserDaoImpl.getInstance();
             try {
-                result = userDao.updateAverageRating(Double.valueOf(grade), userId);
+                Optional<User> user = userDao.findById(userId);
+                if (user.isPresent()) {
+                    Double userGrade = user.get().getAverageRating();
+                    Integer numberOfRatings = user.get().getNumberOfRatings();
+                    if (numberOfRatings > 0) {
+                        userGrade = userGrade * numberOfRatings + grade;
+                        numberOfRatings += 1;
+                        userGrade = userGrade / numberOfRatings;
+                    } else {
+                        userGrade = Double.valueOf(grade);
+                        numberOfRatings += 1;
+                    }
+
+                    result = userDao.updateAverageRating(userGrade, userId) &&
+                            userDao.updateNumberOfRatings(numberOfRatings, userId);
+                } else {
+                    result = false;
+                }
             } catch (DaoException e) {
                 throw new ServiceException(e);
             }

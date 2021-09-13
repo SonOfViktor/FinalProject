@@ -18,12 +18,13 @@ public class UserBuilder {
     private BigDecimal balance;
     private LocalDateTime registrationDate;
     private Double averageRating;
+    private Integer numberOfRatings;
     private UserStatus status;
     private UserRole role;
 
     public User build() {
         User user = new User(userId, email, login, name, surname,
-                discount, balance, registrationDate, averageRating, status, role);
+                discount, balance, registrationDate, averageRating, numberOfRatings, status, role);
         this.userId = null;
         this.email = null;
         this.login = null;
@@ -33,6 +34,7 @@ public class UserBuilder {
         this.balance = null;
         this.registrationDate = null;
         this.averageRating = null;
+        this.numberOfRatings = null;
         this.status = null;
         this.role = null;
         return user;
@@ -107,7 +109,16 @@ public class UserBuilder {
     }
 
     public void setAverageRating(Double averageRating) {
+        averageRating = (double) Math.round(averageRating * 100) / 100;
         this.averageRating = averageRating;
+    }
+
+    public Integer getNumberOfRatings() {
+        return numberOfRatings;
+    }
+
+    public void setNumberOfRatings(Integer numberOfRatings) {
+        this.numberOfRatings = numberOfRatings;
     }
 
     public UserStatus getStatus() {

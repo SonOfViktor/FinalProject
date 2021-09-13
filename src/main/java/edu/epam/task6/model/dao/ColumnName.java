@@ -14,7 +14,8 @@ public final class ColumnName {
     public static final String USER_REGISTRATION_DATE ="registration_date";
     public static final String USER_STATUS ="status";
     public static final String USER_ROLE ="role";
-    public static final String USER_AVERAGE_RATING = "average_rating";
+    public static final String USER_AVERAGE_RATING = "user_average_rating";
+    public static final String USER_NUMBER_OF_RATINGS = "number_of_ratings";
 
     public static final String USER_ROLES_ID ="role_id";
     public static final String USER_ROLES_NAME ="role";
@@ -32,7 +33,8 @@ public final class ColumnName {
     public static final String TATTOOS_STATUS ="tattoo_status";
     public static final String TATTOOS_PLACE ="place";
     public static final String TATTOOS_USER_ID ="users_user_id";
-    public static final String TATTOOS_AVERAGE_RATING = "average_rating";
+    public static final String TATTOOS_AVERAGE_RATING = "tattoo_average_rating";
+    public static final String TATTOOS_NUMBER_OF_RATINGS = "number_of_ratings";
 
     public static final String TATTOO_STATUS_ID ="tattoo_status_id";
     public static final String TATTOO_STATUS_NAME ="tattoo_status";
@@ -52,6 +54,8 @@ public final class ColumnName {
     public static final String COMMENT_REGISTRATION_DATE ="registration_date";
     public static final String COMMENT_USER_ID ="users_user_id";
     public static final String COMMENT_USER_LOGIN ="login";
+
+    public static final String AVERAGE_RATING = "average_rating";
 
     private ColumnName() {}
 }

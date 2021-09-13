@@ -76,7 +76,7 @@ public final class PagePath {
     public static final String CHANGE_PAGE_NAME_REDIRECT = "/ProjectServlet?command=to_change_name_page_command";
     public static final String CHANGE_PAGE_SURNAME_REDIRECT = "/ProjectServlet?command=to_change_surname_page_command";
     public static final String CHANGE_PAGE_USER_STATUS_REDIRECT = "/ProjectServlet?command=to_change_user_status_page_command";
-
+    public static final String CHANGE_PAGE_RATING_REDIRECT = "/ProjectServlet?command=to_change_rating_command";
 
     public static final String CHANGE_BLOCK_TATTOO_PAGE_REDIRECT = "/ProjectServlet?command=to_block_tattoo_page_command";
     public static final String CHANGE_BLOCK_USER_PAGE_REDIRECT = "/ProjectServlet?command=to_block_user_page_command";

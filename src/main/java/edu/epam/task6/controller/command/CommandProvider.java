@@ -78,6 +78,7 @@ public class CommandProvider {
         commands.put(CommandType.TO_CHANGE_PASSWORD_PAGE_COMMAND, new GoToChangePasswordPageCommand());
         commands.put(CommandType.TO_CHANGE_BALANCE_PAGE_COMMAND, new GoToChangeBalancePageCommand());
         commands.put(CommandType.TO_CHANGE_USER_STATUS_PAGE_COMMAND, new GoToChangeUserStatusPageCommand());
+        commands.put(CommandType.TO_CHANGE_RATING_PAGE_COMMAND, new GoToChangeRatingPageCommand());
 
         commands.put(CommandType.CHANGE_EMAIL_COMMAND, new ChangeEmailCommand());
         commands.put(CommandType.CHANGE_NAME_COMMAND, new ChangeNameCommand());
@@ -87,6 +88,7 @@ public class CommandProvider {
         commands.put(CommandType.CHANGE_USER_STATUS_COMMAND, new ChangeUserStatusCommand());
         commands.put(CommandType.CHANGE_TATTOO_STATUS_COMMAND, new ChangeTattooStatusCommand());
         commands.put(CommandType.CHANGE_LANGUAGE_COMMAND, new ChangeLanguageCommand());
+        commands.put(CommandType.CHANGE_RATING_COMMAND, new ChangeRatingCommand());
 
         commands.put(CommandType.REGISTER_PERSON_COMMAND, new RegisterCommand());
         commands.put(CommandType.CODE_ENTRY_COMMAND, new CodeEntryCommand());

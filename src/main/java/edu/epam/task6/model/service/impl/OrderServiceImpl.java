@@ -35,6 +35,7 @@ public class OrderServiceImpl implements OrderService {
             int statusId = switch (parameters.get(ColumnName.ORDERS_STATUS)) {
                 case "COMPLETED" -> 2;
                 case "CANCELED" ->3;
+                case "COMPLETED_AND_ASSESSED" -> 4;
                 default -> 1;
             };
             try {

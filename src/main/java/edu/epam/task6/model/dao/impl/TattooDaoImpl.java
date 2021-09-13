@@ -25,12 +25,12 @@ public class TattooDaoImpl implements TattooDao {
     //CREATE REGEX
     private static final String CREATE_TATTOO = """
             INSERT INTO tattoos (name, description, price, width, height, tattoos.average_rating,
-            image_url, tattoo_status_id, body_part_id, users_user_id)
-            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""";
+            tattoos.number_of_ratings, image_url, tattoo_status_id, body_part_id, users_user_id)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""";
     //FIND REGEX
     private static final String FIND_BY_ID = """
             SELECT tattoo_id, name, description, price, width, height, tattoos.average_rating,
-            image_url, tattoo_statuses.tattoo_status, body_parts.place, users_user_id
+            tattoos.number_of_ratings, image_url, tattoo_statuses.tattoo_status, body_parts.place, users_user_id
             FROM tattoos
             JOIN tattoo_statuses
             ON tattoos.tattoo_status_id = tattoo_statuses.tattoo_status_id
@@ -40,7 +40,7 @@ public class TattooDaoImpl implements TattooDao {
 
     private static final String FIND_BY_NAME_TATTOOS = """
             SELECT tattoo_id, name, description, price, width, height, tattoos.average_rating,
-            image_url, tattoo_statuses.tattoo_status, body_parts.place, users_user_id
+            tattoos.number_of_ratings, image_url, tattoo_statuses.tattoo_status, body_parts.place, users_user_id
             FROM tattoos
             JOIN tattoo_statuses
             ON tattoos.tattoo_status_id = tattoo_statuses.tattoo_status_id
@@ -49,7 +49,7 @@ public class TattooDaoImpl implements TattooDao {
             WHERE name=?""";
     private static final String FIND_BY_PRICE_RANGE_TATTOOS = """
             SELECT tattoo_id, name, description, price, width, height, tattoos.average_rating,
-            image_url, tattoo_statuses.tattoo_status, body_parts.place, users_user_id
+            tattoos.number_of_ratings, image_url, tattoo_statuses.tattoo_status, body_parts.place, users_user_id
             FROM tattoos
             JOIN tattoo_statuses
             ON tattoos.tattoo_status_id = tattoo_statuses.tattoo_status_id
@@ -58,7 +58,7 @@ public class TattooDaoImpl implements TattooDao {
             WHERE price BETWEEN ? AND ?""";
     private static final String FIND_BY_PLACE_TATTOOS = """
             SELECT tattoo_id, name, description, price, width, height, tattoos.average_rating,
-            image_url, tattoo_statuses.tattoo_status, body_parts.place, users_user_id
+            tattoos.number_of_ratings, image_url, tattoo_statuses.tattoo_status, body_parts.place, users_user_id
             FROM tattoos
             JOIN tattoo_statuses
             ON tattoos.tattoo_status_id = tattoo_statuses.tattoo_status_id
@@ -67,7 +67,7 @@ public class TattooDaoImpl implements TattooDao {
             WHERE body_parts.place=?""";
     private static final String FIND_BY_ID_AND_STATUS = """
             SELECT tattoo_id, name, description, price, width, height, tattoos.average_rating,
-            image_url, tattoo_statuses.tattoo_status, body_parts.place, users_user_id
+            tattoos.number_of_ratings, image_url, tattoo_statuses.tattoo_status, body_parts.place, users_user_id
             FROM tattoos
             JOIN tattoo_statuses
             ON tattoos.tattoo_status_id = tattoo_statuses.tattoo_status_id
@@ -76,7 +76,7 @@ public class TattooDaoImpl implements TattooDao {
             WHERE tattoo_id=? AND tattoo_statuses.tattoo_status=?""";
     private static final String FIND_BY_NAME_AND_STATUS = """
             SELECT tattoo_id, name, description, price, width, height, tattoos.average_rating,
-            image_url, tattoo_statuses.tattoo_status, body_parts.place, users_user_id
+            tattoos.number_of_ratings, image_url, tattoo_statuses.tattoo_status, body_parts.place, users_user_id
             FROM tattoos
             JOIN tattoo_statuses
             ON tattoos.tattoo_status_id = tattoo_statuses.tattoo_status_id
@@ -85,7 +85,7 @@ public class TattooDaoImpl implements TattooDao {
             WHERE name=? AND tattoo_statuses.tattoo_status=?""";
     private static final String FIND_BY_PLACE_AND_STATUS = """
             SELECT tattoo_id, name, description, price, width, height, tattoos.average_rating,
-            image_url, tattoo_statuses.tattoo_status, body_parts.place, users_user_id
+            tattoos.number_of_ratings, image_url, tattoo_statuses.tattoo_status, body_parts.place, users_user_id
             FROM tattoos
             JOIN tattoo_statuses
             ON tattoos.tattoo_status_id = tattoo_statuses.tattoo_status_id
@@ -94,7 +94,7 @@ public class TattooDaoImpl implements TattooDao {
             WHERE body_parts.place=? AND tattoo_statuses.tattoo_status=?""";
     private static final String FIND_BY_PRICE_RANGE_AND_STATUS = """
             SELECT tattoo_id, name, description, price, width, height, tattoos.average_rating,
-            image_url, tattoo_statuses.tattoo_status, body_parts.place, users_user_id
+            tattoos.number_of_ratings, image_url, tattoo_statuses.tattoo_status, body_parts.place, users_user_id
             FROM tattoos
             JOIN tattoo_statuses
             ON tattoos.tattoo_status_id = tattoo_statuses.tattoo_status_id
@@ -103,7 +103,7 @@ public class TattooDaoImpl implements TattooDao {
             WHERE price BETWEEN ? AND ? AND tattoo_statuses.tattoo_status=?""";
     private static final String FIND_BY_STATUS = """
             SELECT tattoo_id, name, description, price, width, height, tattoos.average_rating,
-            image_url, tattoo_statuses.tattoo_status, body_parts.place, users_user_id
+            tattoos.number_of_ratings, image_url, tattoo_statuses.tattoo_status, body_parts.place, users_user_id
             FROM tattoos
             JOIN tattoo_statuses
             ON tattoos.tattoo_status_id = tattoo_statuses.tattoo_status_id
@@ -112,7 +112,7 @@ public class TattooDaoImpl implements TattooDao {
             WHERE tattoo_statuses.tattoo_status=?""";
     private static final String FIND_ALL_TATTOOS = """
             SELECT tattoo_id, name, description, price, width, height, tattoos.average_rating,
-            image_url, tattoo_statuses.tattoo_status, body_parts.place, users_user_id
+            tattoos.number_of_ratings, image_url, tattoo_statuses.tattoo_status, body_parts.place, users_user_id
             FROM tattoos
             JOIN tattoo_statuses
             ON tattoos.tattoo_status_id = tattoo_statuses.tattoo_status_id
@@ -121,7 +121,7 @@ public class TattooDaoImpl implements TattooDao {
             ORDER BY tattoo_id ASC""";
     private static final String FIND_ALL_ACTIVE_TATTOOS = """
             SELECT tattoo_id, name, description, price, width, height, tattoos.average_rating,
-            image_url, tattoo_statuses.tattoo_status, body_parts.place, users_user_id
+            tattoos.number_of_ratings, image_url, tattoo_statuses.tattoo_status, body_parts.place, users_user_id
             FROM tattoos
             JOIN tattoo_statuses
             ON tattoos.tattoo_status_id = tattoo_statuses.tattoo_status_id
@@ -132,6 +132,7 @@ public class TattooDaoImpl implements TattooDao {
     private static final String UPDATE_STATUS = "UPDATE tattoos SET tattoos.tattoo_status_id=? WHERE tattoo_id=?";
     private static final String UPDATE_PRICE = "UPDATE tattoos SET tattoos.price=? WHERE tattoo_id=?";
     private static final String UPDATE_AVERAGE_RATING = "UPDATE tattoos SET tattoos.average_rating=? WHERE tattoo_id=?";
+    private static final String UPDATE_NUMBER_OF_RATINGS = "UPDATE tattoos SET tattoos.number_of_ratings=? WHERE tattoo_id=?";
 
     private TattooDaoImpl(){}
 
@@ -152,10 +153,11 @@ public class TattooDaoImpl implements TattooDao {
             statement.setInt(4, Integer.valueOf(parameters.get(ColumnName.TATTOOS_WIDTH)));
             statement.setInt(5, Integer.valueOf(parameters.get(ColumnName.TATTOOS_HEIGHT)));
             statement.setDouble(6, 0);
-            statement.setString(7, parameters.get(ColumnName.TATTOOS_IMAGE_URL));
-            statement.setInt(8, Integer.valueOf(parameters.get(ColumnName.TATTOOS_STATUS)));
-            statement.setInt(9, Integer.valueOf(parameters.get(ColumnName.TATTOOS_PLACE)));
-            statement.setInt(10, Integer.valueOf(parameters.get(ColumnName.TATTOOS_USER_ID)));
+            statement.setDouble(7, 0);
+            statement.setString(8, parameters.get(ColumnName.TATTOOS_IMAGE_URL));
+            statement.setInt(9, Integer.valueOf(parameters.get(ColumnName.TATTOOS_STATUS)));
+            statement.setInt(10, Integer.valueOf(parameters.get(ColumnName.TATTOOS_PLACE)));
+            statement.setInt(11, Integer.valueOf(parameters.get(ColumnName.TATTOOS_USER_ID)));
             result = statement.executeUpdate() > 0;
         } catch (SQLException e) {
             logger.error("Error during adding tattoo.", e);
@@ -206,6 +208,20 @@ public class TattooDaoImpl implements TattooDao {
         return result;
     }
 
+    public boolean updateNumberOfRatings(int numberOfRatings, Long tattooId) throws DaoException {
+        boolean result;
+        try(Connection connection = ConnectionPool.getInstance().getConnection();
+            PreparedStatement statement = connection.prepareStatement(UPDATE_NUMBER_OF_RATINGS)){
+            statement.setInt(1, numberOfRatings);
+            statement.setLong(2, tattooId);
+            result = statement.executeUpdate() > 0;
+        } catch (SQLException e) {
+            logger.error("Error during updating number of ratings of tattoo with id = " + tattooId, e);
+            throw new DaoException("Error during updating number of ratings of tattoo with id = " + tattooId, e);
+        }
+        return result;
+    }
+
     public Optional<Tattoo> findById(Long soughtId) throws DaoException {
         try (Connection connection = ConnectionPool.getInstance().getConnection();
              PreparedStatement statement = connection.prepareStatement(FIND_BY_ID)) {
@@ -220,7 +236,8 @@ public class TattooDaoImpl implements TattooDao {
                     tattooBuilder.setPrice(resultSet.getBigDecimal(ColumnName.TATTOOS_PRICE));
                     tattooBuilder.setWidth(resultSet.getInt(ColumnName.TATTOOS_WIDTH));
                     tattooBuilder.setHeight(resultSet.getInt(ColumnName.TATTOOS_HEIGHT));
-                    tattooBuilder.setAverageRating(resultSet.getDouble(ColumnName.TATTOOS_AVERAGE_RATING));
+                    tattooBuilder.setAverageRating(resultSet.getDouble(ColumnName.AVERAGE_RATING));
+                    tattooBuilder.setNumberOfRatings(resultSet.getInt(ColumnName.TATTOOS_NUMBER_OF_RATINGS));
                     tattooBuilder.setImageUrl(resultSet.getString(ColumnName.TATTOOS_IMAGE_URL));
                     tattooBuilder.setStatus(TattooStatus.valueOf(resultSet.getString(ColumnName.TATTOOS_STATUS)));
                     tattooBuilder.setPlaces(BodyPart.valueOf(resultSet.getString(ColumnName.TATTOOS_PLACE)));
@@ -290,7 +307,8 @@ public class TattooDaoImpl implements TattooDao {
                     tattooBuilder.setPrice(resultSet.getBigDecimal(ColumnName.TATTOOS_PRICE));
                     tattooBuilder.setWidth(resultSet.getInt(ColumnName.TATTOOS_WIDTH));
                     tattooBuilder.setHeight(resultSet.getInt(ColumnName.TATTOOS_HEIGHT));
-                    tattooBuilder.setAverageRating(resultSet.getDouble(ColumnName.TATTOOS_AVERAGE_RATING));
+                    tattooBuilder.setAverageRating(resultSet.getDouble(ColumnName.AVERAGE_RATING));
+                    tattooBuilder.setNumberOfRatings(resultSet.getInt(ColumnName.TATTOOS_NUMBER_OF_RATINGS));
                     tattooBuilder.setImageUrl(resultSet.getString(ColumnName.TATTOOS_IMAGE_URL));
                     tattooBuilder.setStatus(TattooStatus.valueOf(resultSet.getString(ColumnName.TATTOOS_STATUS)));
                     tattooBuilder.setPlaces(BodyPart.valueOf(resultSet.getString(ColumnName.TATTOOS_PLACE)));
@@ -400,7 +418,8 @@ public class TattooDaoImpl implements TattooDao {
                     tattooBuilder.setPrice(resultSet.getBigDecimal(ColumnName.TATTOOS_PRICE));
                     tattooBuilder.setWidth(resultSet.getInt(ColumnName.TATTOOS_WIDTH));
                     tattooBuilder.setHeight(resultSet.getInt(ColumnName.TATTOOS_HEIGHT));
-                    tattooBuilder.setAverageRating(resultSet.getDouble(ColumnName.TATTOOS_AVERAGE_RATING));
+                    tattooBuilder.setAverageRating(resultSet.getDouble(ColumnName.AVERAGE_RATING));
+                    tattooBuilder.setNumberOfRatings(resultSet.getInt(ColumnName.TATTOOS_NUMBER_OF_RATINGS));
                     tattooBuilder.setImageUrl(resultSet.getString(ColumnName.TATTOOS_IMAGE_URL));
                     tattooBuilder.setStatus(TattooStatus.valueOf(resultSet.getString(ColumnName.TATTOOS_STATUS)));
                     tattooBuilder.setPlaces(BodyPart.valueOf(resultSet.getString(ColumnName.TATTOOS_PLACE)));
@@ -425,7 +444,8 @@ public class TattooDaoImpl implements TattooDao {
             tattooBuilder.setPrice(resultSet.getBigDecimal(ColumnName.TATTOOS_PRICE));
             tattooBuilder.setWidth(resultSet.getInt(ColumnName.TATTOOS_WIDTH));
             tattooBuilder.setHeight(resultSet.getInt(ColumnName.TATTOOS_HEIGHT));
-            tattooBuilder.setAverageRating(resultSet.getDouble(ColumnName.TATTOOS_AVERAGE_RATING));
+            tattooBuilder.setAverageRating(resultSet.getDouble(ColumnName.AVERAGE_RATING));
+            tattooBuilder.setNumberOfRatings(resultSet.getInt(ColumnName.TATTOOS_NUMBER_OF_RATINGS));
             tattooBuilder.setImageUrl(resultSet.getString(ColumnName.TATTOOS_IMAGE_URL));
             tattooBuilder.setStatus(TattooStatus.valueOf(resultSet.getString(ColumnName.TATTOOS_STATUS)));
             tattooBuilder.setPlaces(BodyPart.valueOf(resultSet.getString(ColumnName.TATTOOS_PLACE)));

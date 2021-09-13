@@ -49,7 +49,9 @@ public final class RequestParameter {
     public static final String PROFILE = "profile";
 
     public static final String COMMENTS = "comments";
-    public static final String AVERAGE_RATING = "average_rating";
+    public static final String RATING = "rating";
+    public static final String USER_RATING = "user_rating";
+    public static final String TATTOO_RATING = "tattoo_rating";
 
     public static final String REGISTER_CODE = "register_code";
     public static final String GENERATE_CODE = "generate_code";

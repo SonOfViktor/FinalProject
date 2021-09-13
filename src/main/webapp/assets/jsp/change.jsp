@@ -98,6 +98,7 @@
     <c:set var="localBalance">balance</c:set>
     <c:set var="localRole">role</c:set>
     <c:set var="localUserStatus">status</c:set>
+    <c:set var="localRating">rating</c:set>
     <c:set var="localTattooStatus">tattoo_status</c:set>
     <c:set var="localOrdersStatus">order_status</c:set>
     <c:if test="${what_change == localEmail}">
@@ -214,6 +215,33 @@
             <button type="submit"
                     class="submit">
                 <fmt:message key="change.button"/>
+            </button>
+        </form>
+    </c:if>
+    <c:if test="${what_change == localRating}">
+        <form method="post" action="ProjectServlet">
+            <input type="hidden" name="command" value="change_rating_command"/>
+            <div class="info-div">
+                <input type="number"
+                       name="tattoo_rating"
+                       placeholder="<fmt:message key="change.tattoo-rating"/>"
+                       required
+                       min="1"
+                       max="10"
+                />
+            </div>
+            <div class="info-div">
+                <input type="number"
+                       name="user_rating"
+                       placeholder="<fmt:message key="change.user-rating"/>"
+                       min="1"
+                       max="10"
+                />
+            </div>
+            <input type="hidden" name="id" value="${id}"/>
+            <button type="submit"
+                    class="submit">
+                <fmt:message key="change.rating.button"/>
             </button>
         </form>
     </c:if>

@@ -63,13 +63,30 @@ public class TattooServiceImpl implements TattooService {
         return result;
     }
 
-    public boolean updateAverageRating(Map<String, String> parameters, Long userId) throws ServiceException {
-        String grade = parameters.get(ColumnName.TATTOOS_AVERAGE_RATING);
-        boolean result = Validator.validateAverageRating(grade);
+    public boolean updateAverageRating(Map<String, String> parameters, Long tattooId) throws ServiceException {
+        Integer grade = Integer.valueOf(parameters.get(ColumnName.TATTOOS_AVERAGE_RATING));
+        boolean result = Validator.validateAverageRating(grade.toString());
         if(result) {
             TattooDao tattooDao = TattooDaoImpl.getInstance();
             try {
-                result = tattooDao.updateAverageRating(Double.valueOf(grade), userId);
+                Optional<Tattoo> tattoo = tattooDao.findById(tattooId);
+                if (tattoo.isPresent()) {
+                    Double tattooGrade = tattoo.get().getAverageRating();
+                    Integer numberOfRatings = tattoo.get().getNumberOfRatings();
+                    if (numberOfRatings > 0) {
+                        tattooGrade = tattooGrade * numberOfRatings + grade;
+                        numberOfRatings += 1;
+                        tattooGrade = tattooGrade / numberOfRatings;
+                    } else {
+                        tattooGrade = Double.valueOf(grade);
+                        numberOfRatings += 1;
+                    }
+
+                    result = tattooDao.updateAverageRating(tattooGrade, tattooId) &&
+                            tattooDao.updateNumberOfRatings(numberOfRatings, tattooId);
+                } else {
+                    result = false;
+                }
             } catch (DaoException e) {
                 throw new ServiceException(e);
             }

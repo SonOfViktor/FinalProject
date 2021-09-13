@@ -47,7 +47,8 @@ public class OrderDaoImpl implements OrderDao {
             JOIN users ON orders.users_user_id = users.user_id
             JOIN order_statuses ON orders.order_status_id = order_statuses.order_status_id
             JOIN tattoos ON orders.tattoos_tattoo_id = tattoos.tattoo_id
-            WHERE users.login=?""";
+            WHERE users.login=?
+            ORDER BY orders.order_status_id ASC""";
     private static final String FIND_BY_STATUS = """
             SELECT order_id, paid, orders.registration_date, users.login, order_statuses.status,
             tattoos_tattoo_id, tattoos.name, tattoos.price

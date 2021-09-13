@@ -102,7 +102,7 @@
     </header>
 </div>
 <main class="main-background">
-    <div class="average-rating-title"><fmt:message key="about.us.users-assessment"/>${average_rating} / 10</div>
+    <div class="average-rating-title"><fmt:message key="about.us.users-assessment"/>${rating} / 10</div>
     <form method="post" action="ProjectServlet">
         <input type="hidden" name="command" value="create_comment_command"/>
         <input id="date" type="hidden" name="registration_date">
