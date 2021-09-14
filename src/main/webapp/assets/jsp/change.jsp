@@ -4,6 +4,17 @@
 <c:set var="language" value="${sessionScope.locale}" scope="session"/>
 <fmt:setLocale value="${language}"/>
 <fmt:setBundle scope="session" basename="language"/>
+
+<c:set var="localEmail">email</c:set>
+<c:set var="localName">name</c:set>
+<c:set var="localSurname">surname</c:set>
+<c:set var="localPassword">password</c:set>
+<c:set var="localBalance">balance</c:set>
+<c:set var="localRole">role</c:set>
+<c:set var="localUserStatus">status</c:set>
+<c:set var="localRating">rating</c:set>
+<c:set var="localTattooStatus">tattoo_status</c:set>
+<c:set var="localOrdersStatus">order_status</c:set>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -74,33 +85,25 @@
             </li>
         </ul>
 
-        <c:set var="localeRu">ru</c:set>
-        <c:set var="localeEn">en</c:set>
-        <form method="post" action="ProjectServlet">
-            <input type="hidden" name="command" value="change_language_command"/>
-            <button class="language-button" type="submit">
-                <c:if test="${language == localeRu}">
-                    <fmt:message key="header.language.ru"/>
-                </c:if>
-                <c:if test="${language == localeEn}">
-                    <fmt:message key="header.language.en"/>
-                </c:if>
-            </button>
-        </form>
+        <c:if test="${what_change != localRating}">
+            <c:set var="localeRu">ru</c:set>
+            <c:set var="localeEn">en</c:set>
+            <form method="post" action="ProjectServlet">
+                <input type="hidden" name="command" value="change_language_command"/>
+                <button class="language-button" type="submit">
+                    <c:if test="${language == localeRu}">
+                        <fmt:message key="header.language.ru"/>
+                    </c:if>
+                    <c:if test="${language == localeEn}">
+                        <fmt:message key="header.language.en"/>
+                    </c:if>
+                </button>
+            </form>
+        </c:if>
 
     </header>
 </div>
 <div class="container-login">
-    <c:set var="localEmail">email</c:set>
-    <c:set var="localName">name</c:set>
-    <c:set var="localSurname">surname</c:set>
-    <c:set var="localPassword">password</c:set>
-    <c:set var="localBalance">balance</c:set>
-    <c:set var="localRole">role</c:set>
-    <c:set var="localUserStatus">status</c:set>
-    <c:set var="localRating">rating</c:set>
-    <c:set var="localTattooStatus">tattoo_status</c:set>
-    <c:set var="localOrdersStatus">order_status</c:set>
     <c:if test="${what_change == localEmail}">
         <div class="register-login-info">
             <fmt:message key="login.message.info"/>
@@ -219,6 +222,9 @@
         </form>
     </c:if>
     <c:if test="${what_change == localRating}">
+        <div class="register-login-info">
+            <fmt:message key="login.message.info"/>
+        </div>
         <form method="post" action="ProjectServlet">
             <input type="hidden" name="command" value="change_rating_command"/>
             <div class="info-div">

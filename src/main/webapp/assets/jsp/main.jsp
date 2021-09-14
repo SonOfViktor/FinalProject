@@ -1,6 +1,7 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="ctg" uri="customtags" %>
 <c:set var="language" value="${sessionScope.locale}" scope="session"/>
 <fmt:setLocale value="${language}"/>
 <fmt:setBundle scope="session" basename="language"/>
@@ -18,7 +19,7 @@
             rel="stylesheet"
     />
     <link
-            href="${pageContext.request.contextPath}/assets/css/main12.css"
+            href="${pageContext.request.contextPath}/assets/css/main13.css"
             rel="stylesheet"
     />
     <title><fmt:message key="header.main-title"/></title>
@@ -95,24 +96,9 @@
             <div class="main-title1"><fmt:message key="main.catalog"/></div>
             <div class="main-title2"><fmt:message key="main.catalog-title"/></div>
             <div class="main-grid-container2">
-                <c:forEach var="tattoo" items = "${catalog}">
-                    <div class="main-grid-item" title="${tattoo.description}">
-                        <ul>
-                            <li class="main-text" ><fmt:message key="tattoo.number-tattoo"/> ${tattoo.tattooId}</li>
-                            <li class="main-text"><fmt:message key="tattoo.name-tattoo"/> ${tattoo.name}</li>
-                            <li class="main-text"><fmt:message key="tattoo.price-tattoo"/> ${tattoo.price}</li>
-                            <li class="main-text"><fmt:message key="tattoo.width-tattoo"/> ${tattoo.width}</li>
-                            <li class="main-text"><fmt:message key="tattoo.height-tattoo"/> ${tattoo.height}</li>
-                            <li class="main-text"><fmt:message key="tattoo.image-tattoo"/>
-                                <a href="${tattoo.imageUrl}">
-                                    <fmt:message key="tattoo.click-tattoo"/>
-                                </a>
-                            </li>
-                            <li class="main-text"><fmt:message key="tattoo.body-part-tattoo"/> ${tattoo.places}</li>
-                            <li class="main-text"><fmt:message key="tattoo.rating-tattoo"/> ${tattoo.averageRating}</li>
-                        </ul>
-                    </div>
-                </c:forEach>
+                <ctg:tattoo_pagination currentPage="${current_page_number}"
+                                         elementsPerPage="${elements_per_page}"
+                                            title="${title_tattoos}"/>
             </div>
         </section>
         <section class="catalog-all">

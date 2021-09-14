@@ -26,6 +26,9 @@ public class GoToHomePageCommand implements Command {
         if (session.getAttribute(SessionAttribute.LOCALE) == null) {
             session.setAttribute(SessionAttribute.LOCALE, RUSSIAN);
         }
+        request.setAttribute(RequestParameter.ELEMENTS_PER_PAGE, PageSplitParameter.NUMBER_OF_TATTOOS_PER_PAGE);
+        request.setAttribute(RequestParameter.CURRENT_PAGE_NUMBER, PageSplitParameter.FIRST_PAGE);
+        request.setAttribute(RequestParameter.TITLE_TATTOOS, RequestParameter.TITLE_TATTOOS_HOME);
         session.setAttribute(SessionAttribute.PREVIOUS_PAGE, PagePath.MAIN_PAGE_REDIRECT);
         TattooService catalogService = new TattooServiceImpl();
         try {

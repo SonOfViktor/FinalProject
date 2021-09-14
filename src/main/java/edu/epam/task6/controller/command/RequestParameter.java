@@ -47,6 +47,7 @@ public final class RequestParameter {
     public static final String ORDERS = "orders";
     public static final String TATTOO = "tattoo";
     public static final String PROFILE = "profile";
+    public static final String CURRENT_PAGE_NUMBER = "current_page_number";
 
     public static final String COMMENTS = "comments";
     public static final String RATING = "rating";
@@ -78,6 +79,7 @@ public final class RequestParameter {
     public static final String TITLE_ORDERS_COMPLETED = "completed";
     public static final String TITLE_ORDERS_FOUNDED = "founded";
     public static final String TITLE_ORDERS_PERSON = "person";
+    public static final String TITLE_TATTOOS_HOME = "home";
     public static final String TITLE_TATTOOS_ALL = "all";
     public static final String TITLE_TATTOOS_ACTIVE = "active";
     public static final String TITLE_TATTOOS_LOCKED = "locked";

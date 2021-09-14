@@ -1220,7 +1220,7 @@ header {
     -webkit-transform: translate(20px, 20px) scale(1.1);
     transform: translate(20px, 20px) scale(1.1);
     transition-duration: .3s;
-    transition-timing-function: ease-in, ease, linear;
+    transition-timing-function: ease-in, ease, ease-out;
 }
 .tattoo-item-position {
     padding-left: 17%;
