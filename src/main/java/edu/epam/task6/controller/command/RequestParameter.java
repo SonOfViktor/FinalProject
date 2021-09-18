@@ -48,6 +48,7 @@ public final class RequestParameter {
     public static final String TATTOO = "tattoo";
     public static final String PROFILE = "profile";
     public static final String CURRENT_PAGE_NUMBER = "current_page_number";
+    public static final String ALL_PAGE_NUMBER = "all_page_number";
 
     public static final String COMMENTS = "comments";
     public static final String RATING = "rating";

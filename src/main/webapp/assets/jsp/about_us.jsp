@@ -1,11 +1,11 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="ctg" uri="customtags" %>
 <c:set var="language" value="${sessionScope.locale}" scope="session"/>
 <fmt:setLocale value="${language}"/>
 <fmt:setBundle scope="session" basename="language"/>
 
-<c:set var="role_admin">ADMIN</c:set>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -23,32 +23,16 @@
             rel="stylesheet"
     />
     <link
-            href="${pageContext.request.contextPath}/assets/css/main12.css"
+            href="${pageContext.request.contextPath}/assets/css/main16.css"
             rel="stylesheet"
     />
     <link
-            href="${pageContext.request.contextPath}/assets/css/aboutus2.css"
-            rel="stylesheet"
-    />
-    <link
-            href="${pageContext.request.contextPath}/assets/css/slider2.css"
+            href="${pageContext.request.contextPath}/assets/css/aboutus3.css"
             rel="stylesheet"
     />
     <title><fmt:message key="about.us.main-title"/></title>
 </head>
 <body>
-<script src="assets/js/slider1.js">
-    document.addEventListener('DOMContentLoaded', function () {
-        var slider = new SimpleAdaptiveSlider('.slider1');
-
-        document.querySelector('.btn-prev').onclick = function () {
-            slider.prev();
-        }
-        document.querySelector('.btn-next').onclick = function () {
-            slider.next();
-        }
-    });
-</script>
 <script src="assets/js/time3.js"></script>
 <div class="header-background">
     <header>
@@ -118,91 +102,34 @@
     </div>
     <div class="about-us-background">
         <section class="catalog">
-            <div class="slider1">
-                <div class="slider__wrapper">
-                    <div class="slider__items">
-                        <c:forEach var="item" begin="1" end="${pages_number}" varStatus="loop">
-                            <c:choose>
-                                <c:when test="${item != pages_number}">
-                                    <div class="slider__item">
-                                        <div class="comments-list-container">
-                                            <c:forEach var="comment" items = "${comments}" begin="${(item - 1) * elements_per_page}" end="${item * elements_per_page - 1}">
-                                                <div class="comments-list-item">
-                                                    <div class="comments-list-text-item1">
-                                                        <div class="comments-list-text1">
-                                                                ${comment.userLogin}: ${comment.registrationDate}
-                                                        </div>
-                                                    </div>
-                                                    <div class="comments-list-text-item2">
-                                                        <div class="comments-list-text2">
-                                                                ${comment.text}
-                                                        </div>
-                                                    </div>
-                                                    <c:if test="${sessionScope.role == role_admin}">
-                                                        <form class="form-button-comment" method="post" action="ProjectServlet">
-                                                            <input type="hidden" name="command" value="delete_comment_command"/>
-                                                            <input type="hidden" name="comment_id" value="${comment.commentId}"/>
-                                                            <button class="comments-list-item-button" type="submit">
-                                                                <fmt:message key="about.us.delete.comment"/>
-                                                            </button>
-                                                        </form>
-                                                        <form class="form-button-comment" method="post" action="ProjectServlet">
-                                                            <input type="hidden" name="command" value="change_user_status_command"/>
-                                                            <input type="hidden" name="id" value="${comment.userId}"/>
-                                                            <input type="hidden" name="active" value="false"/>
-                                                            <button class="comments-list-item-button" type="submit">
-                                                                <fmt:message key="about.us.block.user"/>
-                                                            </button>
-                                                        </form>
-                                                    </c:if>
-                                                </div>
-                                            </c:forEach>
-                                        </div>
-                                    </div>
-                                </c:when>
-                                <c:otherwise>
-                                    <div class="slider__item">
-                                        <div class="comments-list-container">
-                                            <c:forEach var="comment" items = "${comments}" begin="${(item - 1) * elements_per_page}" end="${number_of_orders}">
-                                                <div class="comments-list-item">
-                                                    <div class="comments-list-text-item1">
-                                                        <div class="comments-list-text1">
-                                                            ${comment.userLogin}: ${comment.registrationDate}
-                                                        </div>
-                                                    </div>
-                                                    <div class="comments-list-text-item2">
-                                                        <div class="comments-list-text2">
-                                                            ${comment.text}
-                                                        </div>
-                                                    </div>
-                                                    <c:if test="${sessionScope.role == role_admin}">
-                                                        <form class="form-button-comment" method="post" action="ProjectServlet">
-                                                            <input type="hidden" name="command" value="delete_comment_command"/>
-                                                            <input type="hidden" name="comment_id" value="${comment.commentId}"/>
-                                                            <button class="comments-list-item-button" type="submit">
-                                                                <fmt:message key="about.us.delete.comment"/>
-                                                            </button>
-                                                        </form>
-                                                        <form class="form-button-comment" method="post" action="ProjectServlet">
-                                                            <input type="hidden" name="command" value="change_user_status_command"/>
-                                                            <input type="hidden" name="id" value="${comment.userId}"/>
-                                                            <input type="hidden" name="active" value="false"/>
-                                                            <button class="comments-list-item-button" type="submit">
-                                                                <fmt:message key="about.us.block.user"/>
-                                                            </button>
-                                                        </form>
-                                                    </c:if>
-                                                </div>
-                                            </c:forEach>
-                                        </div>
-                                    </div>
-                                </c:otherwise>
-                            </c:choose>
-                        </c:forEach>
-                    </div>
-                </div>
-                <a class="slider__control slider__control_prev" href="#" role="button" data-slide="prev"></a>
-                <a class="slider__control slider__control_next" href="#" role="button" data-slide="next"></a>
+            <div class="comments-list-container">
+                <ctg:comments_pagination currentPage="${current_page_number}"
+                                      elementsPerPage="${elements_per_page}"
+                                      title="${title_users}"/>
+
+                <c:if test="${comments.size() > 0}">
+                    <form method="post" action="ProjectServlet">
+                        <input type="hidden" name="command" value="${requestScope.command}"/>
+                        <input type="hidden" name="current_page_number" value="${current_page_number - 1}"/>
+                        <c:if test="${current_page_number > 1}">
+                            <button class="button-prev2"><fmt:message key="pagination.back"/></button>
+                        </c:if>
+                        <c:if test="${current_page_number == 1}">
+                            <button disabled="disabled" class="button-prev2"><fmt:message key="pagination.back"/></button>
+                        </c:if>
+                    </form>
+                    <form method="post" action="ProjectServlet">
+                        <input type="hidden" name="command" value="${requestScope.command}"/>
+                        <input type="hidden" name="current_page_number" value="${current_page_number + 1}"/>
+                        <c:if test="${current_page_number < pages_number}">
+                            <button class="button-next2"><fmt:message key="pagination.forward"/></button>
+                        </c:if>
+                        <c:if test="${current_page_number == pages_number}">
+                            <button disabled="disabled" class="button-next2"><fmt:message key="pagination.forward"/></button>
+                        </c:if>
+                    </form>
+                    <div class="page-number2"> ${current_page_number} / ${pages_number}</div>
+                </c:if>
             </div>
         </section>
     </div>

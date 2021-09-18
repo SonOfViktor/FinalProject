@@ -4,10 +4,6 @@ import edu.epam.task6.controller.command.impl.*;
 import edu.epam.task6.controller.command.impl.change.*;
 import edu.epam.task6.controller.command.impl.find.*;
 import edu.epam.task6.controller.command.impl.page.*;
-import edu.epam.task6.controller.command.impl.*;
-import edu.epam.task6.controller.command.impl.change.*;
-import edu.epam.task6.controller.command.impl.find.*;
-import edu.epam.task6.controller.command.impl.page.*;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 

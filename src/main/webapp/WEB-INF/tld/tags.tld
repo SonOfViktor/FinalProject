@@ -6,6 +6,48 @@
     <uri>customtags</uri>
 
     <tag>
+        <name>comments_pagination</name>
+        <tag-class>edu.epam.task6.tag.CommentsPaginationTag</tag-class>
+        <body-content>empty</body-content>
+        <attribute>
+            <name>currentPage</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>elementsPerPage</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>title</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+
+    <tag>
+        <name>orders_pagination</name>
+        <tag-class>edu.epam.task6.tag.OrdersPaginationTeg</tag-class>
+        <body-content>empty</body-content>
+        <attribute>
+            <name>currentPage</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>elementsPerPage</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>title</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+
+    <tag>
         <name>tattoo_pagination</name>
         <tag-class>edu.epam.task6.tag.TattoosPaginationTag</tag-class>
         <body-content>empty</body-content>
@@ -24,6 +66,33 @@
             <required>true</required>
             <rtexprvalue>true</rtexprvalue>
         </attribute>
+    </tag>
+
+    <tag>
+        <name>users_pagination</name>
+        <tag-class>edu.epam.task6.tag.UsersPaginationTag</tag-class>
+        <body-content>empty</body-content>
+        <attribute>
+            <name>currentPage</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>elementsPerPage</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+        <attribute>
+            <name>title</name>
+            <required>true</required>
+            <rtexprvalue>true</rtexprvalue>
+        </attribute>
+    </tag>
+
+    <tag>
+        <name>time_tag</name>
+        <tag-class>edu.epam.task6.tag.TimeTag</tag-class>
+        <body-content>empty</body-content>
     </tag>
 
 </taglib>

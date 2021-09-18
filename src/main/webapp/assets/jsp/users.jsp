@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="ctg" uri="customtags" %>
 <c:set var="language" value="${sessionScope.locale}" scope="session"/>
 <fmt:setLocale value="${language}"/>
 <fmt:setBundle scope="session" basename="language"/>
@@ -20,33 +21,16 @@
             rel="stylesheet"
     />
     <link
-            href="${pageContext.request.contextPath}/assets/css/main11.css"
+            href="${pageContext.request.contextPath}/assets/css/main16.css"
             rel="stylesheet"
     />
     <link
-            href="${pageContext.request.contextPath}/assets/css/users3.css"
-            rel="stylesheet"
-    />
-    <link
-            href="${pageContext.request.contextPath}/assets/css/slider2.css"
+            href="${pageContext.request.contextPath}/assets/css/users4.css"
             rel="stylesheet"
     />
     <title><fmt:message key="users.main-title"/></title>
 </head>
 <body>
-<script src="assets/js/slider1.js">
-</script>
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        var slider = new SimpleAdaptiveSlider('.slider1');
-        document.querySelector('.btn-prev').onclick = function () {
-            slider.prev();
-        }
-        document.querySelector('.btn-next').onclick = function () {
-            slider.next();
-        }
-    });
-</script>
 <div class="header-background">
     <header>
         <form method="post" action="ProjectServlet">
@@ -202,245 +186,34 @@
                     <fmt:message key="users.message.empty"/>
                 </div>
             </c:if>
-            <div class="slider1">
-                <div class="slider__wrapper">
-                    <div class="slider__items">
-                        <c:forEach var="item" begin="1" end="${pages_number}" varStatus="loop">
-                            <c:choose>
-                                <c:when test="${item != pages_number}">
-                                    <div class="slider__item">
-                                        <div class="user-list-container">
-                                            <c:forEach var="user" items = "${users}" begin="${(item - 1) * elements_per_page}" end="${item * elements_per_page - 1}">
-                                                    <div class="user-list-item">
-                                                        <div class="user-list-text-item">
-                                                            <div class="user-list-text1">
-                                                                <fmt:message key="users.user.id"/>
-                                                            </div>
-                                                            <div class="user-list-text2">
-                                                                    ${user.userId}
-                                                            </div>
-                                                        </div>
-                                                        <div class="user-list-text-item">
-                                                            <div class="user-list-text1">
-                                                                <fmt:message key="users.user.email"/>
-                                                            </div>
-                                                            <div class="user-list-text2">
-                                                                    ${user.email}
-                                                            </div>
-                                                        </div>
-                                                        <div class="user-list-text-item">
-                                                            <div class="user-list-text1">
-                                                                <fmt:message key="users.user.login"/>
-                                                            </div>
-                                                            <div class="user-list-text2">
-                                                                    ${user.login}
-                                                            </div>
-                                                        </div>
-                                                        <div class="user-list-text-item">
-                                                            <div class="user-list-text1">
-                                                                <fmt:message key="users.user.name"/>
-                                                            </div>
-                                                            <div class="user-list-text2">
-                                                                    ${user.name}
-                                                            </div>
-                                                        </div>
-                                                        <div class="user-list-text-item">
-                                                            <div class="user-list-text1">
-                                                                <fmt:message key="users.user.surname"/>
-                                                            </div>
-                                                            <div class="user-list-text2">
-                                                                    ${user.surname}
-                                                            </div>
-                                                        </div>
-                                                        <div class="user-list-text-item">
-                                                            <div class="user-list-text1">
-                                                                <fmt:message key="users.user.discount"/>
-                                                            </div>
-                                                            <div class="user-list-text2">
-                                                                    ${user.discount}
-                                                            </div>
-                                                        </div>
-                                                        <div class="user-list-text-item">
-                                                            <div class="user-list-text1">
-                                                                <fmt:message key="users.user.balance"/>
-                                                            </div>
-                                                            <div class="user-list-text2">
-                                                                    ${user.balance}
-                                                            </div>
-                                                        </div>
-                                                        <div class="user-list-text-item">
-                                                            <div class="user-list-text1">
-                                                                <fmt:message key="users.user.registration-date"/>
-                                                            </div>
-                                                            <div class="user-list-text2">
-                                                                    ${user.registrationDate}
-                                                            </div>
-                                                        </div>
-                                                        <div class="user-list-text-item">
-                                                            <div class="user-list-text1">
-                                                                <fmt:message key="users.user.role"/>
-                                                            </div>
-                                                            <div class="user-list-text2">
-                                                                    ${user.role}
-                                                            </div>
-                                                        </div>
-                                                        <div class="user-list-text-item">
-                                                            <div class="user-list-text1">
-                                                                <fmt:message key="users.user.status"/>
-                                                            </div>
-                                                            <div class="user-list-text2">
-                                                                    ${user.status}
-                                                            </div>
-                                                        </div>
-                                                        <form method="post" action="ProjectServlet">
-                                                            <input type="hidden" name="command" value="change_user_status_command"/>
-                                                            <input type="hidden" name="id" value="${user.userId}"/>
-                                                            <input type="hidden" name="active" value="false"/>
-                                                            <input type="hidden" name="title_users" value="${title_users}"/>
-                                                            <c:if test="${user.status == status_active && user.role != role_admin}">
-                                                                <button class="user-list-item-button" type="submit"><fmt:message key="change.button-block"/></button>
-                                                            </c:if>
-                                                            <c:if test="${user.status == status_blocked || user.role == role_admin}">
-                                                                <button disabled="disabled" class="user-list-item-button" type="submit"><fmt:message key="change.button-block"/></button>
-                                                            </c:if>
-                                                        </form>
-                                                        <form class="form-button-user2" method="post" action="ProjectServlet">
-                                                            <input type="hidden" name="command" value="change_user_status_command"/>
-                                                            <input type="hidden" name="id" value="${user.userId}"/>
-                                                            <input type="hidden" name="active" value="true"/>
-                                                            <input type="hidden" name="title_users" value="${title_users}"/>
-                                                            <c:if test="${user.status == status_active || user.role == role_admin}">
-                                                                <button disabled="disabled" class="user-list-item-button" type="submit"><fmt:message key="change.button-unblock"/></button>
-                                                            </c:if>
-                                                            <c:if test="${user.status == status_blocked && user.role != role_admin}">
-                                                                <button class="user-list-item-button" type="submit"><fmt:message key="change.button-unblock"/></button>
-                                                            </c:if>
-                                                        </form>
-                                                    </div>
-                                            </c:forEach>
-                                        </div>
-                                    </div>
-                                </c:when>
-                                <c:otherwise>
-                                    <div class="slider__item">
-                                        <div class="user-list-container">
-                                            <c:forEach var="user" items = "${users}" begin="${(item - 1) * elements_per_page}" end="${number_of_users}">
-                                                <div class="user-list-item">
-                                                    <div class="user-list-text-item">
-                                                        <div class="user-list-text1">
-                                                            <fmt:message key="users.user.id"/>
-                                                        </div>
-                                                        <div class="user-list-text2">
-                                                                ${user.userId}
-                                                        </div>
-                                                    </div>
-                                                    <div class="user-list-text-item">
-                                                        <div class="user-list-text1">
-                                                            <fmt:message key="users.user.email"/>
-                                                        </div>
-                                                        <div class="user-list-text2">
-                                                                ${user.email}
-                                                        </div>
-                                                    </div>
-                                                    <div class="user-list-text-item">
-                                                        <div class="user-list-text1">
-                                                            <fmt:message key="users.user.login"/>
-                                                        </div>
-                                                        <div class="user-list-text2">
-                                                                ${user.login}
-                                                        </div>
-                                                    </div>
-                                                    <div class="user-list-text-item">
-                                                        <div class="user-list-text1">
-                                                            <fmt:message key="users.user.name"/>
-                                                        </div>
-                                                        <div class="user-list-text2">
-                                                                ${user.name}
-                                                        </div>
-                                                    </div>
-                                                    <div class="user-list-text-item">
-                                                        <div class="user-list-text1">
-                                                            <fmt:message key="users.user.surname"/>
-                                                        </div>
-                                                        <div class="user-list-text2">
-                                                                ${user.surname}
-                                                        </div>
-                                                    </div>
-                                                    <div class="user-list-text-item">
-                                                        <div class="user-list-text1">
-                                                            <fmt:message key="users.user.discount"/>
-                                                        </div>
-                                                        <div class="user-list-text2">
-                                                                ${user.discount}
-                                                        </div>
-                                                    </div>
-                                                    <div class="user-list-text-item">
-                                                        <div class="user-list-text1">
-                                                            <fmt:message key="users.user.balance"/>
-                                                        </div>
-                                                        <div class="user-list-text2">
-                                                                ${user.balance}
-                                                        </div>
-                                                    </div>
-                                                    <div class="user-list-text-item">
-                                                        <div class="user-list-text1">
-                                                            <fmt:message key="users.user.registration-date"/>
-                                                        </div>
-                                                        <div class="user-list-text2">
-                                                                ${user.registrationDate}
-                                                        </div>
-                                                    </div>
-                                                    <div class="user-list-text-item">
-                                                        <div class="user-list-text1">
-                                                            <fmt:message key="users.user.role"/>
-                                                        </div>
-                                                        <div class="user-list-text2">
-                                                                ${user.role}
-                                                        </div>
-                                                    </div>
-                                                    <div class="user-list-text-item">
-                                                        <div class="user-list-text1">
-                                                            <fmt:message key="users.user.status"/>
-                                                        </div>
-                                                        <div class="user-list-text2">
-                                                                ${user.status}
-                                                        </div>
-                                                    </div>
-                                                    <form method="post" action="ProjectServlet">
-                                                        <input type="hidden" name="command" value="change_user_status_command"/>
-                                                        <input type="hidden" name="id" value="${user.userId}"/>
-                                                        <input type="hidden" name="active" value="false"/>
-                                                        <input type="hidden" name="title_users" value="${title_users}"/>
-                                                        <c:if test="${user.status == status_active && user.role != role_admin}">
-                                                            <button class="user-list-item-button" type="submit"><fmt:message key="change.button-block"/></button>
-                                                        </c:if>
-                                                        <c:if test="${user.status == status_blocked || user.role == role_admin}">
-                                                            <button disabled="disabled" class="user-list-item-button" type="submit"><fmt:message key="change.button-block"/></button>
-                                                        </c:if>
-                                                    </form>
-                                                    <form class="form-button-user2" method="post" action="ProjectServlet">
-                                                        <input type="hidden" name="command" value="change_user_status_command"/>
-                                                        <input type="hidden" name="id" value="${user.userId}"/>
-                                                        <input type="hidden" name="active" value="true"/>
-                                                        <input type="hidden" name="title_users" value="${title_users}"/>
-                                                        <c:if test="${user.status == status_active || user.role == role_admin}">
-                                                            <button disabled="disabled" class="user-list-item-button" type="submit"><fmt:message key="change.button-unblock"/></button>
-                                                        </c:if>
-                                                        <c:if test="${user.status == status_blocked && user.role != role_admin}">
-                                                            <button class="user-list-item-button" type="submit"><fmt:message key="change.button-unblock"/></button>
-                                                        </c:if>
-                                                    </form>
-                                                </div>
-                                            </c:forEach>
-                                        </div>
-                                    </div>
-                                </c:otherwise>
-                            </c:choose>
-                        </c:forEach>
-                    </div>
-                </div>
-                <a class="slider__control slider__control_prev" href="#" role="button" data-slide="prev"></a>
-                <a class="slider__control slider__control_next" href="#" role="button" data-slide="next"></a>
+            <div class="user-list-container">
+                <ctg:users_pagination currentPage="${current_page_number}"
+                                       elementsPerPage="${elements_per_page}"
+                                       title="${title_users}"/>
+
+                <c:if test="${users.size() > 0}">
+                    <form method="post" action="ProjectServlet">
+                        <input type="hidden" name="command" value="${requestScope.command}"/>
+                        <input type="hidden" name="current_page_number" value="${current_page_number - 1}"/>
+                        <c:if test="${current_page_number > 1}">
+                            <button class="button-prev"><fmt:message key="pagination.back"/></button>
+                        </c:if>
+                        <c:if test="${current_page_number == 1}">
+                            <button disabled="disabled" class="button-prev"><fmt:message key="pagination.back"/></button>
+                        </c:if>
+                    </form>
+                    <form method="post" action="ProjectServlet">
+                        <input type="hidden" name="command" value="${requestScope.command}"/>
+                        <input type="hidden" name="current_page_number" value="${current_page_number + 1}"/>
+                        <c:if test="${current_page_number < pages_number}">
+                            <button class="button-next"><fmt:message key="pagination.forward"/></button>
+                        </c:if>
+                        <c:if test="${current_page_number == pages_number}">
+                            <button disabled="disabled" class="button-next"><fmt:message key="pagination.forward"/></button>
+                        </c:if>
+                    </form>
+                    <div class="page-number"> ${current_page_number} / ${pages_number}</div>
+                </c:if>
             </div>
         </section>
     </div>

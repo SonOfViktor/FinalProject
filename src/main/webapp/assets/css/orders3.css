@@ -16,7 +16,7 @@
     max-height: 360px;
     max-width: 1360px;
     padding-left: 55px;
-    padding-top: 0px;
+    padding-top: 150px;
     display: inline-grid;
     grid-template-columns: repeat(2, 590px);
     grid-gap: 130px;

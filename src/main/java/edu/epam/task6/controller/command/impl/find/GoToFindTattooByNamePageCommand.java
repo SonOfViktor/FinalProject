@@ -25,6 +25,11 @@ public class GoToFindTattooByNamePageCommand implements Command {
         HttpSession session = request.getSession();
         UserRole userRole = (UserRole) session.getAttribute(SessionAttribute.ROLE);
 
+        Integer currentPage = 1;
+        if (request.getParameter(RequestParameter.CURRENT_PAGE_NUMBER) != null) {
+            currentPage = Integer.valueOf(request.getParameter(RequestParameter.CURRENT_PAGE_NUMBER));
+        }
+
         TattooService tattooService = new TattooServiceImpl();
         String tattooName = request.getParameter(RequestParameter.TATTOO_NAME);
         try {
@@ -35,10 +40,9 @@ public class GoToFindTattooByNamePageCommand implements Command {
                 tattoos = tattooService.findByNameAllActive(tattooName);
             }
             request.setAttribute(RequestParameter.CATALOG, tattoos);
-
-            request = SendSplitParameters.sendSplitParametersTattoos(request, tattoos.size());
-
+            request = SendSplitParameters.sendSplitParametersTattoos(request, tattoos.size(), currentPage);
             request.setAttribute(RequestParameter.TITLE_TATTOOS, RequestParameter.TITLE_TATTOOS_FOUNDED);
+            request.setAttribute(RequestParameter.COMMAND, CommandType.TO_FIND_TATTOO_BY_NAME_PAGE_COMMAND);
             router = new Router(PagePath.CATALOG_PAGE);
         } catch (ServiceException e) {
             logger.error("Error during searching tattoos with name = " + tattooName, e);

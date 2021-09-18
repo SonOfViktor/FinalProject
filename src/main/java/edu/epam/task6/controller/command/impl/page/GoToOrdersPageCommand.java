@@ -10,10 +10,14 @@ import edu.epam.task6.model.entity.User;
 import edu.epam.task6.model.entity.UserRole;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.List;
 
 public class GoToOrdersPageCommand implements Command {
+
+    private static final Logger logger = LogManager.getLogger();
 
     @Override
     public Router execute(HttpServletRequest request) {
@@ -21,6 +25,12 @@ public class GoToOrdersPageCommand implements Command {
 
         HttpSession session = request.getSession();
         session.setAttribute(SessionAttribute.PREVIOUS_PAGE, PagePath.ORDERS_PAGE_ALL_REDIRECT);
+
+        Integer currentPage = 1;
+        if (request.getParameter(RequestParameter.CURRENT_PAGE_NUMBER) != null) {
+            currentPage = Integer.valueOf(request.getParameter(RequestParameter.CURRENT_PAGE_NUMBER));
+        }
+
         User user = (User) session.getAttribute(SessionAttribute.USER);
         String userLogin = user.getLogin();
         UserRole userRole = (UserRole) session.getAttribute(SessionAttribute.ROLE);
@@ -36,10 +46,11 @@ public class GoToOrdersPageCommand implements Command {
                 orders = orderService.findByLogin(userLogin);
             }
             request.setAttribute(RequestParameter.ORDERS, orders);
-
-            request = SendSplitParameters.sendSplitParametersOrders(request, orders.size());
+            request = SendSplitParameters.sendSplitParametersOrders(request, orders.size(), currentPage);
+            request.setAttribute(RequestParameter.COMMAND, CommandType.TO_ORDERS_PAGE_COMMAND);
             router = new Router(PagePath.ORDERS_PAGE);
         } catch (ServiceException e) {
+            logger.error("Error during go to orders page command", e);
             router = new Router(PagePath.ERROR_PAGE_500);
         }
         return router;

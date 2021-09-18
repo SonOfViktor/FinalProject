@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="ctg" uri="customtags" %>
 <c:set var="language" value="${sessionScope.locale}" scope="session"/>
 <fmt:setLocale value="${language}"/>
 <fmt:setBundle scope="session" basename="language"/>
@@ -17,7 +18,7 @@
             rel="stylesheet"
     />
     <link
-            href="${pageContext.request.contextPath}/assets/css/main11.css"
+            href="${pageContext.request.contextPath}/assets/css/main16.css"
             rel="stylesheet"
     />
     <title><fmt:message key="profile.main-title"/></title>
@@ -113,11 +114,7 @@
             </div>
             <div class="block3-item">
                 <div class="block3-text1"><fmt:message key="profile.registration-date"/></div>
-                <div class="block3-text2">${sessionScope.user.registrationDate}
-                    <script src="assets/js/time3.js">
-                        timeOutput("${sessionScope.user.registrationDate}");
-                    </script>
-                </div>
+                <div class="block3-text2"><ctg:time_tag/></div>
             </div>
             <form method="post" action="ProjectServlet">
                 <input type="hidden" name="command" value="to_change_email_page_command"/>

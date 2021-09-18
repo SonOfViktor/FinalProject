@@ -1187,7 +1187,7 @@ header {
     max-height: 400px;
     max-width: 1380px;
     padding-left: 70px;
-    padding-top: 0px;
+    padding-top: 350px;
     display: inline-grid;
     grid-template-columns: repeat(4, 300px);
     grid-gap: 60px;
@@ -1538,5 +1538,113 @@ input {
     transform: scale(1.1);
     background: transparent;
     border: none !important;
+}
+
+
+.button-next {
+    position: absolute;
+    width: 100px;
+    height: 55px;
+    left: 830px;
+    top: 1270px;
+    background: #CD6326;
+    border: 1px solid #CD6326;
+    border-radius: 5px 5px 5px 5px;
+    outline: none;
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: normal;
+    font-size: 23px;
+    line-height: 27px;
+    align-items: center;
+    text-align: center;
+    color: #F7F7F7;
+}
+.button-prev {
+    position: absolute;
+    width: 100px;
+    height: 55px;
+    left: 580px;
+    top: 1270px;
+    background: #CD6326;
+    border: 1px solid #CD6326;
+    border-radius: 5px 5px 5px 5px;
+    outline: none;
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: normal;
+    font-size: 23px;
+    line-height: 27px;
+    align-items: center;
+    text-align: center;
+    color: #F7F7F7;
+}
+.page-number {
+    position: absolute;
+    left: 680px;
+    top: 1270px;
+    width: 150px;
+    height: 55px;
+    padding-top: 14px;
+    text-align: center;
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: normal;
+    font-size: 23px;
+    line-height: 27px;
+    color: #333333;
+}
+.button-next2 {
+    position: absolute;
+    width: 100px;
+    height: 55px;
+    left: 830px;
+    top: 1570px;
+    background: #CD6326;
+    border: 1px solid #CD6326;
+    border-radius: 5px 5px 5px 5px;
+    outline: none;
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: normal;
+    font-size: 23px;
+    line-height: 27px;
+    align-items: center;
+    text-align: center;
+    color: #F7F7F7;
+}
+.button-prev2 {
+    position: absolute;
+    width: 100px;
+    height: 55px;
+    left: 580px;
+    top: 1570px;
+    background: #CD6326;
+    border: 1px solid #CD6326;
+    border-radius: 5px 5px 5px 5px;
+    outline: none;
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: normal;
+    font-size: 23px;
+    line-height: 27px;
+    align-items: center;
+    text-align: center;
+    color: #F7F7F7;
+}
+.page-number2 {
+    position: absolute;
+    left: 680px;
+    top: 1570px;
+    width: 150px;
+    height: 55px;
+    padding-top: 14px;
+    text-align: center;
+    font-family: "Roboto";
+    font-style: normal;
+    font-weight: normal;
+    font-size: 23px;
+    line-height: 27px;
+    color: #333333;
 }
 

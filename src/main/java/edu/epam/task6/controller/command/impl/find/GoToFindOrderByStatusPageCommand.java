@@ -23,6 +23,11 @@ public class GoToFindOrderByStatusPageCommand implements Command {
     public Router execute(HttpServletRequest request) {
         Router router;
 
+        Integer currentPage = 1;
+        if (request.getParameter(RequestParameter.CURRENT_PAGE_NUMBER) != null) {
+            currentPage = Integer.valueOf(request.getParameter(RequestParameter.CURRENT_PAGE_NUMBER));
+        }
+
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute(SessionAttribute.USER);
         String userLogin = user.getLogin();
@@ -38,10 +43,9 @@ public class GoToFindOrderByStatusPageCommand implements Command {
                 orders = orderService.findByStatusPersonal(orderStatus, userLogin);
             }
             request.setAttribute(RequestParameter.ORDERS, orders);
-
-            request = SendSplitParameters.sendSplitParametersOrders(request, orders.size());
-
+            request = SendSplitParameters.sendSplitParametersOrders(request, orders.size(), currentPage);
             request.setAttribute(RequestParameter.TITLE_ORDERS, RequestParameter.TITLE_ORDERS_FOUNDED);
+            request.setAttribute(RequestParameter.COMMAND, CommandType.TO_FIND_ORDER_BY_STATUS_PAGE_COMMAND);
             router = new Router(PagePath.ORDERS_PAGE);
         } catch (ServiceException e) {
             logger.error("Error during searching orders with status = " + orderStatus, e);

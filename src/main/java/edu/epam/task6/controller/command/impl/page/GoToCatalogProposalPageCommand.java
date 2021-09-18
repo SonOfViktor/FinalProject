@@ -9,10 +9,14 @@ import edu.epam.task6.model.service.TattooService;
 import edu.epam.task6.model.service.impl.TattooServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.List;
 
 public class GoToCatalogProposalPageCommand implements Command {
+
+    private static final Logger logger = LogManager.getLogger();
 
     @Override
     public Router execute(HttpServletRequest request) {
@@ -21,16 +25,21 @@ public class GoToCatalogProposalPageCommand implements Command {
         HttpSession session = request.getSession();
         session.setAttribute(SessionAttribute.PREVIOUS_PAGE, PagePath.CATALOG_PAGE_PROPOSAL_REDIRECT);
 
+        Integer currentPage = 1;
+        if (request.getParameter(RequestParameter.CURRENT_PAGE_NUMBER) != null) {
+            currentPage = Integer.valueOf(request.getParameter(RequestParameter.CURRENT_PAGE_NUMBER));
+        }
+
         TattooService catalogService = new TattooServiceImpl();
         try {
             List<Tattoo> catalogElements = catalogService.findByStatus(TattooStatus.OFFERED_BY_USER.name());
             request.setAttribute(RequestParameter.CATALOG, catalogElements);
-
-            request = SendSplitParameters.sendSplitParametersTattoos(request, catalogElements.size());
-
+            request = SendSplitParameters.sendSplitParametersTattoos(request, catalogElements.size(), currentPage);
             request.setAttribute(RequestParameter.TITLE_TATTOOS, RequestParameter.TITLE_TATTOOS_PROPOSAL);
+            request.setAttribute(RequestParameter.COMMAND, CommandType.TO_PROPOSAL_CATALOG_PAGE_COMMAND);
             router = new Router(PagePath.CATALOG_PAGE);
-        } catch (ServiceException e){
+        } catch (ServiceException e) {
+            logger.error("Error during go to proposal tattoos page command", e);
             router = new Router(PagePath.ERROR_PAGE_500);
         }
         return router;

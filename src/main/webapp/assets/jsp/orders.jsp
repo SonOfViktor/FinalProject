@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="ctg" uri="customtags" %>
 <c:set var="language" value="${sessionScope.locale}" scope="session"/>
 <fmt:setLocale value="${language}"/>
 <fmt:setBundle scope="session" basename="language"/>
@@ -27,34 +28,16 @@
             rel="stylesheet"
     />
     <link
-            href="${pageContext.request.contextPath}/assets/css/main11.css"
+            href="${pageContext.request.contextPath}/assets/css/main16.css"
             rel="stylesheet"
     />
     <link
-            href="${pageContext.request.contextPath}/assets/css/orders2.css"
-            rel="stylesheet"
-    />
-    <link
-            href="${pageContext.request.contextPath}/assets/css/slider2.css"
+            href="${pageContext.request.contextPath}/assets/css/orders3.css"
             rel="stylesheet"
     />
     <title><fmt:message key="orders.main-title"/></title>
 </head>
 <body>
-<script src="assets/js/slider1.js">
-</script>
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        var slider = new SimpleAdaptiveSlider('.slider1');
-
-        document.querySelector('.btn-prev').onclick = function () {
-            slider.prev();
-        }
-        document.querySelector('.btn-next').onclick = function () {
-            slider.next();
-        }
-    });
-</script>
 <div class="header-background">
     <header>
         <form method="post" action="ProjectServlet">
@@ -203,211 +186,44 @@
                     <fmt:message key="orders.title.personal"/>
                 </div>
             </c:if>
-            <c:if test="${number_of_orders == 0 && empty_orders_message != true}">
+            <c:if test="${orders.size() == 0 && empty_orders_message != true}">
                 <div class="find-empty-text">
                     <fmt:message key="orders.empty.message.all"/>
                 </div>
             </c:if>
-            <c:if test="${number_of_orders == 0 && empty_orders_message == true}">
+            <c:if test="${orders.size() == 0 && empty_orders_message == true}">
                 <div class="find-empty-text">
                     <fmt:message key="orders.empty.message.personal"/>
                 </div>
             </c:if>
-            <div class="slider1">
-                <div class="slider__wrapper">
-                    <div class="slider__items">
-                        <c:forEach var="item" begin="1" end="${pages_number}" varStatus="loop">
-                            <c:choose>
-                                <c:when test="${item != pages_number}">
-                                    <div class="slider__item">
-                                        <div class="order-list-container">
-                                            <c:forEach var="order" items = "${orders}" begin="${(item - 1) * elements_per_page}" end="${item * elements_per_page - 1}">
-                                                <div class="order-list-item">
-                                                    <div class="order-list-text-item">
-                                                        <div class="order-list-text1">
-                                                            <fmt:message key="order.id"/>
-                                                        </div>
-                                                        <div class="order-list-text2">
-                                                            ${order.orderId}
-                                                        </div>
-                                                    </div>
-                                                    <div class="order-list-text-item">
-                                                        <div class="order-list-text1">
-                                                            <fmt:message key="order.paid"/>
-                                                        </div>
-                                                        <div class="order-list-text2">
-                                                            ${order.paid}
-                                                        </div>
-                                                    </div>
-                                                    <div class="order-list-text-item">
-                                                        <div class="order-list-text1">
-                                                            <fmt:message key="order.registration-date"/>
-                                                        </div>
-                                                        <div class="order-list-text2">
-                                                            ${order.registrationDate}
-                                                        </div>
-                                                    </div>
-                                                    <div class="order-list-text-item">
-                                                        <div class="order-list-text1">
-                                                            <fmt:message key="order.login"/>
-                                                        </div>
-                                                        <div class="order-list-text2">
-                                                            ${order.userLogin}
-                                                        </div>
-                                                    </div>
-                                                    <div class="order-list-text-item">
-                                                        <div class="order-list-text1">
-                                                            <fmt:message key="order.status"/>
-                                                        </div>
-                                                        <div class="order-list-text2">
-                                                            ${order.orderStatus}
-                                                        </div>
-                                                    </div>
-                                                    <div class="order-list-text-item">
-                                                        <div class="order-list-text1">
-                                                            <fmt:message key="order.tattoo.id"/>
-                                                        </div>
-                                                        <div class="order-list-text2">
-                                                            ${order.tattooId}
-                                                        </div>
-                                                    </div>
-                                                    <div class="order-list-text-item">
-                                                        <div class="order-list-text1">
-                                                            <fmt:message key="order.tattoo.price"/>
-                                                        </div>
-                                                        <div class="order-list-text2">
-                                                            ${order.tattooPrice}
-                                                        </div>
-                                                    </div>
-                                                    <div class="order-list-text-item">
-                                                        <div class="order-list-text1">
-                                                            <fmt:message key="order.tattoo.name"/>
-                                                        </div>
-                                                        <div class="order-list-text2">
-                                                            ${order.tattooName}
-                                                        </div>
-                                                    </div>
-                                                    <c:if test="${order.orderStatus == orderStatusActive}">
-                                                        <form method="post" action="ProjectServlet">
-                                                            <input type="hidden" name="command" value="cancel_order_command"/>
-                                                            <input type="hidden" name="id" value="${order.orderId}"/>
-                                                            <button class="order-list-item-button">
-                                                                <fmt:message key="orders.cancel.button"/>
-                                                            </button>
-                                                        </form>
-                                                    </c:if>
-                                                    <c:if test="${order.orderStatus == orderStatusCompleted}">
-                                                        <form method="post" action="ProjectServlet">
-                                                            <input type="hidden" name="command" value="to_change_rating_page_command"/>
-                                                            <input type="hidden" name="id" value="${order.orderId}"/>
-                                                            <button class="order-list-item-button">
-                                                                <fmt:message key="change.rating.button"/>
-                                                            </button>
-                                                        </form>
-                                                    </c:if>
-                                                </div>
-                                            </c:forEach>
-                                        </div>
-                                    </div>
-                                </c:when>
-                                <c:otherwise>
-                                    <div class="slider__item">
-                                        <div class="order-list-container">
-                                            <c:forEach var="order" items = "${orders}" begin="${(item - 1) * elements_per_page}" end="${number_of_orders}">
-                                                <div class="order-list-item">
-                                                    <div class="order-list-text-item">
-                                                        <div class="order-list-text1">
-                                                            <fmt:message key="order.id"/>
-                                                        </div>
-                                                        <div class="order-list-text2">
-                                                                ${order.orderId}
-                                                        </div>
-                                                    </div>
-                                                    <div class="order-list-text-item">
-                                                        <div class="order-list-text1">
-                                                            <fmt:message key="order.paid"/>
-                                                        </div>
-                                                        <div class="order-list-text2">
-                                                                ${order.paid}
-                                                        </div>
-                                                    </div>
-                                                    <div class="order-list-text-item">
-                                                        <div class="order-list-text1">
-                                                            <fmt:message key="order.registration-date"/>
-                                                        </div>
-                                                        <div class="order-list-text2">
-                                                                ${order.registrationDate}
-                                                        </div>
-                                                    </div>
-                                                    <div class="order-list-text-item">
-                                                        <div class="order-list-text1">
-                                                            <fmt:message key="order.login"/>
-                                                        </div>
-                                                        <div class="order-list-text2">
-                                                                ${order.userLogin}
-                                                        </div>
-                                                    </div>
-                                                    <div class="order-list-text-item">
-                                                        <div class="order-list-text1">
-                                                            <fmt:message key="order.status"/>
-                                                        </div>
-                                                        <div class="order-list-text2">
-                                                                ${order.orderStatus}
-                                                        </div>
-                                                    </div>
-                                                    <div class="order-list-text-item">
-                                                        <div class="order-list-text1">
-                                                            <fmt:message key="order.tattoo.id"/>
-                                                        </div>
-                                                        <div class="order-list-text2">
-                                                                ${order.tattooId}
-                                                        </div>
-                                                    </div>
-                                                    <div class="order-list-text-item">
-                                                        <div class="order-list-text1">
-                                                            <fmt:message key="order.tattoo.price"/>
-                                                        </div>
-                                                        <div class="order-list-text2">
-                                                                ${order.tattooPrice}
-                                                        </div>
-                                                    </div>
-                                                    <div class="order-list-text-item">
-                                                        <div class="order-list-text1">
-                                                            <fmt:message key="order.tattoo.name"/>
-                                                        </div>
-                                                        <div class="order-list-text2">
-                                                                ${order.tattooName}
-                                                        </div>
-                                                    </div>
-                                                    <c:if test="${order.orderStatus == orderStatusActive}">
-                                                        <form method="post" action="ProjectServlet">
-                                                            <input type="hidden" name="command" value="cancel_order_command"/>
-                                                            <input type="hidden" name="id" value="${order.orderId}"/>
-                                                            <button class="order-list-item-button">
-                                                                <fmt:message key="orders.cancel.button"/>
-                                                            </button>
-                                                        </form>
-                                                    </c:if>
-                                                    <c:if test="${order.orderStatus == orderStatusCompleted}">
-                                                        <form method="post" action="ProjectServlet">
-                                                            <input type="hidden" name="command" value="to_change_rating_page_command"/>
-                                                            <input type="hidden" name="id" value="${order.orderId}"/>
-                                                            <button class="order-list-item-button">
-                                                                <fmt:message key="change.rating.button"/>
-                                                            </button>
-                                                        </form>
-                                                    </c:if>
-                                                </div>
-                                            </c:forEach>
-                                        </div>
-                                    </div>
-                                </c:otherwise>
-                            </c:choose>
-                        </c:forEach>
-                    </div>
-                </div>
-                <a class="slider__control slider__control_prev" href="#" role="button" data-slide="prev"></a>
-                <a class="slider__control slider__control_next" href="#" role="button" data-slide="next"></a>
+            <div class="order-list-container">
+                <ctg:orders_pagination currentPage="${current_page_number}"
+                                       elementsPerPage="${elements_per_page}"
+                                       title="${title_orders}"/>
+
+                <c:if test="${orders.size() > 0}">
+                    <form method="post" action="ProjectServlet">
+                        <input type="hidden" name="command" value="${requestScope.command}"/>
+                        <input type="hidden" name="current_page_number" value="${current_page_number - 1}"/>
+                        <c:if test="${current_page_number > 1}">
+                            <button class="button-prev"><fmt:message key="pagination.back"/></button>
+                        </c:if>
+                        <c:if test="${current_page_number == 1}">
+                            <button disabled="disabled" class="button-prev"><fmt:message key="pagination.back"/></button>
+                        </c:if>
+                    </form>
+                    <form method="post" action="ProjectServlet">
+                        <input type="hidden" name="command" value="${requestScope.command}"/>
+                        <input type="hidden" name="current_page_number" value="${current_page_number + 1}"/>
+                        <c:if test="${current_page_number < pages_number}">
+                            <button class="button-next"><fmt:message key="pagination.forward"/></button>
+                        </c:if>
+                        <c:if test="${current_page_number == pages_number}">
+                            <button disabled="disabled" class="button-next"><fmt:message key="pagination.forward"/></button>
+                        </c:if>
+                    </form>
+                    <div class="page-number"> ${current_page_number} / ${pages_number}</div>
+                </c:if>
             </div>
         </section>
     </div>

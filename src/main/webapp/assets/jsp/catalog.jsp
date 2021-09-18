@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="ctg" uri="customtags" %>
 <c:set var="language" value="${sessionScope.locale}" scope="session"/>
 <fmt:setLocale value="${language}"/>
 <fmt:setBundle scope="session" basename="language"/>
@@ -27,30 +28,12 @@
             rel="stylesheet"
     />
     <link
-            href="${pageContext.request.contextPath}/assets/css/main12.css"
-            rel="stylesheet"
-    />
-    <link
-            href="${pageContext.request.contextPath}/assets/css/slider2.css"
+            href="${pageContext.request.contextPath}/assets/css/main16.css"
             rel="stylesheet"
     />
     <title><fmt:message key="main.catalog"/></title>
 </head>
 <body class="body-size2">
-<script src="assets/js/slider1.js">
-</script>
-<script>
-    document.addEventListener('DOMContentLoaded', function () {
-        var slider = new SimpleAdaptiveSlider('.slider2');
-
-        document.querySelector('.btn-prev').onclick = function () {
-            slider.prev();
-        }
-        document.querySelector('.btn-next').onclick = function () {
-            slider.next();
-        }
-    });
-</script>
 <div class="header-background">
     <header>
         <form method="post" action="ProjectServlet">
@@ -207,153 +190,40 @@
                     <fmt:message key="tattoo.list-proposal"/>
                 </div>
             </c:if>
-            <c:if test="${number_of_tattoos == 0}">
+            <c:if test="${catalog.size() == 0}">
                 <div class="find-empty-text2">
-                    <fmt:message key="tattoo.find-error-message1"/>
+                    <fmt:message key="tattoo.find-error-message2"/>
                 </div>
             </c:if>
-                <div class="slider2">
-                    <div class="slider__wrapper">
-                        <div class="slider__items">
-                            <c:forEach var="item" begin="1" end="${pages_number}" varStatus="loop">
-                                <c:choose>
-                                    <c:when test="${item != pages_number}">
-                                        <div class="slider__item">
-                                            <div class="main-grid-container">
-                                                <c:forEach var="tattoo" items = "${catalog}" begin="${(item - 1) * elements_per_page}" end="${item * elements_per_page - 1}">
-                                                    <div class="main-grid-item" title="${tattoo.description}">
-                                                        <ul>
-                                                            <li class="main-text" ><fmt:message key="tattoo.number-tattoo"/> ${tattoo.tattooId}</li>
-                                                            <li class="main-text"><fmt:message key="tattoo.name-tattoo"/> ${tattoo.name}</li>
-                                                            <li class="main-text"><fmt:message key="tattoo.price-tattoo"/> ${tattoo.price}</li>
-                                                            <li class="main-text"><fmt:message key="tattoo.width-tattoo"/> ${tattoo.width}</li>
-                                                            <li class="main-text"><fmt:message key="tattoo.height-tattoo"/> ${tattoo.height}</li>
-                                                            <li class="main-text"><fmt:message key="tattoo.image-tattoo"/>
-                                                                <a href="${tattoo.imageUrl}">
-                                                                    <fmt:message key="tattoo.click-tattoo"/>
-                                                                </a>
-                                                            </li>
-                                                            <li class="main-text"><fmt:message key="tattoo.body-part-tattoo"/> ${tattoo.places}</li>
-                                                            <li class="main-text"><fmt:message key="tattoo.rating-tattoo"/> ${tattoo.averageRating}</li>
-                                                        </ul>
-                                                        <c:if test="${title_tattoos == active || title_tattoos == founded}">
-                                                            <form method="post" action="ProjectServlet">
-                                                                <input type="hidden" name="command" value="create_order_command"/>
-                                                                <input type="hidden" name="tattoo_id" value="${tattoo.tattooId}"/>
-                                                                <input id="date" type="hidden" name="registration_date"/>
-                                                                <button class="tattoo-item-button"
-                                                                        type="submit"
-                                                                        onclick="timeNow(date)">
-                                                                    <fmt:message key="tattoo.order"/>
-                                                                </button>
-                                                            </form>
-                                                        </c:if>
-                                                        <c:if test="${title_tattoos == all || title_tattoos == locked || title_tattoos == proposal}">
-                                                            <c:if test="${tattoo.status == tattooStatusActive}">
-                                                                <form method="post" action="ProjectServlet">
-                                                                    <input type="hidden" name="command" value="change_tattoo_status_command"/>
-                                                                    <input type="hidden" name="id" value="${tattoo.tattooId}"/>
-                                                                    <input type="hidden" name="active" value="false"/>
-                                                                    <button class="tattoo-item-button" type="submit">
-                                                                        <fmt:message key="tattoo.block"/>
-                                                                    </button>
-                                                                </form>
-                                                            </c:if>
-                                                            <c:if test="${tattoo.status == tattooStatusLocked}">
-                                                                <form method="post" action="ProjectServlet">
-                                                                    <input type="hidden" name="command" value="change_tattoo_status_command"/>
-                                                                    <input type="hidden" name="id" value="${tattoo.tattooId}"/>
-                                                                    <input type="hidden" name="active" value="true"/>
-                                                                    <button class="tattoo-item-button" type="submit">
-                                                                        <fmt:message key="tattoo.unblock"/>
-                                                                    </button>
-                                                                </form>
-                                                            </c:if>
-                                                            <c:if test="${tattoo.status == tattooStatusProposal}">
-                                                                <form method="post" action="ProjectServlet">
-                                                                    <input type="hidden" name="command" value="to_approve_tattoo_page_command"/>
-                                                                    <input type="hidden" name="id" value="${tattoo.tattooId}"/>
-                                                                    <button class="tattoo-item-button"><fmt:message key="tattoo.proposal"/></button>
-                                                                </form>
-                                                            </c:if>
-                                                        </c:if>
-                                                    </div>
-                                                </c:forEach>
-                                            </div>
-                                        </div>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <div class="slider__item">
-                                            <div class="main-grid-container">
-                                            <c:forEach var="tattoo" items = "${catalog}" begin="${(item - 1) * elements_per_page}" end="${number_of_tattoos}">
-                                                <div class="main-grid-item" title="${tattoo.description}">
-                                                    <ul>
-                                                        <li class="main-text" ><fmt:message key="tattoo.number-tattoo"/> ${tattoo.tattooId}</li>
-                                                        <li class="main-text"><fmt:message key="tattoo.name-tattoo"/> ${tattoo.name}</li>
-                                                        <li class="main-text"><fmt:message key="tattoo.price-tattoo"/> ${tattoo.price}</li>
-                                                        <li class="main-text"><fmt:message key="tattoo.width-tattoo"/> ${tattoo.width}</li>
-                                                        <li class="main-text"><fmt:message key="tattoo.height-tattoo"/> ${tattoo.height}</li>
-                                                        <li class="main-text"><fmt:message key="tattoo.image-tattoo"/>
-                                                            <a href="${tattoo.imageUrl}">
-                                                                <fmt:message key="tattoo.click-tattoo"/>
-                                                            </a>
-                                                        </li>
-                                                        <li class="main-text"><fmt:message key="tattoo.body-part-tattoo"/> ${tattoo.places}</li>
-                                                        <li class="main-text"><fmt:message key="tattoo.rating-tattoo"/> ${tattoo.averageRating}</li>
-                                                    </ul>
-                                                    <c:if test="${title_tattoos == active || title_tattoos == founded}">
-                                                        <form method="post" action="ProjectServlet">
-                                                            <input type="hidden" name="command" value="create_order_command"/>
-                                                            <input type="hidden" name="tattoo_id" value="${tattoo.tattooId}"/>
-                                                            <input id="date" type="hidden" name="registration_date"/>
-                                                            <button class="tattoo-item-button"
-                                                                    type="submit"
-                                                                    onclick="timeNow(date)">
-                                                                <fmt:message key="tattoo.order"/>
-                                                            </button>
-                                                        </form>
-                                                    </c:if>
-                                                    <c:if test="${title_tattoos == all || title_tattoos == locked || title_tattoos == proposal}">
-                                                        <c:if test="${tattoo.status == tattooStatusActive}">
-                                                            <form method="post" action="ProjectServlet">
-                                                                <input type="hidden" name="command" value="change_tattoo_status_command"/>
-                                                                <input type="hidden" name="id" value="${tattoo.tattooId}"/>
-                                                                <input type="hidden" name="active" value="false"/>
-                                                                <button class="tattoo-item-button" type="submit">
-                                                                    <fmt:message key="tattoo.block"/>
-                                                                </button>
-                                                            </form>
-                                                        </c:if>
-                                                        <c:if test="${tattoo.status == tattooStatusLocked}">
-                                                            <form method="post" action="ProjectServlet">
-                                                                <input type="hidden" name="command" value="change_tattoo_status_command"/>
-                                                                <input type="hidden" name="id" value="${tattoo.tattooId}"/>
-                                                                <input type="hidden" name="active" value="true"/>
-                                                                <button class="tattoo-item-button" type="submit">
-                                                                    <fmt:message key="tattoo.unblock"/>
-                                                                </button>
-                                                            </form>
-                                                        </c:if>
-                                                        <c:if test="${tattoo.status == tattooStatusProposal}">
-                                                            <form method="post" action="ProjectServlet">
-                                                                <input type="hidden" name="command" value="to_approve_tattoo_page_command"/>
-                                                                <input type="hidden" name="id" value="${tattoo.tattooId}"/>
-                                                                <button class="tattoo-item-button"><fmt:message key="tattoo.proposal"/></button>
-                                                            </form>
-                                                        </c:if>
-                                                    </c:if>
-                                                </div>
-                                            </c:forEach>
-                                        </div>
-                                        </div>
-                                    </c:otherwise>
-                                </c:choose>
-                            </c:forEach>
-                        </div>
-                    </div>
-                    <a class="slider__control slider__control_prev" href="#" role="button" data-slide="prev"></a>
-                    <a class="slider__control slider__control_next" href="#" role="button" data-slide="next"></a>
-                </div>
+            <div class="main-grid-container">
+                <ctg:tattoo_pagination currentPage="${current_page_number}"
+                                       elementsPerPage="${elements_per_page}"
+                                       title="${title_tattoos}"/>
+
+                <c:if test="${catalog.size() > 0}">
+                    <form method="post" action="ProjectServlet">
+                        <input type="hidden" name="command" value="${requestScope.command}"/>
+                        <input type="hidden" name="current_page_number" value="${current_page_number - 1}"/>
+                        <c:if test="${current_page_number > 1}">
+                            <button class="button-prev"><fmt:message key="pagination.back"/></button>
+                        </c:if>
+                        <c:if test="${current_page_number == 1}">
+                            <button disabled="disabled" class="button-prev"><fmt:message key="pagination.back"/></button>
+                        </c:if>
+                    </form>
+                    <form method="post" action="ProjectServlet">
+                        <input type="hidden" name="command" value="${requestScope.command}"/>
+                        <input type="hidden" name="current_page_number" value="${current_page_number + 1}"/>
+                        <c:if test="${current_page_number < pages_number}">
+                            <button class="button-next"><fmt:message key="pagination.forward"/></button>
+                        </c:if>
+                        <c:if test="${current_page_number == pages_number}">
+                            <button disabled="disabled" class="button-next"><fmt:message key="pagination.forward"/></button>
+                        </c:if>
+                    </form>
+                    <div class="page-number"> ${current_page_number} / ${pages_number}</div>
+                </c:if>
+            </div>
         </section>
     </div>
 </main>

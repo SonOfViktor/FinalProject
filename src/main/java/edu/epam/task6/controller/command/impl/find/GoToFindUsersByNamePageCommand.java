@@ -1,9 +1,6 @@
 package edu.epam.task6.controller.command.impl.find;
 
-import edu.epam.task6.controller.command.Command;
-import edu.epam.task6.controller.command.PagePath;
-import edu.epam.task6.controller.command.RequestParameter;
-import edu.epam.task6.controller.command.Router;
+import edu.epam.task6.controller.command.*;
 import edu.epam.task6.controller.command.impl.pagination.SendSplitParameters;
 import edu.epam.task6.exception.ServiceException;
 import edu.epam.task6.model.entity.User;
@@ -22,15 +19,20 @@ public class GoToFindUsersByNamePageCommand implements Command {
     @Override
     public Router execute(HttpServletRequest request) {
         Router router;
+
+        Integer currentPage = 1;
+        if (request.getParameter(RequestParameter.CURRENT_PAGE_NUMBER) != null) {
+            currentPage = Integer.valueOf(request.getParameter(RequestParameter.CURRENT_PAGE_NUMBER));
+        }
+
         UserService userService = new UserServiceImpl();
         String usersName = request.getParameter(RequestParameter.USER_NAME);
         try {
             List<User> users = userService.findByName(usersName);
             request.setAttribute(RequestParameter.USERS, users);
-
-            request = SendSplitParameters.sendSplitParametersUsers(request, users.size());
-
+            request = SendSplitParameters.sendSplitParametersUsers(request, users.size(), currentPage);
             request.setAttribute(RequestParameter.TITLE_USERS, RequestParameter.TITLE_USERS_FOUNDED);
+            request.setAttribute(RequestParameter.COMMAND, CommandType.TO_FIND_USERS_BY_NAME_PAGE_COMMAND);
             router = new Router(PagePath.USERS_PAGE);
         } catch (ServiceException e) {
             logger.error("Error during searching users with name = " + usersName, e);

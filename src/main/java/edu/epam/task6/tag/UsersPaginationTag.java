@@ -155,7 +155,7 @@ public class UsersPaginationTag extends TagSupport {
                             .append(resourceBundle.getString("change.button-block"))
                             .append("</button>");
                 }
-                if (user.getStatus().equals(UserStatus.BLOCKED) && user.getRole().equals(UserRole.ADMIN)) {
+                if (user.getStatus().equals(UserStatus.BLOCKED) || user.getRole().equals(UserRole.ADMIN)) {
                     stringBuilder.append("<button disabled=\"disabled\" class=\"user-list-item-button\" type=\"submit\">")
                             .append(resourceBundle.getString("change.button-block"))
                             .append("</button>");
@@ -172,7 +172,7 @@ public class UsersPaginationTag extends TagSupport {
                         .append(title)
                         .append("\"/>");
 
-                if (user.getStatus().equals(UserStatus.ACTIVE) && user.getRole().equals(UserRole.ADMIN)) {
+                if (user.getStatus().equals(UserStatus.ACTIVE) || user.getRole().equals(UserRole.ADMIN)) {
                     stringBuilder.append("<button disabled=\"disabled\" class=\"user-list-item-button\" type=\"submit\">")
                             .append(resourceBundle.getString("change.button-unblock"))
                             .append("</button>");
