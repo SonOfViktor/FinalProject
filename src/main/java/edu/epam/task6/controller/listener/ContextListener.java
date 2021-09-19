@@ -13,11 +13,6 @@ public class ContextListener implements ServletContextListener {
     private static final Logger logger = LogManager.getLogger();
 
     @Override
-    public void contextInitialized(ServletContextEvent servletContextEvent) {
-        ConnectionPool.getInstance();
-    }
-
-    @Override
     public void contextDestroyed(ServletContextEvent sce) {
         ConnectionPool.getInstance().destroyPool();
         logger.info("ConnectionPool has den destroyed.");
