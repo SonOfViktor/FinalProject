@@ -4,7 +4,7 @@ import edu.epam.task6.controller.command.*;
 import edu.epam.task6.model.entity.Tattoo;
 import edu.epam.task6.model.service.TattooService;
 import edu.epam.task6.model.service.impl.TattooServiceImpl;
-import edu.epam.task6.controller.command.impl.pagination.SendSplitParameters;
+import edu.epam.task6.util.SendSplitParameters;
 import edu.epam.task6.exception.ServiceException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;

@@ -22,7 +22,7 @@ public interface TattooService {
 
     List<Tattoo> findByName(String name) throws ServiceException;
 
-    List<Tattoo> findByPriceRange(BigDecimal min, BigDecimal max) throws ServiceException;
+    List<Tattoo> findByPriceRange(String min, String max) throws ServiceException;
 
     List<Tattoo> findByPlace(String place) throws ServiceException;
 
@@ -32,14 +32,12 @@ public interface TattooService {
 
     List<Tattoo> findByPlaceAllActive(String place) throws ServiceException;
 
-    List<Tattoo> findByPriceRangeAllActive(BigDecimal min, BigDecimal max) throws ServiceException;
+    List<Tattoo> findByPriceRangeAllActive(String min, String max) throws ServiceException;
 
     List<Tattoo> findByStatus(String status) throws ServiceException;
 
     List<Tattoo> findAll() throws ServiceException;
 
     List<Tattoo> findAllActive() throws ServiceException;
-
-    List<Tattoo> findNumberActive(int number) throws ServiceException;
 
 }

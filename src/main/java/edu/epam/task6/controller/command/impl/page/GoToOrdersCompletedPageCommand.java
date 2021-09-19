@@ -4,7 +4,7 @@ import edu.epam.task6.controller.command.*;
 import edu.epam.task6.model.entity.OrderStatus;
 import edu.epam.task6.model.service.OrderService;
 import edu.epam.task6.model.service.impl.OrderServiceImpl;
-import edu.epam.task6.controller.command.impl.pagination.SendSplitParameters;
+import edu.epam.task6.util.SendSplitParameters;
 import edu.epam.task6.exception.ServiceException;
 import edu.epam.task6.model.entity.Order;
 import jakarta.servlet.http.HttpServletRequest;

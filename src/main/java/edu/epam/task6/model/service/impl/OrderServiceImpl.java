@@ -15,8 +15,10 @@ import java.util.Optional;
 
 public class OrderServiceImpl implements OrderService {
 
+    private static final Validator validator = new Validator();
+
     public boolean createOrder(Map<String, String> parameters) throws ServiceException {
-        boolean result = Validator.validateOrder(parameters);
+        boolean result = validator.validateOrder(parameters);
         if(result) {
             OrderDao orderDao = OrderDaoImpl.getInstance();
             try {
@@ -27,16 +29,16 @@ public class OrderServiceImpl implements OrderService {
         }
         return result;
     }
-    //TODO Сделать валидацию
+
     public boolean updateStatus(Map<String, String> parameters, Long orderId) throws ServiceException {
         boolean result = true;
         if(result) {
             OrderDao orderDao = OrderDaoImpl.getInstance();
             int statusId = switch (parameters.get(ColumnName.ORDERS_STATUS)) {
+                case "ACTIVE" -> 1;
                 case "COMPLETED" -> 2;
-                case "CANCELED" ->3;
                 case "COMPLETED_AND_ASSESSED" -> 4;
-                default -> 1;
+                default -> 3;
             };
             try {
                 result = orderDao.updateStatus(statusId, orderId);

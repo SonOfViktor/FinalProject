@@ -24,7 +24,7 @@
             rel="stylesheet"
     />
     <link
-            href="${pageContext.request.contextPath}/assets/css/register5.css"
+            href="${pageContext.request.contextPath}/assets/css/register6.css"
             rel="stylesheet"
     />
     <title><fmt:message key="register.main-title"/></title>

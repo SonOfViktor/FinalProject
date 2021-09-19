@@ -2,7 +2,7 @@ package edu.epam.task6.controller.command.impl.find;
 
 import edu.epam.task6.controller.command.*;
 import edu.epam.task6.model.entity.User;
-import edu.epam.task6.controller.command.impl.pagination.SendSplitParameters;
+import edu.epam.task6.util.SendSplitParameters;
 import edu.epam.task6.exception.ServiceException;
 import edu.epam.task6.model.service.UserService;
 import edu.epam.task6.model.service.impl.UserServiceImpl;

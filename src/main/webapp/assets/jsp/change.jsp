@@ -36,7 +36,7 @@
             rel="stylesheet"
     />
     <link
-            href="${pageContext.request.contextPath}/assets/css/register5.css"
+            href="${pageContext.request.contextPath}/assets/css/register6.css"
             rel="stylesheet"
     />
     <title><fmt:message key="change.title"/></title>
@@ -252,6 +252,9 @@
         </form>
     </c:if>
     <c:if test="${what_change == localUserStatus && active == false}">
+        <div class="register-login-info">
+            <fmt:message key="login.message.info"/>
+        </div>
         <form method="post" action="ProjectServlet">
             <input type="hidden" name="command" value="change_user_status_command"/>
             <div class="info-div">
@@ -266,6 +269,9 @@
         </form>
     </c:if>
     <c:if test="${what_change == localUserStatus && active == true}">
+        <div class="register-login-info">
+            <fmt:message key="login.message.info"/>
+        </div>
         <form method="post" action="ProjectServlet">
             <input type="hidden" name="command" value="change_user_status_command"/>
             <div class="info-div">
@@ -280,6 +286,9 @@
         </form>
     </c:if>
     <c:if test="${what_change == localTattooStatus && active == false}">
+        <div class="register-login-info">
+            <fmt:message key="login.message.info"/>
+        </div>
         <form method="post" action="ProjectServlet">
             <input type="hidden" name="command" value="change_tattoo_status_command"/>
             <div class="info-div">
@@ -294,6 +303,9 @@
         </form>
     </c:if>
     <c:if test="${what_change == localTattooStatus && active == true}">
+        <div class="register-login-info">
+            <fmt:message key="login.message.info"/>
+        </div>
         <form method="post" action="ProjectServlet">
             <input type="hidden" name="command" value="change_tattoo_status_command"/>
             <div class="info-div">

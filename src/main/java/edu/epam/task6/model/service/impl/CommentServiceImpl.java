@@ -14,9 +14,12 @@ import java.util.Map;
 
 public class CommentServiceImpl implements CommentService {
 
+    private static final Validator validator = new Validator();
+
     public boolean leaveComment(Map<String, String> parameters) throws ServiceException {
         String text = parameters.get(ColumnName.COMMENT_TEXT);
-        boolean result = Validator.validateComment(text);
+        String userId = parameters.get(ColumnName.COMMENT_USER_ID);
+        boolean result = validator.validateComment(text) && validator.validateId(userId);
         if(result) {
             CommentDao commentDao = CommentDaoImpl.getInstance();
             try {
@@ -29,7 +32,7 @@ public class CommentServiceImpl implements CommentService {
     }
 
     public boolean deleteComment(Long commentId) throws ServiceException {
-        boolean result = Validator.validateId(commentId.toString());
+        boolean result = validator.validateId(commentId.toString());
         if(result) {
             CommentDao commentDao = CommentDaoImpl.getInstance();
             try {

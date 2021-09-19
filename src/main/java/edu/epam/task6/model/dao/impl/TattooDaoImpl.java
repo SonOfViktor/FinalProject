@@ -404,36 +404,6 @@ public class TattooDaoImpl implements TattooDao {
         }
     }
 
-    public List<Tattoo> findNumberActive(int number) throws DaoException {
-        try (Connection connection = ConnectionPool.getInstance().getConnection();
-             PreparedStatement statement = connection.prepareStatement(FIND_ALL_ACTIVE_TATTOOS)) {
-            statement.setString(1, TattooStatus.ACTIVE.name());
-            try (ResultSet resultSet = statement.executeQuery()){
-                List<Tattoo> tattoosList = new ArrayList<>();
-                while (resultSet.next() && tattoosList.size() < number) {
-                    TattooBuilder tattooBuilder = new TattooBuilder();
-                    tattooBuilder.setCatalogId(resultSet.getLong(ColumnName.TATTOOS_ID));
-                    tattooBuilder.setName(resultSet.getString(ColumnName.TATTOOS_NAME));
-                    tattooBuilder.setDescription(resultSet.getString(ColumnName.TATTOOS_DESCRIPTION));
-                    tattooBuilder.setPrice(resultSet.getBigDecimal(ColumnName.TATTOOS_PRICE));
-                    tattooBuilder.setWidth(resultSet.getInt(ColumnName.TATTOOS_WIDTH));
-                    tattooBuilder.setHeight(resultSet.getInt(ColumnName.TATTOOS_HEIGHT));
-                    tattooBuilder.setAverageRating(resultSet.getDouble(ColumnName.AVERAGE_RATING));
-                    tattooBuilder.setNumberOfRatings(resultSet.getInt(ColumnName.TATTOOS_NUMBER_OF_RATINGS));
-                    tattooBuilder.setImageUrl(resultSet.getString(ColumnName.TATTOOS_IMAGE_URL));
-                    tattooBuilder.setStatus(TattooStatus.valueOf(resultSet.getString(ColumnName.TATTOOS_STATUS)));
-                    tattooBuilder.setPlaces(BodyPart.valueOf(resultSet.getString(ColumnName.TATTOOS_PLACE)));
-                    tattooBuilder.setUserId(resultSet.getLong(ColumnName.TATTOOS_USER_ID));
-                    tattoosList.add(tattooBuilder.build());
-                }
-                return tattoosList;
-            }
-        } catch (SQLException e) {
-            logger.error("Error during searching ACTIVE tattoos in tattoos catalog.", e);
-            throw new DaoException("Error during searching ACTIVE tattoos in tattoos catalog.", e);
-        }
-    }
-
     private List<Tattoo> createTattoos(ResultSet resultSet) throws SQLException {
         List<Tattoo> tattoosList = new ArrayList<>();
         while (resultSet.next()) {

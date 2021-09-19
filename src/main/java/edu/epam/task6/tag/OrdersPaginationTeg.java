@@ -134,7 +134,7 @@ public class OrdersPaginationTeg extends TagSupport {
                         .append("</div>")
                         .append("</div>");
 
-                if (order.getOrderStatus().equals(OrderStatus.ACTIVE)) {
+                if (order.getOrderStatus().equals(OrderStatus.ACTIVE) && userRole.equals(UserRole.USER)) {
                     stringBuilder.append("<form method=\"post\" action=\"ProjectServlet\">")
                             .append("<input type=\"hidden\" name=\"command\" value=\"cancel_order_command\"/>")
                             .append("<input type=\"hidden\" name=\"id\" value=\"")
@@ -142,6 +142,28 @@ public class OrdersPaginationTeg extends TagSupport {
                             .append("\"/>")
                             .append("<button class=\"order-list-item-button\">")
                             .append(resourceBundle.getString("orders.cancel.button"))
+                            .append("</button>")
+                            .append("</form>");
+                }
+
+                if (order.getOrderStatus().equals(OrderStatus.ACTIVE) && userRole.equals(UserRole.ADMIN)) {
+                    stringBuilder.append("<form method=\"post\" action=\"ProjectServlet\">")
+                            .append("<input type=\"hidden\" name=\"command\" value=\"cancel_order_command\"/>")
+                            .append("<input type=\"hidden\" name=\"id\" value=\"")
+                            .append(order.getOrderId())
+                            .append("\"/>")
+                            .append("<button class=\"order-list-item-button2\">")
+                            .append(resourceBundle.getString("orders.cancel.button"))
+                            .append("</button>")
+                            .append("</form>");
+
+                    stringBuilder.append("<form class=\"form-button-order2\" method=\"post\" action=\"ProjectServlet\">")
+                            .append("<input type=\"hidden\" name=\"command\" value=\"complete_order_command\"/>")
+                            .append("<input type=\"hidden\" name=\"id\" value=\"")
+                            .append(order.getOrderId())
+                            .append("\"/>")
+                            .append("<button class=\"order-list-item-button2\">")
+                            .append(resourceBundle.getString("orders.comlete.button"))
                             .append("</button>")
                             .append("</form>");
                 }

@@ -1,7 +1,7 @@
 package edu.epam.task6.controller.command.impl.find;
 
 import edu.epam.task6.controller.command.*;
-import edu.epam.task6.controller.command.impl.pagination.SendSplitParameters;
+import edu.epam.task6.util.SendSplitParameters;
 import edu.epam.task6.exception.ServiceException;
 import edu.epam.task6.model.entity.Tattoo;
 import edu.epam.task6.model.entity.UserRole;
@@ -32,10 +32,8 @@ public class GoToFindTattooByPriceRangePageCommand implements Command {
         }
 
         TattooService tattooService = new TattooServiceImpl();
-        BigDecimal minPrice =
-                new BigDecimal(request.getParameter(RequestParameter.TATTOO_MIN_PRICE));
-        BigDecimal maxPrice =
-                new BigDecimal(request.getParameter(RequestParameter.TATTOO_MAX_PRICE));
+        String minPrice = request.getParameter(RequestParameter.TATTOO_MIN_PRICE);
+        String maxPrice = request.getParameter(RequestParameter.TATTOO_MAX_PRICE);
 
         try {
             List<Tattoo> tattoos;

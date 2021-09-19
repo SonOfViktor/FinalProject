@@ -10,14 +10,18 @@ import edu.epam.task6.model.service.TattooService;
 import edu.epam.task6.model.validator.Validator;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
 public class TattooServiceImpl implements TattooService {
 
+    private static final Validator validator = new Validator();
+
     public boolean AddNewTattoo(Map<String, String> parameters) throws ServiceException {
-        boolean result = true;
+        boolean result = validator.validateTattoo(parameters);
+        System.out.println(result);
         if(result) {
             TattooDao tattooDao = TattooDaoImpl.getInstance();
             try {
@@ -28,34 +32,33 @@ public class TattooServiceImpl implements TattooService {
         }
         return result;
     }
-    //TODO Сделать валидацию
+
     public boolean updateStatus(Map<String, String> parameters, Long tattooId)
             throws ServiceException {
-        boolean result = true;
-        if(result) {
-            TattooDao tattooDao = TattooDaoImpl.getInstance();
-            int statusId = switch (parameters.get(ColumnName.TATTOOS_STATUS)) {
-                case "LOCKED" -> 2;
-                case "OFFERED_BY_USER" -> 3;
-                default -> 1;
-            };
-            try {
-                result = tattooDao.updateStatus(statusId, tattooId);
-            } catch (DaoException e) {
-                throw new ServiceException(e);
-            }
+        boolean result;
+        TattooDao tattooDao = TattooDaoImpl.getInstance();
+        int statusId = switch (parameters.get(ColumnName.TATTOOS_STATUS)) {
+            case "ACTIVE" -> 1;
+            case "OFFERED_BY_USER" -> 3;
+            default -> 2;
+        };
+        try {
+            result = tattooDao.updateStatus(statusId, tattooId);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
         }
         return result;
     }
 
     public boolean updatePrice(Map<String, String> parameters, Long tattooId)
             throws ServiceException {
-        boolean result = true;
+        String price = parameters.get(ColumnName.TATTOOS_PRICE);
+        boolean result = validator.validatePrice(price);
         if(result) {
             TattooDao tattooDao = TattooDaoImpl.getInstance();
-            BigDecimal price = BigDecimal.valueOf(Long.valueOf(parameters.get(ColumnName.TATTOOS_PRICE)));
+            BigDecimal localPrice = BigDecimal.valueOf(Long.valueOf(price));
             try {
-                result = tattooDao.updatePrice(price, tattooId);
+                result = tattooDao.updatePrice(localPrice, tattooId);
             } catch (DaoException e) {
                 throw new ServiceException(e);
             }
@@ -65,7 +68,7 @@ public class TattooServiceImpl implements TattooService {
 
     public boolean updateAverageRating(Map<String, String> parameters, Long tattooId) throws ServiceException {
         Integer grade = Integer.valueOf(parameters.get(ColumnName.TATTOOS_AVERAGE_RATING));
-        boolean result = Validator.validateAverageRating(grade.toString());
+        boolean result = validator.validateAverageRating(grade.toString());
         if(result) {
             TattooDao tattooDao = TattooDaoImpl.getInstance();
             try {
@@ -116,16 +119,22 @@ public class TattooServiceImpl implements TattooService {
         }
     }
 
-    public List<Tattoo> findByPriceRange(BigDecimal min, BigDecimal max)
+    public List<Tattoo> findByPriceRange(String min, String max)
             throws ServiceException {
-        TattooDao tattooDao = TattooDaoImpl.getInstance();
-        try {
-            List<Tattoo> tattoosList;
-            tattoosList = tattooDao.findByPriceRange(min, max);
-            return tattoosList;
-        } catch (DaoException e){
-            throw new ServiceException(e);
+        List<Tattoo> tattoosList = new ArrayList<>();
+        boolean result = validator.validateMinMaxRange(min, max);
+        if(result) {
+            BigDecimal minRange = new BigDecimal(min);
+            BigDecimal maxRange = new BigDecimal(max);
+            TattooDao tattooDao = TattooDaoImpl.getInstance();
+            try {
+                tattoosList = tattooDao.findByPriceRange(minRange, maxRange);
+                return tattoosList;
+            } catch (DaoException e){
+                throw new ServiceException(e);
+            }
         }
+        return tattoosList;
     }
 
     public List<Tattoo> findByPlace(String place) throws ServiceException {
@@ -172,16 +181,22 @@ public class TattooServiceImpl implements TattooService {
         }
     }
 
-    public List<Tattoo> findByPriceRangeAllActive(BigDecimal min, BigDecimal max)
+    public List<Tattoo> findByPriceRangeAllActive(String min, String max)
             throws ServiceException {
-        TattooDao tattooDao = TattooDaoImpl.getInstance();
-        try {
-            List<Tattoo> tattoosList;
-            tattoosList = tattooDao.findByPriceRangeAllActive(min, max);
-            return tattoosList;
-        } catch (DaoException e){
-            throw new ServiceException(e);
+        List<Tattoo> tattoosList = new ArrayList<>();
+        boolean result = validator.validateMinMaxRange(min, max);
+        if(result) {
+            BigDecimal minRange = new BigDecimal(min);
+            BigDecimal maxRange = new BigDecimal(max);
+            TattooDao tattooDao = TattooDaoImpl.getInstance();
+            try {
+                tattoosList = tattooDao.findByPriceRangeAllActive(minRange, maxRange);
+                return tattoosList;
+            } catch (DaoException e){
+                throw new ServiceException(e);
+            }
         }
+        return tattoosList;
     }
 
     public List<Tattoo> findByStatus(String status) throws ServiceException {
@@ -211,17 +226,6 @@ public class TattooServiceImpl implements TattooService {
         try {
             List<Tattoo> tattoosList;
             tattoosList = tattooDao.findAllActive();
-            return tattoosList;
-        } catch (DaoException e){
-            throw new ServiceException(e);
-        }
-    }
-
-    public List<Tattoo> findNumberActive(int number) throws ServiceException {
-        TattooDao tattooDao = TattooDaoImpl.getInstance();
-        try {
-            List<Tattoo> tattoosList;
-            tattoosList = tattooDao.findNumberActive(number);
             return tattoosList;
         } catch (DaoException e){
             throw new ServiceException(e);

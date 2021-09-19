@@ -63,7 +63,7 @@
     width: 655px;
     height: 45px;
     left: 10px;
-    top: 10px;
+    top: 8px;
     background: #CD6326;
     border: 1px solid #CD6326;
     border-radius: 5px 5px 5px 5px;
@@ -76,4 +76,30 @@
     align-items: center;
     text-align: center;
     color: #F7F7F7;
+}
+.order-list-item-button2 {
+    position: relative;
+    width: 325px;
+    height: 45px;
+    left: 10px;
+    top: 8px;
+    background: #CD6326;
+    border: 1px solid #CD6326;
+    border-radius: 5px 5px 5px 5px;
+    outline: none;
+    font-family: Roboto;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 23px;
+    line-height: 27px;
+    align-items: center;
+    text-align: center;
+    color: #F7F7F7;
+}
+.form-button-order2 {
+    position: relative;
+    width: 325px;
+    height: 45px;
+    left: 330px;
+    top: -62px;
 }

@@ -8,29 +8,33 @@ import java.util.Map;
 
 public class Validator {
 
+
     private static final String ID_REGEX = "[0-9]{1,19}";
     private static final String EMAIL_REGEX = "^[A-z0-9._-]+@[a-z0-9._-]+\\.[a-z]{2,4}$";
     private final static String LOGIN_REGEX= "[\\w][\\w._-]{0,39}";
     private static final String NAME_REGEX = "[A-ZА-ЯЁ][A-Za-zА-Яа-яЁё]{0,39}";
     private final static String PASSWORD_REGEX = "[-\\w_!@#$%^&*()]{8,45}";
-    private final static String PRICE_REGEX = "[0-9]([0-9.]){0,9}";
+    private final static String PRICE_REGEX = "[0-9]([0-9.]){0,18}";
     private final static String DESCRIPTION_REGEX = "[A-ZА-ЯЁ][A-Za-zА-Яа-яЁё ,\\.!?\\d]{0,1999}";
     private final static String COMMENT_REGEX = "[A-Za-zА-Яа-яЁё1-9 ,\\.!?\\d]{1,1000}";
-    private final static String SIZE_REGEX = "[0-9]{1,9}";
+    private final static String SIZE_REGEX = "[0-9]{1,10}";
     private final static String DISCOUNT_REGEX = "[0-9]{1,3}";
     private final static String RATING_REGEX = "[0-9]{1,2}";
 
-    private final static String MAX_PRICE = "9223372036854775807";
-
-    public static boolean validateId(String id) {
+    public boolean validateId(String id) {
         boolean result = false;
-        if(id != null && !id.isBlank()) {
-            result = id.matches(ID_REGEX);
+        if(id != null && !id.isBlank() && id.matches(ID_REGEX)) {
+            try {
+                Long.parseLong(id);
+                result = true;
+            } catch (NumberFormatException e) {
+                result = false;
+            }
         }
         return result;
     }
 
-    public static boolean validateEmail(String email) {
+    public boolean validateEmail(String email) {
         boolean result = false;
         if(email != null && !email.isBlank() && email.length() <= 50) {
             result = email.matches(EMAIL_REGEX);
@@ -38,7 +42,7 @@ public class Validator {
         return result;
     }
 
-    public static boolean validateLogin(String login) {
+    public boolean validateLogin(String login) {
         boolean result = false;
         if(login != null && !login.isBlank()) {
             result = login.matches(LOGIN_REGEX);
@@ -46,15 +50,24 @@ public class Validator {
         return result;
     }
 
-    public static boolean validateMinMaxRange(BigDecimal min, BigDecimal max) {
+    public boolean validateMinMaxRange(String min, String max) {
         boolean result = false;
-        if (min.doubleValue() < max.doubleValue() && min.doubleValue() > 0) {
-            result = true;
+        if (min != null && !min.isBlank() && max != null && !max.isBlank()) {
+            try {
+                BigDecimal minRange = new BigDecimal(min);
+                BigDecimal maxRange = new BigDecimal(max);
+
+                if (minRange.compareTo(maxRange) == -1 && minRange.compareTo(BigDecimal.ZERO) == 1) {
+                    result = true;
+                }
+            } catch (NumberFormatException e) {
+                result = false;
+            }
         }
         return result;
     }
 
-    public static boolean validateName(String name) {
+    public boolean validateName(String name) {
         boolean result = false;
         if(name != null && !name.isBlank()) {
             result = name.matches(NAME_REGEX);
@@ -62,7 +75,7 @@ public class Validator {
         return result;
     }
 
-    public static boolean validatePassword(String password) {
+    public boolean validatePassword(String password) {
         boolean result = false;
         if(password != null && !password.isBlank()){
             result = password.matches(PASSWORD_REGEX);
@@ -70,19 +83,23 @@ public class Validator {
         return result;
     }
 
-    public static boolean validatePrice(String price) {
+    public boolean validatePrice(String price) {
         boolean result = false;
         if(price != null && price.matches(PRICE_REGEX)) {
-            BigDecimal localPrice = new BigDecimal(price);
-            BigDecimal maxPrice = new BigDecimal(MAX_PRICE);
-            if (localPrice.compareTo(BigDecimal.ZERO) == 1 && localPrice.compareTo(maxPrice) == -1) {
-                result = true;
+            try {
+                BigDecimal localPrice = new BigDecimal(price);
+                if (localPrice.compareTo(BigDecimal.ZERO) == 1 ||
+                        localPrice.compareTo(BigDecimal.ZERO) == 0) {
+                    result = true;
+                }
+            } catch (NumberFormatException e) {
+                result = false;
             }
         }
         return result;
     }
 
-    public static boolean validateDescription(String description) {
+    public boolean validateDescription(String description) {
         boolean result = false;
         if(description != null && !description.isBlank()) {
             result = description.matches(DESCRIPTION_REGEX);
@@ -90,7 +107,7 @@ public class Validator {
         return result;
     }
 
-    public static boolean validateComment(String comment) {
+    public boolean validateComment(String comment) {
         boolean result = false;
         if(comment != null && !comment.isBlank()) {
             result = comment.matches(COMMENT_REGEX);
@@ -98,18 +115,25 @@ public class Validator {
         return result;
     }
 
-    public static boolean validateSize(String size) {
+    public boolean validateSize(String size) {
         boolean result = false;
-        if(size != null) {
-            result = size.matches(SIZE_REGEX);
+        if(size != null && !size.isBlank() && size.matches(SIZE_REGEX)) {
+            try {
+                Integer localSize = Integer.valueOf(size);
+                if (localSize > 0) {
+                    result = true;
+                }
+            } catch (NumberFormatException e) {
+                result = false;
+            }
         }
         return result;
     }
 
-    public static boolean validateDiscount(String discount) {
+    public boolean validateDiscount(String discount) {
         boolean result = false;
-        if(discount != null && discount.matches(DISCOUNT_REGEX)) {
-            int localDiscount = Integer.valueOf(discount);
+        if(discount != null && !discount.isBlank() && discount.matches(DISCOUNT_REGEX)) {
+            Integer localDiscount = Integer.valueOf(discount);
             if (localDiscount >= 0 && localDiscount <= 100) {
                 result = true;
             }
@@ -117,9 +141,9 @@ public class Validator {
         return result;
     }
 
-    public static boolean validateAverageRating(String grade) {
+    public boolean validateAverageRating(String grade) {
         boolean result = false;
-        if(grade != null && grade.matches(RATING_REGEX)) {
+        if(grade != null && !grade.isBlank() && grade.matches(RATING_REGEX)) {
             Double localGrade = Double.valueOf(grade);
             if (localGrade >= 1 && localGrade <= 10) {
                 result = true;
@@ -128,7 +152,7 @@ public class Validator {
         return result;
     }
 
-    public static boolean validateRegistrationPassword(String password, String repeatPassword) {
+    public boolean validateRegistrationPassword(String password, String repeatPassword) {
         boolean result = false;
         if (validatePassword(password) && validatePassword(repeatPassword)
                 && password.equals(repeatPassword)) {
@@ -137,13 +161,13 @@ public class Validator {
         return result;
     }
 
-    public static boolean validateOrder(Map<String, String> parameters) {
+    public boolean validateOrder(Map<String, String> parameters) {
         String paid = parameters.get(ColumnName.ORDERS_PAID);
         String tattooId = parameters.get(ColumnName.ORDERS_TATTOO_ID);
         return validatePrice(paid) && validateId(tattooId);
     }
 
-    public static boolean validateTattoo(Map<String, String> parameters) {
+    public boolean validateTattoo(Map<String, String> parameters) {
         String name = parameters.get(ColumnName.TATTOOS_NAME);
         String description = parameters.get(ColumnName.TATTOOS_DESCRIPTION);
         String price = parameters.get(ColumnName.TATTOOS_PRICE);
@@ -156,7 +180,7 @@ public class Validator {
                 && validateSize(height);
     }
 
-    public static boolean validateUser(Map<String, String> parameters) {
+    public boolean validateUser(Map<String, String> parameters) {
         String email = parameters.get(ColumnName.USER_EMAIL);
         String login = parameters.get(ColumnName.USER_LOGIN);
         String password = parameters.get(ColumnName.USER_PASSWORD);

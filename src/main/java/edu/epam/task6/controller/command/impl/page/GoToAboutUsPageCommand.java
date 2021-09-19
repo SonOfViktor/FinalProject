@@ -1,17 +1,14 @@
 package edu.epam.task6.controller.command.impl.page;
 
 import edu.epam.task6.controller.command.*;
-import edu.epam.task6.controller.command.impl.pagination.SendSplitParameters;
+import edu.epam.task6.util.SendSplitParameters;
 import edu.epam.task6.exception.ServiceException;
 import edu.epam.task6.model.entity.Comment;
-import edu.epam.task6.model.entity.Order;
 import edu.epam.task6.model.entity.User;
 import edu.epam.task6.model.entity.UserRole;
 import edu.epam.task6.model.service.CommentService;
-import edu.epam.task6.model.service.OrderService;
 import edu.epam.task6.model.service.UserService;
 import edu.epam.task6.model.service.impl.CommentServiceImpl;
-import edu.epam.task6.model.service.impl.OrderServiceImpl;
 import edu.epam.task6.model.service.impl.UserServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;

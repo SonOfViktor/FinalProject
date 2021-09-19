@@ -41,6 +41,4 @@ public interface TattooDao {
     List<Tattoo> findAll() throws DaoException;
 
     List<Tattoo> findAllActive() throws DaoException;
-
-    List<Tattoo> findNumberActive(int number) throws DaoException;
 }

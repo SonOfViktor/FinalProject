@@ -1,4 +1,4 @@
-package edu.epam.task6.controller.command.impl.pagination;
+package edu.epam.task6.util;
 
 import edu.epam.task6.controller.command.PageSplitParameter;
 import edu.epam.task6.controller.command.RequestParameter;

@@ -23,6 +23,7 @@ public class GoToHomePageCommand implements Command {
     public Router execute(HttpServletRequest request) {
         Router router;
         HttpSession session = request.getSession();
+        session.setAttribute(SessionAttribute.PREVIOUS_PAGE, PagePath.MAIN_PAGE_REDIRECT);
         if (session.getAttribute(SessionAttribute.LOCALE) == null) {
             session.setAttribute(SessionAttribute.LOCALE, RUSSIAN);
         }
@@ -32,7 +33,7 @@ public class GoToHomePageCommand implements Command {
         session.setAttribute(SessionAttribute.PREVIOUS_PAGE, PagePath.MAIN_PAGE_REDIRECT);
         TattooService catalogService = new TattooServiceImpl();
         try {
-            List<Tattoo> catalogElements = catalogService.findNumberActive(PageSplitParameter.NUMBER_OF_TATTOOS_PER_PAGE);
+            List<Tattoo> catalogElements = catalogService.findAllActive();
             request.setAttribute(RequestParameter.CATALOG, catalogElements);
             router = new Router(PagePath.MAIN_PAGE);
         } catch (ServiceException e) {

@@ -18,9 +18,10 @@ import java.util.Optional;
 public class UserServiceImpl implements UserService {
 
     private static final Integer MAXIMUM_DISCOUNT_PERCENT = 50;
+    private static final Validator validator = new Validator();
 
     public boolean registerUser(Map<String, String> parameters) throws ServiceException {
-        boolean result = Validator.validateUser(parameters);
+        boolean result = validator.validateUser(parameters);
         if(result) {
             UserDao userDao = UserDaoImpl.getInstance();
             try {
@@ -36,7 +37,7 @@ public class UserServiceImpl implements UserService {
 
     public boolean updateEmail(Map<String, String> parameters, Long userId) throws ServiceException {
         String email = parameters.get(RequestParameter.USER_EMAIL);
-        boolean result = Validator.validateEmail(email);
+        boolean result = validator.validateEmail(email);
         if(result) {
             UserDao userDao = UserDaoImpl.getInstance();
             try {
@@ -50,7 +51,7 @@ public class UserServiceImpl implements UserService {
 
     public boolean updatePassword(Map<String, String> parameters, Long userId) throws ServiceException {
         String passwordNew = parameters.get(RequestParameter.USER_PASSWORD);
-        boolean result = Validator.validatePassword(passwordNew) ;
+        boolean result = validator.validatePassword(passwordNew) ;
         if(result) {
             UserDao userDao = UserDaoImpl.getInstance();
             try {
@@ -66,7 +67,7 @@ public class UserServiceImpl implements UserService {
 
     public boolean updateName(Map<String, String> parameters, Long userId) throws ServiceException {
         String name = parameters.get(RequestParameter.USER_NAME);
-        boolean result = Validator.validateName(name);
+        boolean result = validator.validateName(name);
         if(result) {
             UserDao userDao = UserDaoImpl.getInstance();
             try {
@@ -80,7 +81,7 @@ public class UserServiceImpl implements UserService {
 
     public boolean updateSurname(Map<String, String> parameters, Long userId) throws ServiceException {
         String surname = parameters.get(RequestParameter.USER_SURNAME);
-        boolean result = Validator.validateName(surname);
+        boolean result = validator.validateName(surname);
         if(result) {
             UserDao userDao = UserDaoImpl.getInstance();
             try {
@@ -94,7 +95,7 @@ public class UserServiceImpl implements UserService {
 
     public boolean updateDiscount(Map<String, String> parameters, Long userId) throws ServiceException {
         String discount = parameters.get(RequestParameter.USER_DISCOUNT);
-        boolean result = Validator.validateDiscount(discount) && Validator.validateId(userId.toString());
+        boolean result = validator.validateDiscount(discount) && validator.validateId(userId.toString());
         if(result) {
             try {
                 UserDao userDao = UserDaoImpl.getInstance();
@@ -117,7 +118,7 @@ public class UserServiceImpl implements UserService {
 
     public boolean updateBalance(Map<String, String> parameters, Long userId) throws ServiceException {
         String balance = parameters.get(RequestParameter.USER_BALANCE);
-        boolean result = Validator.validatePrice(balance);
+        boolean result = validator.validatePrice(balance);
         if(result) {
             UserDao userDao = UserDaoImpl.getInstance();
             try {
@@ -150,7 +151,7 @@ public class UserServiceImpl implements UserService {
 
     public boolean updateAverageRating(Map<String, String> parameters, Long userId) throws ServiceException {
         Integer grade = Integer.valueOf(parameters.get(ColumnName.USER_AVERAGE_RATING));
-        boolean result = Validator.validateAverageRating(grade.toString());
+        boolean result = validator.validateAverageRating(grade.toString());
         if(result) {
             UserDao userDao = UserDaoImpl.getInstance();
             try {

@@ -12,7 +12,7 @@ import java.util.Map;
 public interface CommentService {
 
     /**
-     * Leave comment boolean.
+     * Leave comment with Map of parameters.
      *
      * @param parameters the parameters
      * @return the boolean
@@ -21,7 +21,7 @@ public interface CommentService {
     boolean leaveComment(Map<String, String> parameters) throws ServiceException;
 
     /**
-     * Delete comment boolean.
+     * Delete comment by comment id.
      *
      * @param commentId the comment id
      * @return the boolean
@@ -30,9 +30,9 @@ public interface CommentService {
     boolean deleteComment(Long commentId) throws ServiceException;
 
     /**
-     * Find all list.
+     * Find list of all comments.
      *
-     * @return the list
+     * @return the list of Comment
      * @throws ServiceException the service exception
      */
     List<Comment> findAll() throws ServiceException;
