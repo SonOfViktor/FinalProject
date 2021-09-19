@@ -49,8 +49,6 @@ public class ProjectServlet extends HttpServlet {
     }
 
     @Override
-    public void destroy() {
-        ConnectionPool.getInstance().destroyPool();
-    }
+    public void destroy() {}
 
 }
