@@ -35,7 +35,7 @@ public class GoToOrdersPageCommand implements Command {
         String userLogin = user.getLogin();
         UserRole userRole = (UserRole) session.getAttribute(SessionAttribute.ROLE);
 
-        OrderService orderService = new OrderServiceImpl();
+        OrderService orderService = OrderServiceImpl.getInstance();
         try {
             List<Order> orders;
             if (userRole == UserRole.ADMIN) {

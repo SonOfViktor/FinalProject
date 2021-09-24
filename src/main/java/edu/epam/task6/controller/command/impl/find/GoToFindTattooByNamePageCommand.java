@@ -30,7 +30,7 @@ public class GoToFindTattooByNamePageCommand implements Command {
             currentPage = Integer.valueOf(request.getParameter(RequestParameter.CURRENT_PAGE_NUMBER));
         }
 
-        TattooService tattooService = new TattooServiceImpl();
+        TattooService tattooService = TattooServiceImpl.getInstance();
         String tattooName = request.getParameter(RequestParameter.TATTOO_NAME);
         try {
             List<Tattoo> tattoos;

@@ -24,7 +24,7 @@ public class ChangeTattooStatusCommand implements Command {
     public Router execute(HttpServletRequest request) {
         Router router;
         HttpSession session = request.getSession();
-        TattooService tattooService = new TattooServiceImpl();
+        TattooService tattooService = TattooServiceImpl.getInstance();
         Map<String, String> parameters = new HashMap<>();
         try {
             Long tattooId = Long.valueOf(request.getParameter(RequestParameter.TATTOO_ID));

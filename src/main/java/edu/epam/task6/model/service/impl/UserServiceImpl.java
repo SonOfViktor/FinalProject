@@ -19,6 +19,16 @@ public class UserServiceImpl implements UserService {
 
     private static final Integer MAXIMUM_DISCOUNT_PERCENT = 50;
     private static final Validator validator = new Validator();
+    private static UserServiceImpl instance;
+
+    private UserServiceImpl(){}
+
+    public static UserServiceImpl getInstance() {
+        if (instance == null) {
+            instance = new UserServiceImpl();
+        }
+        return instance;
+    }
 
     public boolean registerUser(Map<String, String> parameters) throws ServiceException {
         boolean result = validator.validateUser(parameters);

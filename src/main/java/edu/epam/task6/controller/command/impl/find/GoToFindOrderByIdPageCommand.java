@@ -26,7 +26,7 @@ public class GoToFindOrderByIdPageCommand implements Command {
         String userLogin = user.getLogin();
         UserRole userRole = (UserRole) session.getAttribute(SessionAttribute.ROLE);
 
-        OrderService orderService = new OrderServiceImpl();
+        OrderService orderService = OrderServiceImpl.getInstance();
         Long orderId = Long.valueOf(request.getParameter(RequestParameter.ORDER_ID));
         try {
             Optional<Order> order;

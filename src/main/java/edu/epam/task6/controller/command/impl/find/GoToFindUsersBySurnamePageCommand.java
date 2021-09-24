@@ -25,7 +25,7 @@ public class GoToFindUsersBySurnamePageCommand implements Command {
             currentPage = Integer.valueOf(request.getParameter(RequestParameter.CURRENT_PAGE_NUMBER));
         }
 
-        UserService userService = new UserServiceImpl();
+        UserService userService = UserServiceImpl.getInstance();
         String usersSurname = request.getParameter(RequestParameter.USER_SURNAME);
         try {
             List<User> users = userService.findBySurname(usersSurname);

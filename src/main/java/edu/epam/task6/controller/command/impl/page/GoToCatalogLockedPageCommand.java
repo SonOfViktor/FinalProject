@@ -30,7 +30,7 @@ public class GoToCatalogLockedPageCommand implements Command {
             currentPage = Integer.valueOf(request.getParameter(RequestParameter.CURRENT_PAGE_NUMBER));
         }
 
-        TattooService catalogService = new TattooServiceImpl();
+        TattooService catalogService = TattooServiceImpl.getInstance();
         try {
             List<Tattoo> catalogElements = catalogService.findByStatus(TattooStatus.LOCKED.name());
             request.setAttribute(RequestParameter.CATALOG, catalogElements);

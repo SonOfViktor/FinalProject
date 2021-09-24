@@ -29,7 +29,7 @@ public class GoToCatalogAllPageCommand implements Command {
             currentPage = Integer.valueOf(request.getParameter(RequestParameter.CURRENT_PAGE_NUMBER));
         }
 
-        TattooService catalogService = new TattooServiceImpl();
+        TattooService catalogService = TattooServiceImpl.getInstance();
         try {
             List<Tattoo> catalogElements = catalogService.findAll();
             request.setAttribute(RequestParameter.CATALOG, catalogElements);

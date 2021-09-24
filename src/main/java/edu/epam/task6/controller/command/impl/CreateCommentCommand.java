@@ -22,7 +22,7 @@ public class CreateCommentCommand implements Command {
         Router router;
         HttpSession session = request.getSession();
         Long userId = (Long) session.getAttribute(SessionAttribute.USER_ID);
-        CommentService commentService = new CommentServiceImpl();
+        CommentService commentService = CommentServiceImpl.getInstance();
         Map<String, String> parameters = new HashMap<>();
         try {
             parameters.put(ColumnName.COMMENT_TEXT, request.getParameter(RequestParameter.COMMENT_TEXT));

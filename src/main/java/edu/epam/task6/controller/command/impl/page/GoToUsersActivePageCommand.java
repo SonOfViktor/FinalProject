@@ -30,7 +30,7 @@ public class GoToUsersActivePageCommand implements Command {
             currentPage = Integer.valueOf(request.getParameter(RequestParameter.CURRENT_PAGE_NUMBER));
         }
 
-        UserService userService = new UserServiceImpl();
+        UserService userService = UserServiceImpl.getInstance();
         try {
             List<User> users = userService.findByStatus(UserStatus.ACTIVE.name());
             request.setAttribute(RequestParameter.USERS, users);

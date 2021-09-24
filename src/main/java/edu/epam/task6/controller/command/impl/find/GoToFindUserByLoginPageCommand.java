@@ -21,7 +21,7 @@ public class GoToFindUserByLoginPageCommand implements Command {
     @Override
     public Router execute(HttpServletRequest request) {
         Router router;
-        UserService userService = new UserServiceImpl();
+        UserService userService = UserServiceImpl.getInstance();
         String userLogin = request.getParameter(RequestParameter.USER_LOGIN);
         try {
             Optional<User> user = userService.findByLogin(userLogin);

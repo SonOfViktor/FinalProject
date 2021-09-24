@@ -28,7 +28,7 @@ public class CompleteOrderCommand implements Command {
         HttpSession session = request.getSession();
         UserRole userRole = (UserRole) session.getAttribute(SessionAttribute.ROLE);
 
-        OrderService orderService = new OrderServiceImpl();
+        OrderService orderService = OrderServiceImpl.getInstance();
         Map<String, String> parameters = new HashMap<>();
         try {
             Long orderId = Long.valueOf(request.getParameter(RequestParameter.ORDER_ID));

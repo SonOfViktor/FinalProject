@@ -35,8 +35,8 @@ public class GoToAboutUsPageCommand implements Command {
             currentPage = Integer.valueOf(request.getParameter(RequestParameter.CURRENT_PAGE_NUMBER));
         }
 
-        CommentService commentService = new CommentServiceImpl();
-        UserService userService = new UserServiceImpl();
+        CommentService commentService = CommentServiceImpl.getInstance();
+        UserService userService = UserServiceImpl.getInstance();
         try {
             List<Comment> comments;
             comments = commentService.findAll();

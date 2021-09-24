@@ -24,7 +24,7 @@ public class Main {
             parameters.put("text", "Это тестовый комментарий");
             parameters.put("registration_date", "2021-09-11 23:42:45");
             parameters.put("users_user_id", "1");
-            CommentService commentService = new CommentServiceImpl();
+            CommentService commentService = CommentServiceImpl.getInstance();
 //            commentService.leaveComment(parameters);
             System.out.println(commentService.findAll());
             String test1 = """

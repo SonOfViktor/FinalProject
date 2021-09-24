@@ -23,7 +23,7 @@ public class DeleteCommentCommand implements Command {
         Router router;
         HttpSession session = request.getSession();
         UserRole userRole = (UserRole) session.getAttribute(SessionAttribute.ROLE);
-        CommentService commentService = new CommentServiceImpl();
+        CommentService commentService = CommentServiceImpl.getInstance();
         try {
             if (userRole.equals(UserRole.ADMIN)) {
                 Long commentId = Long.valueOf(request.getParameter(RequestParameter.COMMENT_ID));

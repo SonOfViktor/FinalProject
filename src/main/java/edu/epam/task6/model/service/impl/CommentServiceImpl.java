@@ -15,6 +15,16 @@ import java.util.Map;
 public class CommentServiceImpl implements CommentService {
 
     private static final Validator validator = new Validator();
+    private static CommentServiceImpl instance;
+
+    private CommentServiceImpl(){}
+
+    public static CommentServiceImpl getInstance() {
+        if (instance == null) {
+            instance = new CommentServiceImpl();
+        }
+        return instance;
+    }
 
     public boolean leaveComment(Map<String, String> parameters) throws ServiceException {
         String text = parameters.get(ColumnName.COMMENT_TEXT);

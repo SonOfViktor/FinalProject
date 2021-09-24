@@ -40,9 +40,9 @@ public class CreateOrderCommand implements Command {
         Long tattooId = Long.valueOf(request.getParameter(RequestParameter.ORDER_TATTOO_ID));
         BigDecimal tattooPrice;
 
-        OrderService orderService = new OrderServiceImpl();
-        UserService userService = new UserServiceImpl();
-        TattooService tattooService = new TattooServiceImpl();
+        OrderService orderService = OrderServiceImpl.getInstance();
+        UserService userService = UserServiceImpl.getInstance();
+        TattooService tattooService = TattooServiceImpl.getInstance();
         Map<String, String> parameters = new HashMap<>();
         try {
             Optional<Tattoo> tattoo = tattooService.findByIdAllActive(tattooId);

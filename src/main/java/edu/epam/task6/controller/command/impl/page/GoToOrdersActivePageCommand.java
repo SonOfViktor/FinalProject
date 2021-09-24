@@ -29,7 +29,7 @@ public class GoToOrdersActivePageCommand implements Command {
             currentPage = Integer.valueOf(request.getParameter(RequestParameter.CURRENT_PAGE_NUMBER));
         }
 
-        OrderService orderService = new OrderServiceImpl();
+        OrderService orderService = OrderServiceImpl.getInstance();
         try {
             List<Order> orders = orderService.findByStatus(OrderStatus.ACTIVE.name());
             request.setAttribute(RequestParameter.ORDERS, orders);

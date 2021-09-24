@@ -24,7 +24,7 @@ public class LoginCommand implements Command {
     public Router execute(HttpServletRequest request) {
         Router router;
         HttpSession session = request.getSession();
-        UserService userService = new UserServiceImpl();
+        UserService userService = UserServiceImpl.getInstance();
         Map<String, String> parameters = new HashMap<>();
         try {
             parameters.put(ColumnName.USER_LOGIN, request.getParameter(RequestParameter.USER_LOGIN));

@@ -24,7 +24,7 @@ public class GoToFindTattooByIdPageCommand implements Command {
         HttpSession session = request.getSession();
         UserRole userRole = (UserRole) session.getAttribute(SessionAttribute.ROLE);
 
-        TattooService tattooService = new TattooServiceImpl();
+        TattooService tattooService = TattooServiceImpl.getInstance();
         Long tattooId = Long.valueOf(request.getParameter(RequestParameter.TATTOO_ID));
         try {
             Optional<Tattoo> tattoo;

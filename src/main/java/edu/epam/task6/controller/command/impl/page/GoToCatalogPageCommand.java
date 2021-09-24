@@ -28,7 +28,7 @@ public class GoToCatalogPageCommand implements Command {
             currentPage = Integer.valueOf(request.getParameter(RequestParameter.CURRENT_PAGE_NUMBER));
         }
 
-        TattooService catalogService = new TattooServiceImpl();
+        TattooService catalogService = TattooServiceImpl.getInstance();
         try {
             List<Tattoo> catalogElements = catalogService.findAllActive();
             request.setAttribute(RequestParameter.CATALOG, catalogElements);

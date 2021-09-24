@@ -30,7 +30,7 @@ public class GoToCatalogProposalPageCommand implements Command {
             currentPage = Integer.valueOf(request.getParameter(RequestParameter.CURRENT_PAGE_NUMBER));
         }
 
-        TattooService catalogService = new TattooServiceImpl();
+        TattooService catalogService = TattooServiceImpl.getInstance();
         try {
             List<Tattoo> catalogElements = catalogService.findByStatus(TattooStatus.OFFERED_BY_USER.name());
             request.setAttribute(RequestParameter.CATALOG, catalogElements);

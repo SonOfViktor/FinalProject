@@ -16,6 +16,16 @@ import java.util.Optional;
 public class OrderServiceImpl implements OrderService {
 
     private static final Validator validator = new Validator();
+    private static OrderServiceImpl instance;
+
+    private OrderServiceImpl(){}
+
+    public static OrderServiceImpl getInstance() {
+        if (instance == null) {
+            instance = new OrderServiceImpl();
+        }
+        return instance;
+    }
 
     public boolean createOrder(Map<String, String> parameters) throws ServiceException {
         boolean result = validator.validateOrder(parameters);

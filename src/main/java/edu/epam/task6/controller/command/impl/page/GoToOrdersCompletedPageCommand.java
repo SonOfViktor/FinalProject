@@ -29,9 +29,10 @@ public class GoToOrdersCompletedPageCommand implements Command {
             currentPage = Integer.valueOf(request.getParameter(RequestParameter.CURRENT_PAGE_NUMBER));
         }
 
-        OrderService orderService = new OrderServiceImpl();
+        OrderService orderService = OrderServiceImpl.getInstance();
         try {
             List<Order> orders = orderService.findByStatus(OrderStatus.COMPLETED.name());
+            orders.addAll(orderService.findByStatus(OrderStatus.COMPLETED_AND_ASSESSED.name()));
             request.setAttribute(RequestParameter.ORDERS, orders);
             request = SendSplitParameters.sendSplitParametersOrders(request, orders.size(), currentPage);
             request.setAttribute(RequestParameter.TITLE_ORDERS, RequestParameter.TITLE_ORDERS_COMPLETED);

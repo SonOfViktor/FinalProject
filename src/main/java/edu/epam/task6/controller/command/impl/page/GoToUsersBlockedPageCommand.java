@@ -30,7 +30,7 @@ public class GoToUsersBlockedPageCommand implements Command {
             currentPage = Integer.valueOf(request.getParameter(RequestParameter.CURRENT_PAGE_NUMBER));
         }
 
-        UserService userService = new UserServiceImpl();
+        UserService userService = UserServiceImpl.getInstance();
         try {
             List<User> users = userService.findByStatus(UserStatus.BLOCKED.name());
             request.setAttribute(RequestParameter.USERS, users);

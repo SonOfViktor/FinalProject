@@ -24,7 +24,7 @@ public class ChangePasswordCommand implements Command {
         HttpSession session = request.getSession();
         User user = (User)session.getAttribute(SessionAttribute.USER);
         Long userId = user.getUserId();
-        UserService userService = new UserServiceImpl();
+        UserService userService = UserServiceImpl.getInstance();
         try {
             Optional<User> localUser = userService.findByLoginAndPassword(
                     user.getLogin(),

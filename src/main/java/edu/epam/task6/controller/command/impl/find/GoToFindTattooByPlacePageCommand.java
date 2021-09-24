@@ -24,13 +24,14 @@ public class GoToFindTattooByPlacePageCommand implements Command {
 
         HttpSession session = request.getSession();
         UserRole userRole = (UserRole) session.getAttribute(SessionAttribute.ROLE);
+        session.setAttribute(SessionAttribute.PREVIOUS_PAGE, PagePath.FIND_TATTOO_BY_PLACE_REDIRECT);
 
         Integer currentPage = 1;
         if (request.getParameter(RequestParameter.CURRENT_PAGE_NUMBER) != null) {
             currentPage = Integer.valueOf(request.getParameter(RequestParameter.CURRENT_PAGE_NUMBER));
         }
 
-        TattooService tattooService = new TattooServiceImpl();
+        TattooService tattooService = TattooServiceImpl.getInstance();
         String tattooPlace = request.getParameter(RequestParameter.TATTOO_PLACE);
         try {
             List<Tattoo> tattoos;

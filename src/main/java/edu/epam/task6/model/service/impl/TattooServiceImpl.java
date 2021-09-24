@@ -2,6 +2,7 @@ package edu.epam.task6.model.service.impl;
 
 import edu.epam.task6.model.dao.ColumnName;
 import edu.epam.task6.model.dao.TattooDao;
+import edu.epam.task6.model.dao.impl.CommentDaoImpl;
 import edu.epam.task6.model.dao.impl.TattooDaoImpl;
 import edu.epam.task6.model.entity.Tattoo;
 import edu.epam.task6.exception.DaoException;
@@ -18,10 +19,19 @@ import java.util.Optional;
 public class TattooServiceImpl implements TattooService {
 
     private static final Validator validator = new Validator();
+    private static TattooServiceImpl instance;
+
+    private TattooServiceImpl(){}
+
+    public static TattooServiceImpl getInstance() {
+        if (instance == null) {
+            instance = new TattooServiceImpl();
+        }
+        return instance;
+    }
 
     public boolean AddNewTattoo(Map<String, String> parameters) throws ServiceException {
         boolean result = validator.validateTattoo(parameters);
-        System.out.println(result);
         if(result) {
             TattooDao tattooDao = TattooDaoImpl.getInstance();
             try {

@@ -29,9 +29,9 @@ public class ChangeRatingCommand implements Command {
     public Router execute(HttpServletRequest request) {
         Router router;
         HttpSession session = request.getSession();
-        UserService userService = new UserServiceImpl();
-        OrderService orderService = new OrderServiceImpl();
-        TattooService tattooService = new TattooServiceImpl();
+        UserService userService = UserServiceImpl.getInstance();
+        OrderService orderService = OrderServiceImpl.getInstance();
+        TattooService tattooService = TattooServiceImpl.getInstance();
         try {
             Map<String, String> parameters = new HashMap<>();
             parameters.put(ColumnName.USER_AVERAGE_RATING, request.getParameter(RequestParameter.USER_RATING));

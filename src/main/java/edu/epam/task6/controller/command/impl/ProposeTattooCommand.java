@@ -26,7 +26,7 @@ public class ProposeTattooCommand implements Command {
         int placeNumber = Integer.valueOf(request.getParameter(RequestParameter.TATTOO_PLACE));
         HttpSession session = request.getSession();
         Long userId = (Long)session.getAttribute(SessionAttribute.USER_ID);
-        TattooService tattooService = new TattooServiceImpl();
+        TattooService tattooService = TattooServiceImpl.getInstance();
         Map<String, String> parameters = new HashMap<>();
         try {
             parameters.put(ColumnName.TATTOOS_NAME,

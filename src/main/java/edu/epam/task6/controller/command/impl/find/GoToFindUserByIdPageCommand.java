@@ -21,7 +21,7 @@ public class GoToFindUserByIdPageCommand implements Command {
     @Override
     public Router execute(HttpServletRequest request) {
         Router router;
-        UserService userService = new UserServiceImpl();
+        UserService userService = UserServiceImpl.getInstance();
         Long userId = Long.valueOf(request.getParameter(RequestParameter.USER_ID));
         try {
             Optional<User> user = userService.findById(userId);

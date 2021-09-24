@@ -25,7 +25,7 @@ public class CodeEntryCommand implements Command {
     @Override
     public Router execute(HttpServletRequest request) {
         Router router;
-        UserService userService = new UserServiceImpl();
+        UserService userService = UserServiceImpl.getInstance();
         try {
             String enteredCode = request.getParameter(RequestParameter.REGISTER_CODE);
             String generateCode = request.getParameter(RequestParameter.GENERATE_CODE);

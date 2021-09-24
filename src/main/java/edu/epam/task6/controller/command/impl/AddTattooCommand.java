@@ -28,7 +28,7 @@ public class AddTattooCommand implements Command {
 
         Long userId = (Long)session.getAttribute(SessionAttribute.USER_ID);
         int placeNumber = Integer.valueOf(request.getParameter(RequestParameter.TATTOO_PLACE));
-        TattooService tattooService = new TattooServiceImpl();
+        TattooService tattooService = TattooServiceImpl.getInstance();
         Map<String, String> parameters = new HashMap<>();
         try {
             parameters.put(ColumnName.TATTOOS_NAME,

@@ -32,8 +32,8 @@ public class ApproveTattooCommand implements Command {
         User userSession = (User)session.getAttribute(SessionAttribute.USER);
         request.setAttribute(RequestParameter.PROFILE, userSession);
 
-        TattooService tattooService = new TattooServiceImpl();
-        UserService userService = new UserServiceImpl();
+        TattooService tattooService = TattooServiceImpl.getInstance();
+        UserService userService = UserServiceImpl.getInstance();
         Map<String, String> parameters = new HashMap<>();
         try {
             Long tattooId = Long.valueOf(request.getParameter(RequestParameter.TATTOO_ID));

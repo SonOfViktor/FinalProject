@@ -24,7 +24,7 @@ public class ChangeNameCommand implements Command {
         HttpSession session = request.getSession();
         User user = (User)session.getAttribute(SessionAttribute.USER);
         Long userId = user.getUserId();
-        UserService userService = new UserServiceImpl();
+        UserService userService = UserServiceImpl.getInstance();
         try {
             Map<String, String> parameters = new HashMap<>();
             parameters.put(ColumnName.USER_NAME, request.getParameter(RequestParameter.USER_NAME));

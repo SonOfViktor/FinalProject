@@ -25,7 +25,7 @@ public class GoToFindOrderByLoginPageCommand implements Command {
             currentPage = Integer.valueOf(request.getParameter(RequestParameter.CURRENT_PAGE_NUMBER));
         }
 
-        OrderService orderService = new OrderServiceImpl();
+        OrderService orderService = OrderServiceImpl.getInstance();
         String orderLogin = request.getParameter(RequestParameter.USER_LOGIN);
         try {
             List<Order> orders = orderService.findByLogin(orderLogin);

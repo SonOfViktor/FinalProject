@@ -31,7 +31,7 @@ public class GoToHomePageCommand implements Command {
         request.setAttribute(RequestParameter.CURRENT_PAGE_NUMBER, PageSplitParameter.FIRST_PAGE);
         request.setAttribute(RequestParameter.TITLE_TATTOOS, RequestParameter.TITLE_TATTOOS_HOME);
         session.setAttribute(SessionAttribute.PREVIOUS_PAGE, PagePath.MAIN_PAGE_REDIRECT);
-        TattooService catalogService = new TattooServiceImpl();
+        TattooService catalogService = TattooServiceImpl.getInstance();
         try {
             List<Tattoo> catalogElements = catalogService.findAllActive();
             request.setAttribute(RequestParameter.CATALOG, catalogElements);

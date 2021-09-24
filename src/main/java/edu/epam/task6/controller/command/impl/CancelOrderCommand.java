@@ -37,8 +37,8 @@ public class CancelOrderCommand implements Command {
         UserRole userRole = (UserRole) session.getAttribute(SessionAttribute.ROLE);
         String userLogin = userSession.getLogin();
 
-        OrderService orderService = new OrderServiceImpl();
-        UserService userService = new UserServiceImpl();
+        OrderService orderService = OrderServiceImpl.getInstance();
+        UserService userService = UserServiceImpl.getInstance();
         Map<String, String> parameters = new HashMap<>();
         try {
             Long orderId = Long.valueOf(request.getParameter(RequestParameter.ORDER_ID));
