@@ -32,8 +32,16 @@ public class GoToFindTattooByPriceRangePageCommand implements Command {
         }
 
         TattooService tattooService = TattooServiceImpl.getInstance();
-        String minPrice = request.getParameter(RequestParameter.TATTOO_MIN_PRICE);
-        String maxPrice = request.getParameter(RequestParameter.TATTOO_MAX_PRICE);
+        if (request.getParameter(RequestParameter.TATTOO_MIN_PRICE) != null) {
+            session.setAttribute(SessionAttribute.FIND_PARAMETER_ONE,
+                    request.getParameter(RequestParameter.TATTOO_MIN_PRICE));
+        }
+        if (request.getParameter(RequestParameter.TATTOO_MAX_PRICE) != null) {
+            session.setAttribute(SessionAttribute.FIND_PARAMETER_TWO,
+                    request.getParameter(RequestParameter.TATTOO_MAX_PRICE));
+        }
+        String minPrice = session.getAttribute(SessionAttribute.FIND_PARAMETER_ONE).toString();
+        String maxPrice = session.getAttribute(SessionAttribute.FIND_PARAMETER_TWO).toString();
 
         try {
             List<Tattoo> tattoos;

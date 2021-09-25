@@ -7,6 +7,7 @@ import edu.epam.task6.model.service.impl.OrderServiceImpl;
 import edu.epam.task6.util.SendSplitParameters;
 import edu.epam.task6.exception.ServiceException;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -19,6 +20,7 @@ public class GoToFindOrderByLoginPageCommand implements Command {
     @Override
     public Router execute(HttpServletRequest request) {
         Router router;
+        HttpSession session = request.getSession();
 
         Integer currentPage = 1;
         if (request.getParameter(RequestParameter.CURRENT_PAGE_NUMBER) != null) {
@@ -26,7 +28,11 @@ public class GoToFindOrderByLoginPageCommand implements Command {
         }
 
         OrderService orderService = OrderServiceImpl.getInstance();
-        String orderLogin = request.getParameter(RequestParameter.USER_LOGIN);
+        if (request.getParameter(RequestParameter.USER_LOGIN) != null) {
+            session.setAttribute(SessionAttribute.FIND_PARAMETER_ONE,
+                    request.getParameter(RequestParameter.USER_LOGIN));
+        }
+        String orderLogin = session.getAttribute(SessionAttribute.FIND_PARAMETER_ONE).toString();
         try {
             List<Order> orders = orderService.findByLogin(orderLogin);
             request.setAttribute(RequestParameter.ORDERS, orders);

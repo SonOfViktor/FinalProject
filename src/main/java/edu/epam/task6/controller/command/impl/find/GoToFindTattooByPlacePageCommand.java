@@ -32,7 +32,11 @@ public class GoToFindTattooByPlacePageCommand implements Command {
         }
 
         TattooService tattooService = TattooServiceImpl.getInstance();
-        String tattooPlace = request.getParameter(RequestParameter.TATTOO_PLACE);
+        if (request.getParameter(RequestParameter.TATTOO_PLACE) != null) {
+            session.setAttribute(SessionAttribute.FIND_PARAMETER_ONE,
+                    request.getParameter(RequestParameter.TATTOO_PLACE));
+        }
+        String tattooPlace = session.getAttribute(SessionAttribute.FIND_PARAMETER_ONE).toString();
         try {
             List<Tattoo> tattoos;
             if (userRole == UserRole.ADMIN) {

@@ -7,6 +7,7 @@ import edu.epam.task6.exception.ServiceException;
 import edu.epam.task6.model.service.UserService;
 import edu.epam.task6.model.service.impl.UserServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -19,6 +20,7 @@ public class GoToFindUsersBySurnamePageCommand implements Command {
     @Override
     public Router execute(HttpServletRequest request) {
         Router router;
+        HttpSession session = request.getSession();
 
         Integer currentPage = 1;
         if (request.getParameter(RequestParameter.CURRENT_PAGE_NUMBER) != null) {
@@ -26,7 +28,11 @@ public class GoToFindUsersBySurnamePageCommand implements Command {
         }
 
         UserService userService = UserServiceImpl.getInstance();
-        String usersSurname = request.getParameter(RequestParameter.USER_SURNAME);
+        if (request.getParameter(RequestParameter.USER_SURNAME) != null) {
+            session.setAttribute(SessionAttribute.FIND_PARAMETER_ONE,
+                    request.getParameter(RequestParameter.USER_SURNAME));
+        }
+        String usersSurname = session.getAttribute(SessionAttribute.FIND_PARAMETER_ONE).toString();
         try {
             List<User> users = userService.findBySurname(usersSurname);
             request.setAttribute(RequestParameter.USERS, users);

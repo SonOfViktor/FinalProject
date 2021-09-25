@@ -7,6 +7,7 @@ import edu.epam.task6.model.entity.User;
 import edu.epam.task6.model.service.UserService;
 import edu.epam.task6.model.service.impl.UserServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -19,6 +20,7 @@ public class GoToFindUsersByNamePageCommand implements Command {
     @Override
     public Router execute(HttpServletRequest request) {
         Router router;
+        HttpSession session = request.getSession();
 
         Integer currentPage = 1;
         if (request.getParameter(RequestParameter.CURRENT_PAGE_NUMBER) != null) {
@@ -26,7 +28,11 @@ public class GoToFindUsersByNamePageCommand implements Command {
         }
 
         UserService userService = UserServiceImpl.getInstance();
-        String usersName = request.getParameter(RequestParameter.USER_NAME);
+        if (request.getParameter(RequestParameter.USER_NAME) != null) {
+            session.setAttribute(SessionAttribute.FIND_PARAMETER_ONE,
+                    request.getParameter(RequestParameter.USER_NAME));
+        }
+        String usersName = session.getAttribute(SessionAttribute.FIND_PARAMETER_ONE).toString();
         try {
             List<User> users = userService.findByName(usersName);
             request.setAttribute(RequestParameter.USERS, users);

@@ -34,7 +34,11 @@ public class GoToFindOrderByStatusPageCommand implements Command {
         UserRole userRole = (UserRole) session.getAttribute(SessionAttribute.ROLE);
 
         OrderService orderService = OrderServiceImpl.getInstance();
-        String orderStatus = request.getParameter(RequestParameter.ORDER_STATUS);
+        if (request.getParameter(RequestParameter.ORDER_STATUS) != null) {
+            session.setAttribute(SessionAttribute.FIND_PARAMETER_ONE,
+                    request.getParameter(RequestParameter.ORDER_STATUS));
+        }
+        String orderStatus = session.getAttribute(SessionAttribute.FIND_PARAMETER_ONE).toString();
         try {
             List<Order> orders;
             if (userRole == UserRole.ADMIN) {
