@@ -39,7 +39,7 @@ public class CodeEntryCommand implements Command {
                     parameters.put(ColumnName.USER_STATUS, UserStatus.ACTIVE.toString());
                     userService.updateStatus(parameters, userId);
                     logger.error("User registration was successful.");
-                    router = new Router(PagePath.MAIN_PAGE);
+                    router = new Router(Router.RouterType.REDIRECT, PagePath.MAIN_PAGE_REDIRECT);
                 } else {
                     logger.error("Invalid code entered.");
                     request.setAttribute(RequestParameter.ENTERED_CODE_ERROR, true);

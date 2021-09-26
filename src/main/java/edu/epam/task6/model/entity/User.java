@@ -15,6 +15,7 @@ public class User {
     private LocalDateTime registrationDate;
     private Double averageRating;
     private Integer numberOfRatings;
+    private Integer registerCode;
     private UserStatus status;
     private UserRole role;
 
@@ -28,6 +29,7 @@ public class User {
                 LocalDateTime registrationDate,
                 Double averageRating,
                 Integer numberOfRatings,
+                Integer registerCode,
                 UserStatus status,
                 UserRole role) {
         this.userId = userId;
@@ -40,6 +42,7 @@ public class User {
         this.registrationDate = registrationDate;
         this.averageRating = averageRating;
         this.numberOfRatings = numberOfRatings;
+        this.registerCode = registerCode;
         this.status = status;
         this.role = role;
     }
@@ -124,6 +127,14 @@ public class User {
         this.numberOfRatings = numberOfRatings;
     }
 
+    public Integer getRegisterCode() {
+        return registerCode;
+    }
+
+    public void setRegisterCode(Integer registerCode) {
+        this.registerCode = registerCode;
+    }
+
     public UserStatus getStatus() {
         return status;
     }
@@ -153,13 +164,14 @@ public class User {
                 && login.equals(user.login)
                 && name.equals(user.name)
                 && surname.equals(user.surname)
-                && discount.equals(user.discount)
+                && discount == user.discount
                 && balance.equals(user.balance)
                 && registrationDate.equals(user.registrationDate)
-                && averageRating.equals(user.averageRating)
-                && numberOfRatings.equals(user.numberOfRatings)
-                && status == user.status
-                && role == user.role;
+                && averageRating == user.averageRating
+                && numberOfRatings == user.numberOfRatings
+                && registerCode == user.registerCode
+                && status.equals(user.status)
+                && role.equals(user.role);
 
     }
 
@@ -177,6 +189,7 @@ public class User {
         result = result * prime + registrationDate.hashCode();
         result = result * prime + averageRating.hashCode();
         result = result * prime + numberOfRatings.hashCode();
+        result = result * prime + registerCode.hashCode();
         result = result * prime + status.hashCode();
         result = result * prime + role.hashCode();
 
@@ -197,6 +210,7 @@ public class User {
                 .append(", registration_date = '").append(registrationDate).append('\'')
                 .append(", average_rating = '").append(averageRating).append('\'')
                 .append(", numberOfRatings = '").append(numberOfRatings).append('\'')
+                .append(", registerCode = '").append(registerCode).append('\'')
                 .append(", status = '").append(status).append('\'')
                 .append(", role = '").append(role).append('\'')
                 .append(" }\n");

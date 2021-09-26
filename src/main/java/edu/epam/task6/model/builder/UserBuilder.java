@@ -19,12 +19,13 @@ public class UserBuilder {
     private LocalDateTime registrationDate;
     private Double averageRating;
     private Integer numberOfRatings;
+    private Integer registerCode;
     private UserStatus status;
     private UserRole role;
 
     public User build() {
-        User user = new User(userId, email, login, name, surname,
-                discount, balance, registrationDate, averageRating, numberOfRatings, status, role);
+        User user = new User(userId, email, login, name, surname, discount, balance,
+                registrationDate, averageRating, numberOfRatings, registerCode, status, role);
         this.userId = null;
         this.email = null;
         this.login = null;
@@ -35,6 +36,7 @@ public class UserBuilder {
         this.registrationDate = null;
         this.averageRating = null;
         this.numberOfRatings = null;
+        this.registerCode = null;
         this.status = null;
         this.role = null;
         return user;
@@ -119,6 +121,14 @@ public class UserBuilder {
 
     public void setNumberOfRatings(Integer numberOfRatings) {
         this.numberOfRatings = numberOfRatings;
+    }
+
+    public Integer getRegisterCode() {
+        return registerCode;
+    }
+
+    public void setRegisterCode(Integer registerCode) {
+        this.registerCode = registerCode;
     }
 
     public UserStatus getStatus() {

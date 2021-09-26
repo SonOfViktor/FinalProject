@@ -16,6 +16,7 @@ public final class ColumnName {
     public static final String USER_ROLE ="role";
     public static final String USER_AVERAGE_RATING = "user_average_rating";
     public static final String USER_NUMBER_OF_RATINGS = "number_of_ratings";
+    public static final String USER_REGISTER_CODE = "register_code";
 
     public static final String USER_ROLES_ID ="role_id";
     public static final String USER_ROLES_NAME ="role";

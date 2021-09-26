@@ -45,8 +45,9 @@ public class RegisterCommand implements Command {
 
                 Optional<User> user = userService.findByLogin(parameters.get(ColumnName.USER_LOGIN));
                 if (!user.isPresent()) {
+                    String code = RegisterCodeGenerator.generateCode();
+                    parameters.put(ColumnName.USER_REGISTER_CODE, code);
                     if (userService.registerUser(parameters)) {
-                        String code = RegisterCodeGenerator.generateCode();
                         EmailSender emailSender = new EmailSender(
                                 request.getParameter(RequestParameter.USER_EMAIL),
                                 EMAIL_MESSAGE_TITLE,
@@ -62,7 +63,7 @@ public class RegisterCommand implements Command {
                     }
                 } else {
                     logger.error("User with this login is already registered.");
-                    router = new Router(PagePath.MAIN_PAGE);
+                    router = new Router(Router.RouterType.REDIRECT, PagePath.MAIN_PAGE_REDIRECT);
                 }
             } else {
                 logger.error("Password and repeated password will not match.");

@@ -7,6 +7,7 @@ import edu.epam.task6.model.entity.User;
 import edu.epam.task6.model.entity.UserStatus;
 import edu.epam.task6.model.service.UserService;
 import edu.epam.task6.model.service.impl.UserServiceImpl;
+import edu.epam.task6.util.EmailSender;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.apache.logging.log4j.LogManager;
@@ -19,6 +20,8 @@ import java.util.Optional;
 public class LoginCommand implements Command {
 
     private static final Logger logger = LogManager.getLogger();
+    private static final String EMAIL_MESSAGE_TITLE = "Email confirmation";
+    private static final String EMAIL_MESSAGE_TEXT = "Your registration confirmation code: ";
 
     @Override
     public Router execute(HttpServletRequest request) {
@@ -35,7 +38,7 @@ public class LoginCommand implements Command {
             if (user.isPresent()) {
                 User localUser = user.get();
 
-                if (localUser.getStatus() == UserStatus.ACTIVE) {
+                if (localUser.getStatus().equals(UserStatus.ACTIVE)) {
                     request.setAttribute(RequestParameter.PROFILE, localUser);
                     session.setAttribute(SessionAttribute.USER, localUser);
                     session.setAttribute(SessionAttribute.USER_ID, localUser.getUserId());
@@ -45,6 +48,15 @@ public class LoginCommand implements Command {
                     session.setAttribute(SessionAttribute.PREVIOUS_PAGE, PagePath.PROFILE_PAGE_REDIRECT);
 
                     router = new Router(Router.RouterType.REDIRECT, PagePath.PROFILE_PAGE_REDIRECT);
+                } else if (localUser.getStatus().equals(UserStatus.NOT_CONFIRMED)) {
+                    EmailSender emailSender = new EmailSender(
+                            localUser.getEmail(),
+                            EMAIL_MESSAGE_TITLE,
+                            EMAIL_MESSAGE_TEXT + localUser.getRegisterCode().toString());
+                    emailSender.start();
+                    request.setAttribute(RequestParameter.GENERATE_CODE, localUser.getRegisterCode());
+                    request.setAttribute(RequestParameter.USER_LOGIN, parameters.get(ColumnName.USER_LOGIN));
+                    router = new Router(PagePath.CODE_PAGE);
                 } else {
                     request.setAttribute(RequestParameter.USER_BLOCKED_ERROR, true);
                     logger.info("This user is blocked.");

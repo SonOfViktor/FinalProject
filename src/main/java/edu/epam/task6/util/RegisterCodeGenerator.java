@@ -6,6 +6,9 @@ public class RegisterCodeGenerator {
 
     public static String generateCode() {
         int code = (int) (Math.random() * SIZE);
+        while (code < 100000 || code > 999999) {
+            code = (int) (Math.random() * SIZE);
+        }
         String result = String.valueOf(code);
         return result;
     }
