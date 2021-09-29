@@ -4,7 +4,6 @@ import edu.epam.task6.controller.command.RequestParameter;
 import edu.epam.task6.controller.command.SessionAttribute;
 import edu.epam.task6.model.entity.Order;
 import edu.epam.task6.model.entity.OrderStatus;
-import edu.epam.task6.model.entity.User;
 import edu.epam.task6.model.entity.UserRole;
 import jakarta.servlet.ServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -12,7 +11,6 @@ import jakarta.servlet.jsp.JspException;
 import jakarta.servlet.jsp.tagext.TagSupport;
 
 import java.io.IOException;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -26,7 +24,6 @@ public class OrdersPaginationTeg extends TagSupport {
 
     private int currentPage;
     private int elementsPerPage;
-    private String title;
 
     public void setCurrentPage(int currentPage) {
         this.currentPage = currentPage;
@@ -34,10 +31,6 @@ public class OrdersPaginationTeg extends TagSupport {
 
     public void setElementsPerPage(int elementsPerPage) {
         this.elementsPerPage = elementsPerPage;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
     }
 
     @Override
@@ -136,7 +129,7 @@ public class OrdersPaginationTeg extends TagSupport {
 
                 if (order.getOrderStatus().equals(OrderStatus.ACTIVE) && userRole.equals(UserRole.USER)) {
                     stringBuilder.append("<form method=\"post\" action=\"ProjectServlet\">")
-                            .append("<input type=\"hidden\" name=\"command\" value=\"cancel_order_command\"/>")
+                            .append("<input type=\"hidden\" name=\"command\" value=\"cancel_order\"/>")
                             .append("<input type=\"hidden\" name=\"id\" value=\"")
                             .append(order.getOrderId())
                             .append("\"/>")
@@ -148,7 +141,7 @@ public class OrdersPaginationTeg extends TagSupport {
 
                 if (order.getOrderStatus().equals(OrderStatus.ACTIVE) && userRole.equals(UserRole.ADMIN)) {
                     stringBuilder.append("<form method=\"post\" action=\"ProjectServlet\">")
-                            .append("<input type=\"hidden\" name=\"command\" value=\"cancel_order_command\"/>")
+                            .append("<input type=\"hidden\" name=\"command\" value=\"cancel_order\"/>")
                             .append("<input type=\"hidden\" name=\"id\" value=\"")
                             .append(order.getOrderId())
                             .append("\"/>")
@@ -158,7 +151,7 @@ public class OrdersPaginationTeg extends TagSupport {
                             .append("</form>");
 
                     stringBuilder.append("<form class=\"form-button-order2\" method=\"post\" action=\"ProjectServlet\">")
-                            .append("<input type=\"hidden\" name=\"command\" value=\"complete_order_command\"/>")
+                            .append("<input type=\"hidden\" name=\"command\" value=\"complete_order\"/>")
                             .append("<input type=\"hidden\" name=\"id\" value=\"")
                             .append(order.getOrderId())
                             .append("\"/>")
@@ -170,7 +163,7 @@ public class OrdersPaginationTeg extends TagSupport {
 
                 if (order.getOrderStatus().equals(OrderStatus.COMPLETED) && userRole.equals(UserRole.USER)) {
                     stringBuilder.append("<form method=\"post\" action=\"ProjectServlet\">")
-                            .append("<input type=\"hidden\" name=\"command\" value=\"to_change_rating_page_command\"/>")
+                            .append("<input type=\"hidden\" name=\"command\" value=\"to_change_rating_page\"/>")
                             .append("<input type=\"hidden\" name=\"id\" value=\"")
                             .append(order.getOrderId())
                             .append("\"/>")

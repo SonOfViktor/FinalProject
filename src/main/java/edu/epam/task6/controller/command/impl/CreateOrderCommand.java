@@ -49,11 +49,11 @@ public class CreateOrderCommand implements Command {
             if (tattoo.isPresent()) {
                 tattooPrice = tattoo.get().getPrice();
                 BigDecimal discount = tattooPrice.multiply(userDiscount).divide(DIVIDER);
+                BigDecimal paid = tattooPrice.add(discount.negate());
                 userBalance = userBalance.add(discount).add(tattooPrice.negate());
                 if (userBalance.compareTo(BigDecimal.ZERO) > 0) {
-                    parameters.put(ColumnName.USER_BALANCE, userBalance.toString());
+                    parameters.put(ColumnName.USER_BALANCE, paid.negate().toString());
 
-                    BigDecimal paid = tattooPrice.add(discount.negate());
                     parameters.put(ColumnName.ORDERS_PAID, paid.toString());
                     parameters.put(ColumnName.ORDERS_REGISTRATION_DATE,
                             request.getParameter(RequestParameter.ORDER_REGISTRATION_DATE));

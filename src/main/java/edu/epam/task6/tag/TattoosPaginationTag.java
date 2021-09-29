@@ -115,7 +115,7 @@ public class TattoosPaginationTag extends TagSupport {
 
                 if(title.equals(TITLE_TATTOOS_ACTIVE) || title.equals(TITLE_TATTOOS_FOUNDED)) {
                     stringBuilder.append("<form method=\"post\" action=\"ProjectServlet\">")
-                            .append("<input type=\"hidden\" name=\"command\" value=\"create_order_command\"/>")
+                            .append("<input type=\"hidden\" name=\"command\" value=\"create_order\"/>")
                             .append("<input type=\"hidden\" name=\"tattoo_id\" value=\"")
                             .append(tattoo.getTattooId())
                             .append("\"/>")
@@ -131,7 +131,7 @@ public class TattoosPaginationTag extends TagSupport {
                         title.equals(TITLE_TATTOOS_PROPOSAL)) {
                     if (tattoo.getStatus().equals(TattooStatus.ACTIVE)) {
                         stringBuilder.append("<form method=\"post\" action=\"ProjectServlet\">")
-                                .append("<input type=\"hidden\" name=\"command\" value=\"change_tattoo_status_command\"/>")
+                                .append("<input type=\"hidden\" name=\"command\" value=\"change_tattoo_status\"/>")
                                 .append("<input type=\"hidden\" name=\"id\" value=\"")
                                 .append(tattoo.getTattooId())
                                 .append("\"/>")
@@ -143,7 +143,7 @@ public class TattoosPaginationTag extends TagSupport {
                     }
                     if (tattoo.getStatus().equals(TattooStatus.LOCKED)) {
                         stringBuilder.append("<form method=\"post\" action=\"ProjectServlet\">")
-                                .append("<input type=\"hidden\" name=\"command\" value=\"change_tattoo_status_command\"/>")
+                                .append("<input type=\"hidden\" name=\"command\" value=\"change_tattoo_status\"/>")
                                 .append("<input type=\"hidden\" name=\"id\" value=\"")
                                 .append(tattoo.getTattooId())
                                 .append("\"/>")
@@ -155,7 +155,7 @@ public class TattoosPaginationTag extends TagSupport {
                     }
                     if (tattoo.getStatus().equals(TattooStatus.OFFERED_BY_USER)) {
                         stringBuilder.append("<form method=\"post\" action=\"ProjectServlet\">")
-                                .append("<input type=\"hidden\" name=\"command\" value=\"to_approve_tattoo_page_command\"/>")
+                                .append("<input type=\"hidden\" name=\"command\" value=\"to_approve_tattoo_page\"/>")
                                 .append("<input type=\"hidden\" name=\"id\" value=\"")
                                 .append(tattoo.getTattooId())
                                 .append("\"/>")

@@ -34,24 +34,24 @@
 <div class="header-background">
     <header>
         <form method="post" action="ProjectServlet">
-            <input type="hidden" name="command" value="to_home_page_command"/>
+            <input type="hidden" name="command" value="to_home_page"/>
             <button class="header-title" type="submit">
                 <fmt:message key="header.main-title"/>
             </button>
         </form>
         <ul>
             <li class="header-ref1">
-                <a href="ProjectServlet?command=to_catalog_page_command">
+                <a href="ProjectServlet?command=to_catalog_page">
                     <fmt:message key="header.catalog"/>
                 </a>
             </li>
             <li class="header-ref2">
-                <a href="ProjectServlet?command=to_orders_page_command">
+                <a href="ProjectServlet?command=to_orders_page">
                     <fmt:message key="header.orders"/>
                 </a>
             </li>
             <li class="header-sign-in">
-                <a href="ProjectServlet?command=to_login_page_command">
+                <a href="ProjectServlet?command=to_login_page">
                     <fmt:message key="header.profile"/>
                 </a>
             </li>
@@ -60,7 +60,7 @@
         <c:set var="localeRu">ru</c:set>
         <c:set var="localeEn">en</c:set>
         <form method="post" action="ProjectServlet">
-            <input type="hidden" name="command" value="change_language_command"/>
+            <input type="hidden" name="command" value="change_language"/>
             <button class="language-button" type="submit">
                 <c:if test="${language == localeRu}">
                     <fmt:message key="header.language.ru"/>
@@ -78,7 +78,7 @@
         <fmt:message key="login.message.info"/>
     </div>
     <form method="post" action="ProjectServlet">
-        <input type="hidden" name="command" value="create_order_command"/>
+        <input type="hidden" name="command" value="create_order"/>
         <div class="info-div">
             <input type="number"
                    name="tattoo_id"
@@ -111,7 +111,7 @@
 <footer class="footer">
     <div class="footer-background">
         <form method="post" action="ProjectServlet">
-            <input type="hidden" name="command" value="to_home_page_command"/>
+            <input type="hidden" name="command" value="to_home_page"/>
             <button class="footer-title" type="submit">
                 <fmt:message key="footer.main-title"/>
             </button>
@@ -119,19 +119,19 @@
         <ul class="footer-info">
             <li class="footer-info-item">
                 <form method="post" action="ProjectServlet">
-                    <input type="hidden" name="command" value="to_proposal_page_command"/>
+                    <input type="hidden" name="command" value="to_proposal_page"/>
                     <button class="footer-button" type="submit"><fmt:message key="footer.proposals"/></button>
                 </form>
             </li>
             <li class="footer-info-item">
                 <form method="post" action="ProjectServlet">
-                    <input type="hidden" name="command" value="to_orders_page_command"/>
+                    <input type="hidden" name="command" value="to_orders_page"/>
                     <button class="footer-button" type="submit"><fmt:message key="footer.orders"/></button>
                 </form>
             </li>
             <li class="footer-info-item">
                 <form method="post" action="ProjectServlet">
-                    <input type="hidden" name="command" value="to_about_us_page_command"/>
+                    <input type="hidden" name="command" value="to_about_us_page"/>
                     <button class="footer-button" type="submit"><fmt:message key="footer.about-us"/></button>
                 </form>
             </li>

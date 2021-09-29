@@ -4,7 +4,7 @@ public class Router {
 
     public enum RouterType {
         FORWARD,
-        REDIRECT;
+        REDIRECT
     }
 
     private RouterType type;

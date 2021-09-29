@@ -9,7 +9,6 @@ public final class SessionAttribute {
     public static final String ROLE = "role";
     public static final String STATUS = "status";
     public static final String AUTHENTICATION ="authentication";
-    public static final String CURRENT_PAGE ="current_page";
     public static final String FIND_PARAMETER_ONE ="find_parameter_one";
     public static final String FIND_PARAMETER_TWO ="find_parameter_two";
 

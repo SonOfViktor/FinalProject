@@ -29,12 +29,11 @@ public class GoToFindUserByLoginPageCommand implements Command {
                 User localUser = user.get();
                 request.setAttribute(RequestParameter.FIND_USER_ERROR, false);
                 request.setAttribute(RequestParameter.USER, localUser);
-                router = new Router(PagePath.FIND_OPTIONAL_PAGE);
             } else {
                 request.setAttribute(RequestParameter.FIND_USER_ERROR, true);
                 logger.error("User with this login was not found.");
-                router = new Router(PagePath.FIND_OPTIONAL_PAGE);
             }
+            router = new Router(PagePath.FIND_OPTIONAL_PAGE);
         } catch (ServiceException e) {
             logger.error("Error during searching users with login = " + userLogin, e);
             router = new Router(PagePath.ERROR_PAGE_500);

@@ -1,5 +1,9 @@
 <%@ page isErrorPage="true" contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<c:set var="language" value="${sessionScope.locale}" scope="session"/>
+<fmt:setLocale value="${language}"/>
+<fmt:setBundle scope="session" basename="language"/>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -8,10 +12,10 @@
             href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;display=swap"
             rel="stylesheet">
     <link
-            href="${pageContext.request.contextPath}/assets/css/error2.css"
+            href="${pageContext.request.contextPath}/assets/css/error3.css"
             rel="stylesheet"
     />
-    <title>Error 403</title>
+    <title><fmt:message key="error.403.main-title"/></title>
 </head>
 <body>
 <div class="container">
@@ -19,11 +23,11 @@
         403
     </div>
     <div class="error-title">
-        FORBIDDEN
+        <fmt:message key="error.403.title"/>
     </div>
     <form method="post" action="ProjectServlet">
-        <a class="error-text" href="ProjectServlet?command=to_home_page_command">
-            GO BACK TO HOME PAGE AND TRY ANOTHER FUNCTIONALITY
+        <a class="error-text" href="ProjectServlet?command=to_home_page">
+            <fmt:message key="error.ref"/>
         </a>
     </form>
 </div>

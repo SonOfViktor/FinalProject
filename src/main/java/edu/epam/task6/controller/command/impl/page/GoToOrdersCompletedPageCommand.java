@@ -24,9 +24,9 @@ public class GoToOrdersCompletedPageCommand implements Command {
         HttpSession session = request.getSession();
         session.setAttribute(SessionAttribute.PREVIOUS_PAGE, PagePath.ORDERS_PAGE_COMPLETED_REDIRECT);
 
-        Integer currentPage = 1;
+        int currentPage = 1;
         if (request.getParameter(RequestParameter.CURRENT_PAGE_NUMBER) != null) {
-            currentPage = Integer.valueOf(request.getParameter(RequestParameter.CURRENT_PAGE_NUMBER));
+            currentPage = Integer.parseInt(request.getParameter(RequestParameter.CURRENT_PAGE_NUMBER));
         }
 
         OrderService orderService = OrderServiceImpl.getInstance();
@@ -34,9 +34,9 @@ public class GoToOrdersCompletedPageCommand implements Command {
             List<Order> orders = orderService.findByStatus(OrderStatus.COMPLETED.name());
             orders.addAll(orderService.findByStatus(OrderStatus.COMPLETED_AND_ASSESSED.name()));
             request.setAttribute(RequestParameter.ORDERS, orders);
-            request = SendSplitParameters.sendSplitParametersOrders(request, orders.size(), currentPage);
+            SendSplitParameters.sendSplitParametersOrders(request, orders.size(), currentPage);
             request.setAttribute(RequestParameter.TITLE_ORDERS, RequestParameter.TITLE_ORDERS_COMPLETED);
-            request.setAttribute(RequestParameter.COMMAND, CommandType.TO_COMPLETED_ORDERS_PAGE_COMMAND);
+            request.setAttribute(RequestParameter.COMMAND, CommandType.TO_COMPLETED_ORDERS_PAGE);
             router = new Router(PagePath.ORDERS_PAGE);
         } catch (ServiceException e) {
             logger.error("Error during go to completed orders page command", e);

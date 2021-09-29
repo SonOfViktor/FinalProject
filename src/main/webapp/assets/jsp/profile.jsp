@@ -27,7 +27,7 @@
 <div class="header-background">
     <header>
         <form method="post" action="ProjectServlet">
-            <input type="hidden" name="command" value="to_home_page_command"/>
+            <input type="hidden" name="command" value="to_home_page"/>
             <button class="header-title" type="submit">
                 <fmt:message key="header.main-title"/>
             </button>
@@ -35,7 +35,7 @@
         <ul>
             <li class="header-ref0">
                 <form method="post" action="ProjectServlet">
-                    <input type="hidden" name="command" value="to_home_page_command"/>
+                    <input type="hidden" name="command" value="to_home_page"/>
                     <button class="header-button" type="submit">
                         <fmt:message key="header.home"/>
                     </button>
@@ -43,7 +43,7 @@
             </li>
             <li class="header-ref1">
                 <form method="post" action="ProjectServlet">
-                    <input type="hidden" name="command" value="to_catalog_page_command"/>
+                    <input type="hidden" name="command" value="to_catalog_page"/>
                     <button class="header-button" type="submit">
                         <fmt:message key="header.catalog"/>
                     </button>
@@ -51,7 +51,7 @@
             </li>
             <li class="header-ref2">
                 <form method="post" action="ProjectServlet">
-                    <input type="hidden" name="command" value="to_orders_page_command"/>
+                    <input type="hidden" name="command" value="to_orders_page"/>
                     <button class="header-button" type="submit">
                         <fmt:message key="header.orders"/>
                     </button>
@@ -59,7 +59,7 @@
             </li>
             <li class="header-sign-in">
                 <form method="post" action="ProjectServlet">
-                    <input type="hidden" name="command" value="logout_person_command"/>
+                    <input type="hidden" name="command" value="logout_person"/>
                     <button class="header-button" type="submit">
                         <fmt:message key="header.log-out"/>
                     </button>
@@ -70,7 +70,7 @@
         <c:set var="localeRu">ru</c:set>
         <c:set var="localeEn">en</c:set>
         <form method="post" action="ProjectServlet">
-            <input type="hidden" name="command" value="change_language_command"/>
+            <input type="hidden" name="command" value="change_language"/>
             <button class="language-button" type="submit">
                 <c:if test="${language == localeRu}">
                     <fmt:message key="header.language.ru"/>
@@ -88,19 +88,19 @@
         <div class="block3-background">
             <div class="block3-item">
                 <div class="block3-text1"><fmt:message key="profile.email"/></div>
-                <div class="block3-text2">${users.email}</div>
+                <div class="block3-text2">${sessionScope.user.email}</div>
             </div>
             <div class="block3-item">
                 <div class="block3-text1"><fmt:message key="profile.login"/></div>
-                <div class="block3-text2">${users.login}</div>
+                <div class="block3-text2">${sessionScope.user.login}</div>
             </div>
             <div class="block3-item">
                 <div class="block3-text1"><fmt:message key="profile.name"/></div>
-                <div class="block3-text2">${users.name}</div>
+                <div class="block3-text2">${sessionScope.user.name}</div>
             </div>
             <div class="block3-item">
                 <div class="block3-text1"><fmt:message key="profile.surname"/></div>
-                <div class="block3-text2">${users.surname}</div>
+                <div class="block3-text2">${sessionScope.user.surname}</div>
             </div>
             <div class="block3-item">
                 <div class="block3-text1"><fmt:message key="profile.balance"/></div>
@@ -117,23 +117,23 @@
                 <div class="block3-text2"><ctg:time_tag/></div>
             </div>
             <form method="post" action="ProjectServlet">
-                <input type="hidden" name="command" value="to_change_email_page_command"/>
+                <input type="hidden" name="command" value="to_change_email_page"/>
                 <button class="block3-button5"><fmt:message key="profile.change.email"/></button>
             </form>
             <form method="post" action="ProjectServlet">
-                <input type="hidden" name="command" value="to_change_password_page_command"/>
+                <input type="hidden" name="command" value="to_change_password_page"/>
                 <button class="block3-button6"><fmt:message key="profile.change.password"/></button>
             </form>
             <form method="post" action="ProjectServlet">
-                <input type="hidden" name="command" value="to_change_name_page_command"/>
+                <input type="hidden" name="command" value="to_change_name_page"/>
                 <button class="block3-button7"><fmt:message key="profile.change.name"/></button>
             </form>
             <form method="post" action="ProjectServlet">
-                <input type="hidden" name="command" value="to_change_surname_page_command"/>
+                <input type="hidden" name="command" value="to_change_surname_page"/>
                 <button class="block3-button8"><fmt:message key="profile.change.surname"/></button>
             </form>
             <form method="post" action="ProjectServlet">
-                <input type="hidden" name="command" value="to_change_balance_page_command"/>
+                <input type="hidden" name="command" value="to_change_balance_page"/>
                 <button class="block3-button9"><fmt:message key="profile.change.balance"/></button>
             </form>
         </div>
@@ -142,7 +142,7 @@
 <footer class="footer">
     <div class="footer-background">
         <form method="post" action="ProjectServlet">
-            <input type="hidden" name="command" value="to_home_page_command"/>
+            <input type="hidden" name="command" value="to_home_page"/>
             <button class="footer-title" type="submit">
                 <fmt:message key="footer.main-title"/>
             </button>
@@ -150,19 +150,19 @@
         <ul class="footer-info">
             <li class="footer-info-item">
                 <form method="post" action="ProjectServlet">
-                    <input type="hidden" name="command" value="to_proposal_page_command"/>
+                    <input type="hidden" name="command" value="to_proposal_page"/>
                     <button class="footer-button" type="submit"><fmt:message key="footer.proposals"/></button>
                 </form>
             </li>
             <li class="footer-info-item">
                 <form method="post" action="ProjectServlet">
-                    <input type="hidden" name="command" value="to_orders_page_command"/>
+                    <input type="hidden" name="command" value="to_orders_page"/>
                     <button class="footer-button" type="submit"><fmt:message key="footer.orders"/></button>
                 </form>
             </li>
             <li class="footer-info-item">
                 <form method="post" action="ProjectServlet">
-                    <input type="hidden" name="command" value="to_about_us_page_command"/>
+                    <input type="hidden" name="command" value="to_about_us_page"/>
                     <button class="footer-button" type="submit"><fmt:message key="footer.about-us"/></button>
                 </form>
             </li>

@@ -32,13 +32,11 @@ public class CreateCommentCommand implements Command {
 
             if (commentService.leaveComment(parameters)) {
                 logger.info("Comment created successfully");
-                router = new Router(Router.RouterType.REDIRECT,
-                        session.getAttribute(SessionAttribute.PREVIOUS_PAGE).toString());
             } else {
                 logger.error("Error during creating comment, perhaps the comment was not validated.");
-                router = new Router(Router.RouterType.REDIRECT,
-                        session.getAttribute(SessionAttribute.PREVIOUS_PAGE).toString());
             }
+            router = new Router(Router.RouterType.REDIRECT,
+                    session.getAttribute(SessionAttribute.PREVIOUS_PAGE).toString());
         } catch (ServiceException e) {
             logger.error("Error during creating comment: ", e);
             router = new Router(PagePath.ERROR_PAGE_500);

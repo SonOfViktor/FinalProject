@@ -12,6 +12,9 @@ import jakarta.servlet.jsp.JspException;
 import jakarta.servlet.jsp.tagext.TagSupport;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -48,6 +51,9 @@ public class UsersPaginationTag extends TagSupport {
             int end = Math.min(users.size(), currentPage * elementsPerPage);
             for (int i = start; i < end; i++) {
                 User user = users.get(i);
+                LocalDateTime userTime = user.getRegistrationDate();
+                String date = userTime.toLocalDate().format(DateTimeFormatter.ofPattern ( "dd-MM-yyyy" ));
+                LocalTime time = userTime.toLocalTime();
 
                 StringBuilder stringBuilder = new StringBuilder("<div class=\"user-list-item\">");
                 stringBuilder.append("<div class=\"user-list-text-item\">")
@@ -118,7 +124,9 @@ public class UsersPaginationTag extends TagSupport {
                         .append(resourceBundle.getString("users.user.registration-date"))
                         .append("</div>")
                         .append("<div class=\"user-list-text2\">")
-                        .append(user.getRegistrationDate())
+                        .append(date)
+                        .append(" ")
+                        .append(time)
                         .append("</div>")
                         .append("</div>");
 
@@ -141,7 +149,7 @@ public class UsersPaginationTag extends TagSupport {
                         .append("</div>");
 
                 stringBuilder.append("<form method=\"post\" action=\"ProjectServlet\">")
-                        .append("<input type=\"hidden\" name=\"command\" value=\"change_user_status_command\"/>")
+                        .append("<input type=\"hidden\" name=\"command\" value=\"change_user_status\"/>")
                         .append("<input type=\"hidden\" name=\"id\" value=\"")
                         .append(user.getUserId())
                         .append("\"/>")
@@ -163,7 +171,7 @@ public class UsersPaginationTag extends TagSupport {
 
                 stringBuilder.append("</form>")
                         .append("<form class=\"form-button-user2\" method=\"post\" action=\"ProjectServlet\">")
-                        .append("<input type=\"hidden\" name=\"command\" value=\"change_user_status_command\"/>")
+                        .append("<input type=\"hidden\" name=\"command\" value=\"change_user_status\"/>")
                         .append("<input type=\"hidden\" name=\"id\" value=\"")
                         .append(user.getUserId())
                         .append("\"/>")

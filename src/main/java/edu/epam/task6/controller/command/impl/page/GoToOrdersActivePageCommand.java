@@ -24,18 +24,18 @@ public class GoToOrdersActivePageCommand implements Command {
         HttpSession session = request.getSession();
         session.setAttribute(SessionAttribute.PREVIOUS_PAGE, PagePath.ORDERS_PAGE_ACTIVE_REDIRECT);
 
-        Integer currentPage = 1;
+        int currentPage = 1;
         if (request.getParameter(RequestParameter.CURRENT_PAGE_NUMBER) != null) {
-            currentPage = Integer.valueOf(request.getParameter(RequestParameter.CURRENT_PAGE_NUMBER));
+            currentPage = Integer.parseInt(request.getParameter(RequestParameter.CURRENT_PAGE_NUMBER));
         }
 
         OrderService orderService = OrderServiceImpl.getInstance();
         try {
             List<Order> orders = orderService.findByStatus(OrderStatus.ACTIVE.name());
             request.setAttribute(RequestParameter.ORDERS, orders);
-            request = SendSplitParameters.sendSplitParametersOrders(request, orders.size(), currentPage);
+            SendSplitParameters.sendSplitParametersOrders(request, orders.size(), currentPage);
             request.setAttribute(RequestParameter.TITLE_ORDERS, RequestParameter.TITLE_ORDERS_ACTIVE);
-            request.setAttribute(RequestParameter.COMMAND, CommandType.TO_ACTIVE_ORDERS_PAGE_COMMAND);
+            request.setAttribute(RequestParameter.COMMAND, CommandType.TO_ACTIVE_ORDERS_PAGE);
             router = new Router(PagePath.ORDERS_PAGE);
         } catch (ServiceException e) {
             logger.error("Error during go to active orders page command", e);

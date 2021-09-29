@@ -2,7 +2,6 @@ package edu.epam.task6.model.service.impl;
 
 import edu.epam.task6.model.dao.ColumnName;
 import edu.epam.task6.model.dao.TattooDao;
-import edu.epam.task6.model.dao.impl.CommentDaoImpl;
 import edu.epam.task6.model.dao.impl.TattooDaoImpl;
 import edu.epam.task6.model.entity.Tattoo;
 import edu.epam.task6.exception.DaoException;
@@ -66,7 +65,7 @@ public class TattooServiceImpl implements TattooService {
         boolean result = validator.validatePrice(price);
         if(result) {
             TattooDao tattooDao = TattooDaoImpl.getInstance();
-            BigDecimal localPrice = BigDecimal.valueOf(Long.valueOf(price));
+            BigDecimal localPrice = BigDecimal.valueOf(Long.parseLong(price));
             try {
                 result = tattooDao.updatePrice(localPrice, tattooId);
             } catch (DaoException e) {
@@ -150,9 +149,7 @@ public class TattooServiceImpl implements TattooService {
     public List<Tattoo> findByPlace(String place) throws ServiceException {
         TattooDao tattooDao = TattooDaoImpl.getInstance();
         try {
-            List<Tattoo> tattoosList;
-            tattoosList = tattooDao.findByPlace(place);
-            return tattoosList;
+            return tattooDao.findByPlace(place);
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
@@ -161,10 +158,8 @@ public class TattooServiceImpl implements TattooService {
     public Optional<Tattoo> findByIdAllActive(Long soughtId) throws ServiceException {
         TattooDao tattooDao = TattooDaoImpl.getInstance();
         try {
-            Optional<Tattoo> tattoo;
-            tattoo = tattooDao.findByIdAllActive(soughtId);
-            return tattoo;
-        } catch (DaoException e){
+            return tattooDao.findByIdAllActive(soughtId);
+        } catch (DaoException e) {
             throw new ServiceException(e);
         }
     }
@@ -172,10 +167,8 @@ public class TattooServiceImpl implements TattooService {
     public List<Tattoo> findByNameAllActive(String name) throws ServiceException {
         TattooDao tattooDao = TattooDaoImpl.getInstance();
         try {
-            List<Tattoo> tattoosList;
-            tattoosList = tattooDao.findByNameAllActive(name);
-            return tattoosList;
-        } catch (DaoException e){
+            return tattooDao.findByNameAllActive(name);
+        } catch (DaoException e) {
             throw new ServiceException(e);
         }
     }
@@ -183,9 +176,7 @@ public class TattooServiceImpl implements TattooService {
     public List<Tattoo> findByPlaceAllActive(String place) throws ServiceException {
         TattooDao tattooDao = TattooDaoImpl.getInstance();
         try {
-            List<Tattoo> tattoosList;
-            tattoosList = tattooDao.findByPlaceAllActive(place);
-            return tattoosList;
+            return tattooDao.findByPlaceAllActive(place);
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
@@ -201,7 +192,6 @@ public class TattooServiceImpl implements TattooService {
             TattooDao tattooDao = TattooDaoImpl.getInstance();
             try {
                 tattoosList = tattooDao.findByPriceRangeAllActive(minRange, maxRange);
-                return tattoosList;
             } catch (DaoException e){
                 throw new ServiceException(e);
             }
@@ -212,9 +202,7 @@ public class TattooServiceImpl implements TattooService {
     public List<Tattoo> findByStatus(String status) throws ServiceException {
         TattooDao tattooDao = TattooDaoImpl.getInstance();
         try {
-            List<Tattoo> tattoosList;
-            tattoosList = tattooDao.findByStatus(status);
-            return tattoosList;
+            return tattooDao.findByStatus(status);
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
@@ -223,9 +211,7 @@ public class TattooServiceImpl implements TattooService {
     public List<Tattoo> findAll() throws ServiceException {
         TattooDao tattooDao = TattooDaoImpl.getInstance();
         try {
-            List<Tattoo> tattoosList;
-            tattoosList = tattooDao.findAll();
-            return tattoosList;
+            return tattooDao.findAll();
         } catch (DaoException e){
             throw new ServiceException(e);
         }
@@ -234,9 +220,7 @@ public class TattooServiceImpl implements TattooService {
     public List<Tattoo> findAllActive() throws ServiceException {
         TattooDao tattooDao = TattooDaoImpl.getInstance();
         try {
-            List<Tattoo> tattoosList;
-            tattoosList = tattooDao.findAllActive();
-            return tattoosList;
+            return tattooDao.findAllActive();
         } catch (DaoException e){
             throw new ServiceException(e);
         }

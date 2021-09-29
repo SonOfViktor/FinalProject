@@ -18,9 +18,9 @@ public class EmailSender extends Thread {
     public static final String PASSWORD_KEY = "mail.user.password";
     public static final String MAIL_CONTENT_TYPE = "text/html";
 
-    private String emailTo;
-    private String title;
-    private String text;
+    private final String emailTo;
+    private final String title;
+    private final String text;
     public EmailSender(String emailTo, String title, String text) {
         this.emailTo = emailTo;
         this.title = title;
@@ -47,8 +47,7 @@ public class EmailSender extends Thread {
             message.setFrom(new InternetAddress(user));
             message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(emailTo));
             message.setSubject(title);
-            String content = text;
-            message.setContent(content, MAIL_CONTENT_TYPE);
+            message.setContent(text, MAIL_CONTENT_TYPE);
             Transport.send(message);
             result = true;
         } catch (MessagingException e) {

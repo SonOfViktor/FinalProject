@@ -30,9 +30,9 @@ public class GoToAboutUsPageCommand implements Command {
         HttpSession session = request.getSession();
         session.setAttribute(SessionAttribute.PREVIOUS_PAGE, PagePath.ABOUT_US_PAGE_REDIRECT);
 
-        Integer currentPage = 1;
+        int currentPage = 1;
         if (request.getParameter(RequestParameter.CURRENT_PAGE_NUMBER) != null) {
-            currentPage = Integer.valueOf(request.getParameter(RequestParameter.CURRENT_PAGE_NUMBER));
+            currentPage = Integer.parseInt(request.getParameter(RequestParameter.CURRENT_PAGE_NUMBER));
         }
 
         CommentService commentService = CommentServiceImpl.getInstance();
@@ -46,19 +46,19 @@ public class GoToAboutUsPageCommand implements Command {
             if (user.isPresent() && user.get().getRole().equals(UserRole.ADMIN)) {
                 Double averageRating = user.get().getAverageRating();
                 request.setAttribute(RequestParameter.RATING, averageRating);
-                request = SendSplitParameters.sendSplitParametersComments(
+                SendSplitParameters.sendSplitParametersComments(
                         request,
                         comments.size(),
                         currentPage,
                         PageSplitParameter.NUMBER_OF_COMMENTS_PER_PAGE_ADMIN);
             } else {
-                request = SendSplitParameters.sendSplitParametersComments(
+                SendSplitParameters.sendSplitParametersComments(
                         request,
                         comments.size(),
                         currentPage,
                         PageSplitParameter.NUMBER_OF_COMMENTS_PER_PAGE_USER);
             }
-            request.setAttribute(RequestParameter.COMMAND, CommandType.TO_ABOUT_US_PAGE_COMMAND);
+            request.setAttribute(RequestParameter.COMMAND, CommandType.TO_ABOUT_US_PAGE);
             router = new Router(PagePath.ABOUT_US_PAGE);
         } catch (ServiceException e) {
             logger.error("Error during go to about us page command", e);

@@ -7,5 +7,5 @@ public enum BodyPart {
     CHEST,
     FACE,
     NECK,
-    WRIST;
+    WRIST
 }

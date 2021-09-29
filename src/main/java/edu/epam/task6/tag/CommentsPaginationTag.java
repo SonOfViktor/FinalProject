@@ -73,7 +73,7 @@ public class CommentsPaginationTag extends TagSupport {
                 if (session.getAttribute(SessionAttribute.ROLE).equals(UserRole.ADMIN)) {
                     stringBuilder.append("<div class=\"container-button-comments\">")
                             .append("<form class=\"form-button-comment1\" method=\"post\" action=\"ProjectServlet\">")
-                            .append("<input type=\"hidden\" name=\"command\" value=\"delete_comment_command\"/>")
+                            .append("<input type=\"hidden\" name=\"command\" value=\"delete_comment\"/>")
                             .append("<input type=\"hidden\" name=\"comment_id\" value=\"")
                             .append(comment.getCommentId())
                             .append("\"/>")
@@ -83,7 +83,7 @@ public class CommentsPaginationTag extends TagSupport {
                             .append("</form>");
 
                     stringBuilder.append("<form class=\"form-button-comment2\" method=\"post\" action=\"ProjectServlet\">")
-                            .append("<input type=\"hidden\" name=\"command\" value=\"change_user_status_command\"/>")
+                            .append("<input type=\"hidden\" name=\"command\" value=\"change_user_status\"/>")
                             .append("<input type=\"hidden\" name=\"id\" value=\"")
                             .append(comment.getUserId())
                             .append("\"/>")

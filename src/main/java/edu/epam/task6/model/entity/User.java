@@ -164,12 +164,12 @@ public class User {
                 && login.equals(user.login)
                 && name.equals(user.name)
                 && surname.equals(user.surname)
-                && discount == user.discount
+                && discount.equals(user.discount)
                 && balance.equals(user.balance)
                 && registrationDate.equals(user.registrationDate)
-                && averageRating == user.averageRating
-                && numberOfRatings == user.numberOfRatings
-                && registerCode == user.registerCode
+                && averageRating.equals(user.averageRating)
+                && numberOfRatings.equals(user.numberOfRatings)
+                && registerCode.equals(user.registerCode)
                 && status.equals(user.status)
                 && role.equals(user.role);
 

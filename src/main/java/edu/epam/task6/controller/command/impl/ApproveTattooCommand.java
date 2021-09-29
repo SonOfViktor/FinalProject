@@ -38,14 +38,14 @@ public class ApproveTattooCommand implements Command {
         try {
             Long tattooId = Long.valueOf(request.getParameter(RequestParameter.TATTOO_ID));
             BigDecimal tattooPrice = BigDecimal.valueOf(
-                    Long.valueOf(request.getParameter(RequestParameter.TATTOO_PRICE)));
+                    Long.parseLong(request.getParameter(RequestParameter.TATTOO_PRICE)));
             String discount = request.getParameter(RequestParameter.USER_DISCOUNT);
             boolean button = Boolean.parseBoolean(
                     request.getParameter(RequestParameter.TATTOO_BUTTON));
             Optional<Tattoo> tattoo = tattooService.findById(tattooId);
             if (tattoo.isPresent()) {
                 TattooStatus tattooStatus = tattoo.get().getStatus();
-                if (tattooStatus == TattooStatus.OFFERED_BY_USER && button == true) {
+                if (tattooStatus == TattooStatus.OFFERED_BY_USER && button) {
                     tattooStatus = TattooStatus.ACTIVE;
                 } else if (tattooStatus == TattooStatus.OFFERED_BY_USER && !button) {
                     tattooStatus = TattooStatus.LOCKED;

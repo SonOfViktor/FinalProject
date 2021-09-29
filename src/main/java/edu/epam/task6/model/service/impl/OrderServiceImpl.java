@@ -41,20 +41,18 @@ public class OrderServiceImpl implements OrderService {
     }
 
     public boolean updateStatus(Map<String, String> parameters, Long orderId) throws ServiceException {
-        boolean result = true;
-        if(result) {
-            OrderDao orderDao = OrderDaoImpl.getInstance();
-            int statusId = switch (parameters.get(ColumnName.ORDERS_STATUS)) {
-                case "ACTIVE" -> 1;
-                case "COMPLETED" -> 2;
-                case "COMPLETED_AND_ASSESSED" -> 4;
-                default -> 3;
-            };
-            try {
-                result = orderDao.updateStatus(statusId, orderId);
-            } catch (DaoException e) {
-                throw new ServiceException(e);
-            }
+        boolean result;
+        OrderDao orderDao = OrderDaoImpl.getInstance();
+        int statusId = switch (parameters.get(ColumnName.ORDERS_STATUS)) {
+            case "ACTIVE" -> 1;
+            case "COMPLETED" -> 2;
+            case "COMPLETED_AND_ASSESSED" -> 4;
+            default -> 3;
+        };
+        try {
+            result = orderDao.updateStatus(statusId, orderId);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
         }
         return result;
     }
@@ -62,9 +60,8 @@ public class OrderServiceImpl implements OrderService {
     public Optional<Order> findById(Long id) throws ServiceException {
         OrderDao orderDao = OrderDaoImpl.getInstance();
         try {
-            Optional<Order> order = orderDao.findById(id);
-            return order;
-        } catch (DaoException e){
+            return orderDao.findById(id);
+        } catch (DaoException e) {
             throw new ServiceException(e);
         }
     }
@@ -72,8 +69,7 @@ public class OrderServiceImpl implements OrderService {
     public List<Order> findByLogin(String login) throws ServiceException {
         OrderDao orderDao = OrderDaoImpl.getInstance();
         try {
-            List<Order> orderList = orderDao.findByLogin(login);
-            return orderList;
+            return orderDao.findByLogin(login);
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
@@ -82,8 +78,7 @@ public class OrderServiceImpl implements OrderService {
     public List<Order> findByStatus(String status) throws ServiceException {
         OrderDao orderDao = OrderDaoImpl.getInstance();
         try {
-            List<Order> orderList = orderDao.findByStatus(status);
-            return orderList;
+            return orderDao.findByStatus(status);
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
@@ -92,8 +87,7 @@ public class OrderServiceImpl implements OrderService {
     public Optional<Order> findByIdPersonal(Long orderId, String userLogin) throws ServiceException {
         OrderDao orderDao = OrderDaoImpl.getInstance();
         try {
-            Optional<Order> order = orderDao.findByIdPersonal(orderId, userLogin);
-            return order;
+            return orderDao.findByIdPersonal(orderId, userLogin);
         } catch (DaoException e){
             throw new ServiceException(e);
         }
@@ -102,8 +96,7 @@ public class OrderServiceImpl implements OrderService {
     public List<Order> findByStatusPersonal(String status, String userLogin) throws ServiceException {
         OrderDao orderDao = OrderDaoImpl.getInstance();
         try {
-            List<Order> orderList = orderDao.findByStatusPersonal(status, userLogin);
-            return orderList;
+            return orderDao.findByStatusPersonal(status, userLogin);
         } catch (DaoException e) {
             throw new ServiceException(e);
         }
@@ -112,8 +105,7 @@ public class OrderServiceImpl implements OrderService {
     public List<Order> findAll() throws ServiceException {
         OrderDao orderDao = OrderDaoImpl.getInstance();
         try {
-            List<Order> orderList = orderDao.findAll();
-            return orderList;
+            return orderDao.findAll();
         } catch (DaoException e) {
             throw new ServiceException(e);
         }

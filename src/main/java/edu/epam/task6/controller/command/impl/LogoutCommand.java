@@ -5,7 +5,6 @@ import edu.epam.task6.controller.command.PagePath;
 import edu.epam.task6.controller.command.Router;
 import edu.epam.task6.controller.command.SessionAttribute;
 import edu.epam.task6.model.entity.UserRole;
-import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.apache.logging.log4j.LogManager;
@@ -23,7 +22,6 @@ public class LogoutCommand implements Command {
         session.removeAttribute(SessionAttribute.STATUS);
         session.setAttribute(SessionAttribute.ROLE, UserRole.VISITOR);
         session.setAttribute(SessionAttribute.AUTHENTICATION, false);
-        Router router = new Router(Router.RouterType.REDIRECT, PagePath.LOGIN_PAGE_REDIRECT);
-        return router;
+        return new Router(Router.RouterType.REDIRECT, PagePath.LOGIN_PAGE_REDIRECT);
     }
 }

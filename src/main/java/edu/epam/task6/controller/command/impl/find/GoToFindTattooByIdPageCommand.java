@@ -37,12 +37,11 @@ public class GoToFindTattooByIdPageCommand implements Command {
                 Tattoo localTattoo = tattoo.get();
                 request.setAttribute(RequestParameter.FIND_TATTOO_ERROR, false);
                 request.setAttribute(RequestParameter.TATTOO, localTattoo);
-                router = new Router(PagePath.FIND_OPTIONAL_PAGE);
             } else {
                 request.setAttribute(RequestParameter.FIND_TATTOO_ERROR, true);
                 logger.error("Tattoo with this id was not found. id = " + tattooId);
-                router = new Router(PagePath.FIND_OPTIONAL_PAGE);
             }
+            router = new Router(PagePath.FIND_OPTIONAL_PAGE);
         } catch (ServiceException e) {
             logger.error("Error during searching tattoo with id = " + tattooId, e);
             router = new Router(PagePath.ERROR_PAGE_500);

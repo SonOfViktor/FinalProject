@@ -22,9 +22,9 @@ public class GoToFindUsersByNamePageCommand implements Command {
         Router router;
         HttpSession session = request.getSession();
 
-        Integer currentPage = 1;
+        int currentPage = 1;
         if (request.getParameter(RequestParameter.CURRENT_PAGE_NUMBER) != null) {
-            currentPage = Integer.valueOf(request.getParameter(RequestParameter.CURRENT_PAGE_NUMBER));
+            currentPage = Integer.parseInt(request.getParameter(RequestParameter.CURRENT_PAGE_NUMBER));
         }
 
         UserService userService = UserServiceImpl.getInstance();
@@ -36,9 +36,9 @@ public class GoToFindUsersByNamePageCommand implements Command {
         try {
             List<User> users = userService.findByName(usersName);
             request.setAttribute(RequestParameter.USERS, users);
-            request = SendSplitParameters.sendSplitParametersUsers(request, users.size(), currentPage);
+            SendSplitParameters.sendSplitParametersUsers(request, users.size(), currentPage);
             request.setAttribute(RequestParameter.TITLE_USERS, RequestParameter.TITLE_USERS_FOUNDED);
-            request.setAttribute(RequestParameter.COMMAND, CommandType.TO_FIND_USERS_BY_NAME_PAGE_COMMAND);
+            request.setAttribute(RequestParameter.COMMAND, CommandType.TO_FIND_USERS_BY_NAME_PAGE);
             router = new Router(PagePath.USERS_PAGE);
         } catch (ServiceException e) {
             logger.error("Error during searching users with name = " + usersName, e);

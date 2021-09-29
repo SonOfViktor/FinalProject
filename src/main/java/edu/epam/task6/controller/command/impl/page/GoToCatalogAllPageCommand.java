@@ -24,18 +24,18 @@ public class GoToCatalogAllPageCommand implements Command {
         HttpSession session = request.getSession();
         session.setAttribute(SessionAttribute.PREVIOUS_PAGE, PagePath.CATALOG_PAGE_ALL_REDIRECT);
 
-        Integer currentPage = 1;
+        int currentPage = 1;
         if (request.getParameter(RequestParameter.CURRENT_PAGE_NUMBER) != null) {
-            currentPage = Integer.valueOf(request.getParameter(RequestParameter.CURRENT_PAGE_NUMBER));
+            currentPage = Integer.parseInt(request.getParameter(RequestParameter.CURRENT_PAGE_NUMBER));
         }
 
         TattooService catalogService = TattooServiceImpl.getInstance();
         try {
             List<Tattoo> catalogElements = catalogService.findAll();
             request.setAttribute(RequestParameter.CATALOG, catalogElements);
-            request = SendSplitParameters.sendSplitParametersTattoos(request, catalogElements.size(), currentPage);
+            SendSplitParameters.sendSplitParametersTattoos(request, catalogElements.size(), currentPage);
             request.setAttribute(RequestParameter.TITLE_TATTOOS, RequestParameter.TITLE_TATTOOS_ALL);
-            request.setAttribute(RequestParameter.COMMAND, CommandType.TO_ALL_CATALOG_PAGE_COMMAND);
+            request.setAttribute(RequestParameter.COMMAND, CommandType.TO_ALL_CATALOG_PAGE);
             router = new Router(PagePath.CATALOG_PAGE);
         } catch (ServiceException e) {
             logger.error("Error during go to all tattoos page command", e);

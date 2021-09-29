@@ -49,7 +49,7 @@
 <div class="header-background">
     <header>
         <form method="post" action="ProjectServlet">
-            <input type="hidden" name="command" value="to_home_page_command"/>
+            <input type="hidden" name="command" value="to_home_page"/>
             <button class="header-title" type="submit">
                 <fmt:message key="header.main-title"/>
             </button>
@@ -57,7 +57,7 @@
         <ul>
             <li class="header-ref1">
                 <form method="post" action="ProjectServlet">
-                    <input type="hidden" name="command" value="to_catalog_page_command"/>
+                    <input type="hidden" name="command" value="to_catalog_page"/>
                     <button class="header-button" type="submit">
                         <fmt:message key="header.catalog"/>
                     </button>
@@ -65,7 +65,7 @@
             </li>
             <li class="header-ref2">
                 <form method="post" action="ProjectServlet">
-                    <input type="hidden" name="command" value="to_orders_page_command"/>
+                    <input type="hidden" name="command" value="to_orders_page"/>
                     <button class="header-button" type="submit">
                         <fmt:message key="header.orders"/>
                     </button>
@@ -73,7 +73,7 @@
             </li>
             <li class="header-sign-in">
                 <form method="post" action="ProjectServlet">
-                    <input type="hidden" name="command" value="to_profile_page_command"/>
+                    <input type="hidden" name="command" value="to_profile_page"/>
                     <button class="header-button" type="submit">
                         <fmt:message key="header.profile"/>
                     </button>
@@ -172,14 +172,14 @@
                 </div>
             </div>
             <form method="post" action="ProjectServlet">
-                <input type="hidden" name="command" value="change_user_status_command"/>
+                <input type="hidden" name="command" value="change_user_status"/>
                 <input type="hidden" name="id" value="${user.userId}"/>
                 <input type="hidden" name="active" value="false"/>
                 <input type="hidden" name="title_users" value="${title_users}"/>
                 <button class="user-list-item-button" type="submit"><fmt:message key="change.button-block"/></button>
             </form>
             <form class="form-button-user2" method="post" action="ProjectServlet">
-                <input type="hidden" name="command" value="change_user_status_command"/>
+                <input type="hidden" name="command" value="change_user_status"/>
                 <input type="hidden" name="id" value="${user.userId}"/>
                 <input type="hidden" name="active" value="true"/>
                 <input type="hidden" name="title_users" value="${title_users}"/>
@@ -261,7 +261,7 @@
             </div>
             <c:if test="${order.orderStatus == orderStatusActive}">
                 <form method="post" action="ProjectServlet">
-                    <input type="hidden" name="command" value="cancel_order_command"/>
+                    <input type="hidden" name="command" value="cancel_order"/>
                     <input type="hidden" name="id" value="${order.orderId}"/>
                     <button class="order-list-item-button">
                         <fmt:message key="orders.cancel.button"/>
@@ -295,7 +295,7 @@
                 </ul>
                 <c:if test="${sessionScope.role == roleVisitor || sessionScope.role == roleUser}">
                     <form method="post" action="ProjectServlet">
-                        <input type="hidden" name="command" value="create_order_command"/>
+                        <input type="hidden" name="command" value="create_order"/>
                         <input type="hidden" name="tattoo_id" value="${tattoo.tattooId}"/>
                         <input id="date" type="hidden" name="registration_date"/>
                         <button class="tattoo-item-button"
@@ -308,7 +308,7 @@
                 <c:if test="${sessionScope.role == roleAdmin}">
                     <c:if test="${tattoo.status == tattooStatusActive}">
                         <form method="post" action="ProjectServlet">
-                            <input type="hidden" name="command" value="change_tattoo_status_command"/>
+                            <input type="hidden" name="command" value="change_tattoo_status"/>
                             <input type="hidden" name="id" value="${tattoo.tattooId}"/>
                             <input type="hidden" name="active" value="false"/>
                             <button class="tattoo-item-button" type="submit">
@@ -318,7 +318,7 @@
                     </c:if>
                     <c:if test="${tattoo.status == tattooStatusLocked}">
                         <form method="post" action="ProjectServlet">
-                            <input type="hidden" name="command" value="change_tattoo_status_command"/>
+                            <input type="hidden" name="command" value="change_tattoo_status"/>
                             <input type="hidden" name="id" value="${tattoo.tattooId}"/>
                             <input type="hidden" name="active" value="true"/>
                             <button class="tattoo-item-button" type="submit">
@@ -328,7 +328,7 @@
                     </c:if>
                     <c:if test="${tattoo.status == tattooStatusProposal}">
                         <form method="post" action="ProjectServlet">
-                            <input type="hidden" name="command" value="to_approve_tattoo_page_command"/>
+                            <input type="hidden" name="command" value="to_approve_tattoo_page"/>
                             <input type="hidden" name="id" value="${tattoo.tattooId}"/>
                             <button class="tattoo-item-button"><fmt:message key="tattoo.proposal"/></button>
                         </form>
@@ -341,7 +341,7 @@
 <footer class="footer">
     <div class="footer-background">
         <form method="post" action="ProjectServlet">
-            <input type="hidden" name="command" value="to_home_page_command"/>
+            <input type="hidden" name="command" value="to_home_page"/>
             <button class="footer-title" type="submit">
                 <fmt:message key="footer.main-title"/>
             </button>
@@ -349,19 +349,19 @@
         <ul class="footer-info">
             <li class="footer-info-item">
                 <form method="post" action="ProjectServlet">
-                    <input type="hidden" name="command" value="to_proposal_page_command"/>
+                    <input type="hidden" name="command" value="to_proposal_page"/>
                     <button class="footer-button" type="submit"><fmt:message key="footer.proposals"/></button>
                 </form>
             </li>
             <li class="footer-info-item">
                 <form method="post" action="ProjectServlet">
-                    <input type="hidden" name="command" value="to_orders_page_command"/>
+                    <input type="hidden" name="command" value="to_orders_page"/>
                     <button class="footer-button" type="submit"><fmt:message key="footer.orders"/></button>
                 </form>
             </li>
             <li class="footer-info-item">
                 <form method="post" action="ProjectServlet">
-                    <input type="hidden" name="command" value="to_about_us_page_command"/>
+                    <input type="hidden" name="command" value="to_about_us_page"/>
                     <button class="footer-button" type="submit"><fmt:message key="footer.about-us"/></button>
                 </form>
             </li>

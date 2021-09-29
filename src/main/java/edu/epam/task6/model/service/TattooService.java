@@ -3,7 +3,6 @@ package edu.epam.task6.model.service;
 import edu.epam.task6.model.entity.Tattoo;
 import edu.epam.task6.exception.ServiceException;
 
-import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;

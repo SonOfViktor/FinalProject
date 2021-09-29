@@ -41,7 +41,7 @@
 <div class="header-background">
     <header>
         <form method="post" action="ProjectServlet">
-            <input type="hidden" name="command" value="to_home_page_command"/>
+            <input type="hidden" name="command" value="to_home_page"/>
             <button class="header-title" type="submit">
                 <fmt:message key="header.main-title"/>
             </button>
@@ -49,7 +49,7 @@
         <ul>
             <li class="header-ref1">
                 <form method="post" action="ProjectServlet">
-                    <input type="hidden" name="command" value="to_home_page_command"/>
+                    <input type="hidden" name="command" value="to_home_page"/>
                     <button class="header-button" type="submit">
                         <fmt:message key="header.home"/>
                     </button>
@@ -57,7 +57,7 @@
             </li>
             <li class="header-ref2">
                 <form method="post" action="ProjectServlet">
-                    <input type="hidden" name="command" value="to_catalog_page_command"/>
+                    <input type="hidden" name="command" value="to_catalog_page"/>
                     <button class="header-button" type="submit">
                         <fmt:message key="header.catalog"/>
                     </button>
@@ -65,7 +65,7 @@
             </li>
             <li class="header-sign-in">
                 <form method="post" action="ProjectServlet">
-                    <input type="hidden" name="command" value="to_profile_page_command"/>
+                    <input type="hidden" name="command" value="to_profile_page"/>
                     <button class="header-button" type="submit">
                         <fmt:message key="header.profile"/>
                     </button>
@@ -76,7 +76,7 @@
         <c:set var="localeRu">ru</c:set>
         <c:set var="localeEn">en</c:set>
         <form method="post" action="ProjectServlet">
-            <input type="hidden" name="command" value="change_language_command"/>
+            <input type="hidden" name="command" value="change_language"/>
             <button class="language-button" type="submit">
                 <c:if test="${language == localeRu}">
                     <fmt:message key="header.language.ru"/>
@@ -95,14 +95,14 @@
             <c:if test="${sessionScope.role == roleUser}">
                 <div class="block2-item">
                     <form class="block2-form" method="post" action="ProjectServlet">
-                        <input type="hidden" name="command" value="to_create_order_page_command"/>
+                        <input type="hidden" name="command" value="to_create_order_page"/>
                         <button class="block2-button-create" type="submit"><fmt:message key="orders.create.order"/></button>
                     </form>
                 </div>
             </c:if>
             <div class="block2-item">
                 <form class="block2-form" method="post" action="ProjectServlet">
-                    <input type="hidden" name="command" value="to_find_order_by_id_page_command"/>
+                    <input type="hidden" name="command" value="to_find_order_by_id_page"/>
                     <div class="block2-text"><fmt:message key="orders.search.title.id"/></div>
                     <input class="block2-input"
                            type="number"
@@ -116,7 +116,7 @@
             </div>
             <div class="block2-item">
                 <form class="block2-form" method="post" action="ProjectServlet">
-                    <input type="hidden" name="command" value="to_find_order_by_status_page_command"/>
+                    <input type="hidden" name="command" value="to_find_order_by_status_page"/>
                     <div class="block2-text"><fmt:message key="orders.search.title.status"/></div>
                     <select class="block2-select" name="order_status" data-live-search="true">
                         <option value="ACTIVE"><fmt:message key="orders.search.select.active"/></option>
@@ -128,12 +128,15 @@
             <c:if test="${sessionScope.role == roleAdmin}">
                 <div class="block2-item">
                     <form class="block2-form" method="post" action="ProjectServlet">
-                        <input type="hidden" name="command" value="to_find_order_by_login_page_command"/>
+                        <input type="hidden" name="command" value="to_find_order_by_login_page"/>
                         <div class="block2-text"><fmt:message key="orders.search.title.login"/></div>
                         <input class="block2-input"
                                type="text"
                                name="login"
                                placeholder="<fmt:message key="orders.search.placeholder.login"/>"
+                               required
+                               oninvalid="this.setCustomValidity('<fmt:message key="regex.login"/>')"
+                               oninput="setCustomValidity('')"
                                minlength="1"
                                maxlength="40"
                                pattern="[\w][\w._-]{0,39}"
@@ -144,7 +147,7 @@
             </c:if>
             <div class="block2-item">
                 <form class="block2-form" method="post" action="ProjectServlet">
-                    <input type="hidden" name="command" value="cancel_order_command"/>
+                    <input type="hidden" name="command" value="cancel_order"/>
                     <div class="block2-text"><fmt:message key="orders.cancel.title"/></div>
                     <input class="block2-input"
                            type="number"
@@ -198,8 +201,7 @@
             </c:if>
             <div class="order-list-container">
                 <ctg:orders_pagination currentPage="${current_page_number}"
-                                       elementsPerPage="${elements_per_page}"
-                                       title="${title_orders}"/>
+                                       elementsPerPage="${elements_per_page}"/>
 
                 <c:if test="${orders.size() > 0}">
                     <form method="post" action="ProjectServlet">
@@ -231,7 +233,7 @@
 <footer class="footer">
     <div class="footer-background">
         <form method="post" action="ProjectServlet">
-            <input type="hidden" name="command" value="to_home_page_command"/>
+            <input type="hidden" name="command" value="to_home_page"/>
             <button class="footer-title" type="submit">
                 <fmt:message key="footer.main-title"/>
             </button>
@@ -239,19 +241,19 @@
         <ul class="footer-info">
             <li class="footer-info-item">
                 <form method="post" action="ProjectServlet">
-                    <input type="hidden" name="command" value="to_proposal_page_command"/>
+                    <input type="hidden" name="command" value="to_proposal_page"/>
                     <button class="footer-button" type="submit"><fmt:message key="footer.proposals"/></button>
                 </form>
             </li>
             <li class="footer-info-item">
                 <form method="post" action="ProjectServlet">
-                    <input type="hidden" name="command" value="to_catalog_page_command"/>
+                    <input type="hidden" name="command" value="to_catalog_page"/>
                     <button class="footer-button" type="submit"><fmt:message key="footer.catalog"/></button>
                 </form>
             </li>
             <li class="footer-info-item">
                 <form method="post" action="ProjectServlet">
-                    <input type="hidden" name="command" value="to_about_us_page_command"/>
+                    <input type="hidden" name="command" value="to_about_us_page"/>
                     <button class="footer-button" type="submit"><fmt:message key="footer.about-us"/></button>
                 </form>
             </li>

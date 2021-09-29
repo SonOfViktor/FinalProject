@@ -1,4 +1,9 @@
 <%@ page isErrorPage="true" contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<c:set var="language" value="${sessionScope.locale}" scope="session"/>
+<fmt:setLocale value="${language}"/>
+<fmt:setBundle scope="session" basename="language"/>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -7,23 +12,23 @@
             href="https://fonts.googleapis.com/css2?family=Bebas+Neue&amp;display=swap"
             rel="stylesheet">
     <link
-            href="${pageContext.request.contextPath}/assets/css/error2.css"
+            href="${pageContext.request.contextPath}/assets/css/error3.css"
             rel="stylesheet"
     />
-    <title>Error 404</title>
+    <title><fmt:message key="error.404.main-title"/></title>
 </head>
 <body>
 <div class="container">
     <div class="error-title-error">
         404
     </div>
-    <div class="error-title">
-        PAGE NOT FOUND
+    <div class="error-title2">
+        <fmt:message key="error.404.title"/>
     </div>
     <form method="post" action="ProjectServlet">
-        <input type="hidden" name="command" value="to_home_page_command"/>
+        <input type="hidden" name="command" value="to_home_page"/>
         <button class="error-text" type="submit">
-            GO BACK TO HOME PAGE AND TRY ANOTHER FUNCTIONALITY
+            <fmt:message key="error.ref"/>
         </button>
     </form>
 </div>

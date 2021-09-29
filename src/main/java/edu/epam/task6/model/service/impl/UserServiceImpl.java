@@ -11,6 +11,7 @@ import edu.epam.task6.model.dao.ColumnName;
 import edu.epam.task6.model.service.UserService;
 import edu.epam.task6.model.validator.Validator;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -128,11 +129,20 @@ public class UserServiceImpl implements UserService {
 
     public boolean updateBalance(Map<String, String> parameters, Long userId) throws ServiceException {
         String balance = parameters.get(RequestParameter.USER_BALANCE);
-        boolean result = validator.validatePrice(balance);
+        boolean result = validator.validatePaid(balance);
         if(result) {
             UserDao userDao = UserDaoImpl.getInstance();
             try {
-                result = userDao.updateBalance(parameters, userId);
+                BigDecimal localBalance = new BigDecimal(balance);
+                Optional<User> localUser = userDao.findById(userId);
+                if (localUser.isPresent()) {
+                    localBalance = localUser.get().getBalance().add(localBalance);
+                    String finalBalance = localBalance.toString();
+                    parameters.computeIfPresent(ColumnName.USER_BALANCE, (key, value) -> value = finalBalance);
+                    result = userDao.updateBalance(parameters, userId);
+                } else {
+                    result = false;
+                }
             } catch (DaoException e) {
                 throw new ServiceException(e);
             }
@@ -140,21 +150,18 @@ public class UserServiceImpl implements UserService {
         return result;
     }
 
-    //TODO Сделать валидацию
     public boolean updateStatus(Map<String, String> parameters, Long userId) throws ServiceException {
-        boolean result = true;
-        if(result) {
-            UserDao userDao = UserDaoImpl.getInstance();
-            int statusId = switch (parameters.get(ColumnName.USER_STATUS)) {
-                case "ACTIVE" -> 1;
-                case "BLOCKED" -> 2;
-                default -> 3;
-            };
-            try {
-                result = userDao.updateStatus(statusId, userId);
-            } catch (DaoException e) {
-                throw new ServiceException(e);
-            }
+        boolean result;
+        UserDao userDao = UserDaoImpl.getInstance();
+        int statusId = switch (parameters.get(ColumnName.USER_STATUS)) {
+            case "ACTIVE" -> 1;
+            case "BLOCKED" -> 2;
+            default -> 3;
+        };
+        try {
+            result = userDao.updateStatus(statusId, userId);
+        } catch (DaoException e) {
+            throw new ServiceException(e);
         }
         return result;
     }
@@ -193,9 +200,8 @@ public class UserServiceImpl implements UserService {
     public Optional<User> findById(Long soughtId) throws ServiceException {
         UserDao userDao = UserDaoImpl.getInstance();
         try {
-            Optional<User> user = userDao.findById(soughtId);
-            return user;
-        } catch (DaoException e){
+            return userDao.findById(soughtId);
+        } catch (DaoException e) {
             throw new ServiceException(e);
         }
     }
@@ -203,9 +209,8 @@ public class UserServiceImpl implements UserService {
     public Optional<User> findByLogin(String login) throws ServiceException {
         UserDao userDao = UserDaoImpl.getInstance();
         try {
-            Optional<User> user = userDao.findByLogin(login);
-            return user;
-        } catch (DaoException e){
+            return userDao.findByLogin(login);
+        } catch (DaoException e) {
             throw new ServiceException(e);
         }
     }
@@ -222,7 +227,7 @@ public class UserServiceImpl implements UserService {
                     result = user;
                 }
             }
-        } catch (DaoException e){
+        } catch (DaoException e) {
             throw new ServiceException(e);
         }
         return result;
@@ -231,9 +236,8 @@ public class UserServiceImpl implements UserService {
     public List<User> findByName(String name) throws ServiceException {
         UserDao userDao = UserDaoImpl.getInstance();
         try {
-            List<User> userList = userDao.findByName(name);
-            return userList;
-        } catch (DaoException e){
+            return userDao.findByName(name);
+        } catch (DaoException e) {
             throw new ServiceException(e);
         }
     }
@@ -241,9 +245,8 @@ public class UserServiceImpl implements UserService {
     public List<User> findBySurname(String surname) throws ServiceException {
         UserDao userDao = UserDaoImpl.getInstance();
         try {
-            List<User> userList = userDao.findBySurname(surname);
-            return userList;
-        } catch (DaoException e){
+            return userDao.findBySurname(surname);
+        } catch (DaoException e) {
             throw new ServiceException(e);
         }
     }
@@ -251,9 +254,8 @@ public class UserServiceImpl implements UserService {
     public List<User> findByStatus(String status) throws ServiceException {
         UserDao userDao = UserDaoImpl.getInstance();
         try {
-            List<User> userList = userDao.findByStatus(status);
-            return userList;
-        } catch (DaoException e){
+            return userDao.findByStatus(status);
+        } catch (DaoException e) {
             throw new ServiceException(e);
         }
     }
@@ -261,9 +263,8 @@ public class UserServiceImpl implements UserService {
     public List<User> findAll() throws ServiceException {
         UserDao userDao = UserDaoImpl.getInstance();
         try {
-            List<User> userList = userDao.findAll();
-            return userList;
-        } catch (DaoException e){
+            return userDao.findAll();
+        } catch (DaoException e) {
             throw new ServiceException(e);
         }
     }

@@ -6,9 +6,6 @@
 <fmt:setLocale value="${language}"/>
 <fmt:setBundle scope="session" basename="language"/>
 
-<c:set var="status_active">ACTIVE</c:set>
-<c:set var="status_blocked">BLOCKED</c:set>
-<c:set var="role_admin">ADMIN</c:set>
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -34,7 +31,7 @@
 <div class="header-background">
     <header>
         <form method="post" action="ProjectServlet">
-            <input type="hidden" name="command" value="to_home_page_command"/>
+            <input type="hidden" name="command" value="to_home_page"/>
             <button class="header-title" type="submit">
                 <fmt:message key="header.main-title"/>
             </button>
@@ -42,7 +39,7 @@
         <ul>
             <li class="header-ref0">
                 <form method="post" action="ProjectServlet">
-                    <input type="hidden" name="command" value="to_home_page_command"/>
+                    <input type="hidden" name="command" value="to_home_page"/>
                     <button class="header-button" type="submit">
                         <fmt:message key="header.home"/>
                     </button>
@@ -50,7 +47,7 @@
             </li>
             <li class="header-ref1">
                 <form method="post" action="ProjectServlet">
-                    <input type="hidden" name="command" value="to_catalog_page_command"/>
+                    <input type="hidden" name="command" value="to_catalog_page"/>
                     <button class="header-button" type="submit">
                         <fmt:message key="header.catalog"/>
                     </button>
@@ -58,7 +55,7 @@
             </li>
             <li class="header-ref2">
                 <form method="post" action="ProjectServlet">
-                    <input type="hidden" name="command" value="to_orders_page_command"/>
+                    <input type="hidden" name="command" value="to_orders_page"/>
                     <button class="header-button" type="submit">
                         <fmt:message key="header.orders"/>
                     </button>
@@ -66,7 +63,7 @@
             </li>
             <li class="header-sign-in">
                 <form method="post" action="ProjectServlet">
-                    <input type="hidden" name="command" value="to_profile_page_command"/>
+                    <input type="hidden" name="command" value="to_profile_page"/>
                     <button class="header-button" type="submit">
                         <fmt:message key="header.profile"/>
                     </button>
@@ -77,7 +74,7 @@
         <c:set var="localeRu">ru</c:set>
         <c:set var="localeEn">en</c:set>
         <form method="post" action="ProjectServlet">
-            <input type="hidden" name="command" value="change_language_command"/>
+            <input type="hidden" name="command" value="change_language"/>
             <button class="language-button" type="submit">
                 <c:if test="${language == localeRu}">
                     <fmt:message key="header.language.ru"/>
@@ -95,7 +92,7 @@
         <div class="block2-background">
             <div class="block2-item">
                 <form class="block2-form" method="post" action="ProjectServlet">
-                    <input type="hidden" name="command" value="to_find_user_by_id_page_command"/>
+                    <input type="hidden" name="command" value="to_find_user_by_id_page"/>
                     <div class="block2-text"><fmt:message key="users.search.title.id"/></div>
                     <input class="block2-input"
                            type="number"
@@ -109,12 +106,15 @@
             </div>
             <div class="block2-item">
                 <form class="block2-form" method="post" action="ProjectServlet">
-                    <input type="hidden" name="command" value="to_find_user_by_login_page_command"/>
+                    <input type="hidden" name="command" value="to_find_user_by_login_page"/>
                     <div class="block2-text"><fmt:message key="users.search.title.login"/></div>
                     <input class="block2-input"
                            type="text"
                            name="login"
                            placeholder="<fmt:message key="users.search.placeholder.login"/>"
+                           required
+                           oninvalid="this.setCustomValidity('<fmt:message key="regex.login"/>')"
+                           oninput="setCustomValidity('')"
                            minlength="1"
                            maxlength="40"
                            pattern="[\w][\w._-]{0,39}"
@@ -124,12 +124,15 @@
             </div>
             <div class="block2-item">
                 <form class="block2-form" method="post" action="ProjectServlet">
-                    <input type="hidden" name="command" value="to_find_users_by_name_page_command"/>
+                    <input type="hidden" name="command" value="to_find_users_by_name_page"/>
                     <div class="block2-text"><fmt:message key="users.search.title.name"/></div>
                     <input class="block2-input"
                            type="text"
                            name="name"
                            placeholder="<fmt:message key="users.search.placeholder.name"/>"
+                           required
+                           oninvalid="this.setCustomValidity('<fmt:message key="regex.name"/>')"
+                           oninput="setCustomValidity('')"
                            minlength="1"
                            maxlength="40"
                            pattern="[A-ZА-ЯЁ][A-Za-zА-Яа-яЁё]{0,39}"
@@ -139,12 +142,14 @@
             </div>
             <div class="block2-item">
                 <form class="block2-form" method="post" action="ProjectServlet">
-                    <input type="hidden" name="command" value="to_find_users_by_surname_page_command"/>
+                    <input type="hidden" name="command" value="to_find_users_by_surname_page"/>
                     <div class="block2-text"><fmt:message key="users.search.title.surname"/></div>
                     <input class="block2-input"
                            type="text"
                            name="surname"
                            placeholder="<fmt:message key="users.search.placeholder.surname"/>"
+                           oninvalid="this.setCustomValidity('<fmt:message key="regex.surname"/>')"
+                           oninput="setCustomValidity('')"
                            minlength="1"
                            maxlength="40"
                            pattern="[A-ZА-ЯЁ][A-Za-zА-Яа-яЁё]{0,39}"
@@ -221,7 +226,7 @@
 <footer class="footer">
     <div class="footer-background">
         <form method="post" action="ProjectServlet">
-            <input type="hidden" name="command" value="to_home_page_command"/>
+            <input type="hidden" name="command" value="to_home_page"/>
             <button class="footer-title" type="submit">
                 <fmt:message key="footer.main-title"/>
             </button>
@@ -229,19 +234,19 @@
         <ul class="footer-info">
             <li class="footer-info-item">
                 <form method="post" action="ProjectServlet">
-                    <input type="hidden" name="command" value="to_proposal_page_command"/>
+                    <input type="hidden" name="command" value="to_proposal_page"/>
                     <button class="footer-button" type="submit"><fmt:message key="footer.proposals"/></button>
                 </form>
             </li>
             <li class="footer-info-item">
                 <form method="post" action="ProjectServlet">
-                    <input type="hidden" name="command" value="to_orders_page_command"/>
+                    <input type="hidden" name="command" value="to_orders_page"/>
                     <button class="footer-button" type="submit"><fmt:message key="footer.orders"/></button>
                 </form>
             </li>
             <li class="footer-info-item">
                 <form method="post" action="ProjectServlet">
-                    <input type="hidden" name="command" value="to_about_us_page_command"/>
+                    <input type="hidden" name="command" value="to_about_us_page"/>
                     <button class="footer-button" type="submit"><fmt:message key="footer.about-us"/></button>
                 </form>
             </li>

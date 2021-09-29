@@ -22,9 +22,9 @@ public class GoToFindOrderByLoginPageCommand implements Command {
         Router router;
         HttpSession session = request.getSession();
 
-        Integer currentPage = 1;
+        int currentPage = 1;
         if (request.getParameter(RequestParameter.CURRENT_PAGE_NUMBER) != null) {
-            currentPage = Integer.valueOf(request.getParameter(RequestParameter.CURRENT_PAGE_NUMBER));
+            currentPage = Integer.parseInt(request.getParameter(RequestParameter.CURRENT_PAGE_NUMBER));
         }
 
         OrderService orderService = OrderServiceImpl.getInstance();
@@ -36,9 +36,9 @@ public class GoToFindOrderByLoginPageCommand implements Command {
         try {
             List<Order> orders = orderService.findByLogin(orderLogin);
             request.setAttribute(RequestParameter.ORDERS, orders);
-            request = SendSplitParameters.sendSplitParametersOrders(request, orders.size(), currentPage);
+            SendSplitParameters.sendSplitParametersOrders(request, orders.size(), currentPage);
             request.setAttribute(RequestParameter.TITLE_ORDERS, RequestParameter.TITLE_ORDERS_FOUNDED);
-            request.setAttribute(RequestParameter.COMMAND, CommandType.TO_FIND_ORDER_BY_LOGIN_PAGE_COMMAND);
+            request.setAttribute(RequestParameter.COMMAND, CommandType.TO_FIND_ORDER_BY_LOGIN_PAGE);
             router = new Router(PagePath.ORDERS_PAGE);
         } catch (ServiceException e) {
             logger.error("Error during searching orders with user login = " + orderLogin, e);

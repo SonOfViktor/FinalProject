@@ -26,9 +26,9 @@ public class GoToFindTattooByPlacePageCommand implements Command {
         UserRole userRole = (UserRole) session.getAttribute(SessionAttribute.ROLE);
         session.setAttribute(SessionAttribute.PREVIOUS_PAGE, PagePath.FIND_TATTOO_BY_PLACE_REDIRECT);
 
-        Integer currentPage = 1;
+        int currentPage = 1;
         if (request.getParameter(RequestParameter.CURRENT_PAGE_NUMBER) != null) {
-            currentPage = Integer.valueOf(request.getParameter(RequestParameter.CURRENT_PAGE_NUMBER));
+            currentPage = Integer.parseInt(request.getParameter(RequestParameter.CURRENT_PAGE_NUMBER));
         }
 
         TattooService tattooService = TattooServiceImpl.getInstance();
@@ -45,9 +45,9 @@ public class GoToFindTattooByPlacePageCommand implements Command {
                 tattoos = tattooService.findByPlaceAllActive(tattooPlace);
             }
             request.setAttribute(RequestParameter.CATALOG, tattoos);
-            request = SendSplitParameters.sendSplitParametersTattoos(request, tattoos.size(), currentPage);
+            SendSplitParameters.sendSplitParametersTattoos(request, tattoos.size(), currentPage);
             request.setAttribute(RequestParameter.TITLE_TATTOOS, RequestParameter.TITLE_TATTOOS_FOUNDED);
-            request.setAttribute(RequestParameter.COMMAND, CommandType.TO_FIND_TATTOO_BY_PLACE_PAGE_COMMAND);
+            request.setAttribute(RequestParameter.COMMAND, CommandType.TO_FIND_TATTOO_BY_PLACE_PAGE);
             router = new Router(PagePath.CATALOG_PAGE);
         } catch (ServiceException e) {
             logger.error("Error during searching tattoos with place = " + tattooPlace, e);

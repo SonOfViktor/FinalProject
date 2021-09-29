@@ -34,12 +34,10 @@ public class ChangeTattooStatusCommand implements Command {
             if (tattoo.isPresent()) {
                 TattooStatus tattooStatus = tattoo.get().getStatus();
                 if (tattooStatus == TattooStatus.ACTIVE ||
-                        tattooStatus == TattooStatus.OFFERED_BY_USER
-                        && button == false) {
+                        tattooStatus == TattooStatus.OFFERED_BY_USER && !button) {
                     tattooStatus = TattooStatus.LOCKED;
                 } else if (tattooStatus == TattooStatus.LOCKED ||
-                        tattooStatus == TattooStatus.OFFERED_BY_USER &&
-                        button == true) {
+                        tattooStatus == TattooStatus.OFFERED_BY_USER && button) {
                     tattooStatus = TattooStatus.ACTIVE;
                 }
                 parameters.put(ColumnName.TATTOOS_STATUS, tattooStatus.toString());

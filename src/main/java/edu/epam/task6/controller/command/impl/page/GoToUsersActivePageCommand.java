@@ -25,18 +25,18 @@ public class GoToUsersActivePageCommand implements Command {
         HttpSession session = request.getSession();
         session.setAttribute(SessionAttribute.PREVIOUS_PAGE, PagePath.USERS_PAGE_ACTIVE_REDIRECT);
 
-        Integer currentPage = 1;
+        int currentPage = 1;
         if (request.getParameter(RequestParameter.CURRENT_PAGE_NUMBER) != null) {
-            currentPage = Integer.valueOf(request.getParameter(RequestParameter.CURRENT_PAGE_NUMBER));
+            currentPage = Integer.parseInt(request.getParameter(RequestParameter.CURRENT_PAGE_NUMBER));
         }
 
         UserService userService = UserServiceImpl.getInstance();
         try {
             List<User> users = userService.findByStatus(UserStatus.ACTIVE.name());
             request.setAttribute(RequestParameter.USERS, users);
-            request = SendSplitParameters.sendSplitParametersUsers(request, users.size(), currentPage);
+            SendSplitParameters.sendSplitParametersUsers(request, users.size(), currentPage);
             request.setAttribute(RequestParameter.TITLE_USERS, RequestParameter.TITLE_USERS_ACTIVE);
-            request.setAttribute(RequestParameter.COMMAND, CommandType.TO_ACTIVE_USERS_PAGE_COMMAND);
+            request.setAttribute(RequestParameter.COMMAND, CommandType.TO_ACTIVE_USERS_PAGE);
             router = new Router(PagePath.USERS_PAGE);
         } catch (ServiceException e) {
             logger.error("Error during go to active users page command", e);

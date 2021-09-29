@@ -39,12 +39,11 @@ public class GoToFindOrderByIdPageCommand implements Command {
                 Order localOrder = order.get();
                 request.setAttribute(RequestParameter.FIND_ORDER_ERROR, false);
                 request.setAttribute(RequestParameter.ORDER, localOrder);
-                router = new Router(PagePath.FIND_OPTIONAL_PAGE);
             } else {
                 request.setAttribute(RequestParameter.FIND_ORDER_ERROR, true);
                 logger.error("Order with this id was not found. id = " + orderId);
-                router = new Router(PagePath.FIND_OPTIONAL_PAGE);
             }
+            router = new Router(PagePath.FIND_OPTIONAL_PAGE);
         } catch (ServiceException e) {
             logger.error("Error during searching order with id = " + orderId, e);
             router = new Router(PagePath.ERROR_PAGE_500);

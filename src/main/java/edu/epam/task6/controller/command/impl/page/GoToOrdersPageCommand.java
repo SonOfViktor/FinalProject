@@ -26,9 +26,9 @@ public class GoToOrdersPageCommand implements Command {
         HttpSession session = request.getSession();
         session.setAttribute(SessionAttribute.PREVIOUS_PAGE, PagePath.ORDERS_PAGE_ALL_REDIRECT);
 
-        Integer currentPage = 1;
+        int currentPage = 1;
         if (request.getParameter(RequestParameter.CURRENT_PAGE_NUMBER) != null) {
-            currentPage = Integer.valueOf(request.getParameter(RequestParameter.CURRENT_PAGE_NUMBER));
+            currentPage = Integer.parseInt(request.getParameter(RequestParameter.CURRENT_PAGE_NUMBER));
         }
 
         User user = (User) session.getAttribute(SessionAttribute.USER);
@@ -46,8 +46,8 @@ public class GoToOrdersPageCommand implements Command {
                 orders = orderService.findByLogin(userLogin);
             }
             request.setAttribute(RequestParameter.ORDERS, orders);
-            request = SendSplitParameters.sendSplitParametersOrders(request, orders.size(), currentPage);
-            request.setAttribute(RequestParameter.COMMAND, CommandType.TO_ORDERS_PAGE_COMMAND);
+            SendSplitParameters.sendSplitParametersOrders(request, orders.size(), currentPage);
+            request.setAttribute(RequestParameter.COMMAND, CommandType.TO_ORDERS_PAGE);
             router = new Router(PagePath.ORDERS_PAGE);
         } catch (ServiceException e) {
             logger.error("Error during go to orders page command", e);

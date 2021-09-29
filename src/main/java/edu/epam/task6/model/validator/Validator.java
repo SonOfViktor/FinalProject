@@ -1,6 +1,5 @@
 package edu.epam.task6.model.validator;
 
-import edu.epam.task6.controller.command.RequestParameter;
 import edu.epam.task6.model.dao.ColumnName;
 
 import java.math.BigDecimal;
@@ -14,9 +13,10 @@ public class Validator {
     private final static String LOGIN_REGEX= "[\\w][\\w._-]{0,39}";
     private static final String NAME_REGEX = "[A-ZА-ЯЁ][A-Za-zА-Яа-яЁё]{0,39}";
     private final static String PASSWORD_REGEX = "[-\\w_!@#$%^&*()]{8,45}";
-    private final static String PRICE_REGEX = "[0-9]([0-9.]){0,18}";
-    private final static String DESCRIPTION_REGEX = "[A-ZА-ЯЁ][A-Za-zА-Яа-яЁё ,\\.!?\\d]{0,1999}";
-    private final static String COMMENT_REGEX = "[A-Za-zА-Яа-яЁё1-9 ,\\.!?\\d]{1,1000}";
+    private final static String PRICE_REGEX = "[0-9]([0-9]){0,18}";
+    private final static String ORDER_PAID_REGEX = "[-0-9]([0-9]){1,18}";
+    private final static String DESCRIPTION_REGEX = "[A-ZА-ЯЁ][A-Za-zА-Яа-яЁё ,.!?\\d]{0,1999}";
+    private final static String COMMENT_REGEX = "[A-Za-zА-Яа-яЁё1-9 ,.!?\\d]{1,1000}";
     private final static String SIZE_REGEX = "[0-9]{1,10}";
     private final static String DISCOUNT_REGEX = "[0-9]{1,3}";
     private final static String RATING_REGEX = "[0-9]{1,2}";
@@ -88,10 +88,22 @@ public class Validator {
         if(price != null && price.matches(PRICE_REGEX)) {
             try {
                 BigDecimal localPrice = new BigDecimal(price);
-                if (localPrice.compareTo(BigDecimal.ZERO) == 1 ||
-                        localPrice.compareTo(BigDecimal.ZERO) == 0) {
+                if (localPrice.compareTo(BigDecimal.ZERO) > 0) {
                     result = true;
                 }
+            } catch (NumberFormatException e) {
+                result = false;
+            }
+        }
+        return result;
+    }
+
+    public boolean validatePaid(String paid) {
+        boolean result = false;
+        if(paid != null && paid.matches(ORDER_PAID_REGEX)) {
+            try {
+                BigDecimal localPrice = new BigDecimal(paid);
+                result = true;
             } catch (NumberFormatException e) {
                 result = false;
             }
@@ -133,7 +145,7 @@ public class Validator {
     public boolean validateDiscount(String discount) {
         boolean result = false;
         if(discount != null && !discount.isBlank() && discount.matches(DISCOUNT_REGEX)) {
-            Integer localDiscount = Integer.valueOf(discount);
+            int localDiscount = Integer.parseInt(discount);
             if (localDiscount >= 0 && localDiscount <= 100) {
                 result = true;
             }
@@ -144,7 +156,7 @@ public class Validator {
     public boolean validateAverageRating(String grade) {
         boolean result = false;
         if(grade != null && !grade.isBlank() && grade.matches(RATING_REGEX)) {
-            Double localGrade = Double.valueOf(grade);
+            double localGrade = Double.parseDouble(grade);
             if (localGrade >= 1 && localGrade <= 10) {
                 result = true;
             }

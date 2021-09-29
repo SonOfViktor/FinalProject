@@ -1,8 +1,6 @@
 package edu.epam.task6.controller;
 
 import edu.epam.task6.controller.command.*;
-import edu.epam.task6.controller.command.*;
-import edu.epam.task6.model.pool.ConnectionPool;
 import jakarta.servlet.*;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.*;
@@ -35,16 +33,15 @@ public class ProjectServlet extends HttpServlet {
         Command command = commandProvider.getCommand(commandName);
         Router router = command.execute(request);
         switch (router.getType()) {
-            case REDIRECT:
-                response.sendRedirect(router.getPage());
-                break;
-            case FORWARD:
+            case REDIRECT -> response.sendRedirect(router.getPage());
+            case FORWARD -> {
                 RequestDispatcher requestDispatcher = request.getRequestDispatcher(router.getPage());
                 requestDispatcher.forward(request, response);
-                break;
-            default:
+            }
+            default -> {
                 logger.error("Error in router type: ", router.getType());
-                response.sendRedirect(PagePath.ERROR_PAGE);
+                response.sendRedirect(PagePath.ERROR_PAGE_500);
+            }
         }
     }
 

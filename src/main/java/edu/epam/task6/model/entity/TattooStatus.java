@@ -3,5 +3,5 @@ package edu.epam.task6.model.entity;
 public enum TattooStatus {
     ACTIVE,
     LOCKED,
-    OFFERED_BY_USER;
+    OFFERED_BY_USER
 }

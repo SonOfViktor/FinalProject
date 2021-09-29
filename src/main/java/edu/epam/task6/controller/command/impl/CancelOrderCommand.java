@@ -52,30 +52,44 @@ public class CancelOrderCommand implements Command {
                 OrderStatus orderStatus = order.get().getOrderStatus();
                 if (orderStatus == OrderStatus.ACTIVE) {
                     orderStatus = OrderStatus.CANCELED;
+//
+//                    Optional<User> user = userService.findByLogin(order.get().getUserLogin());
+//                    BigDecimal paid = order.get().getPaid();
+//                    BigDecimal balance = paid.add(user.get().getBalance());
+//                    parameters.put(ColumnName.USER_BALANCE, balance.toString());
+//
+//                    userService.updateBalance(parameters, user.get().getUserId());
+//                    userSession.setBalance(balance);
 
                     Optional<User> user = userService.findByLogin(order.get().getUserLogin());
-                    BigDecimal paid = order.get().getPaid();
-                    BigDecimal balance = paid.add(user.get().getBalance());
-                    parameters.put(ColumnName.USER_BALANCE, balance.toString());
+                    if (user.isPresent()) {
+                        Long userId = user.get().getUserId();
+                        BigDecimal paid = order.get().getPaid();
 
-                    userService.updateBalance(parameters, user.get().getUserId());
-                    userSession.setBalance(balance);
+                        parameters.put(ColumnName.USER_BALANCE, paid.toString());
+                        parameters.put(ColumnName.ORDERS_STATUS, orderStatus.toString());
+                        if (orderService.updateStatus(parameters, orderId)
+                                && userService.updateBalance(parameters, userId)) {
 
-                    parameters.put(ColumnName.ORDERS_STATUS, orderStatus.toString());
-                    if (orderService.updateStatus(parameters, orderId)) {
+                            user = userService.findById(userId);
+                            userSession.setBalance(user.get().getBalance());
 
-                        StringBuffer sb = new StringBuffer(EMAIL_MESSAGE_TEXT);
-                        sb.insert(18, orderId);
-                        EmailSender emailSender = new EmailSender(
-                                userSession.getEmail(),
-                                EMAIL_MESSAGE_TITLE,
-                                sb.toString());
-                        emailSender.start();
-                        router = new Router(Router.RouterType.REDIRECT,
-                                session.getAttribute(SessionAttribute.PREVIOUS_PAGE).toString());
-                        logger.info("Order status change was successful.");
+                            StringBuilder stringBuilder = new StringBuilder(EMAIL_MESSAGE_TEXT);
+                            stringBuilder.insert(18, orderId);
+                            EmailSender emailSender = new EmailSender(
+                                    userSession.getEmail(),
+                                    EMAIL_MESSAGE_TITLE,
+                                    stringBuilder.toString());
+                            emailSender.start();
+                            router = new Router(Router.RouterType.REDIRECT,
+                                    session.getAttribute(SessionAttribute.PREVIOUS_PAGE).toString());
+                            logger.info("Order status change was successful.");
+                        } else {
+                            logger.error("An error in changing the order's status.");
+                            router = new Router(PagePath.ERROR_PAGE_500);
+                        }
                     } else {
-                        logger.error("An error in changing the order's status.");
+                        logger.error("User was not found to cancel order.");
                         router = new Router(PagePath.ERROR_PAGE_500);
                     }
                 } else {

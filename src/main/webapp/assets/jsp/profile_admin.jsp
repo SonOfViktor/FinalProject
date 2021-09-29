@@ -26,7 +26,7 @@
 <div class="header-background">
     <header>
         <form method="post" action="ProjectServlet">
-            <input type="hidden" name="command" value="to_home_page_command"/>
+            <input type="hidden" name="command" value="to_home_page"/>
             <button class="header-title" type="submit">
                 <fmt:message key="header.main-title"/>
             </button>
@@ -34,7 +34,7 @@
         <ul>
             <li class="header-ref0">
                 <form method="post" action="ProjectServlet">
-                    <input type="hidden" name="command" value="to_home_page_command"/>
+                    <input type="hidden" name="command" value="to_home_page"/>
                     <button class="header-button" type="submit">
                         <fmt:message key="header.home"/>
                     </button>
@@ -42,7 +42,7 @@
             </li>
             <li class="header-ref1">
                 <form method="post" action="ProjectServlet">
-                    <input type="hidden" name="command" value="to_catalog_page_command"/>
+                    <input type="hidden" name="command" value="to_catalog_page"/>
                     <button class="header-button" type="submit">
                         <fmt:message key="header.catalog"/>
                     </button>
@@ -50,7 +50,7 @@
             </li>
             <li class="header-ref2">
                 <form method="post" action="ProjectServlet">
-                    <input type="hidden" name="command" value="to_orders_page_command"/>
+                    <input type="hidden" name="command" value="to_orders_page"/>
                     <button class="header-button" type="submit">
                         <fmt:message key="header.orders"/>
                     </button>
@@ -58,7 +58,7 @@
             </li>
             <li class="header-sign-in">
                 <form method="post" action="ProjectServlet">
-                    <input type="hidden" name="command" value="logout_person_command"/>
+                    <input type="hidden" name="command" value="logout_person"/>
                     <button class="header-button" type="submit">
                         <fmt:message key="header.log-out"/>
                     </button>
@@ -69,7 +69,7 @@
         <c:set var="localeRu">ru</c:set>
         <c:set var="localeEn">en</c:set>
         <form method="post" action="ProjectServlet">
-            <input type="hidden" name="command" value="change_language_command"/>
+            <input type="hidden" name="command" value="change_language"/>
             <button class="language-button" type="submit">
                 <c:if test="${language == localeRu}">
                     <fmt:message key="header.language.ru"/>
@@ -87,129 +87,129 @@
         <div class="block4-background">
             <div class="block3-item">
                 <div class="block3-text1"><fmt:message key="profile.email"/></div>
-                <div class="block3-text2">${users.email}</div>
+                <div class="block3-text2">${sessionScope.user.email}</div>
             </div>
             <div class="block3-item">
                 <div class="block3-text1"><fmt:message key="profile.login"/></div>
-                <div class="block3-text2">${users.login}</div>
+                <div class="block3-text2">${sessionScope.user.login}</div>
             </div>
             <div class="block3-item">
                 <div class="block3-text1"><fmt:message key="profile.name"/></div>
-                <div class="block3-text2">${users.name}</div>
+                <div class="block3-text2">${sessionScope.user.name}</div>
             </div>
             <div class="block3-item">
                 <div class="block3-text1"><fmt:message key="profile.surname"/></div>
-                <div class="block3-text2">${users.surname}</div>
+                <div class="block3-text2">${sessionScope.user.surname}</div>
             </div>
             <form method="post" action="ProjectServlet">
-                <input type="hidden" name="command" value="to_change_email_page_command"/>
+                <input type="hidden" name="command" value="to_change_email_page"/>
                 <button class="block3-button1"><fmt:message key="profile.change.email"/></button>
             </form>
             <form method="post" action="ProjectServlet">
-                <input type="hidden" name="command" value="to_change_password_page_command"/>
+                <input type="hidden" name="command" value="to_change_password_page"/>
                 <button class="block3-button2"><fmt:message key="profile.change.password"/></button>
             </form>
             <form method="post" action="ProjectServlet">
-                <input type="hidden" name="command" value="to_change_name_page_command"/>
+                <input type="hidden" name="command" value="to_change_name_page"/>
                 <button class="block3-button3"><fmt:message key="profile.change.name"/></button>
             </form>
             <form method="post" action="ProjectServlet">
-                <input type="hidden" name="command" value="to_change_surname_page_command"/>
+                <input type="hidden" name="command" value="to_change_surname_page"/>
                 <button class="block3-button4"><fmt:message key="profile.change.surname"/></button>
             </form>
 
             <div class="block4-title-admin"><fmt:message key="profile.admin.title"/></div>
             <div class="block4-container-admin">
                 <form method="post" action="ProjectServlet">
-                    <input type="hidden" name="command" value="to_all_users_page_command"/>
+                    <input type="hidden" name="command" value="to_all_users_page"/>
                     <button class="block4-button-admin1" type="submit">
                         <fmt:message key="profile.button.admin1.list.user.all"/>
                     </button>
                 </form>
                 <form method="post" action="ProjectServlet">
-                    <input type="hidden" name="command" value="to_blocked_users_page_command"/>
+                    <input type="hidden" name="command" value="to_blocked_users_page"/>
                     <button class="block4-button-admin2" type="submit">
                         <fmt:message key="profile.button.admin2.list.user.blocked"/>
                     </button>
                 </form>
                 <form method="post" action="ProjectServlet">
-                    <input type="hidden" name="command" value="to_active_users_page_command"/>
+                    <input type="hidden" name="command" value="to_active_users_page"/>
                     <button class="block4-button-admin3" type="submit">
                         <fmt:message key="profile.button.admin3.list.user.active"/>
                     </button>
                 </form>
 
                 <form method="post" action="ProjectServlet">
-                    <input type="hidden" name="command" value="to_all_catalog_page_command"/>
+                    <input type="hidden" name="command" value="to_all_catalog_page"/>
                     <button class="block4-button-admin4" type="submit">
                         <fmt:message key="profile.button.admin4.list.tattoo.all"/>
                     </button>
                 </form>
                 <form method="post" action="ProjectServlet">
-                    <input type="hidden" name="command" value="to_locked_catalog_page_command"/>
+                    <input type="hidden" name="command" value="to_locked_catalog_page"/>
                     <button class="block4-button-admin5" type="submit">
                         <fmt:message key="profile.button.admin5.list.tattoo.blocked"/>
                     </button>
                 </form>
                 <form method="post" action="ProjectServlet">
-                    <input type="hidden" name="command" value="to_proposal_catalog_page_command"/>
+                    <input type="hidden" name="command" value="to_proposal_catalog_page"/>
                     <button class="block4-button-admin6" type="submit">
                         <fmt:message key="profile.button.admin6.list.tattoo.suggested"/>
                     </button>
                 </form>
 
                 <form method="post" action="ProjectServlet">
-                    <input type="hidden" name="command" value="to_orders_page_command"/>
+                    <input type="hidden" name="command" value="to_orders_page"/>
                     <button class="block4-button-admin7">
                         <fmt:message key="profile.button.admin7.list.order.all"/>
                     </button>
                 </form>
                 <form method="post" action="ProjectServlet">
-                    <input type="hidden" name="command" value="to_active_orders_page_command"/>
+                    <input type="hidden" name="command" value="to_active_orders_page"/>
                     <button class="block4-button-admin8">
                         <fmt:message key="profile.button.admin8.list.order.active"/>
                     </button>
                 </form>
                 <form method="post" action="ProjectServlet">
-                    <input type="hidden" name="command" value="to_completed_orders_page_command"/>
+                    <input type="hidden" name="command" value="to_completed_orders_page"/>
                     <button class="block4-button-admin9">
                         <fmt:message key="profile.button.admin9.list.order.completed"/>
                     </button>
                 </form>
 
                 <form method="post" action="ProjectServlet">
-                    <input type="hidden" name="command" value="to_block_user_page_command"/>
+                    <input type="hidden" name="command" value="to_block_user_page"/>
                     <button class="block4-button-admin10">
                         <fmt:message key="profile.button.admin10.user.block"/>
                     </button>
                 </form>
                 <form method="post" action="ProjectServlet">
-                    <input type="hidden" name="command" value="to_unblock_user_page_command"/>
+                    <input type="hidden" name="command" value="to_unblock_user_page"/>
                     <button class="block4-button-admin11">
                         <fmt:message key="profile.button.admin11.user.unblock"/>
                     </button>
                 </form>
                 <form method="post" action="ProjectServlet">
-                    <input type="hidden" name="command" value="to_add_tattoo_page_command"/>
+                    <input type="hidden" name="command" value="to_add_tattoo_page"/>
                     <button class="block4-button-admin12">
                         <fmt:message key="profile.button.admin12.tattoo.add"/>
                     </button>
                 </form>
 
                 <form method="post" action="ProjectServlet">
-                    <input type="hidden" name="command" value="to_block_tattoo_page_command"/>
+                    <input type="hidden" name="command" value="to_block_tattoo_page"/>
                     <button class="block4-button-admin13">
                         <fmt:message key="profile.button.admin13.tattoo.block"/>
                     </button>
                 </form>
                 <form method="post" action="ProjectServlet">
-                    <input type="hidden" name="command" value="to_unblock_tattoo_page_command"/>
+                    <input type="hidden" name="command" value="to_unblock_tattoo_page"/>
                     <button class="block4-button-admin14">
                         <fmt:message key="profile.button.admin14.tattoo.unblock"/>
                     </button>
                 </form>
                 <form method="post" action="ProjectServlet">
-                    <input type="hidden" name="command" value="to_approve_tattoo_page_command"/>
+                    <input type="hidden" name="command" value="to_approve_tattoo_page"/>
                     <input type="hidden" name="id" value="0"/>
                     <button class="block4-button-admin15">
                         <fmt:message key="profile.button.admin15.tattoo.proposal"/>
@@ -222,7 +222,7 @@
 <footer class="footer">
     <div class="footer-background">
         <form method="post" action="ProjectServlet">
-            <input type="hidden" name="command" value="to_home_page_command"/>
+            <input type="hidden" name="command" value="to_home_page"/>
             <button class="footer-title" type="submit">
                 <fmt:message key="footer.main-title"/>
             </button>
@@ -230,19 +230,19 @@
         <ul class="footer-info">
             <li class="footer-info-item">
                 <form method="post" action="ProjectServlet">
-                    <input type="hidden" name="command" value="to_proposal_page_command"/>
+                    <input type="hidden" name="command" value="to_proposal_page"/>
                     <button class="footer-button" type="submit"><fmt:message key="footer.proposals"/></button>
                 </form>
             </li>
             <li class="footer-info-item">
                 <form method="post" action="ProjectServlet">
-                    <input type="hidden" name="command" value="to_orders_page_command"/>
+                    <input type="hidden" name="command" value="to_orders_page"/>
                     <button class="footer-button" type="submit"><fmt:message key="footer.orders"/></button>
                 </form>
             </li>
             <li class="footer-info-item">
                 <form method="post" action="ProjectServlet">
-                    <input type="hidden" name="command" value="to_about_us_page_command"/>
+                    <input type="hidden" name="command" value="to_about_us_page"/>
                     <button class="footer-button" type="submit"><fmt:message key="footer.about-us"/></button>
                 </form>
             </li>

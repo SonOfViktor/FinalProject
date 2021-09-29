@@ -57,8 +57,7 @@ public class CommentServiceImpl implements CommentService {
     public List<Comment> findAll() throws ServiceException {
         CommentDao commentDao = CommentDaoImpl.getInstance();
         try {
-            List<Comment> commentList = commentDao.findAll();
-            return commentList;
+            return commentDao.findAll();
         } catch (DaoException e){
             throw new ServiceException(e);
         }

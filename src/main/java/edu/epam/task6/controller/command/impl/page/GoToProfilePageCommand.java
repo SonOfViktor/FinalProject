@@ -23,18 +23,11 @@ public class GoToProfilePageCommand implements Command {
         if (session.getAttribute(SessionAttribute.USER) != null) {
             User user = (User)session.getAttribute(SessionAttribute.USER);
             request.setAttribute(RequestParameter.USERS, user);
-            switch (user.getRole()) {
-                case ADMIN -> {
-                    router = new Router(PagePath.PROFILE_PAGE_ADMIN);
-                }
-                case USER -> {
-                    router = new Router(PagePath.PROFILE_PAGE_USER);
-                }
-                default -> {
-                    logger.error("User with this login and password was not found.");
-                    router = new Router(PagePath.LOGIN_PAGE);
-                }
-            }
+            router = switch (user.getRole()) {
+                case ADMIN -> new Router(PagePath.PROFILE_PAGE_ADMIN);
+                case USER -> new Router(PagePath.PROFILE_PAGE_USER);
+                default -> new Router(PagePath.LOGIN_PAGE);
+            };
         } else {
             logger.error("The session does not contain a user. An attempt to get to the profile page without authorization is possible.");
             router = new Router(PagePath.ERROR_PAGE_500);

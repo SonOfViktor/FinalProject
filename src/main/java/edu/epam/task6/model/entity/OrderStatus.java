@@ -4,5 +4,5 @@ public enum OrderStatus {
     ACTIVE,
     COMPLETED,
     CANCELED,
-    COMPLETED_AND_ASSESSED;
+    COMPLETED_AND_ASSESSED
 }

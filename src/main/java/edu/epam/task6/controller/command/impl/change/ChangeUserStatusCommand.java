@@ -37,9 +37,9 @@ public class ChangeUserStatusCommand implements Command {
                 UserStatus userStatus = user.get().getStatus();
                 UserRole userRole = user.get().getRole();
                 if (userRole != UserRole.ADMIN) {
-                    if (userStatus == UserStatus.ACTIVE && button == false) {
+                    if (userStatus == UserStatus.ACTIVE && !button) {
                         userStatus = UserStatus.BLOCKED;
-                    } else if (userStatus == UserStatus.BLOCKED && button == true) {
+                    } else if (userStatus == UserStatus.BLOCKED && button) {
                         userStatus = UserStatus.ACTIVE;
                     }
                 }
