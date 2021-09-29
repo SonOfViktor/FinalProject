@@ -329,13 +329,6 @@ public class ValidatorTest {
     }
 
     @Test
-    public void validatePriceTestTrue2() {
-        String price = "9.23372036854775807";
-        boolean actual = validator.validatePrice(price);
-        assertTrue(actual);
-    }
-
-    @Test
     public void validatePriceTestFalse1() {
         String price = "0";
         boolean actual = validator.validatePrice(price);
