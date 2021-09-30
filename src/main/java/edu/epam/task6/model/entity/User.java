@@ -180,18 +180,18 @@ public class User {
         int prime = 31;
         int result = 1;
 
-        result = result * prime + email.hashCode();
-        result = result * prime + login.hashCode();
-        result = result * prime + name.hashCode();
-        result = result * prime + surname.hashCode();
-        result = result * prime + discount.hashCode();
-        result = result * prime + balance.hashCode();
-        result = result * prime + registrationDate.hashCode();
-        result = result * prime + averageRating.hashCode();
-        result = result * prime + numberOfRatings.hashCode();
-        result = result * prime + registerCode.hashCode();
-        result = result * prime + status.hashCode();
-        result = result * prime + role.hashCode();
+        result = result * prime + (email != null ? email.hashCode() : 0);
+        result = result * prime + (login != null ? login.hashCode() : 0);
+        result = result * prime + (name != null ? name.hashCode() : 0);
+        result = result * prime + (surname != null ? surname.hashCode() : 0);
+        result = result * prime + (discount != null ? discount.hashCode() : 0);
+        result = result * prime + (balance != null ? balance.hashCode() : 0);
+        result = result * prime + (registrationDate != null ? registrationDate.hashCode() : 0);
+        result = result * prime + (averageRating != null ? averageRating.hashCode() : 0);
+        result = result * prime + (numberOfRatings != null ? numberOfRatings.hashCode() : 0);
+        result = result * prime + (registerCode != null ? registerCode.hashCode() : 0);
+        result = result * prime + (status != null ? status.hashCode() : 0);
+        result = result * prime + (role != null ? role.hashCode() : 0);
 
         return result;
     }

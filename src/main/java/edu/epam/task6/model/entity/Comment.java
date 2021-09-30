@@ -76,11 +76,10 @@ public class Comment {
     public int hashCode() {
         int prime = 31;
         int result = 1;
-
-        result = result * prime + text.hashCode();
-        result = result * prime + registrationDate.hashCode();
-        result = result * prime + userId.hashCode();
-        result = result * prime + userLogin.hashCode();
+        result = result * prime + (text != null ? text.hashCode() : 0);
+        result = result * prime + (registrationDate != null ? registrationDate.hashCode() : 0);
+        result = result * prime + (userId != null ? userId.hashCode() : 0);
+        result = result * prime + (userLogin != null ? userLogin.hashCode() : 0);
 
         return result;
     }

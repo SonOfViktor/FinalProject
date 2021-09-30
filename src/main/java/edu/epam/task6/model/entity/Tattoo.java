@@ -166,17 +166,17 @@ public class Tattoo {
         int prime = 31;
         int result = 1;
 
-        result = result * prime + name.hashCode();
-        result = result * prime + description.hashCode();
-        result = result * prime + price.hashCode();
-        result = result * prime + width.hashCode();
-        result = result * prime + height.hashCode();
-        result = result * prime + averageRating.hashCode();
-        result = result * prime + numberOfRatings.hashCode();
-        result = result * prime + imageUrl.hashCode();
-        result = result * prime + status.hashCode();
-        result = result * prime + places.hashCode();
-        result = result * prime + userId.hashCode();
+        result = result * prime + (name != null ? name.hashCode() : 0);
+        result = result * prime + (description != null ? description.hashCode() : 0);
+        result = result * prime + (price != null ? price.hashCode() : 0);
+        result = result * prime + (width != null ? width.hashCode() : 0);
+        result = result * prime + (height != null ? height.hashCode() : 0);
+        result = result * prime + (averageRating != null ? averageRating.hashCode() : 0);
+        result = result * prime + (numberOfRatings != null ? numberOfRatings.hashCode() : 0);
+        result = result * prime + (imageUrl != null ? imageUrl.hashCode() : 0);
+        result = result * prime + (status != null ? status.hashCode() : 0);
+        result = result * prime + (places != null ? places.hashCode() : 0);
+        result = result * prime + (userId != null ? userId.hashCode() : 0);
 
         return result;
     }

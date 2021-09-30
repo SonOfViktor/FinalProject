@@ -135,13 +135,13 @@ public class Order {
         int prime = 31;
         int result = 1;
 
-        result = result * prime + paid.hashCode();
-        result = result * prime + registrationDate.hashCode();
-        result = result * prime + userLogin.hashCode();
-        result = result * prime + orderStatus.hashCode();
-        result = result * prime + tattooId.hashCode();
-        result = result * prime + tattooPrice.hashCode();
-        result = result * prime + tattooName.hashCode();
+        result = result * prime + (paid != null ? paid.hashCode() : 0);
+        result = result * prime + (registrationDate != null ? registrationDate.hashCode() : 0);
+        result = result * prime + (userLogin != null ? userLogin.hashCode() : 0);
+        result = result * prime + (orderStatus != null ? orderStatus.hashCode() : 0);
+        result = result * prime + (tattooId != null ? tattooId.hashCode() : 0);
+        result = result * prime + (tattooPrice != null ? tattooPrice.hashCode() : 0);
+        result = result * prime + (tattooName != null ? tattooName.hashCode() : 0);
 
         return result;
     }

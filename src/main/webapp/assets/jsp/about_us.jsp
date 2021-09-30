@@ -33,7 +33,6 @@
     <title><fmt:message key="about.us.main-title"/></title>
 </head>
 <body>
-<script src="assets/js/time3.js"></script>
 <div class="header-background">
     <header>
         <form method="post" action="ProjectServlet">
@@ -187,6 +186,7 @@
         </ul>
     </div>
 </footer>
+<script src="assets/js/time3.js"></script>
 </body>
 </html>
 
