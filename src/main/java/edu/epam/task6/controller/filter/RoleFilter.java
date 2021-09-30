@@ -47,7 +47,6 @@ public class RoleFilter implements Filter {
 
         if (role.equals(UserRole.VISITOR)) {
             if (!CommandType.valueOf(command.toUpperCase()).isContainRole(UserRole.VISITOR)) {
-                System.out.println("Work this filter");
                 response.sendRedirect(request.getContextPath() + indexPath);
                 return;
             }
