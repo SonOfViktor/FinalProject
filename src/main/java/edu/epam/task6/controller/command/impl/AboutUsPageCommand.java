@@ -1,7 +1,7 @@
-package edu.epam.task6.controller.command.impl.page;
+package edu.epam.task6.controller.command.impl;
 
 import edu.epam.task6.controller.command.*;
-import edu.epam.task6.util.SendSplitParameters;
+import edu.epam.task6.controller.command.SendSplitParameters;
 import edu.epam.task6.exception.ServiceException;
 import edu.epam.task6.model.entity.Comment;
 import edu.epam.task6.model.entity.User;
@@ -18,7 +18,7 @@ import org.apache.logging.log4j.Logger;
 import java.util.List;
 import java.util.Optional;
 
-public class GoToAboutUsPageCommand implements Command {
+public class AboutUsPageCommand implements Command {
 
     private static final Logger logger = LogManager.getLogger();
     private static final Long ADMIN_ID = 1L;
@@ -42,17 +42,18 @@ public class GoToAboutUsPageCommand implements Command {
             comments = commentService.findAll();
             request.setAttribute(RequestParameter.COMMENTS, comments);
 
+            SendSplitParameters sendSplitParameters = SendSplitParameters.getInstance();
             Optional<User> user = userService.findById(ADMIN_ID);
             if (user.isPresent() && user.get().getRole().equals(UserRole.ADMIN)) {
                 Double averageRating = user.get().getAverageRating();
                 request.setAttribute(RequestParameter.RATING, averageRating);
-                SendSplitParameters.sendSplitParametersComments(
+                sendSplitParameters.sendSplitParametersComments(
                         request,
                         comments.size(),
                         currentPage,
                         PageSplitParameter.NUMBER_OF_COMMENTS_PER_PAGE_ADMIN);
             } else {
-                SendSplitParameters.sendSplitParametersComments(
+                sendSplitParameters.sendSplitParametersComments(
                         request,
                         comments.size(),
                         currentPage,

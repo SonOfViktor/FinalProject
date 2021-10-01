@@ -39,7 +39,9 @@ public class ConnectionPool {
             freeConnections = new LinkedBlockingDeque<>(CONNECTION_POOL_SIZE);
             busyConnections = new LinkedBlockingDeque<>();
             for (int i = 0; i < CONNECTION_POOL_SIZE; i++) {
-                freeConnections.add(new ProxyConnection(DriverManager.getConnection(url, properties)));
+                Connection connection = DriverManager.getConnection(url, properties);
+                ProxyConnection proxyConnection = new ProxyConnection(connection);
+                freeConnections.add(proxyConnection);
             }
         } catch (SQLException | ClassNotFoundException | LocalPropertyException e) {
             logger.fatal("Fatal error during connection pool creation.", e);
@@ -92,6 +94,7 @@ public class ConnectionPool {
 
     public void destroyPool() {
         try {
+            //TODO заменить на обычный цикл
             for (ProxyConnection freeConnection : freeConnections) {
                 freeConnection.reallyClose();
             }

@@ -1,12 +1,15 @@
 package edu.epam.task6.model.validator;
 
 import edu.epam.task6.model.dao.ColumnName;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.math.BigDecimal;
 import java.util.Map;
 
 public class Validator {
 
+    private static final Logger logger = LogManager.getLogger();
 
     private static final String ID_REGEX = "[0-9]{1,19}";
     private static final String EMAIL_REGEX = "^[A-z0-9._-]+@[a-z0-9._-]+\\.[a-z]{2,4}$";
@@ -28,6 +31,7 @@ public class Validator {
                 Long.parseLong(id);
                 result = true;
             } catch (NumberFormatException e) {
+                logger.error("Format out of bounds not covered by regular expression", e);
                 result = false;
             }
         }
@@ -61,6 +65,7 @@ public class Validator {
                     result = true;
                 }
             } catch (NumberFormatException e) {
+                logger.error("Format out of bounds not covered by regular expression", e);
                 result = false;
             }
         }
@@ -77,7 +82,7 @@ public class Validator {
 
     public boolean validatePassword(String password) {
         boolean result = false;
-        if(password != null && !password.isBlank()){
+        if(password != null && !password.isBlank()) {
             result = password.matches(PASSWORD_REGEX);
         }
         return result;
@@ -92,6 +97,7 @@ public class Validator {
                     result = true;
                 }
             } catch (NumberFormatException e) {
+                logger.error("Format out of bounds not covered by regular expression", e);
                 result = false;
             }
         }
@@ -105,6 +111,7 @@ public class Validator {
                 BigDecimal localPrice = new BigDecimal(paid);
                 result = true;
             } catch (NumberFormatException e) {
+                logger.error("Format out of bounds not covered by regular expression", e);
                 result = false;
             }
         }
@@ -136,6 +143,7 @@ public class Validator {
                     result = true;
                 }
             } catch (NumberFormatException e) {
+                logger.error("Format out of bounds not covered by regular expression", e);
                 result = false;
             }
         }

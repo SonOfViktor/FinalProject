@@ -1,7 +1,7 @@
-package edu.epam.task6.controller.command.impl.page;
+package edu.epam.task6.controller.command.impl;
 
 import edu.epam.task6.controller.command.*;
-import edu.epam.task6.util.SendSplitParameters;
+import edu.epam.task6.controller.command.SendSplitParameters;
 import edu.epam.task6.exception.ServiceException;
 import edu.epam.task6.model.entity.Tattoo;
 import edu.epam.task6.model.service.TattooService;
@@ -13,7 +13,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.List;
 
-public class GoToCatalogAllPageCommand implements Command {
+public class CatalogAllPageCommand implements Command {
 
     private static final Logger logger = LogManager.getLogger();
 
@@ -33,7 +33,8 @@ public class GoToCatalogAllPageCommand implements Command {
         try {
             List<Tattoo> catalogElements = catalogService.findAll();
             request.setAttribute(RequestParameter.CATALOG, catalogElements);
-            SendSplitParameters.sendSplitParametersTattoos(request, catalogElements.size(), currentPage);
+            SendSplitParameters sendSplitParameters = SendSplitParameters.getInstance();
+            sendSplitParameters.sendSplitParametersTattoos(request, catalogElements.size(), currentPage);
             request.setAttribute(RequestParameter.TITLE_TATTOOS, RequestParameter.TITLE_TATTOOS_ALL);
             request.setAttribute(RequestParameter.COMMAND, CommandType.TO_ALL_CATALOG_PAGE);
             router = new Router(PagePath.CATALOG_PAGE);

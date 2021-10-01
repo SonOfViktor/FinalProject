@@ -1,9 +1,9 @@
-package edu.epam.task6.controller.command.impl.page;
+package edu.epam.task6.controller.command.impl;
 
 import edu.epam.task6.controller.command.*;
 import edu.epam.task6.model.service.OrderService;
 import edu.epam.task6.model.service.impl.OrderServiceImpl;
-import edu.epam.task6.util.SendSplitParameters;
+import edu.epam.task6.controller.command.SendSplitParameters;
 import edu.epam.task6.exception.ServiceException;
 import edu.epam.task6.model.entity.Order;
 import edu.epam.task6.model.entity.User;
@@ -15,7 +15,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.List;
 
-public class GoToOrdersPageCommand implements Command {
+public class OrdersPageCommand implements Command {
 
     private static final Logger logger = LogManager.getLogger();
 
@@ -46,7 +46,8 @@ public class GoToOrdersPageCommand implements Command {
                 orders = orderService.findByLogin(userLogin);
             }
             request.setAttribute(RequestParameter.ORDERS, orders);
-            SendSplitParameters.sendSplitParametersOrders(request, orders.size(), currentPage);
+            SendSplitParameters sendSplitParameters = SendSplitParameters.getInstance();
+            sendSplitParameters.sendSplitParametersOrders(request, orders.size(), currentPage);
             request.setAttribute(RequestParameter.COMMAND, CommandType.TO_ORDERS_PAGE);
             router = new Router(PagePath.ORDERS_PAGE);
         } catch (ServiceException e) {

@@ -1,4 +1,4 @@
-package edu.epam.task6.tag;
+package edu.epam.task6.controller.tag;
 
 import edu.epam.task6.controller.command.RequestParameter;
 import edu.epam.task6.controller.command.SessionAttribute;
@@ -10,7 +10,6 @@ import jakarta.servlet.jsp.JspException;
 import jakarta.servlet.jsp.tagext.TagSupport;
 
 import java.io.IOException;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;

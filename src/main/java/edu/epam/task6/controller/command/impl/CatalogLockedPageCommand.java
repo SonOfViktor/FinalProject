@@ -1,7 +1,7 @@
-package edu.epam.task6.controller.command.impl.page;
+package edu.epam.task6.controller.command.impl;
 
 import edu.epam.task6.controller.command.*;
-import edu.epam.task6.util.SendSplitParameters;
+import edu.epam.task6.controller.command.SendSplitParameters;
 import edu.epam.task6.exception.ServiceException;
 import edu.epam.task6.model.entity.Tattoo;
 import edu.epam.task6.model.entity.TattooStatus;
@@ -14,7 +14,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.List;
 
-public class GoToCatalogProposalPageCommand implements Command {
+public class CatalogLockedPageCommand implements Command {
 
     private static final Logger logger = LogManager.getLogger();
 
@@ -23,7 +23,7 @@ public class GoToCatalogProposalPageCommand implements Command {
         Router router;
 
         HttpSession session = request.getSession();
-        session.setAttribute(SessionAttribute.PREVIOUS_PAGE, PagePath.CATALOG_PAGE_PROPOSAL_REDIRECT);
+        session.setAttribute(SessionAttribute.PREVIOUS_PAGE, PagePath.CATALOG_PAGE_LOCKED_REDIRECT);
 
         int currentPage = 1;
         if (request.getParameter(RequestParameter.CURRENT_PAGE_NUMBER) != null) {
@@ -32,14 +32,15 @@ public class GoToCatalogProposalPageCommand implements Command {
 
         TattooService catalogService = TattooServiceImpl.getInstance();
         try {
-            List<Tattoo> catalogElements = catalogService.findByStatus(TattooStatus.OFFERED_BY_USER.name());
+            List<Tattoo> catalogElements = catalogService.findByStatus(TattooStatus.LOCKED.name());
             request.setAttribute(RequestParameter.CATALOG, catalogElements);
-            SendSplitParameters.sendSplitParametersTattoos(request, catalogElements.size(), currentPage);
-            request.setAttribute(RequestParameter.TITLE_TATTOOS, RequestParameter.TITLE_TATTOOS_PROPOSAL);
-            request.setAttribute(RequestParameter.COMMAND, CommandType.TO_PROPOSAL_CATALOG_PAGE);
+            SendSplitParameters sendSplitParameters = SendSplitParameters.getInstance();
+            sendSplitParameters.sendSplitParametersTattoos(request, catalogElements.size(), currentPage);
+            request.setAttribute(RequestParameter.TITLE_TATTOOS, RequestParameter.TITLE_TATTOOS_LOCKED);
+            request.setAttribute(RequestParameter.COMMAND, CommandType.TO_LOCKED_CATALOG_PAGE);
             router = new Router(PagePath.CATALOG_PAGE);
         } catch (ServiceException e) {
-            logger.error("Error during go to proposal tattoos page command", e);
+            logger.error("Error during go to locked tattoos page command", e);
             router = new Router(PagePath.ERROR_PAGE_500);
         }
         return router;

@@ -14,7 +14,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.Optional;
 
-public class GoToFindUserByIdPageCommand implements Command {
+public class FindUserByLoginCommand implements Command {
 
     private static final Logger logger = LogManager.getLogger();
 
@@ -22,20 +22,20 @@ public class GoToFindUserByIdPageCommand implements Command {
     public Router execute(HttpServletRequest request) {
         Router router;
         UserService userService = UserServiceImpl.getInstance();
-        Long userId = Long.valueOf(request.getParameter(RequestParameter.USER_ID));
+        String userLogin = request.getParameter(RequestParameter.USER_LOGIN);
         try {
-            Optional<User> user = userService.findById(userId);
+            Optional<User> user = userService.findByLogin(userLogin);
             if (user.isPresent()) {
                 User localUser = user.get();
                 request.setAttribute(RequestParameter.FIND_USER_ERROR, false);
                 request.setAttribute(RequestParameter.USER, localUser);
             } else {
                 request.setAttribute(RequestParameter.FIND_USER_ERROR, true);
-                logger.error("User with this id was not found.");
+                logger.error("User with this login was not found.");
             }
             router = new Router(PagePath.FIND_OPTIONAL_PAGE);
         } catch (ServiceException e) {
-            logger.error("Error during searching user with id = " + userId, e);
+            logger.error("Error during searching users with login = " + userLogin, e);
             router = new Router(PagePath.ERROR_PAGE_500);
         }
         return router;

@@ -13,7 +13,6 @@ public class GoToChangePasswordPageCommand implements Command {
         HttpSession session = request.getSession();
         session.setAttribute(SessionAttribute.PREVIOUS_PAGE, PagePath.CHANGE_PAGE_PASSWORD_REDIRECT);
 
-
         request.setAttribute(RequestParameter.WHAT_CHANGE, RequestParameter.USER_PASSWORD);
         router = new Router(PagePath.CHANGE_PAGE);
         return router;

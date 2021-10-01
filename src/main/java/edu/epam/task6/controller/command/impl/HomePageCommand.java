@@ -1,4 +1,4 @@
-package edu.epam.task6.controller.command.impl.page;
+package edu.epam.task6.controller.command.impl;
 
 import edu.epam.task6.controller.command.*;
 import edu.epam.task6.model.entity.Tattoo;
@@ -12,7 +12,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.List;
 
-public class GoToHomePageCommand implements Command {
+public class HomePageCommand implements Command {
 
     private static final Logger logger = LogManager.getLogger();
 

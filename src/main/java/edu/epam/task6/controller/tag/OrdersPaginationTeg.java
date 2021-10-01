@@ -1,4 +1,4 @@
-package edu.epam.task6.tag;
+package edu.epam.task6.controller.tag;
 
 import edu.epam.task6.controller.command.RequestParameter;
 import edu.epam.task6.controller.command.SessionAttribute;

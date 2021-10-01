@@ -1,8 +1,7 @@
-package edu.epam.task6.tag;
+package edu.epam.task6.controller.tag;
 
 import edu.epam.task6.controller.command.RequestParameter;
 import edu.epam.task6.controller.command.SessionAttribute;
-import edu.epam.task6.model.entity.Tattoo;
 import edu.epam.task6.model.entity.User;
 import edu.epam.task6.model.entity.UserRole;
 import edu.epam.task6.model.entity.UserStatus;

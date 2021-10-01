@@ -13,7 +13,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.Optional;
 
-public class GoToFindTattooByIdPageCommand implements Command {
+public class FindTattooByIdCommand implements Command {
 
     private static final Logger logger = LogManager.getLogger();
 

@@ -14,7 +14,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.Optional;
 
-public class GoToFindOrderByIdPageCommand implements Command {
+public class FindOrderByIdCommand implements Command {
 
     private static final Logger logger = LogManager.getLogger();
 

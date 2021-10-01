@@ -1,7 +1,7 @@
 package edu.epam.task6.controller.command.impl.find;
 
 import edu.epam.task6.controller.command.*;
-import edu.epam.task6.util.SendSplitParameters;
+import edu.epam.task6.controller.command.SendSplitParameters;
 import edu.epam.task6.exception.ServiceException;
 import edu.epam.task6.model.entity.Tattoo;
 import edu.epam.task6.model.entity.UserRole;
@@ -14,7 +14,7 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.List;
 
-public class GoToFindTattooByPlacePageCommand implements Command {
+public class FindTattooByPriceRangeCommand implements Command {
 
     private static final Logger logger = LogManager.getLogger();
 
@@ -24,7 +24,6 @@ public class GoToFindTattooByPlacePageCommand implements Command {
 
         HttpSession session = request.getSession();
         UserRole userRole = (UserRole) session.getAttribute(SessionAttribute.ROLE);
-        session.setAttribute(SessionAttribute.PREVIOUS_PAGE, PagePath.FIND_TATTOO_BY_PLACE_REDIRECT);
 
         int currentPage = 1;
         if (request.getParameter(RequestParameter.CURRENT_PAGE_NUMBER) != null) {
@@ -32,25 +31,32 @@ public class GoToFindTattooByPlacePageCommand implements Command {
         }
 
         TattooService tattooService = TattooServiceImpl.getInstance();
-        if (request.getParameter(RequestParameter.TATTOO_PLACE) != null) {
+        if (request.getParameter(RequestParameter.TATTOO_MIN_PRICE) != null) {
             session.setAttribute(SessionAttribute.FIND_PARAMETER_ONE,
-                    request.getParameter(RequestParameter.TATTOO_PLACE));
+                    request.getParameter(RequestParameter.TATTOO_MIN_PRICE));
         }
-        String tattooPlace = session.getAttribute(SessionAttribute.FIND_PARAMETER_ONE).toString();
+        if (request.getParameter(RequestParameter.TATTOO_MAX_PRICE) != null) {
+            session.setAttribute(SessionAttribute.FIND_PARAMETER_TWO,
+                    request.getParameter(RequestParameter.TATTOO_MAX_PRICE));
+        }
+        String minPrice = session.getAttribute(SessionAttribute.FIND_PARAMETER_ONE).toString();
+        String maxPrice = session.getAttribute(SessionAttribute.FIND_PARAMETER_TWO).toString();
+
         try {
             List<Tattoo> tattoos;
             if (userRole == UserRole.ADMIN) {
-                tattoos = tattooService.findByPlace(tattooPlace);
+                tattoos = tattooService.findByPriceRange(minPrice, maxPrice);
             } else {
-                tattoos = tattooService.findByPlaceAllActive(tattooPlace);
+                tattoos = tattooService.findByPriceRangeAllActive(minPrice, maxPrice);
             }
             request.setAttribute(RequestParameter.CATALOG, tattoos);
-            SendSplitParameters.sendSplitParametersTattoos(request, tattoos.size(), currentPage);
+            SendSplitParameters sendSplitParameters = SendSplitParameters.getInstance();
+            sendSplitParameters.sendSplitParametersTattoos(request, tattoos.size(), currentPage);
             request.setAttribute(RequestParameter.TITLE_TATTOOS, RequestParameter.TITLE_TATTOOS_FOUNDED);
-            request.setAttribute(RequestParameter.COMMAND, CommandType.TO_FIND_TATTOO_BY_PLACE_PAGE);
+            request.setAttribute(RequestParameter.COMMAND, CommandType.TO_FIND_TATTOO_BY_PRICE_RANGE_PAGE);
             router = new Router(PagePath.CATALOG_PAGE);
         } catch (ServiceException e) {
-            logger.error("Error during searching tattoos with place = " + tattooPlace, e);
+            logger.error("Error during searching tattoos in price range = " + minPrice + " and " + maxPrice, e);
             router = new Router(PagePath.ERROR_PAGE_500);
         }
         return router;
