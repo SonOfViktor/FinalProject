@@ -52,14 +52,6 @@ public class CancelOrderCommand implements Command {
                 OrderStatus orderStatus = order.get().getOrderStatus();
                 if (orderStatus == OrderStatus.ACTIVE) {
                     orderStatus = OrderStatus.CANCELED;
-//
-//                    Optional<User> user = userService.findByLogin(order.get().getUserLogin());
-//                    BigDecimal paid = order.get().getPaid();
-//                    BigDecimal balance = paid.add(user.get().getBalance());
-//                    parameters.put(ColumnName.USER_BALANCE, balance.toString());
-//
-//                    userService.updateBalance(parameters, user.get().getUserId());
-//                    userSession.setBalance(balance);
 
                     Optional<User> user = userService.findByLogin(order.get().getUserLogin());
                     if (user.isPresent()) {
