@@ -78,6 +78,8 @@
                 <div class="info-div">
                     <input type="number" name="id" placeholder="<fmt:message key="change.tattoo-status.id"/>"
                            required
+                           oninvalid="this.setCustomValidity('<fmt:message key="regex.id"/>')"
+                           oninput="setCustomValidity('')"
                            min="1"
                            max="9223372036854775807"
                     >
@@ -90,13 +92,17 @@
         <div class="info-div">
             <input type="number" name="price" placeholder="<fmt:message key="add.tattoo.price"/>"
                    required
+                   oninvalid="this.setCustomValidity('<fmt:message key="regex.price"/>')"
+                   oninput="setCustomValidity('')"
                    min="0"
-                   max="9223372036854775807"
+                   max="10000000"
             >
         </div>
         <div class="info-div">
             <input type="number" name="discount" placeholder="<fmt:message key="add.tattoo.discount"/>"
                    required
+                   oninvalid="this.setCustomValidity('<fmt:message key="regex.discount"/>')"
+                   oninput="setCustomValidity('')"
                    min="0"
                    max="10"
             >

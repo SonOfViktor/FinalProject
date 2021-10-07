@@ -94,7 +94,7 @@ public class ConnectionPool {
 
     public void destroyPool() {
         try {
-            //TODO заменить на обычный цикл
+            //TODO заменить на обычный цикл (ещё не доделано)
             for (ProxyConnection freeConnection : freeConnections) {
                 freeConnection.reallyClose();
             }

@@ -23,6 +23,7 @@ public class Validator {
     private final static String SIZE_REGEX = "[0-9]{1,10}";
     private final static String DISCOUNT_REGEX = "[0-9]{1,3}";
     private final static String RATING_REGEX = "[0-9]{1,2}";
+    private final static String REFERENCE_REGEX = "[^<>]{1,255}";
 
     public boolean validateId(String id) {
         boolean result = false;
@@ -181,6 +182,14 @@ public class Validator {
         return result;
     }
 
+    public boolean validateReference(String reference) {
+        boolean result = false;
+        if(reference != null && !reference.isBlank() && reference.matches(REFERENCE_REGEX)) {
+            result = true;
+        }
+        return result;
+    }
+
     public boolean validateOrder(Map<String, String> parameters) {
         String paid = parameters.get(ColumnName.ORDERS_PAID);
         String tattooId = parameters.get(ColumnName.ORDERS_TATTOO_ID);
@@ -193,11 +202,13 @@ public class Validator {
         String price = parameters.get(ColumnName.TATTOOS_PRICE);
         String width = parameters.get(ColumnName.TATTOOS_WIDTH);
         String height = parameters.get(ColumnName.TATTOOS_HEIGHT);
+        String reference = parameters.get(ColumnName.TATTOOS_IMAGE_URL);
         return validateName(name)
                 && validateDescription(description)
                 && validatePrice(price)
                 && validateSize(width)
-                && validateSize(height);
+                && validateSize(height)
+                && validateReference(reference);
     }
 
     public boolean validateUser(Map<String, String> parameters) {

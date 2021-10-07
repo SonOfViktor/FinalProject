@@ -113,6 +113,8 @@
             <div class="info-div">
                 <input type="email" name="email" placeholder="<fmt:message key="change.email"/>"
                        required
+                       oninvalid="this.setCustomValidity('<fmt:message key="regex.email"/>')"
+                       oninput="setCustomValidity('')"
                        minlength="2"
                        maxlength="50"
                        pattern="^[A-z0-9._-]+@[a-z0-9._-]+\.[a-z]{2,4}$"
@@ -133,6 +135,8 @@
             <div class="info-div">
                 <input type="info-field" name="name" placeholder="<fmt:message key="change.name"/>"
                        required
+                       oninvalid="this.setCustomValidity('<fmt:message key="regex.name"/>')"
+                       oninput="setCustomValidity('')"
                        minlength="1"
                        maxlength="40"
                        pattern="[A-ZА-ЯЁ][A-Za-zА-Яа-яЁё]{0,39}"
@@ -153,6 +157,8 @@
             <div class="info-div">
                 <input type="info-field" name="surname" placeholder="<fmt:message key="change.surname"/>"
                        required
+                       oninvalid="this.setCustomValidity('<fmt:message key="regex.surname"/>')"
+                       oninput="setCustomValidity('')"
                        minlength="1"
                        maxlength="40"
                        pattern="[A-ZА-ЯЁ][A-Za-zА-Яа-яЁё]{0,39}"
@@ -176,6 +182,8 @@
                        name="password_old"
                        placeholder="<fmt:message key="change.password-old"/>"
                        required
+                       oninvalid="this.setCustomValidity('<fmt:message key="regex.password"/>')"
+                       oninput="setCustomValidity('')"
                        minlength="8"
                        maxlength="45"
                        pattern="[-\w_!@#$%^&*()]{8,45}"
@@ -187,6 +195,8 @@
                        name="password_new"
                        placeholder="<fmt:message key="change.password-new"/>"
                        required
+                       oninvalid="this.setCustomValidity('<fmt:message key="regex.password"/>')"
+                       oninput="setCustomValidity('')"
                        minlength="8"
                        maxlength="45"
                        pattern="[-\w_!@#$%^&*()]{8,45}"
@@ -211,6 +221,8 @@
                        name="balance"
                        placeholder="<fmt:message key="profile.change.balance"/>"
                        required
+                       oninvalid="this.setCustomValidity('<fmt:message key="regex.balance"/>')"
+                       oninput="setCustomValidity('')"
                        min="0"
                        max="9223372036854775807"
                 />
@@ -232,6 +244,8 @@
                        name="tattoo_rating"
                        placeholder="<fmt:message key="change.tattoo-rating"/>"
                        required
+                       oninvalid="this.setCustomValidity('<fmt:message key="regex.rating"/>')"
+                       oninput="setCustomValidity('')"
                        min="1"
                        max="10"
                 />
@@ -240,6 +254,8 @@
                 <input type="number"
                        name="user_rating"
                        placeholder="<fmt:message key="change.user-rating"/>"
+                       oninvalid="this.setCustomValidity('<fmt:message key="regex.rating"/>')"
+                       oninput="setCustomValidity('')"
                        min="1"
                        max="10"
                 />
@@ -260,6 +276,8 @@
             <div class="info-div">
                 <input type="number" name="id" placeholder="<fmt:message key="change.user-status.id"/>"
                        required
+                       oninvalid="this.setCustomValidity('<fmt:message key="regex.id"/>')"
+                       oninput="setCustomValidity('')"
                        min="1"
                        max="9223372036854775807"
                 />
@@ -277,6 +295,8 @@
             <div class="info-div">
                 <input type="number" name="id" placeholder="<fmt:message key="change.user-status.id"/>"
                        required
+                       oninvalid="this.setCustomValidity('<fmt:message key="regex.id"/>')"
+                       oninput="setCustomValidity('')"
                        min="1"
                        max="9223372036854775807"
                 >
@@ -294,6 +314,8 @@
             <div class="info-div">
                 <input type="number" name="tattoo_status" placeholder="<fmt:message key="change.tattoo-status.id"/>"
                        required
+                       oninvalid="this.setCustomValidity('<fmt:message key="regex.id"/>')"
+                       oninput="setCustomValidity('')"
                        min="1"
                        max="9223372036854775807"
                 >
@@ -311,6 +333,8 @@
             <div class="info-div">
                 <input type="number" name="id" placeholder="<fmt:message key="change.tattoo-status.id"/>"
                        required
+                       oninvalid="this.setCustomValidity('<fmt:message key="regex.id"/>')"
+                       oninput="setCustomValidity('')"
                        minlength="1"
                        maxlength="9223372036854775807"
                 >

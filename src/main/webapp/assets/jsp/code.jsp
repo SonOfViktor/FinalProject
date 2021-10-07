@@ -79,6 +79,8 @@
                    name="register_code"
                    placeholder="<fmt:message key="register.placeholder.code"/>"
                    required
+                   oninvalid="this.setCustomValidity('<fmt:message key="regex.code"/>')"
+                   oninput="setCustomValidity('')"
                    min="100000"
                    max="999999"
             />

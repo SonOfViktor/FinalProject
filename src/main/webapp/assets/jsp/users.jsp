@@ -98,6 +98,8 @@
                            type="number"
                            name="id"
                            placeholder="<fmt:message key="users.search.placeholder.id"/>"
+                           oninvalid="this.setCustomValidity('<fmt:message key="regex.id"/>')"
+                           oninput="setCustomValidity('')"
                            min="1"
                            max="9223372036854775807"
                     />

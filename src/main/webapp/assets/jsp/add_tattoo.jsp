@@ -110,29 +110,38 @@
         <div class="info-div">
             <input type="number" name="price" placeholder="<fmt:message key="add.tattoo.price"/>"
                    required
+                   oninvalid="this.setCustomValidity('<fmt:message key="regex.price"/>')"
+                   oninput="setCustomValidity('')"
                    min="0"
-                   max="9223372036854775807"
+                   max="10000000"
             >
         </div>
         <div class="info-div">
             <input type="number" name="width" placeholder="<fmt:message key="add.tattoo.width"/>"
                    required
+                   oninvalid="this.setCustomValidity('<fmt:message key="regex.width"/>')"
+                   oninput="setCustomValidity('')"
                    min="1"
-                   max="2147483647"
+                   max="200"
             >
         </div>
         <div class="info-div">
             <input type="number" name="height" placeholder="<fmt:message key="add.tattoo.height"/>"
                    required
+                   oninvalid="this.setCustomValidity('<fmt:message key="regex.height"/>')"
+                   oninput="setCustomValidity('')"
                    min="1"
-                   max="2147483647"
+                   max="200"
             >
         </div>
         <div class="info-div">
             <input type="text" name="image_url" placeholder="<fmt:message key="add.tattoo.link"/>"
                    required
+                   oninvalid="this.setCustomValidity('<fmt:message key="regex.link"/>')"
+                   oninput="setCustomValidity('')"
                    minlength="1"
                    maxlength="255"
+                   pattern="[^<>]{1,255}"
             >
         </div>
         <div class="info-div-proposal2">

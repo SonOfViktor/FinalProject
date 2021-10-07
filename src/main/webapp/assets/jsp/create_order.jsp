@@ -84,6 +84,8 @@
                    name="tattoo_id"
                    placeholder="<fmt:message key="create.order.tattoo.id"/>"
                    required
+                   oninvalid="this.setCustomValidity('<fmt:message key="regex.id"/>')"
+                   oninput="setCustomValidity('')"
                    min="1"
                    max="9223372036854775807"
             />

@@ -102,6 +102,8 @@
                            type="number"
                            name="id"
                            placeholder="<fmt:message key="tattoo.search-by-id-input"/>"
+                           oninvalid="this.setCustomValidity('<fmt:message key="regex.id"/>')"
+                           oninput="setCustomValidity('')"
                            min="1"
                            max="9223372036854775807"
                     />
@@ -150,15 +152,19 @@
                            type="number"
                            name="min_price"
                            placeholder="<fmt:message key="tattoo.search-by-price-min"/>"
+                           oninvalid="this.setCustomValidity('<fmt:message key="regex.price"/>')"
+                           oninput="setCustomValidity('')"
                            min="0"
-                           max="2147483647"
+                           max="10000000"
                     />
                     <input class="block2-input"
                            type="number"
                            name="max_price"
                            placeholder="<fmt:message key="tattoo.search-by-price-max"/>"
+                           oninvalid="this.setCustomValidity('<fmt:message key="regex.price"/>')"
+                           oninput="setCustomValidity('')"
                            min="0"
-                           max="2147483647"
+                           max="10000000"
                     />
                     <button class="block2-button2" type="submit"><fmt:message key="tattoo.search-button"/></button>
                 </form>
