@@ -15,9 +15,9 @@ public class LogoutCommand implements Command {
         HttpSession session = request.getSession();
         session.removeAttribute(SessionAttribute.USER);
         session.removeAttribute(SessionAttribute.USER_ID);
+        session.removeAttribute(SessionAttribute.USER_LOGIN);
         session.removeAttribute(SessionAttribute.STATUS);
         session.setAttribute(SessionAttribute.ROLE, UserRole.VISITOR);
-        session.setAttribute(SessionAttribute.AUTHENTICATION, false);
         return new Router(Router.RouterType.REDIRECT, PagePath.LOGIN_PAGE_REDIRECT);
     }
 }

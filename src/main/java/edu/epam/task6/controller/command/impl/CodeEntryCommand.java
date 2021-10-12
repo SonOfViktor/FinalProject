@@ -1,9 +1,6 @@
 package edu.epam.task6.controller.command.impl;
 
-import edu.epam.task6.controller.command.Command;
-import edu.epam.task6.controller.command.PagePath;
-import edu.epam.task6.controller.command.RequestParameter;
-import edu.epam.task6.controller.command.Router;
+import edu.epam.task6.controller.command.*;
 import edu.epam.task6.model.dao.ColumnName;
 import edu.epam.task6.model.entity.User;
 import edu.epam.task6.model.entity.UserStatus;
@@ -11,6 +8,7 @@ import edu.epam.task6.model.service.UserService;
 import edu.epam.task6.model.service.impl.UserServiceImpl;
 import edu.epam.task6.exception.ServiceException;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -25,14 +23,15 @@ public class CodeEntryCommand implements Command {
     @Override
     public Router execute(HttpServletRequest request) {
         Router router;
+        HttpSession session = request.getSession();
         UserService userService = UserServiceImpl.getInstance();
         try {
             String enteredCode = request.getParameter(RequestParameter.REGISTER_CODE);
-            String generateCode = request.getParameter(RequestParameter.GENERATE_CODE);
-            String userLogin = request.getParameter(RequestParameter.USER_LOGIN);
+            String userLogin = session.getAttribute(SessionAttribute.USER_LOGIN).toString();
             Optional<User> user = userService.findByLogin(userLogin);
 
             if (user.isPresent()) {
+                String generateCode = user.get().getRegisterCode().toString();
                 if (generateCode.equals(enteredCode)) {
                     Long userId = user.get().getUserId();
                     Map<String, String> parameters = new HashMap<>();

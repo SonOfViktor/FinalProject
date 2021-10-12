@@ -106,12 +106,19 @@ public class TattoosPaginationTag extends TagSupport {
                         .append(tattoo.getPlaces())
                         .append("</li>");
 
-                stringBuilder.append("<li class=\"main-text\">")
-                        .append(resourceBundle.getString("tattoo.rating-tattoo"))
-                        .append(" ")
-                        .append(tattoo.getAverageRating())
-                        .append("</li>")
-                        .append("</ul>");
+                if(tattoo.getNumberOfRatings() > 0) {
+                    stringBuilder.append("<li class=\"main-text\">")
+                            .append(resourceBundle.getString("tattoo.rating-tattoo"))
+                            .append(" ")
+                            .append(tattoo.getAverageRating())
+                            .append("</li>")
+                            .append("</ul>");
+                } else {
+                    stringBuilder.append("<li class=\"main-text\">")
+                            .append(resourceBundle.getString("tattoo.rating-tattoo-empty"))
+                            .append("</li>")
+                            .append("</ul>");
+                }
 
                 if(title.equals(TITLE_TATTOOS_ACTIVE) || title.equals(TITLE_TATTOOS_FOUNDED)) {
                     stringBuilder.append("<form method=\"post\" action=\"ProjectServlet\">")

@@ -42,9 +42,9 @@ public class LoginCommand implements Command {
                     request.setAttribute(RequestParameter.PROFILE, localUser);
                     session.setAttribute(SessionAttribute.USER, localUser);
                     session.setAttribute(SessionAttribute.USER_ID, localUser.getUserId());
+                    session.setAttribute(SessionAttribute.USER_LOGIN, localUser.getLogin());
                     session.setAttribute(SessionAttribute.ROLE, localUser.getRole());
                     session.setAttribute(SessionAttribute.STATUS, localUser.getStatus());
-                    session.setAttribute(SessionAttribute.AUTHENTICATION, true);
                     session.setAttribute(SessionAttribute.PREVIOUS_PAGE, PagePath.PROFILE_PAGE_REDIRECT);
 
                     router = new Router(Router.RouterType.REDIRECT, PagePath.PROFILE_PAGE_REDIRECT);

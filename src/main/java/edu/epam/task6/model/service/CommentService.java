@@ -15,7 +15,7 @@ public interface CommentService {
      * Leave comment with Map of parameters.
      *
      * @param parameters the parameters
-     * @return the boolean
+     * @return the boolean result of leaving a comment
      * @throws ServiceException the service exception
      */
     boolean leaveComment(Map<String, String> parameters) throws ServiceException;
@@ -24,7 +24,7 @@ public interface CommentService {
      * Delete comment by comment id.
      *
      * @param commentId the comment id
-     * @return the boolean
+     * @return the boolean result of deleting a comment
      * @throws ServiceException the service exception
      */
     boolean deleteComment(Long commentId) throws ServiceException;

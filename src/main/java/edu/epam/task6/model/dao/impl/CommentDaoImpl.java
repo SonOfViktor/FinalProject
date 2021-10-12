@@ -53,8 +53,8 @@ public class CommentDaoImpl implements CommentDao {
             statement.setString(3, parameters.get(ColumnName.COMMENT_USER_ID));
             result = statement.executeUpdate() > 0;
         } catch (SQLException e) {
-            logger.error("Error during adding user.", e);
-            throw new DaoException("Error during adding user.", e);
+            logger.error("Error during adding comment.", e);
+            throw new DaoException("Error during adding comment.", e);
         }
         return result;
     }

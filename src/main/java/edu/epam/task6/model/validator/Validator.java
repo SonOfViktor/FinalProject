@@ -94,7 +94,7 @@ public class Validator {
         if(price != null && price.matches(PRICE_REGEX)) {
             try {
                 BigDecimal localPrice = new BigDecimal(price);
-                if (localPrice.compareTo(BigDecimal.ZERO) > 0) {
+                if (localPrice.compareTo(BigDecimal.ZERO) >= 0) {
                     result = true;
                 }
             } catch (NumberFormatException e) {
@@ -192,8 +192,9 @@ public class Validator {
 
     public boolean validateOrder(Map<String, String> parameters) {
         String paid = parameters.get(ColumnName.ORDERS_PAID);
+        String userId = parameters.get(ColumnName.ORDERS_USER_ID);
         String tattooId = parameters.get(ColumnName.ORDERS_TATTOO_ID);
-        return validatePrice(paid) && validateId(tattooId);
+        return validatePrice(paid) && validateId(userId) && validateId(tattooId);
     }
 
     public boolean validateTattoo(Map<String, String> parameters) {

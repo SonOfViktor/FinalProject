@@ -24,7 +24,6 @@ public class FindTattooByPlaceCommand implements Command {
 
         HttpSession session = request.getSession();
         UserRole userRole = (UserRole) session.getAttribute(SessionAttribute.ROLE);
-        session.setAttribute(SessionAttribute.PREVIOUS_PAGE, PagePath.FIND_TATTOO_BY_PLACE_REDIRECT);
 
         int currentPage = 1;
         if (request.getParameter(RequestParameter.CURRENT_PAGE_NUMBER) != null) {

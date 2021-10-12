@@ -34,9 +34,8 @@ public class FindTattooByIdCommand implements Command {
                 tattoo = tattooService.findByIdAllActive(tattooId);
             }
             if (tattoo.isPresent()) {
-                Tattoo localTattoo = tattoo.get();
                 request.setAttribute(RequestParameter.FIND_TATTOO_ERROR, false);
-                request.setAttribute(RequestParameter.TATTOO, localTattoo);
+                request.setAttribute(RequestParameter.TATTOO, tattoo.get());
             } else {
                 request.setAttribute(RequestParameter.FIND_TATTOO_ERROR, true);
                 logger.error("Tattoo with this id was not found. id = " + tattooId);

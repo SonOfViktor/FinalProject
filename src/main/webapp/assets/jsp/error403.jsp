@@ -15,6 +15,13 @@
             href="${pageContext.request.contextPath}/assets/css/error3.css"
             rel="stylesheet"
     />
+    <script type="text/javascript">
+        window.history.forward();
+        function noBack()
+        {
+            window.history.forward();
+        }
+    </script>
     <title><fmt:message key="error.403.main-title"/></title>
 </head>
 <body>

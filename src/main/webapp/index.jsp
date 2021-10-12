@@ -2,6 +2,15 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="localVisitor">VISITOR</c:set>
 <html>
+<head>
+  <script type="text/javascript">
+    window.history.forward();
+    function noBack()
+    {
+      window.history.forward();
+    }
+  </script>
+</head>
   <body>
   <c:choose>
     <c:when test="${sessionScope.role == localVisitor}">

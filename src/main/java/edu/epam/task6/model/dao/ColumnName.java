@@ -18,12 +18,6 @@ public final class ColumnName {
     public static final String USER_NUMBER_OF_RATINGS = "number_of_ratings";
     public static final String USER_REGISTER_CODE = "register_code";
 
-    public static final String USER_ROLES_ID ="role_id";
-    public static final String USER_ROLES_NAME ="role";
-
-    public static final String USER_STATUSES_ID ="status_id";
-    public static final String USER_STATUSES_NAME ="status";
-
     public static final String TATTOOS_ID ="tattoo_id";
     public static final String TATTOOS_NAME ="name";
     public static final String TATTOOS_DESCRIPTION ="description";
@@ -36,9 +30,6 @@ public final class ColumnName {
     public static final String TATTOOS_USER_ID ="users_user_id";
     public static final String TATTOOS_AVERAGE_RATING = "tattoo_average_rating";
     public static final String TATTOOS_NUMBER_OF_RATINGS = "number_of_ratings";
-
-    public static final String TATTOO_STATUS_ID ="tattoo_status_id";
-    public static final String TATTOO_STATUS_NAME ="tattoo_status";
 
     public static final String ORDERS_ID ="order_id";
     public static final String ORDERS_PAID ="paid";

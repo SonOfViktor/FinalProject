@@ -5,6 +5,7 @@ import edu.epam.task6.model.service.CommentService;
 import edu.epam.task6.model.service.UserService;
 import edu.epam.task6.model.service.impl.CommentServiceImpl;
 import edu.epam.task6.model.service.impl.UserServiceImpl;
+import edu.epam.task6.model.validator.Validator;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
@@ -39,6 +40,8 @@ public class Main {
                     aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaa
                     aaaaaaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaaaaaaaa""";
             System.out.println(test1.length());
+            Validator validator = new Validator();
+            System.out.println(validator.validateReference("https://www.pinterest.com/pin/896990450753304286/"));
 //        Timestamp time = Timestamp.valueOf("2021-08-20 15:27:12");
 //        LocalDateTime ldt = LocalDateTime.of(time.toLocalDateTime().toLocalDate(), time.toLocalDateTime().toLocalTime());
 //        System.out.println(ldt);

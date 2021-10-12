@@ -20,6 +20,13 @@
             href="${pageContext.request.contextPath}/assets/css/main16.css"
             rel="stylesheet"
     />
+    <script type="text/javascript">
+        window.history.forward();
+        function noBack()
+        {
+            window.history.forward();
+        }
+    </script>
     <title><fmt:message key="profile.main-title"/></title>
 </head>
 <body class="body-size3">
@@ -249,21 +256,21 @@
         </ul>
         <ul class="footer-info-refs">
             <li class="footer-info-refs-item">
-                <a href="https://github.com/Daetwen/FinalProject">
+                <a href="https://github.com/Daetwen/FinalProject" target="_blank">
                     <img class="footer-github-logo"
                          src="assets/image/github-logo.png"
                          alt="<fmt:message key="footer.alt.git"/>" >
                 </a>
             </li>
             <li class="footer-info-refs-item">
-                <a href="https://vk.com/vlad_makarey">
+                <a href="https://vk.com/vlad_makarey" target="_blank">
                     <img class="footer-vk-logo"
                          src="assets/image/vk-logo.svg"
                          alt="<fmt:message key="footer.alt.vk"/>">
                 </a>
             </li>
             <li class="footer-info-refs-item">
-                <a href="https://t.me/Daetwen">
+                <a href="https://t.me/Daetwen" target="_blank">
                     <svg class="svg-icon5" width="26" height="23" viewBox="0 0 26 23" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M23.4299 0.755723L0.838079 9.93565C-0.0710467 10.3631 -0.378545 11.2193 0.618303 11.6839L6.41413 13.6246L20.4275 4.49886C21.1927 3.92594 21.976 4.07873 21.302 4.70893L9.26632 16.1918L8.88824 21.0513C9.23843 21.8016 9.87963 21.8051 10.2886 21.4322L13.6185 18.1122L19.3214 22.612C20.6459 23.4383 21.3666 22.905 21.6516 21.3906L25.3922 2.72707C25.7806 0.862859 25.1182 0.0414915 23.4299 0.755723Z" fill="#040303"/>
                     </svg>

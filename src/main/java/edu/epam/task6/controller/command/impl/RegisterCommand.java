@@ -1,17 +1,15 @@
 package edu.epam.task6.controller.command.impl;
 
+import edu.epam.task6.controller.command.*;
 import edu.epam.task6.model.dao.ColumnName;
 import edu.epam.task6.model.entity.User;
 import edu.epam.task6.model.service.UserService;
 import edu.epam.task6.model.service.impl.UserServiceImpl;
 import edu.epam.task6.util.EmailSender;
-import edu.epam.task6.controller.command.Command;
-import edu.epam.task6.controller.command.PagePath;
-import edu.epam.task6.controller.command.RequestParameter;
-import edu.epam.task6.controller.command.Router;
 import edu.epam.task6.exception.ServiceException;
 import edu.epam.task6.util.RegisterCodeGenerator;
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -28,6 +26,7 @@ public class RegisterCommand implements Command {
     @Override
     public Router execute(HttpServletRequest request) {
         Router router;
+        HttpSession session = request.getSession();
         UserService userService = UserServiceImpl.getInstance();
         Map<String, String> parameters = new HashMap<>();
         try {
@@ -53,8 +52,7 @@ public class RegisterCommand implements Command {
                                 EMAIL_MESSAGE_TITLE,
                                 EMAIL_MESSAGE_TEXT + code);
                         emailSender.start();
-                        request.setAttribute(RequestParameter.GENERATE_CODE, code);
-                        request.setAttribute(RequestParameter.USER_LOGIN, parameters.get(ColumnName.USER_LOGIN));
+                        session.setAttribute(SessionAttribute.USER_LOGIN, parameters.get(ColumnName.USER_LOGIN));
                         router = new Router(PagePath.CODE_PAGE);
                         logger.info("User registered but not verified.");
                     } else {

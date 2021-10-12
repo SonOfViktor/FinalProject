@@ -13,10 +13,10 @@ import java.util.Optional;
 public interface OrderService {
 
     /**
-     * Create order boolean.
+     * Create order.
      *
      * @param parameters the parameters
-     * @return the boolean
+     * @return the boolean result of order creation
      * @throws ServiceException the service exception
      */
     boolean createOrder(Map<String, String> parameters) throws ServiceException;
@@ -24,9 +24,9 @@ public interface OrderService {
     /**
      * Update status boolean.
      *
-     * @param parameters the parameters
+     * @param parameters the map containing the status to change
      * @param orderId    the order id
-     * @return the boolean
+     * @return the boolean status update result
      * @throws ServiceException the service exception
      */
     boolean updateStatus(Map<String, String> parameters, Long orderId) throws ServiceException;
@@ -34,17 +34,17 @@ public interface OrderService {
     /**
      * Find by id optional.
      *
-     * @param id the id
-     * @return the optional
+     * @param id the order id
+     * @return the optional order
      * @throws ServiceException the service exception
      */
     Optional<Order> findById(Long id) throws ServiceException;
 
     /**
-     * Find by login list.
+     * Find by user login list of orders.
      *
-     * @param login the login
-     * @return the list
+     * @param login the user login
+     * @return the orders list belonging to the user with the received login
      * @throws ServiceException the service exception
      */
     List<Order> findByLogin(String login) throws ServiceException;
@@ -52,8 +52,8 @@ public interface OrderService {
     /**
      * Find by status list.
      *
-     * @param status the status
-     * @return the list
+     * @param status the status of orders
+     * @return the order list
      * @throws ServiceException the service exception
      */
     List<Order> findByStatus(String status) throws ServiceException;
@@ -63,7 +63,7 @@ public interface OrderService {
      *
      * @param orderId   the order id
      * @param userLogin the user login
-     * @return the optional
+     * @return the optional order
      * @throws ServiceException the service exception
      */
     Optional<Order> findByIdPersonal(Long orderId, String userLogin) throws ServiceException;
@@ -73,15 +73,15 @@ public interface OrderService {
      *
      * @param status    the status
      * @param userLogin the user login
-     * @return the list
+     * @return the list of orders, with the desired status, owned by a user with a login
      * @throws ServiceException the service exception
      */
     List<Order> findByStatusPersonal(String status, String userLogin) throws ServiceException;
 
     /**
-     * Find all list.
+     * Find all orders list.
      *
-     * @return the list
+     * @return the list of all orders
      * @throws ServiceException the service exception
      */
     List<Order> findAll() throws ServiceException;

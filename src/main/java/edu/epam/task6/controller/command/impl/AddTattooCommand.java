@@ -6,6 +6,7 @@ import edu.epam.task6.exception.ServiceException;
 import edu.epam.task6.model.dao.ColumnName;
 import edu.epam.task6.model.service.TattooService;
 import edu.epam.task6.model.service.impl.TattooServiceImpl;
+import edu.epam.task6.model.validator.Validator;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.apache.logging.log4j.LogManager;
