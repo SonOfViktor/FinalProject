@@ -19,7 +19,7 @@ public interface TattooService {
      * @return the boolean result of creation
      * @throws ServiceException the service exception
      */
-    boolean AddNewTattoo(Map<String, String> parameters) throws ServiceException;
+    boolean addNewTattoo(Map<String, String> parameters) throws ServiceException;
 
     /**
      * Update tattoo status.

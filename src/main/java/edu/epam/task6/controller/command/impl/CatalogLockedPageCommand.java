@@ -32,7 +32,7 @@ public class CatalogLockedPageCommand implements Command {
 
         TattooService catalogService = TattooServiceImpl.getInstance();
         try {
-            List<Tattoo> catalogElements = catalogService.findByStatus(TattooStatus.LOCKED.name());
+            List<Tattoo> catalogElements = catalogService.findByStatus(TattooStatus.LOCKED.toString());
             request.setAttribute(RequestParameter.CATALOG, catalogElements);
             SendSplitParameters sendSplitParameters = SendSplitParameters.getInstance();
             sendSplitParameters.sendSplitParametersTattoos(request, catalogElements.size(), currentPage);

@@ -18,7 +18,7 @@ public class Validator {
     private final static String PASSWORD_REGEX = "[-\\w_!@#$%^&*()]{8,45}";
     private final static String PRICE_REGEX = "[0-9]([0-9]){0,18}";
     private final static String ORDER_PAID_REGEX = "[-0-9]([0-9]){1,18}";
-    private final static String DESCRIPTION_REGEX = "[A-ZА-ЯЁ][A-Za-zА-Яа-яЁё ,.!?\\d]{0,1999}";
+    private final static String DESCRIPTION_REGEX = "[A-ZА-ЯЁ][A-Za-zА-Яа-яЁё ,.!?\\-\\d]{0,1999}";
     private final static String COMMENT_REGEX = "[A-Za-zА-Яа-яЁё1-9 ,.!?\\d]{1,1000}";
     private final static String SIZE_REGEX = "[0-9]{1,10}";
     private final static String DISCOUNT_REGEX = "[0-9]{1,3}";

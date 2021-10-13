@@ -111,7 +111,7 @@
                    oninput="setCustomValidity('')"
                    minlength="1"
                    maxlength="2000"
-                   pattern="[A-ZА-ЯЁ][A-Za-zА-Яа-яЁё ,\.!?\d]{0,1999}"
+                   pattern="[A-ZА-ЯЁ][A-Za-zА-Яа-яЁё ,\.!?\-\d]{0,1999}"
             >
         </div>
         <div class="info-div">

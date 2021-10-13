@@ -29,7 +29,7 @@ public class TattooServiceImpl implements TattooService {
         return instance;
     }
 
-    public boolean AddNewTattoo(Map<String, String> parameters) throws ServiceException {
+    public boolean addNewTattoo(Map<String, String> parameters) throws ServiceException {
         boolean result = validator.validateTattoo(parameters);
         if(result) {
             TattooDao tattooDao = TattooDaoImpl.getInstance();

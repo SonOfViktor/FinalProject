@@ -6,7 +6,6 @@ import edu.epam.task6.exception.ServiceException;
 import edu.epam.task6.model.dao.ColumnName;
 import edu.epam.task6.model.service.TattooService;
 import edu.epam.task6.model.service.impl.TattooServiceImpl;
-import edu.epam.task6.model.validator.Validator;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import org.apache.logging.log4j.LogManager;
@@ -49,7 +48,7 @@ public class AddTattooCommand implements Command {
             parameters.put(ColumnName.TATTOOS_PLACE, String.valueOf(placeNumber));
             parameters.put(ColumnName.TATTOOS_USER_ID, userId.toString());
 
-            if (tattooService.AddNewTattoo(parameters)) {
+            if (tattooService.addNewTattoo(parameters)) {
                 logger.info("Tattoo has been added in catalog.");
                 router = new Router(Router.RouterType.REDIRECT, PagePath.PROFILE_PAGE_REDIRECT);
             } else {

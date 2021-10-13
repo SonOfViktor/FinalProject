@@ -32,7 +32,7 @@ public class CatalogProposalPageCommand implements Command {
 
         TattooService catalogService = TattooServiceImpl.getInstance();
         try {
-            List<Tattoo> catalogElements = catalogService.findByStatus(TattooStatus.OFFERED_BY_USER.name());
+            List<Tattoo> catalogElements = catalogService.findByStatus(TattooStatus.OFFERED_BY_USER.toString());
             request.setAttribute(RequestParameter.CATALOG, catalogElements);
             SendSplitParameters sendSplitParameters = SendSplitParameters.getInstance();
             sendSplitParameters.sendSplitParametersTattoos(request, catalogElements.size(), currentPage);
