@@ -6,6 +6,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.sql.Connection;
+import java.sql.Driver;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
@@ -93,20 +94,27 @@ public class ConnectionPool {
     }
 
     public void destroyPool() {
-        try {
-            while (!freeConnections.isEmpty()) {
+        while (!freeConnections.isEmpty()) {
+            try {
                 freeConnections.take().reallyClose();
+            } catch (SQLException e) {
+                logger.error("Error while destroying connection pool.", e);
+            } catch (InterruptedException e) {
+                logger.error("Error while destroying connection pool, thread was interrupted.", e);
+                Thread.currentThread().interrupt();
             }
-            deregisterDrivers();
-        } catch (InterruptedException | SQLException e) {
-            logger.error("Error while destroying connection pool.", e);
-            Thread.currentThread().interrupt();
         }
+        deregisterDrivers();
     }
 
-    private void deregisterDrivers() throws SQLException {
-        while(DriverManager.getDrivers().hasMoreElements()){
-            DriverManager.deregisterDriver(DriverManager.getDrivers().nextElement());
+    private void deregisterDrivers() {
+        while(DriverManager.getDrivers().hasMoreElements()) {
+            Driver driver = DriverManager.getDrivers().nextElement();
+            try {
+                DriverManager.deregisterDriver(driver);
+            } catch (SQLException e) {
+                logger.error("Error during driver deregistration: ", e);
+            }
         }
     }
 }
