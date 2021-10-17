@@ -28,6 +28,7 @@ public class AboutUsPageCommand implements Command {
         Router router;
 
         HttpSession session = request.getSession();
+        UserRole sessionRole = (UserRole) session.getAttribute(SessionAttribute.ROLE);
         session.setAttribute(SessionAttribute.PREVIOUS_PAGE, PagePath.ABOUT_US_PAGE_REDIRECT);
 
         int currentPage = 1;
@@ -44,7 +45,7 @@ public class AboutUsPageCommand implements Command {
 
             SendSplitParameters sendSplitParameters = SendSplitParameters.getInstance();
             Optional<User> user = userService.findById(ADMIN_ID);
-            if (user.isPresent() && user.get().getRole().equals(UserRole.ADMIN)) {
+            if (user.isPresent() && user.get().getRole().equals(UserRole.ADMIN) && sessionRole.equals(UserRole.ADMIN)) {
                 Double averageRating = user.get().getAverageRating();
                 request.setAttribute(RequestParameter.RATING, averageRating);
                 sendSplitParameters.sendSplitParametersComments(
@@ -52,7 +53,17 @@ public class AboutUsPageCommand implements Command {
                         comments.size(),
                         currentPage,
                         PageSplitParameter.NUMBER_OF_COMMENTS_PER_PAGE_ADMIN);
+            } else if (user.isPresent() && user.get().getRole().equals(UserRole.ADMIN) && !sessionRole.equals(UserRole.ADMIN)) {
+                Double averageRating = user.get().getAverageRating();
+                request.setAttribute(RequestParameter.RATING, averageRating);
+                sendSplitParameters.sendSplitParametersComments(
+                        request,
+                        comments.size(),
+                        currentPage,
+                        PageSplitParameter.NUMBER_OF_COMMENTS_PER_PAGE_USER);
             } else {
+                Double averageRating = 0D;
+                request.setAttribute(RequestParameter.RATING, averageRating);
                 sendSplitParameters.sendSplitParametersComments(
                         request,
                         comments.size(),

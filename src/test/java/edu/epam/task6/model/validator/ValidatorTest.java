@@ -330,34 +330,27 @@ public class ValidatorTest {
 
     @Test
     public void validatePriceTestFalse1() {
-        String price = "0";
-        boolean actual = validator.validatePrice(price);
-        assertFalse(actual);
-    }
-
-    @Test
-    public void validatePriceTestFalse2() {
         String price = "";
         boolean actual = validator.validatePrice(price);
         assertFalse(actual);
     }
 
     @Test
-    public void validatePriceTestFalse3() {
+    public void validatePriceTestFalse2() {
         String price = "  ";
         boolean actual = validator.validatePrice(price);
         assertFalse(actual);
     }
 
     @Test
-    public void validatePriceTestFalse4() {
+    public void validatePriceTestFalse3() {
         String price = "<script>";
         boolean actual = validator.validatePrice(price);
         assertFalse(actual);
     }
 
     @Test
-    public void validatePriceTestFalse5() {
+    public void validatePriceTestFalse4() {
         String price = "12345fgr";
         boolean actual = validator.validatePrice(price);
         assertFalse(actual);

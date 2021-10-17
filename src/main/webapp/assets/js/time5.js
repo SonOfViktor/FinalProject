@@ -17,8 +17,14 @@ function timeNow(date) {
         '.' + (time.getUTCMilliseconds() / 1000).toFixed(9).slice(2, 11);
 }
 
-function timeOutput(date) {
-    var local = date;
-    var time = new Date(local);
-    time = time.toLocaleDateString() + " " + time.toLocaleTimeString();
+function timeNow2(date) {
+    time = new Date();
+    time.setTime(time.getTime() + time.getTimezoneOffset()*60*1000*(-1));
+    date.value = time.getUTCFullYear() +
+        '-' + pad(time.getUTCMonth() + 1) +
+        '-' + pad(time.getUTCDate()) +
+        ' ' + pad(time.getUTCHours()) +
+        ':' + pad(time.getUTCMinutes()) +
+        ':' + pad(time.getUTCSeconds()) +
+        '.' + (time.getUTCMilliseconds() / 1000).toFixed(9).slice(2, 11);
 }

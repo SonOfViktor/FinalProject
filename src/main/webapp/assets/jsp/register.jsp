@@ -34,6 +34,7 @@
             window.history.forward();
         }
     </script>
+    <script src="${pageContext.request.contextPath}/assets/js/time5.js"></script>
     <title><fmt:message key="register.main-title"/></title>
 </head>
 <body class="body-size1">
@@ -228,6 +229,5 @@
         </ul>
     </div>
 </footer>
-<script src="assets/js/time3.js"></script>
 </body>
 </html>

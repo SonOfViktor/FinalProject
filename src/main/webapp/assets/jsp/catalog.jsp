@@ -38,6 +38,7 @@
             window.history.forward();
         }
     </script>
+    <script src="${pageContext.request.contextPath}/assets/js/time5.js"></script>
     <title><fmt:message key="main.catalog"/></title>
 </head>
 <body class="body-size2">
@@ -296,6 +297,5 @@
         </ul>
     </div>
 </footer>
-<script src="assets/js/time3.js"></script>
 </body>
 </html>

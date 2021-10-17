@@ -30,6 +30,7 @@
             href="${pageContext.request.contextPath}/assets/css/aboutus3.css"
             rel="stylesheet"
     />
+    <script src="${pageContext.request.contextPath}/assets/js/time5.js"></script>
     <title><fmt:message key="about.us.main-title"/></title>
 </head>
 <body>
@@ -91,7 +92,7 @@
         <input id="date" type="hidden" name="registration_date">
         <button class="comment-button"
                 type="submit"
-                onclick="timeNow(date)">
+                onclick="timeNow2(date)">
             <fmt:message key="about.us.post.comment"/>
         </button>
         <textarea class="comment-input" name="text" minlength="1" maxlength="1000" pattern="[A-Za-zА-Яа-яЁё1-9 ,\.!?\d]{1,1000}" placeholder="<fmt:message key="about.us.textarea.placeholder"/>"></textarea>
@@ -186,7 +187,6 @@
         </ul>
     </div>
 </footer>
-<script src="assets/js/time4.js"></script>
 </body>
 </html>
 

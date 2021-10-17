@@ -13,9 +13,6 @@
 <c:set var="person">person</c:set>
 <c:set var="roleAdmin">ADMIN</c:set>
 <c:set var="roleUser">USER</c:set>
-<c:set var="orderStatusActive">ACTIVE</c:set>
-<c:set var="orderStatusCompleted">COMPLETED</c:set>
-<c:set var="orderStatusCanceled">CANCELED</c:set>
 <html>
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">

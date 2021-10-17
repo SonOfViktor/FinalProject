@@ -58,7 +58,6 @@ public final class SendSplitParameters {
         request.setAttribute(RequestParameter.CURRENT_PAGE_NUMBER, currentPage);
 
         request.setAttribute(RequestParameter.PAGES_NUMBER,
-                (int)Math.ceil((double)size
-                        / PageSplitParameter.NUMBER_OF_TATTOOS_PER_PAGE));
+                (int)Math.ceil((double)size / numberOfElementsPerPage));
     }
 }

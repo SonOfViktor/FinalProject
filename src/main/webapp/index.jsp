@@ -12,13 +12,6 @@
   </script>
 </head>
   <body>
-  <c:choose>
-    <c:when test="${sessionScope.role == localVisitor}">
-      <jsp:forward page="ProjectServlet?command=to_login_page"/>
-    </c:when>
-    <c:otherwise>
-      <jsp:forward page="ProjectServlet?command=to_home_page"/>
-    </c:otherwise>
-  </c:choose>
+    <jsp:forward page="ProjectServlet?command=to_home_page"/>
   </body>
 </html>

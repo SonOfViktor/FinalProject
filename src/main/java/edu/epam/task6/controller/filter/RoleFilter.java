@@ -14,14 +14,13 @@ import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
 
-@WebFilter( urlPatterns = { "/ProjectServlet" },
-        initParams = { @WebInitParam(name = "INDEX_PATH", value = "index.jsp") })
 public class RoleFilter implements Filter {
+    private static final String INDEX_PATH = "path";
     private String indexPath;
 
     @Override
     public void init(FilterConfig filterConfig) {
-        indexPath = filterConfig.getInitParameter("INDEX_PATH");
+        indexPath = filterConfig.getInitParameter(INDEX_PATH);
     }
 
     @Override

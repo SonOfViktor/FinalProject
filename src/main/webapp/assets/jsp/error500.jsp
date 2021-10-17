@@ -32,9 +32,12 @@
     <div class="error-title">
         <fmt:message key="error.500.title"/>
     </div>
-    <a class="error-text" href="ProjectServlet?command=to_home_page">
-        <fmt:message key="error.ref"/>
-    </a>
+    <form method="post" action="ProjectServlet">
+        <input type="hidden" name="command" value="to_home_page"/>
+        <button class="error-text" type="submit">
+            <fmt:message key="error.ref"/>
+        </button>
+    </form>
 </div>
 </body>
 </html>

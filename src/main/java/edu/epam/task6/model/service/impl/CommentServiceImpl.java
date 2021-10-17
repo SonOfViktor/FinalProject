@@ -16,7 +16,6 @@ public class CommentServiceImpl implements CommentService {
 
     private static final Validator validator = new Validator();
     private static CommentServiceImpl instance;
-    private CommentDao commentDao;
 
     private CommentServiceImpl(){}
 

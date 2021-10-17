@@ -94,13 +94,13 @@ public class ConnectionPool {
 
     public void destroyPool() {
         try {
-            //TODO заменить на обычный цикл (ещё не доделано 1)
-            for (ProxyConnection freeConnection : freeConnections) {
-                freeConnection.reallyClose();
+            while (!freeConnections.isEmpty()) {
+                freeConnections.take().reallyClose();
             }
             deregisterDrivers();
-        } catch (SQLException e) {
+        } catch (InterruptedException | SQLException e) {
             logger.error("Error while destroying connection pool.", e);
+            Thread.currentThread().interrupt();
         }
     }
 

@@ -33,9 +33,10 @@
         <fmt:message key="error.403.title"/>
     </div>
     <form method="post" action="ProjectServlet">
-        <a class="error-text" href="ProjectServlet?command=to_home_page">
+        <input type="hidden" name="command" value="to_home_page"/>
+        <button class="error-text" type="submit">
             <fmt:message key="error.ref"/>
-        </a>
+        </button>
     </form>
 </div>
 </body>
