@@ -112,7 +112,7 @@ public class UserServiceImpl implements UserService {
                 UserDao userDao = UserDaoImpl.getInstance();
                 Optional<User> user = userDao.findById(userId);
                 if (user.isPresent()) {
-                    int localDiscount = user.get().getDiscount() + Integer.valueOf(discount);
+                    int localDiscount = user.get().getDiscount() + Integer.parseInt(discount);
                     if (localDiscount > MAXIMUM_DISCOUNT_PERCENT) {
                         localDiscount = MAXIMUM_DISCOUNT_PERCENT;
                     }
@@ -167,8 +167,8 @@ public class UserServiceImpl implements UserService {
     }
 
     public boolean updateAverageRating(Map<String, String> parameters, Long userId) throws ServiceException {
-        Integer grade = Integer.valueOf(parameters.get(ColumnName.USER_AVERAGE_RATING));
-        boolean result = validator.validateAverageRating(grade.toString());
+        int grade = Integer.parseInt(parameters.get(ColumnName.USER_AVERAGE_RATING));
+        boolean result = validator.validateAverageRating(String.valueOf(grade));
         if(result) {
             UserDao userDao = UserDaoImpl.getInstance();
             try {
@@ -181,7 +181,7 @@ public class UserServiceImpl implements UserService {
                         numberOfRatings += 1;
                         userGrade = userGrade / numberOfRatings;
                     } else {
-                        userGrade = Double.valueOf(grade);
+                        userGrade = (double) grade;
                         numberOfRatings += 1;
                     }
 
