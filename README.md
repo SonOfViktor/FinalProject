@@ -2,7 +2,7 @@ Final project for EPAM courses Java-web
 
 # Tattoo-salon
 
-#### Tattoo-salon is a web service that allows users to search for and order tattoos. Also, users can influence the service by offering their tattoos and rating the already available tattoos and the work of the administration. There are 3 types of roles in the system: Guest, User, Administrator.
+#### Tattoo-salon is a web-service that allows users to search for and order tattoos. Also, users can influence the service by offering their tattoos and rating the already available tattoos and the work of the administration. There are 3 types of roles in the system: Guest, User, Administrator.
 
 ## Guest role
 - Can view start page
