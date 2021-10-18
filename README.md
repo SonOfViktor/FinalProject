@@ -33,7 +33,7 @@ General
 - Can view his profile
 - Can edit his profile (name, surname, email, password)
 - Can change localization
-- Can come out
+- Can log out
 
 Tattoos
 - Can visit the tattoos catalog page
