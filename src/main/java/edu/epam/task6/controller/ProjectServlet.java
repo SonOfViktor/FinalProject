@@ -39,7 +39,7 @@ public class ProjectServlet extends HttpServlet {
                 requestDispatcher.forward(request, response);
             }
             default -> {
-                logger.error("Error in router type: ", router.getType());
+                logger.error("Error in router type.");
                 response.sendRedirect(PagePath.ERROR_PAGE_500);
             }
         }

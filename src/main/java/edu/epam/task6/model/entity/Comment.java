@@ -21,10 +21,6 @@ public class Comment {
         return commentId;
     }
 
-    public void setCommentId(Long commentId) {
-        this.commentId = commentId;
-    }
-
     public String getText() {
         return text;
     }
@@ -35,10 +31,6 @@ public class Comment {
 
     public LocalDateTime getRegistrationDate() {
         return registrationDate;
-    }
-
-    public void setRegistrationDate(LocalDateTime registrationDate) {
-        this.registrationDate = registrationDate;
     }
 
     public Long getUserId() {

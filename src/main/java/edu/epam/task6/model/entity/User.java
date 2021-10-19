@@ -107,32 +107,16 @@ public class User {
         return registrationDate;
     }
 
-    public void setRegistrationDate(LocalDateTime registrationDate) {
-        this.registrationDate = registrationDate;
-    }
-
     public Double getAverageRating() {
         return averageRating;
-    }
-
-    public void setAverageRating(Double averageRating) {
-        this.averageRating = averageRating;
     }
 
     public Integer getNumberOfRatings() {
         return numberOfRatings;
     }
 
-    public void setNumberOfRatings(Integer numberOfRatings) {
-        this.numberOfRatings = numberOfRatings;
-    }
-
     public Integer getRegisterCode() {
         return registerCode;
-    }
-
-    public void setRegisterCode(Integer registerCode) {
-        this.registerCode = registerCode;
     }
 
     public UserStatus getStatus() {

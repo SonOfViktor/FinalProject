@@ -38,10 +38,6 @@ public class TattooBuilder {
         return tattoo;
     }
 
-    public Long getCatalogId() {
-        return catalogId;
-    }
-
     public void setCatalogId(Long catalogId) {
         this.catalogId = catalogId;
     }
@@ -86,16 +82,8 @@ public class TattooBuilder {
         this.height = height;
     }
 
-    public BodyPart getPlaces() {
-        return places;
-    }
-
     public void setPlaces(BodyPart places) {
         this.places = places;
-    }
-
-    public Double getAverageRating() {
-        return averageRating;
     }
 
     public void setAverageRating(Double averageRating) {
@@ -103,16 +91,8 @@ public class TattooBuilder {
         this.averageRating = averageRating;
     }
 
-    public Integer getNumberOfRatings() {
-        return numberOfRatings;
-    }
-
     public void setNumberOfRatings(Integer numberOfRatings) {
         this.numberOfRatings = numberOfRatings;
-    }
-
-    public String getImageUrl() {
-        return imageUrl;
     }
 
     public void setImageUrl(String imageUrl) {

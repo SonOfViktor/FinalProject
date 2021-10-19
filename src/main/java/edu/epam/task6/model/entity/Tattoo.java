@@ -95,32 +95,16 @@ public class Tattoo {
         return places;
     }
 
-    public void setPlaces(BodyPart places) {
-        this.places = places;
-    }
-
     public Double getAverageRating() {
         return averageRating;
-    }
-
-    public void setAverageRating(Double averageRating) {
-        this.averageRating = averageRating;
     }
 
     public Integer getNumberOfRatings() {
         return numberOfRatings;
     }
 
-    public void setNumberOfRatings(Integer numberOfRatings) {
-        this.numberOfRatings = numberOfRatings;
-    }
-
     public String getImageUrl() {
         return imageUrl;
-    }
-
-    public void setImageUrl(String imageUrl) {
-        this.imageUrl = imageUrl;
     }
 
     public TattooStatus getStatus() {

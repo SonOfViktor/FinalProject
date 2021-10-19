@@ -150,14 +150,14 @@ public class TattooDaoImpl implements TattooDao {
             statement.setString(1, parameters.get(ColumnName.TATTOOS_NAME));
             statement.setString(2, parameters.get(ColumnName.TATTOOS_DESCRIPTION));
             statement.setBigDecimal(3, BigDecimal.valueOf(Long.parseLong(parameters.get(ColumnName.TATTOOS_PRICE))));
-            statement.setInt(4, Integer.valueOf(parameters.get(ColumnName.TATTOOS_WIDTH)));
-            statement.setInt(5, Integer.valueOf(parameters.get(ColumnName.TATTOOS_HEIGHT)));
+            statement.setInt(4, Integer.parseInt(parameters.get(ColumnName.TATTOOS_WIDTH)));
+            statement.setInt(5, Integer.parseInt(parameters.get(ColumnName.TATTOOS_HEIGHT)));
             statement.setDouble(6, 0);
             statement.setDouble(7, 0);
             statement.setString(8, parameters.get(ColumnName.TATTOOS_IMAGE_URL));
-            statement.setInt(9, Integer.valueOf(parameters.get(ColumnName.TATTOOS_STATUS)));
-            statement.setInt(10, Integer.valueOf(parameters.get(ColumnName.TATTOOS_PLACE)));
-            statement.setInt(11, Integer.valueOf(parameters.get(ColumnName.TATTOOS_USER_ID)));
+            statement.setInt(9, Integer.parseInt(parameters.get(ColumnName.TATTOOS_STATUS)));
+            statement.setInt(10, Integer.parseInt(parameters.get(ColumnName.TATTOOS_PLACE)));
+            statement.setInt(11, Integer.parseInt(parameters.get(ColumnName.TATTOOS_USER_ID)));
             result = statement.executeUpdate() > 0;
         } catch (SQLException e) {
             logger.error("Error during adding tattoo.", e);

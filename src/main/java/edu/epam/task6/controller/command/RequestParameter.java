@@ -12,12 +12,10 @@ public final class RequestParameter {
     public static final String USER_REGISTRATION_DATE = "registration_date";
     public static final String USER_DISCOUNT = "discount";
     public static final String USER_BALANCE = "balance";
-    public static final String USER_ROLE = "role";
     public static final String USER_STATUS = "status";
     public static final String USER_BUTTON = "active";
 
     public static final String ORDER_ID = "id";
-    public static final String ORDER_PAID = "paid";
     public static final String ORDER_REGISTRATION_DATE = "registration_date";
     public static final String ORDER_STATUS = "order_status";
     public static final String ORDER_TATTOO_ID = "tattoo_id";
@@ -48,7 +46,6 @@ public final class RequestParameter {
     public static final String TATTOO = "tattoo";
     public static final String PROFILE = "profile";
     public static final String CURRENT_PAGE_NUMBER = "current_page_number";
-    public static final String ALL_PAGE_NUMBER = "all_page_number";
 
     public static final String COMMENTS = "comments";
     public static final String RATING = "rating";
@@ -61,13 +58,9 @@ public final class RequestParameter {
     public static final String COMMENT_ID ="comment_id";
     public static final String COMMENT_TEXT ="text";
     public static final String COMMENT_REGISTRATION_DATE ="registration_date";
-    public static final String COMMENT_USER_ID ="users_user_id";
 
     public static final String PAGES_NUMBER = "pages_number";
     public static final String ELEMENTS_PER_PAGE = "elements_per_page";
-    public static final String NUMBER_OF_TATTOOS = "number_of_tattoos";
-    public static final String NUMBER_OF_USERS = "number_of_users";
-    public static final String NUMBER_OF_ORDERS = "number_of_orders";
     public static final String TITLE_USERS = "title_users";
     public static final String TITLE_ORDERS = "title_orders";
     public static final String TITLE_TATTOOS = "title_tattoos";
@@ -97,7 +90,6 @@ public final class RequestParameter {
     public static final String ENTERED_CODE_ERROR = "entered_code_error";
     public static final String BALANCE_NOT_ENOUGH_ERROR_MESSAGE = "balance_not_enough_error_message";
     public static final String TATTOO_ID_NOT_FOUND_MESSAGE = "tattoo_id_not_found_message";
-    public static final String EMPTY_ORDERS_MESSAGE = "empty_orders_message";
 
     private RequestParameter() {}
 }

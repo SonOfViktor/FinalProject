@@ -68,10 +68,6 @@ public class Order {
         return registrationDate;
     }
 
-    public void setRegistrationDate(LocalDateTime registrationDate) {
-        this.registrationDate = registrationDate;
-    }
-
     public String getUserLogin() {
         return userLogin;
     }
@@ -100,16 +96,8 @@ public class Order {
         return tattooPrice;
     }
 
-    public void setTattooPrice(BigDecimal tattooPrice) {
-        this.tattooPrice = tattooPrice;
-    }
-
     public String getTattooName() {
         return tattooName;
-    }
-
-    public void setTattooName(String tattooName) {
-        this.tattooName = tattooName;
     }
 
     @Override

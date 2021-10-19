@@ -47,10 +47,6 @@ public class OrderBuilder {
         this.paid = paid;
     }
 
-    public LocalDateTime getRegistrationDate() {
-        return registrationDate;
-    }
-
     public void setRegistrationDate(LocalDateTime registrationDate) {
         this.registrationDate = registrationDate;
     }
@@ -79,16 +75,8 @@ public class OrderBuilder {
         this.tattooId = tattooId;
     }
 
-    public BigDecimal getTattooPrice() {
-        return tattooPrice;
-    }
-
     public void setTattooPrice(BigDecimal tattooPrice) {
         this.tattooPrice = tattooPrice;
-    }
-
-    public String getTattooName() {
-        return tattooName;
     }
 
     public void setTattooName(String tattooName) {

@@ -98,16 +98,8 @@ public class UserBuilder {
         this.balance = balance;
     }
 
-    public LocalDateTime getRegistrationDate() {
-        return registrationDate;
-    }
-
     public void setRegistrationDate(LocalDateTime registrationDate) {
         this.registrationDate = registrationDate;
-    }
-
-    public Double getAverageRating() {
-        return averageRating;
     }
 
     public void setAverageRating(Double averageRating) {
@@ -115,16 +107,8 @@ public class UserBuilder {
         this.averageRating = averageRating;
     }
 
-    public Integer getNumberOfRatings() {
-        return numberOfRatings;
-    }
-
     public void setNumberOfRatings(Integer numberOfRatings) {
         this.numberOfRatings = numberOfRatings;
-    }
-
-    public Integer getRegisterCode() {
-        return registerCode;
     }
 
     public void setRegisterCode(Integer registerCode) {

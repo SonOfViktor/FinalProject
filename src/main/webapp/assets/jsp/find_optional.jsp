@@ -294,7 +294,7 @@
                     <li class="main-text"><fmt:message key="tattoo.width-tattoo"/> ${tattoo.width}</li>
                     <li class="main-text"><fmt:message key="tattoo.height-tattoo"/> ${tattoo.height}</li>
                     <li class="main-text"><fmt:message key="tattoo.image-tattoo"/>
-                        <a href="${tattoo.imageUrl}">
+                        <a href="${tattoo.imageUrl}" target="_blank">
                             <fmt:message key="tattoo.click-tattoo"/>
                         </a>
                     </li>

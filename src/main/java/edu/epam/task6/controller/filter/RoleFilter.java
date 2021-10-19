@@ -6,12 +6,9 @@ import edu.epam.task6.controller.command.SessionAttribute;
 import edu.epam.task6.model.entity.User;
 import edu.epam.task6.model.entity.UserRole;
 import jakarta.servlet.*;
-import jakarta.servlet.annotation.WebFilter;
-import jakarta.servlet.annotation.WebInitParam;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-
 import java.io.IOException;
 
 public class RoleFilter implements Filter {

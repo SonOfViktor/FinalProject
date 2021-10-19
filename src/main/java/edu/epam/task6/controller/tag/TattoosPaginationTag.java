@@ -95,7 +95,7 @@ public class TattoosPaginationTag extends TagSupport {
                         .append(" ")
                         .append("<a href=\"")
                         .append(tattoo.getImageUrl())
-                        .append("\">")
+                        .append("\" target=\"_blank\">")
                         .append(resourceBundle.getString("tattoo.click-tattoo"))
                         .append("</a>")
                         .append("</li>");

@@ -7,7 +7,6 @@ import edu.epam.task6.model.dao.UserDao;
 import edu.epam.task6.model.entity.User;
 import edu.epam.task6.model.entity.UserRole;
 import edu.epam.task6.model.entity.UserStatus;
-import edu.epam.task6.model.entity.*;
 import edu.epam.task6.model.pool.ConnectionPool;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -115,7 +114,7 @@ public class UserDaoImpl implements UserDao {
             statement.setTimestamp(8, Timestamp.valueOf(parameters.get(ColumnName.USER_REGISTRATION_DATE)));
             statement.setDouble(9, 0);
             statement.setInt(10, 0);
-            statement.setInt(11, Integer.valueOf(parameters.get(ColumnName.USER_REGISTER_CODE)));
+            statement.setInt(11, Integer.parseInt(parameters.get(ColumnName.USER_REGISTER_CODE)));
             statement.setInt(12, 3);
             statement.setInt(13, 2);
             result = statement.executeUpdate() > 0;
