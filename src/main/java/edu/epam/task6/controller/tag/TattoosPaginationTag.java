@@ -57,8 +57,13 @@ public class TattoosPaginationTag extends TagSupport {
                 if (tattoo.getDescription() != null) {
                     stringBuilder.append(tattoo.getDescription());
                 }
-                stringBuilder.append("\">\n")
-                        .append("<ul>");
+                stringBuilder.append("\">\n");
+                if(title.equals(TITLE_TATTOOS_ALL) ||
+                        title.equals(TITLE_TATTOOS_LOCKED)) {
+                    stringBuilder.append("<ul class=\"ul-tattoo1\">");
+                } else {
+                    stringBuilder.append("<ul>");
+                }
 
                 stringBuilder.append("<li class=\"main-text\">")
                         .append(resourceBundle.getString("tattoo.number-tattoo"))
@@ -143,8 +148,18 @@ public class TattoosPaginationTag extends TagSupport {
                                 .append(tattoo.getTattooId())
                                 .append("\"/>")
                                 .append("<input type=\"hidden\" name=\"active\" value=\"false\"/>")
-                                .append("<button class=\"tattoo-item-button\" type=\"submit\">")
+                                .append("<button class=\"tattoo-item-button2\" type=\"submit\">")
                                 .append(resourceBundle.getString("tattoo.block"))
+                                .append("</button>")
+                                .append("</form>");
+
+                        stringBuilder.append("<form method=\"post\" action=\"ProjectServlet\">")
+                                .append("<input type=\"hidden\" name=\"command\" value=\"to_change_tattoo_price_page\"/>")
+                                .append("<input type=\"hidden\" name=\"id\" value=\"")
+                                .append(tattoo.getTattooId())
+                                .append("\"/>")
+                                .append("<button class=\"tattoo-item-button2\" type=\"submit\">")
+                                .append(resourceBundle.getString("tattoo.edit"))
                                 .append("</button>")
                                 .append("</form>");
                     }
@@ -155,8 +170,18 @@ public class TattoosPaginationTag extends TagSupport {
                                 .append(tattoo.getTattooId())
                                 .append("\"/>")
                                 .append("<input type=\"hidden\" name=\"active\" value=\"true\"/>")
-                                .append("<button class=\"tattoo-item-button\" type=\"submit\">")
+                                .append("<button class=\"tattoo-item-button2\" type=\"submit\">")
                                 .append(resourceBundle.getString("tattoo.unblock"))
+                                .append("</button>")
+                                .append("</form>");
+
+                        stringBuilder.append("<form method=\"post\" action=\"ProjectServlet\">")
+                                .append("<input type=\"hidden\" name=\"command\" value=\"to_change_tattoo_price_page\"/>")
+                                .append("<input type=\"hidden\" name=\"id\" value=\"")
+                                .append(tattoo.getTattooId())
+                                .append("\"/>")
+                                .append("<button class=\"tattoo-item-button2\" type=\"submit\">")
+                                .append(resourceBundle.getString("tattoo.edit"))
                                 .append("</button>")
                                 .append("</form>");
                     }

@@ -66,6 +66,7 @@ public class CommandProvider {
         commands.put(TO_CHANGE_BALANCE_PAGE, new GoToChangeBalancePageCommand());
         commands.put(TO_CHANGE_USER_STATUS_PAGE, new GoToChangeUserStatusPageCommand());
         commands.put(TO_CHANGE_RATING_PAGE, new GoToChangeRatingPageCommand());
+        commands.put(TO_CHANGE_TATTOO_PRICE_PAGE, new GoToChangeTattooPricePageCommand());
 
         commands.put(CHANGE_EMAIL, new ChangeEmailCommand());
         commands.put(CHANGE_NAME, new ChangeNameCommand());
@@ -74,6 +75,7 @@ public class CommandProvider {
         commands.put(CHANGE_BALANCE, new ChangeBalanceCommand());
         commands.put(CHANGE_USER_STATUS, new ChangeUserStatusCommand());
         commands.put(CHANGE_TATTOO_STATUS, new ChangeTattooStatusCommand());
+        commands.put(CHANGE_TATTOO_PRICE, new ChangeTattooPriceCommand());
         commands.put(CHANGE_LANGUAGE, new ChangeLanguageCommand());
         commands.put(CHANGE_RATING, new ChangeRatingCommand());
 

@@ -15,6 +15,7 @@
 <c:set var="localRating">rating</c:set>
 <c:set var="localTattooStatus">tattoo_status</c:set>
 <c:set var="localOrdersStatus">order_status</c:set>
+<c:set var="localTattooPrice">price</c:set>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -348,6 +349,28 @@
             </div>
             <input type="hidden" name="active" value="true"/>
             <button class="submit" type="submit"><fmt:message key="change.button-unblock"/></button>
+        </form>
+    </c:if>
+    <c:if test="${what_change == localTattooPrice}">
+        <div class="register-login-info">
+            <fmt:message key="login.message.info"/>
+        </div>
+        <form method="post" action="ProjectServlet">
+            <input type="hidden" name="command" value="change_tattoo_price"/>
+            <input type="hidden" name="id" value="${requestScope.id}"/>
+            <div class="info-div">
+                <input type="info-field" name="price" placeholder="<fmt:message key="change.tattoo-price"/>"
+                       required
+                       oninvalid="this.setCustomValidity('<fmt:message key="regex.price"/>')"
+                       oninput="setCustomValidity('')"
+                       min="0"
+                       max="10000000"
+                />
+            </div>
+            <button type="submit"
+                    class="submit">
+                <fmt:message key="change.button"/>
+            </button>
         </form>
     </c:if>
 </div>

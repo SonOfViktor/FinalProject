@@ -26,7 +26,7 @@ public class ChangeUserStatusCommand implements Command {
     public Router execute(HttpServletRequest request) {
         Router router;
         HttpSession session = request.getSession();
-         UserService userService = UserServiceImpl.getInstance();
+        UserService userService = UserServiceImpl.getInstance();
         Map<String, String> parameters = new HashMap<>();
         try {
             Long userId = Long.valueOf(request.getParameter(RequestParameter.USER_ID));
@@ -53,8 +53,9 @@ public class ChangeUserStatusCommand implements Command {
                     router = new Router(PagePath.ERROR_PAGE_500);
                 }
             } else {
-                logger.error("User with this login was not found.");
-                router = new Router(PagePath.ERROR_PAGE_500);
+                logger.error("User with this id was not found.");
+                router = new Router(Router.RouterType.REDIRECT,
+                        session.getAttribute(SessionAttribute.PREVIOUS_PAGE).toString());
             }
         } catch (ServiceException e) {
             logger.error("Error during changing status of user: ", e);
