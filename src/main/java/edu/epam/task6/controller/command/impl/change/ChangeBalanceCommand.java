@@ -33,13 +33,20 @@ public class ChangeBalanceCommand implements Command {
             if (userBase.isPresent()) {
                 parameters.put(ColumnName.USER_BALANCE,
                         request.getParameter(RequestParameter.USER_BALANCE));
-                userService.updateBalance(parameters, userId);
-
-                userBase = userService.findById(userId);
-                session.setAttribute(SessionAttribute.USER, userBase.get());
-
-                router = new Router(Router.RouterType.REDIRECT, PagePath.PROFILE_PAGE_REDIRECT);
-                logger.info("Balance updated successfully.");
+                if (userService.updateBalance(parameters, userId)) {
+                    userBase = userService.findById(userId);
+                    if (userBase.isPresent()) {
+                        session.setAttribute(SessionAttribute.USER, userBase.get());
+                        router = new Router(Router.RouterType.REDIRECT, PagePath.PROFILE_PAGE_REDIRECT);
+                        logger.info("Balance updated successfully.");
+                    } else {
+                        logger.error("Error during finding user by id from session: ");
+                        router = new Router(PagePath.ERROR_PAGE_500);
+                    }
+                } else {
+                    router = new Router(Router.RouterType.REDIRECT, PagePath.PROFILE_PAGE_REDIRECT);
+                    logger.info("Failed to update balance, maximum exceeded.");
+                }
             } else {
                 logger.error("Error during finding user by id from session: ");
                 router = new Router(PagePath.ERROR_PAGE_500);

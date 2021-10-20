@@ -49,6 +49,7 @@ public class LoginCommand implements Command {
 
                     router = new Router(Router.RouterType.REDIRECT, PagePath.PROFILE_PAGE_REDIRECT);
                 } else if (localUser.getStatus().equals(UserStatus.NOT_CONFIRMED)) {
+                    session.setAttribute(SessionAttribute.USER_LOGIN, localUser.getLogin());
                     EmailSender emailSender = new EmailSender(
                             localUser.getEmail(),
                             EMAIL_MESSAGE_TITLE,

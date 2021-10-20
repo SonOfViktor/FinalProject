@@ -19,6 +19,7 @@ import java.util.Optional;
 public class UserServiceImpl implements UserService {
 
     private static final Integer MAXIMUM_DISCOUNT_PERCENT = 50;
+    private static final Integer MAXIMUM_BALANCE = 2000000000;
     private static final Validator validator = new Validator();
     private static UserServiceImpl instance;
 
@@ -136,10 +137,14 @@ public class UserServiceImpl implements UserService {
                 BigDecimal localBalance = new BigDecimal(balance);
                 Optional<User> localUser = userDao.findById(userId);
                 if (localUser.isPresent()) {
-                    localBalance = localUser.get().getBalance().add(localBalance);
-                    String finalBalance = localBalance.toString();
-                    parameters.computeIfPresent(ColumnName.USER_BALANCE, (key, value) -> value = finalBalance);
-                    result = userDao.updateBalance(parameters, userId);
+                    if (localUser.get().getBalance().compareTo(BigDecimal.valueOf(MAXIMUM_BALANCE)) != 1) {
+                        localBalance = localUser.get().getBalance().add(localBalance);
+                        String finalBalance = localBalance.toString();
+                        parameters.computeIfPresent(ColumnName.USER_BALANCE, (key, value) -> value = finalBalance);
+                        result = userDao.updateBalance(parameters, userId);
+                    } else {
+                        result = false;
+                    }
                 } else {
                     result = false;
                 }
