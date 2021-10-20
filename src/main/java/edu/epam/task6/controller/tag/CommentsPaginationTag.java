@@ -23,7 +23,6 @@ public class CommentsPaginationTag extends TagSupport {
 
     private int currentPage;
     private int elementsPerPage;
-    private String title;
 
     public void setCurrentPage(int currentPage) {
         this.currentPage = currentPage;
@@ -32,8 +31,6 @@ public class CommentsPaginationTag extends TagSupport {
     public void setElementsPerPage(int elementsPerPage) {
         this.elementsPerPage = elementsPerPage;
     }
-
-    public void setTitle(String title) { this.title = title; }
 
     @Override
     public int doStartTag() throws JspException {

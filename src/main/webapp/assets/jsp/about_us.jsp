@@ -104,8 +104,7 @@
         <section class="catalog">
             <div class="comments-list-container">
                 <ctg:comments_pagination currentPage="${current_page_number}"
-                                      elementsPerPage="${elements_per_page}"
-                                      title="${title_users}"/>
+                                      elementsPerPage="${elements_per_page}"/>
 
                 <c:if test="${comments.size() > 0}">
                     <form method="post" action="ProjectServlet">
