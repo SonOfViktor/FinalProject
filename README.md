@@ -45,6 +45,7 @@ Tattoos
 - Can block and unblock already accepted tattoos
 - Can give a discount to the user who offered the tattoo when considering it
 - Can add a tattoo
+- Can change the price of the tattoo
 
 Users
 - Can visit all users page
