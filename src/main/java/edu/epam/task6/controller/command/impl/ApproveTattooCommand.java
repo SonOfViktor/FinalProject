@@ -49,6 +49,11 @@ public class ApproveTattooCommand implements Command {
                     tattooStatus = TattooStatus.ACTIVE;
                 } else if (tattooStatus == TattooStatus.OFFERED_BY_USER && !button) {
                     tattooStatus = TattooStatus.LOCKED;
+                } else {
+                    logger.error("Tattoo with this id has the status not OFFERED_BY_USER.");
+                    request.setAttribute(RequestParameter.TATTOO_HAS_A_DIFFERENT_STATUS, true);
+                    router = new Router(PagePath.APPROVE_TATTOO_PAGE);
+                    return router;
                 }
 
                 Long userId = tattoo.get().getUserId();
@@ -68,7 +73,8 @@ public class ApproveTattooCommand implements Command {
                 }
             } else {
                 logger.error("Tattoo with this id was not found.");
-                router = new Router(PagePath.ERROR_PAGE_500);
+                request.setAttribute(RequestParameter.FIND_TATTOO_ERROR, true);
+                router = new Router(PagePath.APPROVE_TATTOO_PAGE);
             }
         } catch (ServiceException e) {
             logger.error("Error during approving of tattoo: ", e);

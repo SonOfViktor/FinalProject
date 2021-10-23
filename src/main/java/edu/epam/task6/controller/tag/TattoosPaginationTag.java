@@ -87,12 +87,16 @@ public class TattoosPaginationTag extends TagSupport {
                         .append(resourceBundle.getString("tattoo.width-tattoo"))
                         .append(" ")
                         .append(tattoo.getWidth())
+                        .append(" ")
+                        .append(resourceBundle.getString("size.sm"))
                         .append("</li>");
 
                 stringBuilder.append("<li class=\"main-text\">")
                         .append(resourceBundle.getString("tattoo.height-tattoo"))
                         .append(" ")
                         .append(tattoo.getHeight())
+                        .append(" ")
+                        .append(resourceBundle.getString("size.sm"))
                         .append("</li>");
 
                 stringBuilder.append("<li class=\"main-text\">")

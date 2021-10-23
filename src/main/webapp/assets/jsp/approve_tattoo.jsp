@@ -28,6 +28,10 @@
             href="${pageContext.request.contextPath}/assets/css/register6.css"
             rel="stylesheet"
     />
+    <link
+            href="${pageContext.request.contextPath}/assets/css/errormessage2.css"
+            rel="stylesheet"
+    />
     <script type="text/javascript">
         window.history.forward();
         function noBack()
@@ -81,7 +85,7 @@
     <form method="post" action="ProjectServlet">
         <input type="hidden" name="command" value="approve_tattoo"/>
         <c:choose>
-            <c:when test="${id == 0}">
+            <c:when test="${id == 0 || id == null}">
                 <div class="info-div">
                     <input type="number" name="id" placeholder="<fmt:message key="change.tattoo-status.id"/>"
                            required
@@ -116,7 +120,7 @@
         </div>
         <input type="hidden" name="active" value="true"/>
         <c:choose>
-            <c:when test="${id == 0}">
+            <c:when test="${id == 0 || id == null}">
                 <button class="submit" type="submit"><fmt:message key="approve.button"/></button>
             </c:when>
             <c:otherwise>
@@ -124,13 +128,23 @@
             </c:otherwise>
         </c:choose>
     </form>
-    <c:if test="${id != 0}">
+    <c:if test="${id != 0 && id != null}">
         <form class="register-form" method="post" action="ProjectServlet" width="290px">
             <input type="hidden" name="command" value="change_tattoo_status"/>
             <input type="hidden" name="active" value="false"/>
             <input type="hidden" name="id" value="${id}"/>
             <button class="register" type="submit"><fmt:message key="change.button-block"/></button>
         </form>
+    </c:if>
+    <c:if test = "${find_tattoo_error == true}">
+        <div class="user-error-message2">
+            <fmt:message key="find.optional.tattoo.error.message"/>
+        </div>
+    </c:if>
+    <c:if test = "${tattoo_has_a_different_status == true}">
+        <div class="user-error-message2">
+            <fmt:message key="approve.tattoo.error.message.2"/>
+        </div>
     </c:if>
 </div>
 <footer class="footer">

@@ -40,7 +40,7 @@
             rel="stylesheet"
     />
     <link
-            href="${pageContext.request.contextPath}/assets/css/errormessage1.css"
+            href="${pageContext.request.contextPath}/assets/css/errormessage2.css"
             rel="stylesheet"
     />
     <script type="text/javascript">
@@ -290,9 +290,17 @@
                 <ul>
                     <li class="main-text" ><fmt:message key="tattoo.number-tattoo"/> ${tattoo.tattooId}</li>
                     <li class="main-text"><fmt:message key="tattoo.name-tattoo"/> ${tattoo.name}</li>
-                    <li class="main-text"><fmt:message key="tattoo.price-tattoo"/> ${tattoo.price}</li>
-                    <li class="main-text"><fmt:message key="tattoo.width-tattoo"/> ${tattoo.width}</li>
-                    <li class="main-text"><fmt:message key="tattoo.height-tattoo"/> ${tattoo.height}</li>
+                    <li class="main-text"><fmt:message key="tattoo.price-tattoo"/>${tattoo.price}</li>
+                    <li class="main-text">
+                        <fmt:message key="tattoo.width-tattoo"/>
+                            ${tattoo.width}
+                        <fmt:message key="size.sm"/>
+                    </li>
+                    <li class="main-text">
+                        <fmt:message key="tattoo.height-tattoo"/>
+                            ${tattoo.height}
+                        <fmt:message key="size.sm"/>
+                    </li>
                     <li class="main-text"><fmt:message key="tattoo.image-tattoo"/>
                         <a href="${tattoo.imageUrl}" target="_blank">
                             <fmt:message key="tattoo.click-tattoo"/>

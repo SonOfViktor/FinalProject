@@ -107,6 +107,7 @@
         </div>
         <div class="info-div">
             <input type="text" name="description" placeholder="<fmt:message key="add.tattoo.description"/>"
+                   required
                    oninvalid="this.setCustomValidity('<fmt:message key="regex.description"/>')"
                    oninput="setCustomValidity('')"
                    minlength="1"

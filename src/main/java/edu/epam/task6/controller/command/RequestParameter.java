@@ -85,6 +85,7 @@ public final class RequestParameter {
     public static final String FIND_USER_ERROR = "find_user_error";
     public static final String FIND_ORDER_ERROR = "find_order_error";
     public static final String FIND_TATTOO_ERROR = "find_tattoo_error";
+    public static final String TATTOO_HAS_A_DIFFERENT_STATUS = "tattoo_has_a_different_status";
     public static final String CHANGE_PASSWORD_ERROR = "change_password_error";
     public static final String REPEAT_PASSWORD_ERROR = "repeat_password_error";
     public static final String ENTERED_CODE_ERROR = "entered_code_error";
