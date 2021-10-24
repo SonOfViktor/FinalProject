@@ -59,7 +59,7 @@
                 </a>
             </li>
             <li class="header-sign-in">
-                <a href="ProjectServlet?command=to_login_page">
+                <a href="ProjectServlet?command=to_profile_page">
                     <fmt:message key="header.profile"/>
                 </a>
             </li>

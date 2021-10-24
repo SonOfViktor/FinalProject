@@ -61,7 +61,8 @@ public class RegisterCommand implements Command {
                     }
                 } else {
                     logger.error("User with this login is already registered.");
-                    router = new Router(Router.RouterType.REDIRECT, PagePath.MAIN_PAGE_REDIRECT);
+                    request.setAttribute(RequestParameter.REPEAT_LOGIN_ERROR, true);
+                    router = new Router(PagePath.REGISTER_PAGE);
                 }
             } else {
                 logger.error("Password and repeated password will not match.");

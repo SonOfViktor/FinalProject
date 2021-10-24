@@ -175,6 +175,11 @@
             <fmt:message key="register.error.password.message"/>
         </div>
     </c:if>
+    <c:if test = "${repeat_login_error}">
+        <div class="error-password-message">
+            <fmt:message key="register.error.repeat-login"/>
+        </div>
+    </c:if>
 </div>
 <footer class="footer">
     <div class="footer-background">

@@ -88,6 +88,7 @@ public final class RequestParameter {
     public static final String TATTOO_HAS_A_DIFFERENT_STATUS = "tattoo_has_a_different_status";
     public static final String CHANGE_PASSWORD_ERROR = "change_password_error";
     public static final String REPEAT_PASSWORD_ERROR = "repeat_password_error";
+    public static final String REPEAT_LOGIN_ERROR = "repeat_login_error";
     public static final String ENTERED_CODE_ERROR = "entered_code_error";
     public static final String BALANCE_NOT_ENOUGH_ERROR_MESSAGE = "balance_not_enough_error_message";
     public static final String TATTOO_ID_NOT_FOUND_MESSAGE = "tattoo_id_not_found_message";
