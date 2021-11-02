@@ -149,7 +149,7 @@
                    oninput="setCustomValidity('')"
                    minlength="1"
                    maxlength="255"
-                   pattern="[^<>]{1,255}"
+                   pattern="^[^<>]{1,255}$"
             >
         </div>
         <div class="info-div-proposal2">

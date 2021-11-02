@@ -23,7 +23,7 @@ public class Validator {
     private final static String SIZE_REGEX = "[0-9]{1,10}";
     private final static String DISCOUNT_REGEX = "[0-9]{1,3}";
     private final static String RATING_REGEX = "[0-9]{1,2}";
-    private final static String REFERENCE_REGEX = "[^<>]{1,255}";
+    private final static String REFERENCE_REGEX = "^[^<>]{1,255}$";
 
     public boolean validateId(String id) {
         boolean result = false;
