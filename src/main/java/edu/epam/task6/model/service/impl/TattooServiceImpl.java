@@ -6,6 +6,7 @@ import edu.epam.task6.model.dao.impl.TattooDaoImpl;
 import edu.epam.task6.model.entity.Tattoo;
 import edu.epam.task6.exception.DaoException;
 import edu.epam.task6.exception.ServiceException;
+import edu.epam.task6.model.entity.TattooStatus;
 import edu.epam.task6.model.service.TattooService;
 import edu.epam.task6.model.validator.Validator;
 
@@ -14,6 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import static edu.epam.task6.model.entity.TattooStatus.*;
 
 public class TattooServiceImpl implements TattooService {
 
@@ -46,9 +48,10 @@ public class TattooServiceImpl implements TattooService {
             throws ServiceException {
         boolean result;
         TattooDao tattooDao = TattooDaoImpl.getInstance();
-        int statusId = switch (parameters.get(ColumnName.TATTOOS_STATUS)) {
-            case "ACTIVE" -> 1;
-            case "OFFERED_BY_USER" -> 3;
+        TattooStatus status = TattooStatus.valueOf(parameters.get(ColumnName.TATTOOS_STATUS));
+        int statusId = switch (status) {
+            case ACTIVE -> 1;
+            case OFFERED_BY_USER -> 3;
             default -> 2;
         };
         try {
