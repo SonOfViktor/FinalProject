@@ -131,7 +131,7 @@
                            oninput="setCustomValidity('')"
                            minlength="1"
                            maxlength="40"
-                           pattern="[A-ZА-ЯЁ][A-Za-zА-Яа-яЁё]{0,39}"
+                           pattern="[A-ZА-ЯЁ][A-Za-zА-Яа-яЁё ]{0,39}"
                     />
                     <button class="block2-button1" type="submit"><fmt:message key="tattoo.search-button"/></button>
                 </form>
