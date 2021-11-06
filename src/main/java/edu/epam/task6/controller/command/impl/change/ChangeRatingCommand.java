@@ -29,50 +29,83 @@ public class ChangeRatingCommand implements Command {
     public Router execute(HttpServletRequest request) {
         Router router;
         HttpSession session = request.getSession();
-        UserService userService = UserServiceImpl.getInstance();
-        OrderService orderService = OrderServiceImpl.getInstance();
-        TattooService tattooService = TattooServiceImpl.getInstance();
         try {
             Map<String, String> parameters = new HashMap<>();
             parameters.put(ColumnName.USER_AVERAGE_RATING, request.getParameter(RequestParameter.USER_RATING));
             parameters.put(ColumnName.TATTOOS_AVERAGE_RATING, request.getParameter(RequestParameter.TATTOO_RATING));
-            Long orderId = Long.valueOf(request.getParameter(RequestParameter.ORDER_ID));
-            Optional<Order> order = orderService.findById(orderId);
-            if (order.isPresent() && order.get().getOrderStatus().equals(OrderStatus.COMPLETED)) {
-                Long tattooId = order.get().getTattooId();
-                if (tattooService.updateAverageRating(parameters, tattooId)) {
-
-                    parameters.put(ColumnName.ORDERS_STATUS, OrderStatus.COMPLETED_AND_ASSESSED.toString());
-                    orderService.updateStatus(parameters, orderId);
-                    if (request.getParameter(RequestParameter.USER_RATING) != null &&
-                            !request.getParameter(RequestParameter.USER_RATING).isEmpty()) {
-
-                        if (userService.updateAverageRating(parameters, ADMIN_ID)) {
-                            logger.info("Average tattoo and ADMIN USER rating changed successfully.");
-                            router = new Router(Router.RouterType.REDIRECT,
-                                    session.getAttribute(SessionAttribute.PREVIOUS_PAGE).toString());
-                        } else {
-                            logger.error("Error during changing average rating of user with id = " + ADMIN_ID);
-                            request.setAttribute(RequestParameter.WHAT_CHANGE, RequestParameter.RATING);
-                            router = new Router(PagePath.CHANGE_PAGE);
-                        }
-                    } else {
-                        logger.info("Average tattoo rating changed successfully.");
-                        router = new Router(Router.RouterType.REDIRECT,
-                                session.getAttribute(SessionAttribute.PREVIOUS_PAGE).toString());
-                    }
-                } else {
-                    logger.error("Error during changing average rating of tattoo with id = " + tattooId);
-                    request.setAttribute(RequestParameter.WHAT_CHANGE, RequestParameter.RATING);
-                    router = new Router(PagePath.CHANGE_PAGE);
-                }
-            } else {
-                logger.error("Error during changing average rating, order for changing not found. ");
-                router = new Router(PagePath.ERROR_PAGE_500);
-            }
+            router = isUpdateAnyAverageRating(request, session, parameters);
         } catch (ServiceException e) {
             logger.error("Error during changing average rating: ", e);
             router = new Router(PagePath.ERROR_PAGE_500);
+        }
+        return router;
+    }
+
+    private Router isUpdateAnyAverageRating(HttpServletRequest request,
+                                            HttpSession session,
+                                            Map<String, String> parameters) throws ServiceException {
+        Router router;
+        OrderService orderService = OrderServiceImpl.getInstance();
+        Long orderId = Long.valueOf(request.getParameter(RequestParameter.ORDER_ID));
+        Optional<Order> order = orderService.findById(orderId);
+        if (order.isPresent() && order.get().getOrderStatus().equals(OrderStatus.COMPLETED)) {
+            Long tattooId = order.get().getTattooId();
+            router = updateTattooAverageRatingAndOrderStatus(request, session, parameters, tattooId, orderId);
+        } else {
+            logger.error("Error during changing average rating, order for changing not found. ");
+            router = new Router(PagePath.ERROR_PAGE_500);
+        }
+        return router;
+    }
+
+    private Router updateTattooAverageRatingAndOrderStatus(HttpServletRequest request,
+                                               HttpSession session,
+                                               Map<String, String> parameters,
+                                               Long tattooId,
+                                               Long orderId) throws ServiceException {
+        Router router;
+        TattooService tattooService = TattooServiceImpl.getInstance();
+        OrderService orderService = OrderServiceImpl.getInstance();
+        if (tattooService.updateAverageRating(parameters, tattooId)) {
+            parameters.put(ColumnName.ORDERS_STATUS, OrderStatus.COMPLETED_AND_ASSESSED.toString());
+            orderService.updateStatus(parameters, orderId);
+            router = isUpdateUserAverageRating(request, session, parameters);
+        } else {
+            logger.error("Error during changing average rating of tattoo with id = " + tattooId);
+            request.setAttribute(RequestParameter.WHAT_CHANGE, RequestParameter.RATING);
+            router = new Router(PagePath.CHANGE_PAGE);
+        }
+        return router;
+    }
+
+    private Router isUpdateUserAverageRating(HttpServletRequest request,
+                                             HttpSession session,
+                                             Map<String, String> parameters) throws ServiceException {
+        Router router;
+        if (request.getParameter(RequestParameter.USER_RATING) != null &&
+                !request.getParameter(RequestParameter.USER_RATING).isEmpty()) {
+            router = updateUserAverageRating(request, session, parameters);
+        } else {
+            logger.info("Average tattoo rating changed successfully.");
+            router = new Router(Router.RouterType.REDIRECT,
+                    session.getAttribute(SessionAttribute.PREVIOUS_PAGE).toString());
+        }
+        return router;
+    }
+
+    private Router updateUserAverageRating(HttpServletRequest request,
+                                           HttpSession session,
+                                           Map<String, String> parameters) throws ServiceException {
+        Router router;
+        UserService userService = UserServiceImpl.getInstance();
+        if (userService.updateAverageRating(parameters, ADMIN_ID)) {
+            logger.info("Average tattoo and ADMIN USER rating changed successfully.");
+            router = new Router(Router.RouterType.REDIRECT,
+                    session.getAttribute(SessionAttribute.PREVIOUS_PAGE).toString());
+        } else {
+            logger.error("Error during changing average rating of user with id = " + ADMIN_ID);
+            request.setAttribute(RequestParameter.WHAT_CHANGE, RequestParameter.RATING);
+            router = new Router(PagePath.CHANGE_PAGE);
         }
         return router;
     }

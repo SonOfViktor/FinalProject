@@ -21,33 +21,13 @@ public class AddTattooCommand implements Command {
     @Override
     public Router execute(HttpServletRequest request) {
         Router router;
-
         HttpSession session = request.getSession();
         User userSession = (User)session.getAttribute(SessionAttribute.USER);
         request.setAttribute(RequestParameter.PROFILE, userSession);
-
-        Long userId = (Long)session.getAttribute(SessionAttribute.USER_ID);
-        int placeNumber = Integer.parseInt(request.getParameter(RequestParameter.TATTOO_PLACE));
         TattooService tattooService = TattooServiceImpl.getInstance();
-        Map<String, String> parameters = new HashMap<>();
+        Map<String, String> parameters;
         try {
-            parameters.put(ColumnName.TATTOOS_NAME,
-                    request.getParameter(RequestParameter.TATTOO_NAME));
-            parameters.put(ColumnName.TATTOOS_DESCRIPTION,
-                    request.getParameter(RequestParameter.TATTOO_DESCRIPTION));
-            parameters.put(ColumnName.TATTOOS_PRICE,
-                    request.getParameter(RequestParameter.TATTOO_PRICE));
-            parameters.put(ColumnName.TATTOOS_WIDTH,
-                    request.getParameter(RequestParameter.TATTOO_WIDTH));
-            parameters.put(ColumnName.TATTOOS_HEIGHT,
-                    request.getParameter(RequestParameter.TATTOO_HEIGHT));
-            parameters.put(ColumnName.TATTOOS_IMAGE_URL,
-                    request.getParameter(RequestParameter.TATTOO_IMAGE_URL));
-            parameters.put(ColumnName.TATTOOS_STATUS,
-                    request.getParameter(RequestParameter.TATTOO_STATUS));
-            parameters.put(ColumnName.TATTOOS_PLACE, String.valueOf(placeNumber));
-            parameters.put(ColumnName.TATTOOS_USER_ID, userId.toString());
-
+            parameters = addParameters(request, session);
             if (tattooService.addNewTattoo(parameters)) {
                 logger.info("Tattoo has been added in catalog.");
                 router = new Router(Router.RouterType.REDIRECT, PagePath.PROFILE_PAGE_REDIRECT);
@@ -61,5 +41,29 @@ public class AddTattooCommand implements Command {
             router = new Router(PagePath.ERROR_PAGE_500);
         }
         return router;
+    }
+
+    private Map<String, String> addParameters(HttpServletRequest request,
+                                              HttpSession session) {
+        Map<String, String> parameters = new HashMap<>();
+        Long userId = (Long)session.getAttribute(SessionAttribute.USER_ID);
+        int placeNumber = Integer.parseInt(request.getParameter(RequestParameter.TATTOO_PLACE));
+        parameters.put(ColumnName.TATTOOS_NAME,
+                request.getParameter(RequestParameter.TATTOO_NAME));
+        parameters.put(ColumnName.TATTOOS_DESCRIPTION,
+                request.getParameter(RequestParameter.TATTOO_DESCRIPTION));
+        parameters.put(ColumnName.TATTOOS_PRICE,
+                request.getParameter(RequestParameter.TATTOO_PRICE));
+        parameters.put(ColumnName.TATTOOS_WIDTH,
+                request.getParameter(RequestParameter.TATTOO_WIDTH));
+        parameters.put(ColumnName.TATTOOS_HEIGHT,
+                request.getParameter(RequestParameter.TATTOO_HEIGHT));
+        parameters.put(ColumnName.TATTOOS_IMAGE_URL,
+                request.getParameter(RequestParameter.TATTOO_IMAGE_URL));
+        parameters.put(ColumnName.TATTOOS_STATUS,
+                request.getParameter(RequestParameter.TATTOO_STATUS));
+        parameters.put(ColumnName.TATTOOS_PLACE, String.valueOf(placeNumber));
+        parameters.put(ColumnName.TATTOOS_USER_ID, userId.toString());
+        return parameters;
     }
 }

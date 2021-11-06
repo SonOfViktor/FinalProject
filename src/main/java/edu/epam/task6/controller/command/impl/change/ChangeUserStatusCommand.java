@@ -27,31 +27,14 @@ public class ChangeUserStatusCommand implements Command {
         Router router;
         HttpSession session = request.getSession();
         UserService userService = UserServiceImpl.getInstance();
-        Map<String, String> parameters = new HashMap<>();
         try {
             Long userId = Long.valueOf(request.getParameter(RequestParameter.USER_ID));
-            boolean button = Boolean.parseBoolean(
-                    request.getParameter(RequestParameter.USER_BUTTON));
             Optional<User> user = userService.findById(userId);
             if (user.isPresent()) {
                 UserStatus userStatus = user.get().getStatus();
                 UserRole userRole = user.get().getRole();
-                if (userRole != UserRole.ADMIN) {
-                    if (userStatus == UserStatus.ACTIVE && !button) {
-                        userStatus = UserStatus.BLOCKED;
-                    } else if (userStatus == UserStatus.BLOCKED && button) {
-                        userStatus = UserStatus.ACTIVE;
-                    }
-                }
-                parameters.put(ColumnName.USER_STATUS, userStatus.toString());
-                if (userService.updateStatus(parameters, userId)) {
-                    logger.info("User status change was successful.");
-                    router = new Router(Router.RouterType.REDIRECT,
-                            session.getAttribute(SessionAttribute.PREVIOUS_PAGE).toString());
-                } else {
-                    logger.error("An error in changing the user's status.");
-                    router = new Router(PagePath.ERROR_PAGE_500);
-                }
+                userStatus = checkingUserStatus(request, userRole, userStatus);
+                router = isUpdateUserStatus(session, userStatus, userId);
             } else {
                 logger.error("User with this id was not found.");
                 router = new Router(Router.RouterType.REDIRECT,
@@ -59,6 +42,39 @@ public class ChangeUserStatusCommand implements Command {
             }
         } catch (ServiceException e) {
             logger.error("Error during changing status of user: ", e);
+            router = new Router(PagePath.ERROR_PAGE_500);
+        }
+        return router;
+    }
+
+    private UserStatus checkingUserStatus(HttpServletRequest request,
+                                          UserRole userRole,
+                                          UserStatus userStatus) {
+        boolean button = Boolean.parseBoolean(
+                request.getParameter(RequestParameter.USER_BUTTON));
+        if (userRole != UserRole.ADMIN) {
+            if (userStatus == UserStatus.ACTIVE && !button) {
+                userStatus = UserStatus.BLOCKED;
+            } else if (userStatus == UserStatus.BLOCKED && button) {
+                userStatus = UserStatus.ACTIVE;
+            }
+        }
+        return userStatus;
+    }
+
+    private Router isUpdateUserStatus(HttpSession session,
+                                      UserStatus userStatus,
+                                      Long userId) throws ServiceException {
+        Router router;
+        Map<String, String> parameters = new HashMap<>();
+        parameters.put(ColumnName.USER_STATUS, userStatus.toString());
+        UserService userService = UserServiceImpl.getInstance();
+        if (userService.updateStatus(parameters, userId)) {
+            logger.info("User status change was successful.");
+            router = new Router(Router.RouterType.REDIRECT,
+                    session.getAttribute(SessionAttribute.PREVIOUS_PAGE).toString());
+        } else {
+            logger.error("An error in changing the user's status.");
             router = new Router(PagePath.ERROR_PAGE_500);
         }
         return router;

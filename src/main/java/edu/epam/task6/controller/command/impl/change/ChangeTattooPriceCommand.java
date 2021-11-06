@@ -31,16 +31,7 @@ public class ChangeTattooPriceCommand implements Command {
                     Long.parseLong(request.getParameter(RequestParameter.TATTOO_PRICE)));
             Optional<Tattoo> tattoo = tattooService.findById(tattooId);
             if (tattoo.isPresent()) {
-                Map<String, String> parameters = new HashMap<>();
-                parameters.put(ColumnName.TATTOOS_PRICE, tattooPrice.toString());
-                if (tattooService.updatePrice(parameters, tattooId)) {
-                    logger.info("Tattoo price update was successful.");
-                    router = new Router(Router.RouterType.REDIRECT,
-                            session.getAttribute(SessionAttribute.PREVIOUS_PAGE).toString());
-                } else {
-                    logger.error("An error in updating tattoo price.");
-                    router = new Router(PagePath.ERROR_PAGE_500);
-                }
+                router = isUpdatePrice(session, tattooPrice, tattooId);
             } else {
                 logger.error("Tattoo with this id was not found.");
                 router = new Router(PagePath.ERROR_PAGE_500);
@@ -48,6 +39,23 @@ public class ChangeTattooPriceCommand implements Command {
         } catch (ServiceException e) {
             logger.error("Error during changing tattoo price: ", e);
             router = new Router(PagePath.ERROR_PAGE_500);
+        }
+        return router;
+    }
+
+    private Router isUpdatePrice(HttpSession session, BigDecimal tattooPrice, Long tattooId)
+            throws ServiceException {
+        Router router;
+        Map<String, String> parameters = new HashMap<>();
+        parameters.put(ColumnName.TATTOOS_PRICE, tattooPrice.toString());
+        TattooService tattooService = TattooServiceImpl.getInstance();
+        if (tattooService.updatePrice(parameters, tattooId)) {
+            router = new Router(Router.RouterType.REDIRECT,
+                    session.getAttribute(SessionAttribute.PREVIOUS_PAGE).toString());
+            logger.info("Tattoo price update was successful.");
+        } else {
+            router = new Router(PagePath.ERROR_PAGE_500);
+            logger.error("An error in updating tattoo price.");
         }
         return router;
     }

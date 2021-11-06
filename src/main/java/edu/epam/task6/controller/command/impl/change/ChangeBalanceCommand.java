@@ -28,25 +28,11 @@ public class ChangeBalanceCommand implements Command {
         UserService userService = UserServiceImpl.getInstance();
         try {
             Map<String, String> parameters = new HashMap<>();
-
             Optional<User> userBase = userService.findById(userId);
             if (userBase.isPresent()) {
                 parameters.put(ColumnName.USER_BALANCE,
                         request.getParameter(RequestParameter.USER_BALANCE));
-                if (userService.updateBalance(parameters, userId)) {
-                    userBase = userService.findById(userId);
-                    if (userBase.isPresent()) {
-                        session.setAttribute(SessionAttribute.USER, userBase.get());
-                        router = new Router(Router.RouterType.REDIRECT, PagePath.PROFILE_PAGE_REDIRECT);
-                        logger.info("Balance updated successfully.");
-                    } else {
-                        logger.error("Error during finding user by id from session: ");
-                        router = new Router(PagePath.ERROR_PAGE_500);
-                    }
-                } else {
-                    router = new Router(Router.RouterType.REDIRECT, PagePath.PROFILE_PAGE_REDIRECT);
-                    logger.info("Failed to update balance, maximum exceeded.");
-                }
+                router = isUpdateUserBalance(session, parameters, userId);
             } else {
                 logger.error("Error during finding user by id from session: ");
                 router = new Router(PagePath.ERROR_PAGE_500);
@@ -54,6 +40,28 @@ public class ChangeBalanceCommand implements Command {
         } catch (ServiceException e) {
             logger.error("Error during changing balance of user: ", e);
             router = new Router(PagePath.ERROR_PAGE_500);
+        }
+        return router;
+    }
+
+    private Router isUpdateUserBalance(HttpSession session,
+                                       Map<String, String> parameters,
+                                       Long userId) throws ServiceException {
+        Router router;
+        UserService userService = UserServiceImpl.getInstance();
+        if (userService.updateBalance(parameters, userId)) {
+            Optional<User> userBase = userService.findById(userId);
+            if (userBase.isPresent()) {
+                session.setAttribute(SessionAttribute.USER, userBase.get());
+                router = new Router(Router.RouterType.REDIRECT, PagePath.PROFILE_PAGE_REDIRECT);
+                logger.info("Balance updated successfully.");
+            } else {
+                router = new Router(PagePath.ERROR_PAGE_500);
+                logger.error("Error during finding user by id from session: ");
+            }
+        } else {
+            router = new Router(Router.RouterType.REDIRECT, PagePath.PROFILE_PAGE_REDIRECT);
+            logger.info("Failed to update balance, maximum exceeded.");
         }
         return router;
     }

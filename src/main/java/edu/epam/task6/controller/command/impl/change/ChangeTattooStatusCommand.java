@@ -25,30 +25,13 @@ public class ChangeTattooStatusCommand implements Command {
         Router router;
         HttpSession session = request.getSession();
         TattooService tattooService = TattooServiceImpl.getInstance();
-        Map<String, String> parameters = new HashMap<>();
         try {
             Long tattooId = Long.valueOf(request.getParameter(RequestParameter.TATTOO_ID));
-            boolean button = Boolean.parseBoolean(
-                    request.getParameter(RequestParameter.TATTOO_BUTTON));
             Optional<Tattoo> tattoo = tattooService.findById(tattooId);
             if (tattoo.isPresent()) {
                 TattooStatus tattooStatus = tattoo.get().getStatus();
-                if (tattooStatus == TattooStatus.ACTIVE ||
-                        tattooStatus == TattooStatus.OFFERED_BY_USER && !button) {
-                    tattooStatus = TattooStatus.LOCKED;
-                } else if (tattooStatus == TattooStatus.LOCKED ||
-                        tattooStatus == TattooStatus.OFFERED_BY_USER && button) {
-                    tattooStatus = TattooStatus.ACTIVE;
-                }
-                parameters.put(ColumnName.TATTOOS_STATUS, tattooStatus.toString());
-                if (tattooService.updateStatus(parameters, tattooId)) {
-                    logger.info("Tattoo status change was successful.");
-                    router = new Router(Router.RouterType.REDIRECT,
-                            session.getAttribute(SessionAttribute.PREVIOUS_PAGE).toString());
-                } else {
-                    logger.error("An error in changing the tattoo's status.");
-                    router = new Router(PagePath.ERROR_PAGE_500);
-                }
+                tattooStatus = checkingTattooStatus(request, tattooStatus);
+                router = isUpdateTattooStatus(session, tattooStatus, tattooId);
             } else {
                 logger.error("Tattoo with this id was not found.");
                 router = new Router(Router.RouterType.REDIRECT,
@@ -56,6 +39,38 @@ public class ChangeTattooStatusCommand implements Command {
             }
         } catch (ServiceException e) {
             logger.error("Error during changing status of tattoo: ", e);
+            router = new Router(PagePath.ERROR_PAGE_500);
+        }
+        return router;
+    }
+
+    private TattooStatus checkingTattooStatus(HttpServletRequest request,
+                                              TattooStatus tattooStatus) {
+        boolean button = Boolean.parseBoolean(
+                request.getParameter(RequestParameter.TATTOO_BUTTON));
+        if (tattooStatus == TattooStatus.ACTIVE ||
+                tattooStatus == TattooStatus.OFFERED_BY_USER && !button) {
+            tattooStatus = TattooStatus.LOCKED;
+        } else if (tattooStatus == TattooStatus.LOCKED ||
+                tattooStatus == TattooStatus.OFFERED_BY_USER && button) {
+            tattooStatus = TattooStatus.ACTIVE;
+        }
+        return tattooStatus;
+    }
+
+    private Router isUpdateTattooStatus(HttpSession session,
+                                        TattooStatus tattooStatus,
+                                        Long tattooId) throws ServiceException {
+        Router  router;
+        Map<String, String> parameters = new HashMap<>();
+        parameters.put(ColumnName.TATTOOS_STATUS, tattooStatus.toString());
+        TattooService tattooService = TattooServiceImpl.getInstance();
+        if (tattooService.updateStatus(parameters, tattooId)) {
+            logger.info("Tattoo status change was successful.");
+            router = new Router(Router.RouterType.REDIRECT,
+                    session.getAttribute(SessionAttribute.PREVIOUS_PAGE).toString());
+        } else {
+            logger.error("An error in changing the tattoo's status.");
             router = new Router(PagePath.ERROR_PAGE_500);
         }
         return router;
