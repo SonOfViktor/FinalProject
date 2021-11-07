@@ -26,24 +26,11 @@ public class CodeEntryCommand implements Command {
         HttpSession session = request.getSession();
         UserService userService = UserServiceImpl.getInstance();
         try {
-            String enteredCode = request.getParameter(RequestParameter.REGISTER_CODE);
             String userLogin = session.getAttribute(SessionAttribute.USER_LOGIN).toString();
             Optional<User> user = userService.findByLogin(userLogin);
-
             if (user.isPresent()) {
-                String generateCode = user.get().getRegisterCode().toString();
-                if (generateCode.equals(enteredCode)) {
-                    Long userId = user.get().getUserId();
-                    Map<String, String> parameters = new HashMap<>();
-                    parameters.put(ColumnName.USER_STATUS, UserStatus.ACTIVE.toString());
-                    userService.updateStatus(parameters, userId);
-                    logger.error("User registration was successful.");
-                    router = new Router(Router.RouterType.REDIRECT, PagePath.MAIN_PAGE_REDIRECT);
-                } else {
-                    logger.error("Invalid code entered.");
-                    request.setAttribute(RequestParameter.ENTERED_CODE_ERROR, true);
-                    router = new Router(PagePath.CODE_PAGE);
-                }
+                User localUser = user.get();
+                router = checkCode(request, localUser);
             } else {
                 logger.error("Error during entering code: user was not found.");
                 router = new Router(PagePath.ERROR_PAGE_500);
@@ -51,6 +38,27 @@ public class CodeEntryCommand implements Command {
         } catch (ServiceException e) {
             logger.error("Error during entering code: ", e);
             router = new Router(PagePath.ERROR_PAGE_500);
+        }
+        return router;
+    }
+    
+    private Router checkCode(HttpServletRequest request, User localUser)
+            throws ServiceException {
+        Router router;
+        UserService userService = UserServiceImpl.getInstance();
+        String generateCode = localUser.getRegisterCode().toString();
+        String enteredCode = request.getParameter(RequestParameter.REGISTER_CODE);
+        if (generateCode.equals(enteredCode)) {
+            Long userId = localUser.getUserId();
+            Map<String, String> parameters = new HashMap<>();
+            parameters.put(ColumnName.USER_STATUS, UserStatus.ACTIVE.toString());
+            userService.updateStatus(parameters, userId);
+            router = new Router(Router.RouterType.REDIRECT, PagePath.MAIN_PAGE_REDIRECT);
+            logger.error("User registration was successful.");
+        } else {
+            request.setAttribute(RequestParameter.ENTERED_CODE_ERROR, true);
+            router = new Router(PagePath.CODE_PAGE);
+            logger.error("Invalid code entered.");
         }
         return router;
     }

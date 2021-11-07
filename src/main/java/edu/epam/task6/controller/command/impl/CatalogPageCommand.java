@@ -7,7 +7,6 @@ import edu.epam.task6.model.service.impl.TattooServiceImpl;
 import edu.epam.task6.controller.command.SendSplitParameters;
 import edu.epam.task6.exception.ServiceException;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -20,14 +19,7 @@ public class CatalogPageCommand implements Command {
     @Override
     public Router execute(HttpServletRequest request) {
         Router router;
-
-        HttpSession session = request.getSession();
-        session.setAttribute(SessionAttribute.PREVIOUS_PAGE, PagePath.CATALOG_PAGE_REDIRECT);
-        int currentPage = 1;
-        if (request.getParameter(RequestParameter.CURRENT_PAGE_NUMBER) != null) {
-            currentPage = Integer.parseInt(request.getParameter(RequestParameter.CURRENT_PAGE_NUMBER));
-        }
-
+        int currentPage = pagesManagement(request, PagePath.CATALOG_PAGE_REDIRECT);
         TattooService catalogService = TattooServiceImpl.getInstance();
         try {
             List<Tattoo> catalogElements = catalogService.findAllActive();

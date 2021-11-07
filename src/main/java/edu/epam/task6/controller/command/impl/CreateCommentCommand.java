@@ -21,15 +21,9 @@ public class CreateCommentCommand implements Command {
     public Router execute(HttpServletRequest request) {
         Router router;
         HttpSession session = request.getSession();
-        Long userId = (Long) session.getAttribute(SessionAttribute.USER_ID);
         CommentService commentService = CommentServiceImpl.getInstance();
-        Map<String, String> parameters = new HashMap<>();
         try {
-            parameters.put(ColumnName.COMMENT_TEXT, request.getParameter(RequestParameter.COMMENT_TEXT));
-            parameters.put(ColumnName.COMMENT_REGISTRATION_DATE,
-                    request.getParameter(RequestParameter.COMMENT_REGISTRATION_DATE));
-            parameters.put(ColumnName.COMMENT_USER_ID, userId.toString());
-
+            Map<String, String> parameters = addParameters(request);
             if (commentService.leaveComment(parameters)) {
                 logger.info("Comment created successfully");
             } else {
@@ -42,5 +36,16 @@ public class CreateCommentCommand implements Command {
             router = new Router(PagePath.ERROR_PAGE_500);
         }
         return router;
+    }
+
+    private Map<String, String> addParameters(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        Long userId = (Long) session.getAttribute(SessionAttribute.USER_ID);
+        Map<String, String> parameters = new HashMap<>();
+        parameters.put(ColumnName.COMMENT_TEXT, request.getParameter(RequestParameter.COMMENT_TEXT));
+        parameters.put(ColumnName.COMMENT_REGISTRATION_DATE,
+                request.getParameter(RequestParameter.COMMENT_REGISTRATION_DATE));
+        parameters.put(ColumnName.COMMENT_USER_ID, userId.toString());
+        return parameters;
     }
 }

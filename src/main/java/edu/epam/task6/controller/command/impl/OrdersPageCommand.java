@@ -22,29 +22,13 @@ public class OrdersPageCommand implements Command {
     @Override
     public Router execute(HttpServletRequest request) {
         Router router;
-
+        int currentPage = pagesManagement(request, PagePath.ORDERS_PAGE_ALL_REDIRECT);
         HttpSession session = request.getSession();
-        session.setAttribute(SessionAttribute.PREVIOUS_PAGE, PagePath.ORDERS_PAGE_ALL_REDIRECT);
-
-        int currentPage = 1;
-        if (request.getParameter(RequestParameter.CURRENT_PAGE_NUMBER) != null) {
-            currentPage = Integer.parseInt(request.getParameter(RequestParameter.CURRENT_PAGE_NUMBER));
-        }
-
         User user = (User) session.getAttribute(SessionAttribute.USER);
         String userLogin = user.getLogin();
         UserRole userRole = (UserRole) session.getAttribute(SessionAttribute.ROLE);
-
-        OrderService orderService = OrderServiceImpl.getInstance();
         try {
-            List<Order> orders;
-            if (userRole == UserRole.ADMIN) {
-                request.setAttribute(RequestParameter.TITLE_ORDERS, RequestParameter.TITLE_ORDERS_ALL);
-                orders = orderService.findAll();
-            } else {
-                request.setAttribute(RequestParameter.TITLE_ORDERS, RequestParameter.TITLE_ORDERS_PERSON);
-                orders = orderService.findByLogin(userLogin);
-            }
+            List<Order> orders = chooseListOfOrders(request, userRole, userLogin);
             request.setAttribute(RequestParameter.ORDERS, orders);
             SendSplitParameters sendSplitParameters = SendSplitParameters.getInstance();
             sendSplitParameters.sendSplitParametersOrders(request, orders.size(), currentPage);
@@ -55,5 +39,20 @@ public class OrdersPageCommand implements Command {
             router = new Router(PagePath.ERROR_PAGE_500);
         }
         return router;
+    }
+
+    private List<Order> chooseListOfOrders(HttpServletRequest request,
+                                           UserRole userRole,
+                                           String userLogin) throws ServiceException {
+        OrderService orderService = OrderServiceImpl.getInstance();
+        List<Order> orders;
+        if (userRole == UserRole.ADMIN) {
+            request.setAttribute(RequestParameter.TITLE_ORDERS, RequestParameter.TITLE_ORDERS_ALL);
+            orders = orderService.findAll();
+        } else {
+            request.setAttribute(RequestParameter.TITLE_ORDERS, RequestParameter.TITLE_ORDERS_PERSON);
+            orders = orderService.findByLogin(userLogin);
+        }
+        return orders;
     }
 }

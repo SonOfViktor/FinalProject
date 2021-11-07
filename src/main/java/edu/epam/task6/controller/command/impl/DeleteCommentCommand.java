@@ -19,18 +19,9 @@ public class DeleteCommentCommand implements Command {
         Router router;
         HttpSession session = request.getSession();
         UserRole userRole = (UserRole) session.getAttribute(SessionAttribute.ROLE);
-        CommentService commentService = CommentServiceImpl.getInstance();
         try {
             if (userRole.equals(UserRole.ADMIN)) {
-                Long commentId = Long.valueOf(request.getParameter(RequestParameter.COMMENT_ID));
-
-                if (commentService.deleteComment(commentId)) {
-                    logger.info("Comment deleted successfully");
-                } else {
-                    logger.error("Error during deleting comment.");
-                }
-                router = new Router(Router.RouterType.REDIRECT,
-                        session.getAttribute(SessionAttribute.PREVIOUS_PAGE).toString());
+                router = tryDeleteComment(request);
             } else {
                 logger.error("An attempt to delete a comment without an administrator role.");
                 router = new Router(PagePath.ERROR_PAGE_500);
@@ -39,6 +30,21 @@ public class DeleteCommentCommand implements Command {
             logger.error("Error during deleting comment: ", e);
             router = new Router(PagePath.ERROR_PAGE_500);
         }
+        return router;
+    }
+
+    private Router tryDeleteComment(HttpServletRequest request) throws ServiceException {
+        Router router;
+        HttpSession session = request.getSession();
+        CommentService commentService = CommentServiceImpl.getInstance();
+        Long commentId = Long.valueOf(request.getParameter(RequestParameter.COMMENT_ID));
+        if (commentService.deleteComment(commentId)) {
+            logger.info("Comment deleted successfully");
+        } else {
+            logger.error("Error during deleting comment.");
+        }
+        router = new Router(Router.RouterType.REDIRECT,
+                session.getAttribute(SessionAttribute.PREVIOUS_PAGE).toString());
         return router;
     }
 }

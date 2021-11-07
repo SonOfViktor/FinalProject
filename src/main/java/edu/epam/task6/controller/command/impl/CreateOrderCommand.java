@@ -29,54 +29,13 @@ public class CreateOrderCommand implements Command {
     @Override
     public Router execute(HttpServletRequest request) {
         Router router;
-
-        HttpSession session = request.getSession();
-        User userSession = (User) session.getAttribute(SessionAttribute.USER);
-
-        Long userId = (Long) session.getAttribute(SessionAttribute.USER_ID);
-        BigDecimal userBalance = userSession.getBalance();
-        BigDecimal userDiscount = new BigDecimal(userSession.getDiscount().toString());
-
         Long tattooId = Long.valueOf(request.getParameter(RequestParameter.ORDER_TATTOO_ID));
-        BigDecimal tattooPrice;
-
-        OrderService orderService = OrderServiceImpl.getInstance();
-        UserService userService = UserServiceImpl.getInstance();
         TattooService tattooService = TattooServiceImpl.getInstance();
-        Map<String, String> parameters = new HashMap<>();
         try {
             Optional<Tattoo> tattoo = tattooService.findByIdAllActive(tattooId);
             if (tattoo.isPresent()) {
-                tattooPrice = tattoo.get().getPrice();
-                BigDecimal discount = tattooPrice.multiply(userDiscount).divide(DIVIDER);
-                BigDecimal paid = tattooPrice.add(discount.negate());
-                userBalance = userBalance.add(discount).add(tattooPrice.negate());
-                if (userBalance.compareTo(BigDecimal.ZERO) > 0) {
-                    parameters.put(ColumnName.USER_BALANCE, paid.negate().toString());
-
-                    parameters.put(ColumnName.ORDERS_PAID, paid.toString());
-                    parameters.put(ColumnName.ORDERS_REGISTRATION_DATE,
-                            request.getParameter(RequestParameter.ORDER_REGISTRATION_DATE));
-                    parameters.put(ColumnName.ORDERS_USER_ID, userId.toString());
-                    parameters.put(ColumnName.ORDERS_TATTOO_ID, tattooId.toString());
-
-                    if (orderService.createOrder(parameters)) {
-                        userService.updateBalance(parameters, userId);
-                        userSession.setBalance(userBalance);
-                        request.setAttribute(RequestParameter.PROFILE, userSession);
-
-                        logger.info("Order has been created.");
-                        router = new Router(Router.RouterType.REDIRECT,
-                                session.getAttribute(SessionAttribute.PREVIOUS_PAGE).toString());
-                    } else {
-                        logger.error("Error during creating order.");
-                        router = new Router(PagePath.ERROR_PAGE_500);
-                    }
-                } else {
-                    logger.error("Error during creating order: not enough money in the account");
-                    request.setAttribute(RequestParameter.BALANCE_NOT_ENOUGH_ERROR_MESSAGE, true);
-                    router = new Router(PagePath.CREATE_ORDER_PAGE);
-                }
+                Tattoo resultTattoo = tattoo.get();
+                router = balanceAnalysisAndAttemptToCreateAnOrder(request, resultTattoo);
             } else {
                 logger.error("Error during creating order: tattoo with entered id was not found.");
                 request.setAttribute(RequestParameter.TATTOO_ID_NOT_FOUND_MESSAGE, true);
@@ -87,5 +46,65 @@ public class CreateOrderCommand implements Command {
             router = new Router(PagePath.ERROR_PAGE_500);
         }
         return router;
+    }
+
+    private Router balanceAnalysisAndAttemptToCreateAnOrder(HttpServletRequest request,
+                                                            Tattoo resultTattoo) throws ServiceException {
+        Router router;
+        HttpSession session = request.getSession();
+        User userSession = (User) session.getAttribute(SessionAttribute.USER);
+        BigDecimal userDiscount = new BigDecimal(userSession.getDiscount().toString());
+        BigDecimal userBalance = userSession.getBalance();
+        BigDecimal tattooPrice = resultTattoo.getPrice();
+        BigDecimal discount = tattooPrice.multiply(userDiscount).divide(DIVIDER);
+        BigDecimal paid = tattooPrice.add(discount.negate());
+        userBalance = userBalance.add(discount).add(tattooPrice.negate());
+        if (userBalance.compareTo(BigDecimal.ZERO) > 0) {
+            router = tryCreateOrder(request, session, userSession, paid, userBalance);
+        } else {
+            logger.error("Error during creating order: not enough money in the account");
+            request.setAttribute(RequestParameter.BALANCE_NOT_ENOUGH_ERROR_MESSAGE, true);
+            router = new Router(PagePath.CREATE_ORDER_PAGE);
+        }
+        return router;
+    }
+
+    private Router tryCreateOrder(HttpServletRequest request,
+                                  HttpSession session,
+                                  User userSession,
+                                  BigDecimal paid,
+                                  BigDecimal userBalance) throws ServiceException {
+        Router router;
+        Long userId = (Long) session.getAttribute(SessionAttribute.USER_ID);
+        Long tattooId = Long.valueOf(request.getParameter(RequestParameter.ORDER_TATTOO_ID));
+        Map<String, String> parameters = addParameters(request, paid, userId, tattooId);
+        OrderService orderService = OrderServiceImpl.getInstance();
+        UserService userService = UserServiceImpl.getInstance();
+        if (orderService.createOrder(parameters)) {
+            userService.updateBalance(parameters, userId);
+            userSession.setBalance(userBalance);
+            request.setAttribute(RequestParameter.PROFILE, userSession);
+            router = new Router(Router.RouterType.REDIRECT,
+                    session.getAttribute(SessionAttribute.PREVIOUS_PAGE).toString());
+            logger.info("Order has been created.");
+        } else {
+            router = new Router(PagePath.ERROR_PAGE_500);
+            logger.error("Error during creating order.");
+        }
+        return router;
+    }
+
+    private Map<String, String> addParameters(HttpServletRequest request,
+                                              BigDecimal paid,
+                                              Long userId,
+                                              Long tattooId) {
+        Map<String, String> parameters = new HashMap<>();
+        parameters.put(ColumnName.USER_BALANCE, paid.negate().toString());
+        parameters.put(ColumnName.ORDERS_PAID, paid.toString());
+        parameters.put(ColumnName.ORDERS_REGISTRATION_DATE,
+                request.getParameter(RequestParameter.ORDER_REGISTRATION_DATE));
+        parameters.put(ColumnName.ORDERS_USER_ID, userId.toString());
+        parameters.put(ColumnName.ORDERS_TATTOO_ID, tattooId.toString());
+        return parameters;
     }
 }

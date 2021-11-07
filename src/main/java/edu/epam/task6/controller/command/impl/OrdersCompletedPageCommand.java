@@ -8,7 +8,6 @@ import edu.epam.task6.controller.command.SendSplitParameters;
 import edu.epam.task6.exception.ServiceException;
 import edu.epam.task6.model.entity.Order;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -21,14 +20,7 @@ public class OrdersCompletedPageCommand implements Command {
     @Override
     public Router execute(HttpServletRequest request) {
         Router router;
-        HttpSession session = request.getSession();
-        session.setAttribute(SessionAttribute.PREVIOUS_PAGE, PagePath.ORDERS_PAGE_COMPLETED_REDIRECT);
-
-        int currentPage = 1;
-        if (request.getParameter(RequestParameter.CURRENT_PAGE_NUMBER) != null) {
-            currentPage = Integer.parseInt(request.getParameter(RequestParameter.CURRENT_PAGE_NUMBER));
-        }
-
+        int currentPage = pagesManagement(request, PagePath.ORDERS_PAGE_COMPLETED_REDIRECT);
         OrderService orderService = OrderServiceImpl.getInstance();
         try {
             List<Order> orders = orderService.findByStatus(OrderStatus.COMPLETED.name());

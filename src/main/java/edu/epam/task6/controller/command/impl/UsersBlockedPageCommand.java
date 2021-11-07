@@ -8,7 +8,6 @@ import edu.epam.task6.model.entity.UserStatus;
 import edu.epam.task6.model.service.UserService;
 import edu.epam.task6.model.service.impl.UserServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -21,15 +20,7 @@ public class UsersBlockedPageCommand implements Command {
     @Override
     public Router execute(HttpServletRequest request) {
         Router router;
-
-        HttpSession session = request.getSession();
-        session.setAttribute(SessionAttribute.PREVIOUS_PAGE, PagePath.USERS_PAGE_BLOCKED_REDIRECT);
-
-        int currentPage = 1;
-        if (request.getParameter(RequestParameter.CURRENT_PAGE_NUMBER) != null) {
-            currentPage = Integer.parseInt(request.getParameter(RequestParameter.CURRENT_PAGE_NUMBER));
-        }
-
+        int currentPage = pagesManagement(request, PagePath.USERS_PAGE_BLOCKED_REDIRECT);
         UserService userService = UserServiceImpl.getInstance();
         try {
             List<User> users = userService.findByStatus(UserStatus.BLOCKED.name());

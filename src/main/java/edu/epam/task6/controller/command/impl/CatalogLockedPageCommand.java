@@ -8,7 +8,6 @@ import edu.epam.task6.model.entity.TattooStatus;
 import edu.epam.task6.model.service.TattooService;
 import edu.epam.task6.model.service.impl.TattooServiceImpl;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -21,15 +20,7 @@ public class CatalogLockedPageCommand implements Command {
     @Override
     public Router execute(HttpServletRequest request) {
         Router router;
-
-        HttpSession session = request.getSession();
-        session.setAttribute(SessionAttribute.PREVIOUS_PAGE, PagePath.CATALOG_PAGE_LOCKED_REDIRECT);
-
-        int currentPage = 1;
-        if (request.getParameter(RequestParameter.CURRENT_PAGE_NUMBER) != null) {
-            currentPage = Integer.parseInt(request.getParameter(RequestParameter.CURRENT_PAGE_NUMBER));
-        }
-
+        int currentPage = pagesManagement(request, PagePath.CATALOG_PAGE_LOCKED_REDIRECT);
         TattooService catalogService = TattooServiceImpl.getInstance();
         try {
             List<Tattoo> catalogElements = catalogService.findByStatus(TattooStatus.LOCKED.toString());

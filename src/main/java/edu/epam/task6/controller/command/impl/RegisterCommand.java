@@ -27,43 +27,11 @@ public class RegisterCommand implements Command {
     public Router execute(HttpServletRequest request) {
         Router router;
         HttpSession session = request.getSession();
-        UserService userService = UserServiceImpl.getInstance();
-        Map<String, String> parameters = new HashMap<>();
         try {
             String password = request.getParameter(RequestParameter.USER_PASSWORD);
             String repeatPassword = request.getParameter(RequestParameter.USER_REPEAT_PASSWORD);
             if (password.equals(repeatPassword)) {
-                parameters.put(ColumnName.USER_EMAIL, request.getParameter(RequestParameter.USER_EMAIL));
-                parameters.put(ColumnName.USER_LOGIN, request.getParameter(RequestParameter.USER_LOGIN));
-                parameters.put(ColumnName.USER_PASSWORD, password);
-                parameters.put(ColumnName.USER_REPEAT_PASSWORD, repeatPassword);
-                parameters.put(ColumnName.USER_NAME, request.getParameter(RequestParameter.USER_NAME));
-                parameters.put(ColumnName.USER_SURNAME, request.getParameter(RequestParameter.USER_SURNAME));
-                parameters.put(ColumnName.USER_REGISTRATION_DATE,
-                        request.getParameter(RequestParameter.USER_REGISTRATION_DATE));
-
-                Optional<User> user = userService.findByLogin(parameters.get(ColumnName.USER_LOGIN));
-                if (!user.isPresent()) {
-                    String code = RegisterCodeGenerator.generateCode();
-                    parameters.put(ColumnName.USER_REGISTER_CODE, code);
-                    if (userService.registerUser(parameters)) {
-                        EmailSender emailSender = new EmailSender(
-                                request.getParameter(RequestParameter.USER_EMAIL),
-                                EMAIL_MESSAGE_TITLE,
-                                EMAIL_MESSAGE_TEXT + code);
-                        emailSender.start();
-                        session.setAttribute(SessionAttribute.USER_LOGIN, parameters.get(ColumnName.USER_LOGIN));
-                        router = new Router(PagePath.CODE_PAGE);
-                        logger.info("User registered but not verified.");
-                    } else {
-                        logger.error("Error during register user.");
-                        router = new Router(PagePath.ERROR_PAGE_500);
-                    }
-                } else {
-                    logger.error("User with this login is already registered.");
-                    request.setAttribute(RequestParameter.REPEAT_LOGIN_ERROR, true);
-                    router = new Router(PagePath.REGISTER_PAGE);
-                }
+                router = tryRegisterUser(request, session);
             } else {
                 logger.error("Password and repeated password will not match.");
                 request.setAttribute(RequestParameter.REPEAT_PASSWORD_ERROR, true);
@@ -76,4 +44,61 @@ public class RegisterCommand implements Command {
         return router;
     }
 
+    private Router tryRegisterUser(HttpServletRequest request, HttpSession session)
+            throws ServiceException {
+        Router router;
+        Map<String, String> parameters = addParameters(request);
+        UserService userService = UserServiceImpl.getInstance();
+        Optional<User> user = userService.findByLogin(parameters.get(ColumnName.USER_LOGIN));
+        if (!user.isPresent()) {
+            router = registerUser(request, session, parameters);
+        } else {
+            logger.error("User with this login is already registered.");
+            request.setAttribute(RequestParameter.REPEAT_LOGIN_ERROR, true);
+            router = new Router(PagePath.REGISTER_PAGE);
+        }
+        return router;
+    }
+
+    private Map<String, String> addParameters(HttpServletRequest request) {
+        String password = request.getParameter(RequestParameter.USER_PASSWORD);
+        String repeatPassword = request.getParameter(RequestParameter.USER_REPEAT_PASSWORD);
+        Map<String, String> parameters = new HashMap<>();
+        parameters.put(ColumnName.USER_EMAIL, request.getParameter(RequestParameter.USER_EMAIL));
+        parameters.put(ColumnName.USER_LOGIN, request.getParameter(RequestParameter.USER_LOGIN));
+        parameters.put(ColumnName.USER_PASSWORD, password);
+        parameters.put(ColumnName.USER_REPEAT_PASSWORD, repeatPassword);
+        parameters.put(ColumnName.USER_NAME, request.getParameter(RequestParameter.USER_NAME));
+        parameters.put(ColumnName.USER_SURNAME, request.getParameter(RequestParameter.USER_SURNAME));
+        parameters.put(ColumnName.USER_REGISTRATION_DATE,
+                request.getParameter(RequestParameter.USER_REGISTRATION_DATE));
+        return parameters;
+    }
+
+    private Router registerUser(HttpServletRequest request,
+                                HttpSession session,
+                                Map<String, String> parameters) throws ServiceException {
+        Router router;
+        UserService userService = UserServiceImpl.getInstance();
+        String code = RegisterCodeGenerator.generateCode();
+        parameters.put(ColumnName.USER_REGISTER_CODE, code);
+        if (userService.registerUser(parameters)) {
+            sendCodeToUserEmail(request, code);
+            session.setAttribute(SessionAttribute.USER_LOGIN, parameters.get(ColumnName.USER_LOGIN));
+            router = new Router(PagePath.CODE_PAGE);
+            logger.info("User registered but not verified.");
+        } else {
+            router = new Router(PagePath.ERROR_PAGE_500);
+            logger.error("Error during register user.");
+        }
+        return router;
+    }
+
+    private void sendCodeToUserEmail(HttpServletRequest request, String code) {
+        EmailSender emailSender = new EmailSender(
+                request.getParameter(RequestParameter.USER_EMAIL),
+                EMAIL_MESSAGE_TITLE,
+                EMAIL_MESSAGE_TEXT + code);
+        emailSender.start();
+    }
 }

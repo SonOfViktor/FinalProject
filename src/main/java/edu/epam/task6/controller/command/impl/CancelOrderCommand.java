@@ -31,64 +31,15 @@ public class CancelOrderCommand implements Command {
     @Override
     public Router execute(HttpServletRequest request) {
         Router router;
-
         HttpSession session = request.getSession();
         User userSession = (User) session.getAttribute(SessionAttribute.USER);
         UserRole userRole = (UserRole) session.getAttribute(SessionAttribute.ROLE);
         String userLogin = userSession.getLogin();
-
-        OrderService orderService = OrderServiceImpl.getInstance();
-        UserService userService = UserServiceImpl.getInstance();
-        Map<String, String> parameters = new HashMap<>();
         try {
             Long orderId = Long.valueOf(request.getParameter(RequestParameter.ORDER_ID));
-            Optional<Order> order = Optional.empty();
-            if (userRole == UserRole.ADMIN) {
-                order = orderService.findById(orderId);
-            } else if (userRole == UserRole.USER) {
-                order = orderService.findByIdPersonal(orderId, userLogin);
-            }
+            Optional<Order> order = findNecessaryOrder(userRole, orderId, userLogin);
             if (order.isPresent()) {
-                OrderStatus orderStatus = order.get().getOrderStatus();
-                if (orderStatus == OrderStatus.ACTIVE) {
-                    orderStatus = OrderStatus.CANCELED;
-
-                    Optional<User> user = userService.findByLogin(order.get().getUserLogin());
-                    if (user.isPresent()) {
-                        Long userId = user.get().getUserId();
-                        BigDecimal paid = order.get().getPaid();
-
-                        parameters.put(ColumnName.USER_BALANCE, paid.toString());
-                        parameters.put(ColumnName.ORDERS_STATUS, orderStatus.toString());
-                        if (orderService.updateStatus(parameters, orderId)
-                                && userService.updateBalance(parameters, userId)) {
-
-                            user = userService.findById(userId);
-                            userSession.setBalance(user.get().getBalance());
-
-                            StringBuilder stringBuilder = new StringBuilder(EMAIL_MESSAGE_TEXT);
-                            stringBuilder.insert(18, orderId);
-                            EmailSender emailSender = new EmailSender(
-                                    userSession.getEmail(),
-                                    EMAIL_MESSAGE_TITLE,
-                                    stringBuilder.toString());
-                            emailSender.start();
-                            router = new Router(Router.RouterType.REDIRECT,
-                                    session.getAttribute(SessionAttribute.PREVIOUS_PAGE).toString());
-                            logger.info("Order status change was successful.");
-                        } else {
-                            logger.error("An error in changing the order's status.");
-                            router = new Router(PagePath.ERROR_PAGE_500);
-                        }
-                    } else {
-                        logger.error("User was not found to cancel order.");
-                        router = new Router(PagePath.ERROR_PAGE_500);
-                    }
-                } else {
-                    logger.error("Order status is CANCELED already.");
-                    router = new Router(Router.RouterType.REDIRECT,
-                            session.getAttribute(SessionAttribute.PREVIOUS_PAGE).toString());
-                }
+                router = update(session, order.get(), userSession, orderId);
             } else {
                 logger.error("Order with this id and user login was not found.");
                 router = new Router(Router.RouterType.REDIRECT,
@@ -99,5 +50,91 @@ public class CancelOrderCommand implements Command {
             router = new Router(PagePath.ERROR_PAGE_500);
         }
         return router;
+    }
+
+    private Optional<Order> findNecessaryOrder(UserRole userRole, Long orderId, String userLogin)
+            throws ServiceException {
+        Optional<Order> order = Optional.empty();
+        OrderService orderService = OrderServiceImpl.getInstance();
+        if (userRole == UserRole.ADMIN) {
+            order = orderService.findById(orderId);
+        } else if (userRole == UserRole.USER) {
+            order = orderService.findByIdPersonal(orderId, userLogin);
+        }
+        return order;
+    }
+
+    private Router update(HttpSession session,
+                          Order localOrder,
+                          User userSession,
+                          Long orderId) throws ServiceException {
+        Router router;
+        OrderStatus orderStatus = localOrder.getOrderStatus();
+        if (orderStatus == OrderStatus.ACTIVE) {
+            orderStatus = OrderStatus.CANCELED;
+            router = updateDependentParameters(session, localOrder, orderStatus, userSession, orderId);
+        } else {
+            logger.error("Order status is CANCELED already.");
+            router = new Router(Router.RouterType.REDIRECT,
+                    session.getAttribute(SessionAttribute.PREVIOUS_PAGE).toString());
+        }
+        return router;
+    }
+
+    private Router updateDependentParameters(HttpSession session,
+                                             Order localOrder,
+                                             OrderStatus orderStatus,
+                                             User userSession,
+                                             Long orderId) throws ServiceException {
+        Router router;
+        UserService userService = UserServiceImpl.getInstance();
+        Map<String, String> parameters = new HashMap<>();
+        Optional<User> user = userService.findByLogin(localOrder.getUserLogin());
+        if (user.isPresent()) {
+            Long userId = user.get().getUserId();
+            BigDecimal paid = localOrder.getPaid();
+            parameters.put(ColumnName.USER_BALANCE, paid.toString());
+            parameters.put(ColumnName.ORDERS_STATUS, orderStatus.toString());
+            router = tryToUpdateOrderStatusAndUserBalance(
+                    session, parameters, userSession, orderId, userId);
+        } else {
+            logger.error("User was not found to cancel order.");
+            router = new Router(PagePath.ERROR_PAGE_500);
+        }
+        return router;
+    }
+
+    private Router tryToUpdateOrderStatusAndUserBalance(HttpSession session,
+                                                    Map<String, String> parameters,
+                                                    User userSession,
+                                                    Long orderId,
+                                                    Long userId) throws ServiceException {
+        Router router;
+        OrderService orderService = OrderServiceImpl.getInstance();
+        UserService userService = UserServiceImpl.getInstance();
+        if (orderService.updateStatus(parameters, orderId)
+                && userService.updateBalance(parameters, userId)) {
+
+            Optional<User> user = userService.findById(userId);
+            userSession.setBalance(user.get().getBalance());
+            sendLetterAboutTheCancellationOfTheOrder(user.get(), orderId);
+            router = new Router(Router.RouterType.REDIRECT,
+                    session.getAttribute(SessionAttribute.PREVIOUS_PAGE).toString());
+            logger.info("Order status change was successful.");
+        } else {
+            router = new Router(PagePath.ERROR_PAGE_500);
+            logger.error("An error in changing the order's status.");
+        }
+        return router;
+    }
+
+    private void sendLetterAboutTheCancellationOfTheOrder(User localUser, Long orderId) {
+        StringBuilder stringBuilder = new StringBuilder(EMAIL_MESSAGE_TEXT);
+        stringBuilder.insert(18, orderId);
+        EmailSender emailSender = new EmailSender(
+                localUser.getEmail(),
+                EMAIL_MESSAGE_TITLE,
+                stringBuilder.toString());
+        emailSender.start();
     }
 }

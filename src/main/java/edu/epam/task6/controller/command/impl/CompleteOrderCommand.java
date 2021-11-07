@@ -24,41 +24,57 @@ public class CompleteOrderCommand implements Command {
     @Override
     public Router execute(HttpServletRequest request) {
         Router router;
-
         HttpSession session = request.getSession();
         UserRole userRole = (UserRole) session.getAttribute(SessionAttribute.ROLE);
-
-        OrderService orderService = OrderServiceImpl.getInstance();
-        Map<String, String> parameters = new HashMap<>();
         try {
             Long orderId = Long.valueOf(request.getParameter(RequestParameter.ORDER_ID));
-            Optional<Order> order = Optional.empty();
             if (userRole == UserRole.ADMIN) {
-                order = orderService.findById(orderId);
-            }
-            if (order.isPresent()) {
-                OrderStatus orderStatus = order.get().getOrderStatus();
-                if (orderStatus.equals(OrderStatus.ACTIVE)) {
-                    orderStatus = OrderStatus.COMPLETED;
-
-                    parameters.put(ColumnName.ORDERS_STATUS, orderStatus.toString());
-                    orderService.updateStatus(parameters, orderId);
-                    router = new Router(Router.RouterType.REDIRECT,
-                            session.getAttribute(SessionAttribute.PREVIOUS_PAGE).toString());
-                    logger.info("Order status successfully changed to COMPLETED");
-                } else {
-                    logger.error("Order status is not ACTIVE.");
-                    router = new Router(Router.RouterType.REDIRECT,
-                            session.getAttribute(SessionAttribute.PREVIOUS_PAGE).toString());
-                }
+                router = isOrderFoundedAndChanged(session, orderId);
             } else {
-                logger.error("Order with this id was not found.");
-                router = new Router(Router.RouterType.REDIRECT,
-                        session.getAttribute(SessionAttribute.PREVIOUS_PAGE).toString());
+                logger.error("An attempt to change the status of an order without the required access level.");
+                router = new Router(PagePath.ERROR_PAGE_500);
             }
         } catch (ServiceException e) {
             logger.error("Error during changing status of order: ", e);
             router = new Router(PagePath.ERROR_PAGE_500);
+        }
+        return router;
+    }
+
+    private Router isOrderFoundedAndChanged(HttpSession session, Long orderId)
+            throws ServiceException {
+        Router router;
+        OrderService orderService = OrderServiceImpl.getInstance();
+        Optional<Order> order = orderService.findById(orderId);
+        if (order.isPresent()) {
+            Order localOrder = order.get();
+            router = tryToUpdateOrderStatus(session, localOrder, orderId);
+        } else {
+            router = new Router(Router.RouterType.REDIRECT,
+                    session.getAttribute(SessionAttribute.PREVIOUS_PAGE).toString());
+            logger.error("Order with this id was not found.");
+        }
+        return router;
+    }
+
+    private Router tryToUpdateOrderStatus(HttpSession session,
+                                        Order localOrder,
+                                        Long orderId) throws ServiceException {
+        Router router;
+        OrderService orderService = OrderServiceImpl.getInstance();
+        OrderStatus orderStatus = localOrder.getOrderStatus();
+        if (orderStatus.equals(OrderStatus.ACTIVE)) {
+            orderStatus = OrderStatus.COMPLETED;
+            Map<String, String> parameters = new HashMap<>();
+            parameters.put(ColumnName.ORDERS_STATUS, orderStatus.toString());
+            orderService.updateStatus(parameters, orderId);
+            router = new Router(Router.RouterType.REDIRECT,
+                    session.getAttribute(SessionAttribute.PREVIOUS_PAGE).toString());
+            logger.info("Order status successfully changed to COMPLETED");
+        } else {
+            router = new Router(Router.RouterType.REDIRECT,
+                    session.getAttribute(SessionAttribute.PREVIOUS_PAGE).toString());
+            logger.error("Order status is not ACTIVE.");
         }
         return router;
     }

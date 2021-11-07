@@ -26,50 +26,15 @@ public class AboutUsPageCommand implements Command {
     @Override
     public Router execute(HttpServletRequest request) {
         Router router;
-
+        int currentPage = pagesManagement(request, PagePath.ABOUT_US_PAGE_REDIRECT);
         HttpSession session = request.getSession();
         UserRole sessionRole = (UserRole) session.getAttribute(SessionAttribute.ROLE);
-        session.setAttribute(SessionAttribute.PREVIOUS_PAGE, PagePath.ABOUT_US_PAGE_REDIRECT);
-
-        int currentPage = 1;
-        if (request.getParameter(RequestParameter.CURRENT_PAGE_NUMBER) != null) {
-            currentPage = Integer.parseInt(request.getParameter(RequestParameter.CURRENT_PAGE_NUMBER));
-        }
-
         CommentService commentService = CommentServiceImpl.getInstance();
-        UserService userService = UserServiceImpl.getInstance();
         try {
             List<Comment> comments;
             comments = commentService.findAll();
             request.setAttribute(RequestParameter.COMMENTS, comments);
-
-            SendSplitParameters sendSplitParameters = SendSplitParameters.getInstance();
-            Optional<User> user = userService.findById(ADMIN_ID);
-            if (user.isPresent() && user.get().getRole().equals(UserRole.ADMIN) && sessionRole.equals(UserRole.ADMIN)) {
-                Double averageRating = user.get().getAverageRating();
-                request.setAttribute(RequestParameter.RATING, averageRating);
-                sendSplitParameters.sendSplitParametersComments(
-                        request,
-                        comments.size(),
-                        currentPage,
-                        PageSplitParameter.NUMBER_OF_COMMENTS_PER_PAGE_ADMIN);
-            } else if (user.isPresent() && user.get().getRole().equals(UserRole.ADMIN) && !sessionRole.equals(UserRole.ADMIN)) {
-                Double averageRating = user.get().getAverageRating();
-                request.setAttribute(RequestParameter.RATING, averageRating);
-                sendSplitParameters.sendSplitParametersComments(
-                        request,
-                        comments.size(),
-                        currentPage,
-                        PageSplitParameter.NUMBER_OF_COMMENTS_PER_PAGE_USER);
-            } else {
-                Double averageRating = 0D;
-                request.setAttribute(RequestParameter.RATING, averageRating);
-                sendSplitParameters.sendSplitParametersComments(
-                        request,
-                        comments.size(),
-                        currentPage,
-                        PageSplitParameter.NUMBER_OF_COMMENTS_PER_PAGE_USER);
-            }
+            selectionOfInformationDisplay(request, comments.size(), currentPage, sessionRole);
             request.setAttribute(RequestParameter.COMMAND, CommandType.TO_ABOUT_US_PAGE);
             router = new Router(PagePath.ABOUT_US_PAGE);
         } catch (ServiceException e) {
@@ -77,5 +42,40 @@ public class AboutUsPageCommand implements Command {
             router = new Router(PagePath.ERROR_PAGE_500);
         }
         return router;
+    }
+
+    private void selectionOfInformationDisplay(HttpServletRequest request,
+                                               int commentsSize,
+                                               int currentPage,
+                                               UserRole sessionRole) throws ServiceException {
+        UserService userService = UserServiceImpl.getInstance();
+        Optional<User> user = userService.findById(ADMIN_ID);
+
+        if (user.isPresent() && user.get().getRole().equals(UserRole.ADMIN)
+                && sessionRole.equals(UserRole.ADMIN)) {
+            DisplayOfRatingAndPagination(request, user.get().getAverageRating(), commentsSize, currentPage,
+                    PageSplitParameter.NUMBER_OF_COMMENTS_PER_PAGE_ADMIN);
+        } else if (user.isPresent() && user.get().getRole().equals(UserRole.ADMIN)
+                && !sessionRole.equals(UserRole.ADMIN)) {
+            DisplayOfRatingAndPagination(request, user.get().getAverageRating(), commentsSize, currentPage,
+                    PageSplitParameter.NUMBER_OF_COMMENTS_PER_PAGE_USER);
+        } else {
+            DisplayOfRatingAndPagination(request, 0D, commentsSize, currentPage,
+                    PageSplitParameter.NUMBER_OF_COMMENTS_PER_PAGE_USER);
+        }
+    }
+
+    private void DisplayOfRatingAndPagination(HttpServletRequest request,
+                                              Double rating,
+                                              int commentsSize,
+                                              int currentPage,
+                                              int numberOfCommentsPerPage) {
+        SendSplitParameters sendSplitParameters = SendSplitParameters.getInstance();
+        request.setAttribute(RequestParameter.RATING, rating);
+        sendSplitParameters.sendSplitParametersComments(
+                request,
+                commentsSize,
+                currentPage,
+                numberOfCommentsPerPage);
     }
 }
